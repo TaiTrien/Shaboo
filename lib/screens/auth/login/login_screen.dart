@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shaboo/components/custom_textfield.dart';
 import 'package:shaboo/components/default_button.dart';
 import 'package:shaboo/constants.dart';
-import 'package:shaboo/size_config.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shaboo/screens/auth/login/components/circle_button.dart';
+import 'package:shaboo/screens/auth/login/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var controller = LoginController(context: context);
 
-    SizeConfig().init(context);
     return Scaffold(
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
@@ -32,23 +34,18 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Your email',
-                  suffixIcon: Icon(MdiIcons.account),
-                ),
+              CustomTextField(
+                controller: controller.emailController,
+                keyboard: TextInputType.emailAddress,
+                labelText: 'Your email',
+                icon: MdiIcons.account,
               ),
               SizedBox(height: 20),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Your password',
-                  suffixIcon: Icon(MdiIcons.lock),
-                ),
+              CustomTextField(
+                controller: controller.passwordController,
+                labelText: 'Your password',
+                isObscure: true,
+                icon: MdiIcons.lock,
               ),
               Container(
                 alignment: Alignment.centerRight,
@@ -100,43 +97,26 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 25,
-                    child: Container(
-                      child: Icon(
-                        MdiIcons.facebook,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.red,
-                    radius: 25,
-                    child: Container(
-                      child: Icon(
-                        MdiIcons.gmail,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CircleAvatar(
+                  CircleButton(
+                    onPress: () {},
                     backgroundColor: kPrimaryColor,
-                    radius: 25,
-                    child: Container(
-                      child: Icon(
-                        MdiIcons.linkedin,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                    ),
+                    icon: MdiIcons.facebook,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircleButton(
+                    onPress: () {},
+                    icon: MdiIcons.gmail,
+                    backgroundColor: Colors.red,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircleButton(
+                    onPress: () {},
+                    backgroundColor: kPrimaryColor,
+                    icon: MdiIcons.linkedin,
                   ),
                 ],
               ),
