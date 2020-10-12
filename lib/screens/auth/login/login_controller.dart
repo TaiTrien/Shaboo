@@ -8,4 +8,8 @@ class LoginController {
     emailController = new TextEditingController();
     passwordController = new TextEditingController();
   }
+
+  toSignupScreen() {
+    Navigator.pushNamed(context, '/signupScreen');
+  }
 }

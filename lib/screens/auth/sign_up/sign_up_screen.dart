@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shaboo/screens/auth/login/components/circle_button.dart';
 import 'package:shaboo/screens/auth/login/login_controller.dart';
 
-class LoginScreen extends StatelessWidget {
+class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -24,12 +24,12 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                alignment: Alignment.center,
+                alignment: Alignment.centerLeft,
                 child: Text(
-                  'Shaboo',
+                  'Create account',
                   style: TextStyle(
                     fontFamily: 'Pacifico',
-                    fontSize: 60,
+                    fontSize: 40,
                   ),
                 ),
               ),
@@ -126,7 +126,7 @@ class LoginScreen extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 child: FlatButton(
-                  onPressed: controller.toSignupScreen,
+                  onPressed: () {},
                   child: RichText(
                     text: TextSpan(
                       children: [
