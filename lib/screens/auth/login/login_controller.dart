@@ -12,4 +12,9 @@ class LoginController {
   toSignupScreen() {
     Navigator.pushNamed(context, '/signupScreen');
   }
+
+  toMainScreen() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/mainScreen', (context) => false);
+  }
 }
