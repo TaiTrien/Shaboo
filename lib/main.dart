@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shaboo/routes.dart';
 import 'package:shaboo/screens/on_boarding/on_boarding_screen.dart';
 
 void main() {
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: OnBoardingScreen(),
+      initialRoute: '/onBoardingScren',
+      routes: routes,
     );
   }
 }

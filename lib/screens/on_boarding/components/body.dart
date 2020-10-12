@@ -78,7 +78,11 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Bắt đầu",
                       press: () {
-                        //  Navigator.pushNamed(context, SignInScreen.routeName);
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/loginScreen',
+                          (context) => false,
+                        );
                       },
                     ),
                   ],
