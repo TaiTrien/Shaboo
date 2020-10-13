@@ -5,13 +5,13 @@ import 'package:shaboo/components/default_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/screens/auth/login/components/circle_button.dart';
-import 'package:shaboo/screens/auth/login/login_controller.dart';
+import 'package:shaboo/screens/auth/sign_up/sign_up_controller.dart';
 
 class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var controller = LoginController(context: context);
+    var controller = SignupController(context: context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -23,6 +23,7 @@ class SignupScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Spacer(),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -47,23 +48,17 @@ class SignupScreen extends StatelessWidget {
                 isObscure: true,
                 icon: MdiIcons.lock,
               ),
-              Container(
-                alignment: Alignment.centerRight,
-                child: FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Forgot password?',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: kPrimaryColor,
-                    ),
-                  ),
-                ),
+              SizedBox(height: 20),
+              CustomTextField(
+                controller: controller.confirmPasswordController,
+                labelText: 'Confirm password',
+                isObscure: true,
+                icon: MdiIcons.lock,
               ),
               SizedBox(height: 20),
               DefaultButton(
                 press: () {},
-                text: 'Login',
+                text: 'Sign up',
               ),
               SizedBox(height: 20),
               Container(
@@ -79,7 +74,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Or login with',
+                      'Or sign up with',
                       style: TextStyle(fontSize: 20),
                     ),
                     Expanded(
@@ -126,19 +121,19 @@ class SignupScreen extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: controller.toLoginScreen,
                   child: RichText(
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Don\'t have an account? ',
+                          text: 'Already have an account? ',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 18,
                           ),
                         ),
                         TextSpan(
-                          text: ' Sign Up',
+                          text: ' Login',
                           style: TextStyle(
                             color: kPrimaryColor,
                             fontSize: 18,

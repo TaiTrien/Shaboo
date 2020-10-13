@@ -23,6 +23,7 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Spacer(),
               Container(
                 alignment: Alignment.center,
                 child: Text(

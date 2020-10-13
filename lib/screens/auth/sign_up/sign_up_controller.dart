@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class LoginController {
+class SignupController {
   TextEditingController emailController;
   TextEditingController passwordController;
+  TextEditingController confirmPasswordController;
+
   BuildContext context;
-  LoginController({this.context}) {
+  SignupController({this.context}) {
     emailController = new TextEditingController();
     passwordController = new TextEditingController();
+    confirmPasswordController = new TextEditingController();
   }
 
-  toSignupScreen() {
-    Navigator.pushNamed(context, '/signupScreen');
+  toLoginScreen() {
+    Navigator.pop(context);
   }
 }

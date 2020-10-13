@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shaboo/routes.dart';
-import 'package:shaboo/screens/on_boarding/on_boarding_screen.dart';
 
 void main() {
   runApp(MyApp());
