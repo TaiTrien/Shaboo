@@ -6,6 +6,7 @@ import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/auth/login/login_screen.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:shaboo/screens/home/home_screen.dart';
+import 'package:shaboo/screens/notification/notification_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     LoginScreen(),
     SignupScreen(),
-    HomeScreen(),
+    NotificationScreen(),
     HomeScreen(),
   ];
 
