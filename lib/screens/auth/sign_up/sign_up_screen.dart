@@ -5,7 +5,6 @@ import 'package:shaboo/components/custom_textfield.dart';
 import 'package:shaboo/components/default_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/screens/auth/components/auth_button.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_controller.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -99,10 +98,11 @@ class SignupScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: GoogleSignInButton(
-                        onPressed: () {},
+                        onPressed: controller.toGoogleSignIn,
                         darkMode: false,
+                        text: 'Sign up with Google',
                         textStyle:
-                            TextStyle(fontSize: 20, color: Colors.black54),
+                            TextStyle(fontSize: 20, color: Colors.black87),
                       ),
                     ),
                     SizedBox(
@@ -112,7 +112,7 @@ class SignupScreen extends StatelessWidget {
                       width: double.infinity,
                       child: FacebookSignInButton(
                         onPressed: () {},
-                        text: '   Sign in with Facebook',
+                        text: '   Sign up with Facebook',
                         textStyle: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),

@@ -15,4 +15,8 @@ class SignupController {
   toLoginScreen() {
     Navigator.pop(context);
   }
+
+  toGoogleSignIn() {
+    Navigator.pushNamed(context, '/googleSigninScreen');
+  }
 }

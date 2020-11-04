@@ -17,4 +17,8 @@ class LoginController {
     Navigator.pushNamedAndRemoveUntil(
         context, '/mainScreen', (context) => false);
   }
+
+  toGoogleSignIn() {
+    Navigator.pushNamed(context, '/googleSigninScreen');
+  }
 }

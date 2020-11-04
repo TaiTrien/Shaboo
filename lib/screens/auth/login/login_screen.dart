@@ -4,7 +4,6 @@ import 'package:shaboo/components/custom_textfield.dart';
 import 'package:shaboo/components/default_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/screens/auth/components/auth_button.dart';
 import 'package:shaboo/screens/auth/login/login_controller.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
@@ -105,10 +104,10 @@ class LoginScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: GoogleSignInButton(
-                        onPressed: () {},
+                        onPressed: controller.toGoogleSignIn,
                         darkMode: false,
                         textStyle:
-                            TextStyle(fontSize: 20, color: Colors.black54),
+                            TextStyle(fontSize: 20, color: Colors.black87),
                       ),
                     ),
                     SizedBox(
