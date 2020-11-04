@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:shaboo/components/custom_textfield.dart';
 import 'package:shaboo/components/default_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/screens/auth/login/components/circle_button.dart';
+import 'package:shaboo/screens/auth/components/auth_button.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_controller.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -89,31 +90,34 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleButton(
-                    onPress: () {},
-                    backgroundColor: kPrimaryColor,
-                    icon: MdiIcons.facebook,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CircleButton(
-                    onPress: () {},
-                    icon: MdiIcons.gmail,
-                    backgroundColor: Colors.red,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CircleButton(
-                    onPress: () {},
-                    backgroundColor: kPrimaryColor,
-                    icon: MdiIcons.linkedin,
-                  ),
-                ],
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      child: GoogleSignInButton(
+                        onPressed: () {},
+                        darkMode: false,
+                        textStyle:
+                            TextStyle(fontSize: 20, color: Colors.black54),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: FacebookSignInButton(
+                        onPressed: () {},
+                        text: '   Sign in with Facebook',
+                        textStyle: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 30,

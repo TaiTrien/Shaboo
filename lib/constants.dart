@@ -15,7 +15,8 @@ final kHeadingTextStyle = TextStyle(
   color: Colors.black,
   height: 1.5,
 );
-
+const kDefaultPaddingVerical = 15.0;
+const kDefaultPaddingHorizontal = 20.0;
 const defaultDuration = Duration(milliseconds: 250);
 
 // Form Error

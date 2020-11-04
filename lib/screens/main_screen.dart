@@ -1,5 +1,4 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
-import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants.dart';

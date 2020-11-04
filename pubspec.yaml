@@ -26,6 +26,9 @@ dependencies:
   flutter_svg: ^0.19.0
   material_design_icons_flutter: ^4.0.5655
   fancy_bottom_navigation: ^0.3.2
+  flutter_auth_buttons: ^0.10.0
+
+
 
 
 
