@@ -1,4 +1,3 @@
-import 'package:shaboo/screens/auth/google_sign_in_screen.dart';
 import 'package:shaboo/screens/auth/login/login_screen.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:shaboo/screens/main_screen.dart';
@@ -9,5 +8,4 @@ final routes = {
   '/loginScreen': (context) => LoginScreen(),
   '/signupScreen': (context) => SignupScreen(),
   '/mainScreen': (context) => MainScreen(),
-  '/googleSigninScreen': (context) => GoogleSigninScreen(),
 };

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "492602638278",
+    "firebase_url": "https://shaboo-f6024.firebaseio.com",
+    "project_id": "shaboo-f6024",
+    "storage_bucket": "shaboo-f6024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492602638278:android:aedf0ccfe1d88953d6bcc7",
+        "android_client_info": {
+          "package_name": "com.example.shaboo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492602638278-qfgepkeq2htceh8kn0obpfe5gqvnfku1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shaboo",
+            "certificate_hash": "21c71024b47db76a06beaead3e6cf07f0eb2cb18"
+          }
+        },
+        {
+          "client_id": "492602638278-8mkadd9hq349kl7t2snqiru4g37536un.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsaD5PC7ucvT0AY_VRnp_tiS5l9g9ZDVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492602638278-8mkadd9hq349kl7t2snqiru4g37536un.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

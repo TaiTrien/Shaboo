@@ -27,7 +27,10 @@ dependencies:
   material_design_icons_flutter: ^4.0.5655
   fancy_bottom_navigation: ^0.3.2
   flutter_auth_buttons: ^0.10.0
-  webview_flutter: ^1.0.5
+  firebase_core: ^0.5.1
+  firebase_auth: ^0.18.2
+  google_sign_in: ^4.5.6
+  
 
 
 

@@ -98,7 +98,7 @@ class SignupScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: GoogleSignInButton(
-                        onPressed: controller.toGoogleSignIn,
+                        onPressed: () {},
                         darkMode: false,
                         text: 'Sign up with Google',
                         textStyle:
@@ -111,7 +111,9 @@ class SignupScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: FacebookSignInButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await controller.signOutGoogle();
+                        },
                         text: '   Sign up with Facebook',
                         textStyle: TextStyle(fontSize: 20, color: Colors.white),
                       ),

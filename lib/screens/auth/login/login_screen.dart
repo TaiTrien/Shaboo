@@ -6,6 +6,7 @@ import 'package:shaboo/constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/screens/auth/login/login_controller.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -15,7 +16,6 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Container(
           height: size.height,
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -104,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       child: GoogleSignInButton(
-                        onPressed: controller.toGoogleSignIn,
+                        onPressed: controller.signInWithGoogle,
                         darkMode: false,
                         textStyle:
                             TextStyle(fontSize: 20, color: Colors.black87),
