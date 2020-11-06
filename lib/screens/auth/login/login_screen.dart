@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               CustomTextField(
-                controller: controller.emailController,
+                controller: controller.usernameController,
                 keyboard: TextInputType.emailAddress,
                 labelText: 'Your email',
                 icon: MdiIcons.account,

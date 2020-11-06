@@ -7,12 +7,12 @@ class LoginController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  TextEditingController emailController;
+  TextEditingController usernameController;
   TextEditingController passwordController;
   BuildContext context;
 
   LoginController({this.context}) {
-    emailController = new TextEditingController();
+    usernameController = new TextEditingController();
     passwordController = new TextEditingController();
   }
 
