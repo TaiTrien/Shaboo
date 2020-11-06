@@ -6,3 +6,7 @@ abstract class AuthEvent {
 
   AuthEvent({this.payload});
 }
+
+class Login extends AuthEvent {
+  Login(bool isLogging) : super(payload: isLogging);
+}
