@@ -27,11 +27,11 @@ class LoginController {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-
       final UserCredential authResult =
           await _auth.signInWithCredential(credential);
 
       final User user = authResult.user;
+      var googleToken = googleSignInAuthentication.accessToken;
 
       if (user != null) {
         assert(!user.isAnonymous);
@@ -41,7 +41,7 @@ class LoginController {
         assert(user.uid == currentUser.uid);
 
         print('signInWithGoogle succeeded: $user');
-
+        print('Google token: $googleToken');
         return '$user';
       }
     } catch (e) {

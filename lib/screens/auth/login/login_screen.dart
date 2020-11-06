@@ -6,7 +6,6 @@ import 'package:shaboo/constants.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/screens/auth/login/login_controller.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
-import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
