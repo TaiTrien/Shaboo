@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 
 class LoginController {
@@ -10,6 +12,7 @@ class LoginController {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  final FacebookLogin facebooklogin = FacebookLogin();
 
   TextEditingController usernameController;
   TextEditingController passwordController;
@@ -21,7 +24,7 @@ class LoginController {
     passwordController = new TextEditingController();
   }
 
-  Future<String> signInWithGoogle() async {
+  Future<dynamic> signInWithGoogle() async {
     _authBloc.add(Login(true));
     await Firebase.initializeApp();
     try {
@@ -57,12 +60,31 @@ class LoginController {
     } catch (e) {
       print(e);
     }
-
+    _authBloc.add(Login(false));
     return null;
   }
 
   Future<void> signOutGoogle() async {
     await googleSignIn.signOut();
+  }
+
+  Future<dynamic> signInWithFacebook() async {
+    facebooklogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
+    _authBloc.add(Login(true));
+    final result = await facebooklogin.logIn(['email']);
+
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      final credential = FacebookAuthProvider.credential(
+        result.accessToken.token,
+      );
+
+      // Lấy thông tin User qua credential có giá trị token đã đăng nhập
+      final user = (await _auth.signInWithCredential(credential)).user;
+      _authBloc.add(Login(false));
+      return user;
+    }
+    _authBloc.add(Login(false));
+    return null;
   }
 
   toSignupScreen() {

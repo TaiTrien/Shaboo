@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Container(
                 height: size.height,
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             child: FacebookSignInButton(
-                              onPressed: () {},
+                              onPressed: controller.signInWithFacebook,
                               text: '   Sign in with Facebook',
                               textStyle:
                                   TextStyle(fontSize: 20, color: Colors.white),
