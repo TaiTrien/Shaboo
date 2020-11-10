@@ -44,6 +44,7 @@ class LoginController {
 
       final User user = authResult.user;
       var googleToken = googleSignInAuthentication.accessToken;
+      var idToken = googleSignInAuthentication.idToken;
 
       if (user != null) {
         assert(!user.isAnonymous);
@@ -54,7 +55,8 @@ class LoginController {
 
         print('signInWithGoogle succeeded: $user');
         print('Google token: $googleToken');
-        toMainScreen();
+        print('Id token: $idToken');
+        //toMainScreen();
         return '$user';
       }
     } catch (e) {
