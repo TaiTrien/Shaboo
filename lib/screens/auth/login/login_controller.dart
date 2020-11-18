@@ -32,7 +32,7 @@ class LoginController {
     passwordController = new TextEditingController();
   }
 
-  Future<dynamic> signinByGoogle() async {
+  Future<dynamic> signInByGoogle() async {
     _authBloc.add(Login(true));
 
     await Firebase.initializeApp();
@@ -44,6 +44,7 @@ class LoginController {
 
       var idToken = googleSignInAuthentication.idToken;
       var uid = googleSignInAccount.id;
+      if (idToken == null || uid == null) return;
 
       var respone = await AuthApi.signinByGoogle(userID: uid, idToken: idToken);
       if (respone == null) return Notify().error(message: 'Sign in failed');
@@ -53,11 +54,14 @@ class LoginController {
 
       var userData = respone.data;
       ShabooUser currentUser = new ShabooUser(
-          userID: userData["id"],
-          firstName: userData["firstName"],
-          lastName: userData["lastName"],
-          email: userData["email"],
-          avatar: userData["avatar"]);
+        userID: userData["id"],
+        firstName: userData["firstName"],
+        lastName: userData["lastName"],
+        userName: userData["username"],
+        email: userData["email"],
+        phone: userData["phone"],
+        avatar: userData["avatar"],
+      );
 
       _userBloc.add(UpdateUserData(currentUser));
       toMainScreen();
@@ -70,28 +74,52 @@ class LoginController {
 
   Future<void> signOutGoogle() async {
     await googleSignIn.disconnect();
-    await _auth.signOut();
     await googleSignIn.signOut();
+    await _auth.signOut();
+    Navigator.pushNamed(context, '/loginScreen');
   }
 
-  Future<dynamic> signinByFacebook() async {
-    facebooklogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
+  Future<dynamic> signInByFacebook() async {
+    facebooklogin.loginBehavior = FacebookLoginBehavior.nativeWithFallback;
     _authBloc.add(Login(true));
-    final result = await facebooklogin.logIn(['email']);
+    try {
+      final result = await facebooklogin.logIn(['email']);
 
-    if (result.status == FacebookLoginStatus.loggedIn) {
-      final credential = FacebookAuthProvider.credential(
-        result.accessToken.token,
+      var uid = result.accessToken.userId;
+      var idToken = result.accessToken.token;
+      if (idToken == null || uid == null) return;
+
+      var respone =
+          await AuthApi.signinByFacebook(userID: uid, idToken: idToken);
+      if (respone == null) return Notify().error(message: 'Sign in failed');
+
+      var token = respone.token["accessToken"];
+      Store.setToken(token);
+
+      var userData = respone.data;
+      ShabooUser currentUser = new ShabooUser(
+        userID: userData["id"],
+        firstName: userData["firstName"],
+        lastName: userData["lastName"],
+        userName: userData["username"],
+        email: userData["email"],
+        phone: userData["phone"],
+        avatar: userData["avatar"],
       );
 
-      // Lấy thông tin User qua credential có giá trị token đã đăng nhập
-      final user = (await _auth.signInWithCredential(credential)).user;
-
-      _authBloc.add(Login(false));
-      return user;
+      _userBloc.add(UpdateUserData(currentUser));
+      toMainScreen();
+    } catch (e) {
+      print(e);
     }
     _authBloc.add(Login(false));
     return null;
+  }
+
+  Future<void> signOutFacebook() async {
+    await facebooklogin.logOut();
+    await _auth.signOut();
+    Navigator.pushNamed(context, '/loginScreen');
   }
 
   toSignupScreen() {

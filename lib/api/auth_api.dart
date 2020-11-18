@@ -6,7 +6,7 @@ import 'package:shaboo/model/response.dart';
 class AuthApi {
   static String prefixUrl = 'http://10.0.2.2:3001';
   static String urlGoogleSignin = '$prefixUrl/auth/google';
-  static String urlFacebookSignin = '$prefixUrl/auth/google';
+  static String urlFacebookSignin = '$prefixUrl/auth/facebook';
 
   // static String urlRegister = "https://fin.mal.vn/api/user/register";
   // static String urlGetUserInfo = 'https://fin.mal.vn/api/user/info';
@@ -14,6 +14,19 @@ class AuthApi {
   //     'https://fin.mal.vn/api/user/password_change';
 
   static Future<dynamic> signinByGoogle({String userID, String idToken}) async {
+    var response = await http.post(
+      urlGoogleSignin,
+      body: {
+        "userID": userID,
+        "token": idToken,
+      },
+    );
+    if (response.statusCode != 200) return null;
+    return Response.map(json.decode(response.body));
+  }
+
+  static Future<dynamic> signinByFacebook(
+      {String userID, String idToken}) async {
     var response = await http.post(
       urlFacebookSignin,
       body: {
