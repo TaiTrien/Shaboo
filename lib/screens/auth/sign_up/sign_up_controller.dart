@@ -47,7 +47,7 @@ class SignupController {
       var uid = googleSignInAccount.id;
       if (idToken == null || uid == null) return;
 
-      var respone = await AuthApi.signinByGoogle(userID: uid, idToken: idToken);
+      var respone = await AuthApi.signInByGoogle(userID: uid, idToken: idToken);
       if (respone == null) return Notify().error(message: 'Sign in failed');
 
       var token = respone.token["accessToken"];
@@ -91,7 +91,7 @@ class SignupController {
       if (idToken == null || uid == null) return;
 
       var respone =
-          await AuthApi.signinByFacebook(userID: uid, idToken: idToken);
+          await AuthApi.signInByFacebook(userID: uid, idToken: idToken);
       if (respone == null) return Notify().error(message: 'Sign in failed');
 
       var token = respone.token["accessToken"];

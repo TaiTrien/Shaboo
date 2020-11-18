@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  controller.signOutFacebook();
+                  controller.signOutGoogle();
                   Navigator.pushNamed(context, '/loginScreen');
                 },
               )

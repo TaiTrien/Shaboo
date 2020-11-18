@@ -13,7 +13,7 @@ class AuthApi {
   // static String urlChangePassword =
   //     'https://fin.mal.vn/api/user/password_change';
 
-  static Future<dynamic> signinByGoogle({String userID, String idToken}) async {
+  static Future<dynamic> signInByGoogle({String userID, String idToken}) async {
     var response = await http.post(
       urlGoogleSignin,
       body: {
@@ -25,7 +25,7 @@ class AuthApi {
     return Response.map(json.decode(response.body));
   }
 
-  static Future<dynamic> signinByFacebook(
+  static Future<dynamic> signInByFacebook(
       {String userID, String idToken}) async {
     var response = await http.post(
       urlFacebookSignin,
