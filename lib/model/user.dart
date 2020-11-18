@@ -1,5 +1,5 @@
-class User {
-  String _userID;
+class ShabooUser {
+  int _userID;
   String firstName;
   String lastName;
   String _password;
@@ -8,14 +8,10 @@ class User {
   String phone;
   String gender;
   String birthday;
-  String _facebookID;
-  String _googleID;
-  String _facebookToken;
-  String _googleToken;
   String avatar;
 
-  User({
-    String userID,
+  ShabooUser({
+    int userID,
     this.firstName,
     this.lastName,
     String password,
@@ -30,9 +26,5 @@ class User {
     String googleToken,
     this.avatar,
   })  : _userID = userID,
-        _password = password,
-        _facebookID = facebookID,
-        _googleID = googleID,
-        _facebookToken = facebookToken,
-        _googleToken = googleToken;
+        _password = password;
 }

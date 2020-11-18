@@ -4,11 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shaboo/api/auth_api.dart';
 
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
+import 'package:shaboo/blocs/user/user_bloc.dart';
+import 'package:shaboo/model/user.dart';
+import 'package:shaboo/utils/notify.dart';
+import 'package:shaboo/utils/store.dart';
 
 class LoginController {
   AuthBloc _authBloc;
+  UserBloc _userBloc;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -20,11 +26,13 @@ class LoginController {
 
   LoginController({this.context}) {
     _authBloc = BlocProvider.of<AuthBloc>(context);
+    _userBloc = BlocProvider.of<UserBloc>(context);
+
     usernameController = new TextEditingController();
     passwordController = new TextEditingController();
   }
 
-  Future<dynamic> signInWithGoogle() async {
+  Future<dynamic> signinByGoogle() async {
     _authBloc.add(Login(true));
 
     await Firebase.initializeApp();
@@ -33,32 +41,26 @@ class LoginController {
           await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-      final UserCredential authResult =
-          await _auth.signInWithCredential(credential).then((value) {
-        _authBloc.add(Login(false));
-        return value;
-      });
 
-      final User user = authResult.user;
       var idToken = googleSignInAuthentication.idToken;
+      var uid = googleSignInAccount.id;
 
-      if (user != null) {
-        assert(!user.isAnonymous);
-        assert(await user.getIdToken() != null);
+      var respone = await AuthApi.signinByGoogle(userID: uid, idToken: idToken);
+      if (respone == null) return Notify().error(message: 'Sign in failed');
 
-        final User currentUser = _auth.currentUser;
-        assert(user.uid == currentUser.uid);
+      var token = respone.token["accessToken"];
+      Store.setToken(token);
 
-        //print('signInWithGoogle succeeded: $user');
-        print('uid: ${googleSignInAccount.id}');
-        print('Id token: $idToken');
-        //toMainScreen();
-        return '$user';
-      }
+      var userData = respone.data;
+      ShabooUser currentUser = new ShabooUser(
+          userID: userData["id"],
+          firstName: userData["firstName"],
+          lastName: userData["lastName"],
+          email: userData["email"],
+          avatar: userData["avatar"]);
+
+      _userBloc.add(UpdateUserData(currentUser));
+      toMainScreen();
     } catch (e) {
       print(e);
     }
@@ -72,7 +74,7 @@ class LoginController {
     await googleSignIn.signOut();
   }
 
-  Future<dynamic> signInWithFacebook() async {
+  Future<dynamic> signinByFacebook() async {
     facebooklogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
     _authBloc.add(Login(true));
     final result = await facebooklogin.logIn(['email']);
@@ -84,6 +86,7 @@ class LoginController {
 
       // Lấy thông tin User qua credential có giá trị token đã đăng nhập
       final user = (await _auth.signInWithCredential(credential)).user;
+
       _authBloc.add(Login(false));
       return user;
     }

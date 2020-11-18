@@ -2,7 +2,7 @@ part of 'user_bloc.dart';
 
 @immutable
 abstract class UserState {
-  final User currentUser;
+  final ShabooUser currentUser;
 
   UserState({this.currentUser});
 }
@@ -14,6 +14,6 @@ class UserInitial extends UserState {
 class UpdateState extends UserState {
   UpdateState(
     UserState oldState, {
-    User currentUser,
+    ShabooUser currentUser,
   }) : super(currentUser: currentUser ?? oldState.currentUser);
 }

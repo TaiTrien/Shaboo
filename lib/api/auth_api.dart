@@ -3,29 +3,26 @@ import 'dart:convert';
 
 import 'package:shaboo/model/response.dart';
 
-class UserApi {
+class AuthApi {
   static String prefixUrl = 'http://10.0.2.2:3001';
-  static String urlGoogleLogin = '$prefixUrl/auth/google';
-  static String urlRegister = "https://fin.mal.vn/api/user/register";
-  static String urlGetUserInfo = 'https://fin.mal.vn/api/user/info';
-  static String urlChangePassword =
-      'https://fin.mal.vn/api/user/password_change';
+  static String urlGoogleSignin = '$prefixUrl/auth/google';
+  static String urlFacebookSignin = '$prefixUrl/auth/google';
 
-  static Future<String> getUserTokenThroughGoogle(
-      {String googleID, String googleToken}) async {
-    String token;
+  // static String urlRegister = "https://fin.mal.vn/api/user/register";
+  // static String urlGetUserInfo = 'https://fin.mal.vn/api/user/info';
+  // static String urlChangePassword =
+  //     'https://fin.mal.vn/api/user/password_change';
 
+  static Future<dynamic> signinByGoogle({String userID, String idToken}) async {
     var response = await http.post(
-      urlGoogleLogin,
+      urlFacebookSignin,
       body: {
-        "user_name": googleID,
-        "password": googleToken,
+        "userID": userID,
+        "token": idToken,
       },
     );
     if (response.statusCode != 200) return null;
-
-    token = Response.map(json.decode(response.body)).data;
-    return token;
+    return Response.map(json.decode(response.body));
   }
 }
 

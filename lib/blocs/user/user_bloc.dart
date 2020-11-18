@@ -14,7 +14,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> mapEventToState(
     UserEvent event,
   ) async* {
-    if (event is LoadUserData) {
+    if (event is UpdateUserData) {
       yield UpdateState(state, currentUser: event.payload);
     }
   }

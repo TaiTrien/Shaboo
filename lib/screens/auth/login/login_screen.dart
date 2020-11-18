@@ -110,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             child: GoogleSignInButton(
-                              onPressed: controller.signInWithGoogle,
+                              onPressed: controller.signinByGoogle,
                               darkMode: false,
                               textStyle: TextStyle(
                                   fontSize: 20, color: Colors.black87),
@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             child: FacebookSignInButton(
-                              onPressed: controller.signInWithFacebook,
+                              onPressed: controller.signinByFacebook,
                               text: '   Sign in with Facebook',
                               textStyle:
                                   TextStyle(fontSize: 20, color: Colors.white),

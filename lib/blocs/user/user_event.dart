@@ -7,6 +7,6 @@ abstract class UserEvent {
   UserEvent({this.payload});
 }
 
-class LoadUserData extends UserEvent {
-  LoadUserData(User currentUser) : super(payload: currentUser);
+class UpdateUserData extends UserEvent {
+  UpdateUserData(ShabooUser currentUser) : super(payload: currentUser);
 }
