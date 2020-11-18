@@ -26,6 +26,7 @@ class LoginController {
 
   Future<dynamic> signInWithGoogle() async {
     _authBloc.add(Login(true));
+
     await Firebase.initializeApp();
     try {
       final GoogleSignInAccount googleSignInAccount =
@@ -43,7 +44,6 @@ class LoginController {
       });
 
       final User user = authResult.user;
-      var googleToken = googleSignInAuthentication.accessToken;
       var idToken = googleSignInAuthentication.idToken;
 
       if (user != null) {
@@ -53,8 +53,8 @@ class LoginController {
         final User currentUser = _auth.currentUser;
         assert(user.uid == currentUser.uid);
 
-        print('signInWithGoogle succeeded: $user');
-        print('Google token: $googleToken');
+        //print('signInWithGoogle succeeded: $user');
+        print('uid: ${googleSignInAccount.id}');
         print('Id token: $idToken');
         //toMainScreen();
         return '$user';
@@ -67,6 +67,8 @@ class LoginController {
   }
 
   Future<void> signOutGoogle() async {
+    await googleSignIn.disconnect();
+    await _auth.signOut();
     await googleSignIn.signOut();
   }
 
