@@ -4,6 +4,7 @@ import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:shaboo/screens/home/home_screen.dart';
 import 'package:shaboo/screens/notification/notification_screen.dart';
+import 'package:shaboo/screens/profile/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     SignupScreen(),
     NotificationScreen(),
-    HomeScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -55,8 +56,8 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
