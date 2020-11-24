@@ -7,11 +7,6 @@ import 'package:shaboo/screens/profile/profile_controller.dart';
 
 import 'components/field_info.dart';
 
-enum MenuValue {
-  SETTINGS,
-  LOGOUT,
-}
-
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -38,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 PopupMenuItem(
-                  value: MenuValue.LOGOUT,
+                  value: MenuValue.SIGNOUT,
                   child: ListTile(
                     leading: Icon(MdiIcons.logout),
                     title: Transform(
