@@ -10,6 +10,15 @@ class ProfileController {
   ProfileController({this.context}) {
     _userBloc = BlocProvider.of<UserBloc>(context);
   }
+// Future<void> signOutGoogle() async {
+//     await googleSignIn.disconnect();
+//     await googleSignIn.signOut();
+//     await _auth.signOut();
+//     Navigator.pushNamed(context, '/loginScreen');
+//   }
+  onMenuSelect(value) {
+    print(value);
+  }
 
   get currentUser => _userBloc.state.currentUser;
   get userFullName =>

@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shaboo/components/popup_menu.dart';
 
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/profile/profile_controller.dart';
+
+import 'components/field_info.dart';
+
+enum MenuValue {
+  SETTINGS,
+  LOGOUT,
+}
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -15,11 +24,30 @@ class ProfileScreen extends StatelessWidget {
           elevation: 0,
           title: Text('Profile', style: kHeadingTextStyle),
           actions: [
-            FlatButton(
-              onPressed: () {},
-              child: Icon(
-                Icons.more_vert,
-              ),
+            PopupMenu(
+              onSelect: controller.onMenuSelect,
+              items: [
+                PopupMenuItem(
+                  value: MenuValue.SETTINGS,
+                  child: ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Transform(
+                      transform: Matrix4.translationValues(-16, 0.0, 0.0),
+                      child: Text("Settings"),
+                    ),
+                  ),
+                ),
+                PopupMenuItem(
+                  value: MenuValue.LOGOUT,
+                  child: ListTile(
+                    leading: Icon(MdiIcons.logout),
+                    title: Transform(
+                      transform: Matrix4.translationValues(-16, 0.0, 0.0),
+                      child: Text("Sign out"),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -88,71 +116,17 @@ class ProfileScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Posts\n',
-                              style: TextStyle(
-                                color: kTitleColor.withOpacity(0.4),
-                                fontSize: 25,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '05',
-                              style: TextStyle(
-                                color: kTitleColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28,
-                              ),
-                            ),
-                          ],
-                        ),
+                      FieldInfo(
+                        title: 'Posts',
+                        data: 10,
                       ),
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Books\n',
-                              style: TextStyle(
-                                color: kTitleColor.withOpacity(0.4),
-                                fontSize: 25,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '33',
-                              style: TextStyle(
-                                color: kTitleColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28,
-                              ),
-                            ),
-                          ],
-                        ),
+                      FieldInfo(
+                        title: 'Books',
+                        data: 33,
                       ),
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Interest\n',
-                              style: TextStyle(
-                                color: kTitleColor.withOpacity(0.4),
-                                fontSize: 25,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '125',
-                              style: TextStyle(
-                                color: kTitleColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28,
-                              ),
-                            ),
-                          ],
-                        ),
+                      FieldInfo(
+                        title: 'Interest',
+                        data: 125,
                       ),
                     ],
                   ),
