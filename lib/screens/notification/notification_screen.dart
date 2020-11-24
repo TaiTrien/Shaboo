@@ -31,14 +31,14 @@ class NotificationScreen extends StatelessWidget {
                       'Today',
                       style: kHeadingTextStyle.copyWith(
                         fontSize: 25,
-                        color: kSecondaryColor,
+                        color: kTitleColor,
                       ),
                     ),
                     GestureDetector(
                       onTap: () {},
                       child: Icon(
                         MdiIcons.notificationClearAll,
-                        color: kSecondaryColor,
+                        color: kTitleColor,
                       ),
                     ),
                   ],
@@ -61,14 +61,14 @@ class NotificationScreen extends StatelessWidget {
                       'Yesterday',
                       style: kHeadingTextStyle.copyWith(
                         fontSize: 25,
-                        color: kSecondaryColor,
+                        color: kTitleColor,
                       ),
                     ),
                     GestureDetector(
                       onTap: () {},
                       child: Icon(
                         MdiIcons.notificationClearAll,
-                        color: kSecondaryColor,
+                        color: kTitleColor,
                       ),
                     ),
                   ],
