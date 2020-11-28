@@ -22,6 +22,7 @@ class Auth {
 
       var token = respone.token["accessToken"];
       Store.setToken(token);
+      print(token);
 
       var userData = respone.data;
       ShabooUser currentUser = new ShabooUser(

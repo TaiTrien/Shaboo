@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/auth.dart';
-import 'package:shaboo/utils/store.dart';
 
 enum MenuValue {
   SETTINGS,
