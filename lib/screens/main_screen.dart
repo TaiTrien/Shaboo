@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shaboo/constants.dart';
+import 'package:shaboo/screens/add_post/add_image/add_image_screen.dart';
 import 'package:shaboo/screens/add_post/add_post_screen.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:shaboo/screens/home/home_screen.dart';
@@ -25,15 +25,13 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onItemTapped(int index) {
     if (index == 2) {
-      showBarModalBottomSheet(
-        expand: true,
+      showModalBottomSheet<void>(
+        isScrollControlled: true,
         context: context,
-        backgroundColor: Colors.transparent,
-        builder: (context) => AddPostScreen(),
+        builder: (context) => AddImageScreen(),
       );
       return;
     }
-
     setState(() {
       _selectedIndex = index;
     });
