@@ -47,7 +47,7 @@ class NotificationBoard extends StatelessWidget {
           trailing: Text(
             '6:40',
             style: TextStyle(
-              color: kSecondaryColor,
+              color: kGreyColor,
               fontSize: 18,
             ),
           ),

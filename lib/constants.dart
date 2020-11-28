@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shaboo/size_config.dart';
 
 const kPrimaryColor = Color(0xFF0365B0);
-const kPrimaryLightColor = Color(0xFFFFECDF);
-
-const kSecondaryColor = Color(0xFF979797);
+const kPrimaryLightColor = Color(0xFFE0F1FF);
+const kSecondaryColor = Color(0xFF5B97E8);
+const kTitleColor = Color(0xFF334a68);
+const kGreyColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
 
 const kAnimationDuration = Duration(milliseconds: 200);

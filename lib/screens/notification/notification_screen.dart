@@ -9,64 +9,79 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Material(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        child: Column(
-          children: [
-            Text(
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Text(
               'Notifications',
               style: kHeadingTextStyle,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          body: Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: Column(
               children: [
-                Text(
-                  'Today',
-                  style: kHeadingTextStyle.copyWith(
-                    fontSize: 25,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Today',
+                      style: kHeadingTextStyle.copyWith(
+                        fontSize: 25,
+                        color: kTitleColor,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Icon(
+                        MdiIcons.notificationClearAll,
+                        color: kTitleColor,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: size.height * 0.2),
+                  child: NotificationBoard(
+                    itemCount: 3,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Icon(MdiIcons.notificationClearAll),
+                Divider(
+                  color: Colors.black,
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Yesterday',
+                      style: kHeadingTextStyle.copyWith(
+                        fontSize: 25,
+                        color: kTitleColor,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Icon(
+                        MdiIcons.notificationClearAll,
+                        color: kTitleColor,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                Expanded(
+                  child: NotificationBoard(
+                    itemCount: 5,
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 15),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: size.height * 0.2),
-              child: NotificationBoard(
-                itemCount: 3,
-              ),
-            ),
-            Divider(
-              color: Colors.black,
-              height: 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Yesterday',
-                  style: kHeadingTextStyle.copyWith(
-                    fontSize: 25,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Icon(
-                    MdiIcons.notificationClearAll,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 15),
-            Expanded(
-              child: NotificationBoard(
-                itemCount: 5,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
