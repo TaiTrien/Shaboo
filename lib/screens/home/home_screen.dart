@@ -28,19 +28,6 @@ class HomeScreen extends StatelessWidget {
                   fontSize: 50,
                 ),
               ),
-              FlatButton(
-                child: Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 50,
-                  ),
-                ),
-                onPressed: () {
-                  controller.signOutGoogle();
-                  Navigator.pushNamed(context, '/loginScreen');
-                },
-              )
             ],
           ),
         );

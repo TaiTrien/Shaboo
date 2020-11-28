@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants.dart';
+import 'package:shaboo/model/auth.dart';
 import 'package:shaboo/utils/store.dart';
 
 enum MenuValue {
@@ -16,22 +17,24 @@ enum MenuValue {
 
 class ProfileController {
   BuildContext context;
+  // ignore: close_sinks
   UserBloc _userBloc;
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FacebookLogin facebooklogin = FacebookLogin();
+  final Auth _authModel = Auth();
 
   ProfileController({this.context}) {
     _userBloc = BlocProvider.of<UserBloc>(context);
   }
 
-  Future<void> signOutGoogle() async {
-    await googleSignIn.disconnect();
-    await googleSignIn.signOut();
+  Future<void> signOut() async {
+    _authModel.signOut();
+    Navigator.pushNamed(context, '/loginScreen');
   }
 
-  Future<void> signOutFacebook() async {
-    await facebooklogin.logOut();
+  onMenuSelect(value) {
+    if (value == MenuValue.SIGNOUT) _alertSignOut();
   }
 
   Future<void> _alertSignOut() async {
@@ -83,21 +86,7 @@ class ProfileController {
     );
   }
 
-  Future<void> signOut() async {
-    signOutGoogle();
-    signOutFacebook();
-    Store.deleteToken();
-    Navigator.pushNamed(context, '/loginScreen');
-  }
-
-  onMenuSelect(value) {
-    if (value == MenuValue.SIGNOUT) _alertSignOut();
-  }
-
   get currentUser => _userBloc.state.currentUser;
-  get userFullName =>
-      _userBloc.state.currentUser.firstName.toUpperCase() +
-      ' ' +
-      _userBloc.state.currentUser.lastName.toUpperCase();
+  get userFullName => _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
   get defaultAvatar => SvgPicture.asset('assets/images/reader.svg');
 }
