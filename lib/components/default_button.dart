@@ -7,10 +7,10 @@ class DefaultButton extends StatelessWidget {
   const DefaultButton({
     Key key,
     this.text,
-    this.press,
+    this.onPress,
   }) : super(key: key);
   final String text;
-  final Function press;
+  final Function onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class DefaultButton extends StatelessWidget {
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         color: kPrimaryColor,
-        onPressed: press,
+        onPressed: onPress,
         child: Text(
           text,
           style: TextStyle(

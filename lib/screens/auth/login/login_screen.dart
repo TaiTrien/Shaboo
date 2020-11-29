@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     DefaultButton(
-                      press: controller.toMainScreen,
+                      onPress: controller.toMainScreen,
                       text: 'Login',
                     ),
                     SizedBox(height: 20),
@@ -112,8 +112,7 @@ class LoginScreen extends StatelessWidget {
                             child: GoogleSignInButton(
                               onPressed: controller.signInByGoogle,
                               darkMode: false,
-                              textStyle: TextStyle(
-                                  fontSize: 20, color: Colors.black87),
+                              textStyle: TextStyle(fontSize: 20, color: Colors.black87),
                             ),
                           ),
                           SizedBox(
@@ -124,8 +123,7 @@ class LoginScreen extends StatelessWidget {
                             child: FacebookSignInButton(
                               onPressed: controller.signInByFacebook,
                               text: '   Sign in with Facebook',
-                              textStyle:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              textStyle: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
                         ],

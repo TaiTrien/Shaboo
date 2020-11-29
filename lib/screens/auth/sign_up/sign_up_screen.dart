@@ -57,7 +57,7 @@ class SignupScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               DefaultButton(
-                press: () {},
+                onPress: () {},
                 text: 'Sign up',
               ),
               SizedBox(height: 20),
@@ -101,8 +101,7 @@ class SignupScreen extends StatelessWidget {
                         onPressed: controller.signInByGoogle,
                         darkMode: false,
                         text: 'Sign up with Google',
-                        textStyle:
-                            TextStyle(fontSize: 20, color: Colors.black87),
+                        textStyle: TextStyle(fontSize: 20, color: Colors.black87),
                       ),
                     ),
                     SizedBox(

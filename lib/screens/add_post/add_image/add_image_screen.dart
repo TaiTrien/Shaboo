@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shaboo/components/default_button.dart';
+import 'package:shaboo/screens/add_post/add_image/components/fancy_fab.dart';
 import 'package:shaboo/constants.dart';
 
 class AddImageScreen extends StatelessWidget {
@@ -21,13 +23,26 @@ class AddImageScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        actions: [
+          FlatButton(
+            onPressed: () {},
+            child: Text(
+              'Next',
+              style: kTitleTextStyle.copyWith(
+                fontWeight: FontWeight.normal,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
+      floatingActionButton: FancyFab(),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+        padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
               child: Row(
                 children: [
                   Text(
