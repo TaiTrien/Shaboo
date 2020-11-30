@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shaboo/components/default_button.dart';
+import 'package:shaboo/screens/add_post/add_image/add_images_controller.dart';
 import 'package:shaboo/screens/add_post/add_image/components/fancy_fab.dart';
 import 'package:shaboo/constants.dart';
 
 class AddImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var _controller = AddImageController(context: context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -36,7 +38,10 @@ class AddImageScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FancyFab(),
+      floatingActionButton: FancyFab(
+        onAccessPhotos: _controller.onAccessPhotos,
+        onAccessCamera: _controller.onAccessCamera,
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
         child: Column(

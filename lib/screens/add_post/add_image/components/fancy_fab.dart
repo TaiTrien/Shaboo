@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shaboo/constants.dart';
 
 class FancyFab extends StatefulWidget {
-  final Function() onPressed;
-  final String tooltip;
+  final Function onAccessCamera;
+  final Function onAccessPhotos;
   final IconData icon;
 
   FancyFab({this.onPressed, this.tooltip, this.icon});
 
+  FancyFab({required this.onAccessCamera, required this.onAccessPhotos, this.tooltip});
   @override
   _FancyFabState createState() => _FancyFabState();
 }
@@ -66,7 +67,7 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
     return Container(
       child: FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: null,
+        onPressed: () => widget.onAccessCamera,
         tooltip: 'Add',
         child: Icon(Icons.photo_camera),
       ),
@@ -77,7 +78,7 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
     return Container(
       child: FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: null,
+        onPressed: () => widget.onAccessPhotos,
         tooltip: 'Image',
         child: Icon(Icons.image),
       ),
@@ -87,6 +88,7 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
   Widget toggle() {
     return Container(
       child: FloatingActionButton(
+        splashColor: Colors.transparent,
         backgroundColor: _buttonColor.value,
         onPressed: animate,
         tooltip: 'Toggle',
