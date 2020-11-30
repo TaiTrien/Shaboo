@@ -5,7 +5,7 @@ import 'package:shaboo/screens/on_boarding/on_boarding_screen.dart';
 import 'package:shaboo/screens/profile/profile_screen.dart';
 
 final routes = {
-  '/onBoardingScren': (context) => OnBoardingScreen(),
+  '/onBoardingScreen': (context) => OnBoardingScreen(),
   '/loginScreen': (context) => LoginScreen(),
   '/signupScreen': (context) => SignupScreen(),
   '/mainScreen': (context) => MainScreen(),

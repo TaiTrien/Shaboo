@@ -4,11 +4,8 @@ import 'package:shaboo/constants.dart';
 class FancyFab extends StatefulWidget {
   final Function onAccessCamera;
   final Function onAccessPhotos;
-  final IconData icon;
 
-  FancyFab({this.onPressed, this.tooltip, this.icon});
-
-  FancyFab({required this.onAccessCamera, required this.onAccessPhotos, this.tooltip});
+  FancyFab({this.onAccessCamera, this.onAccessPhotos});
   @override
   _FancyFabState createState() => _FancyFabState();
 }
@@ -67,7 +64,7 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
     return Container(
       child: FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: () => widget.onAccessCamera,
+        onPressed: widget.onAccessCamera,
         tooltip: 'Add',
         child: Icon(Icons.photo_camera),
       ),
@@ -78,7 +75,7 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
     return Container(
       child: FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: () => widget.onAccessPhotos,
+        onPressed: widget.onAccessPhotos,
         tooltip: 'Image',
         child: Icon(Icons.image),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shaboo/screens/add_post/add_image/add_images_controller.dart';
-import 'package:shaboo/screens/add_post/add_image/components/fancy_fab.dart';
+import 'package:shaboo/screens/post/add_image/add_image_controller.dart';
+import 'package:shaboo/screens/post/add_image/components/fancy_fab.dart';
 import 'package:shaboo/constants.dart';
 
 class AddImageScreen extends StatelessWidget {

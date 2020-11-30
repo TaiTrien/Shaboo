@@ -33,8 +33,8 @@ dependencies:
   bloc: ^6.1.0
   flutter_bloc: ^6.1.1
   http: ^0.12.2
+  fluttertoast: ^7.1.5
   connectivity: ^2.0.1
-  fluttertoast: ^7.1.1
   modal_progress_hud: ^0.1.3
   multi_image_picker: ^4.7.14
   permission_handler: ^5.0.1+1

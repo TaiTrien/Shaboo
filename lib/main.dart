@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: '/onBoardingScren',
+        initialRoute: '/onBoardingScreen',
         routes: routes,
       ),
     );

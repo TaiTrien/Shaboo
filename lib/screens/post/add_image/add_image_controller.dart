@@ -2,11 +2,11 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/model/image.dart';
-import 'package:shaboo/screens/add_post/add_image/components/camera.dart';
+import 'package:shaboo/screens/post/take_photo/take_photo_screen.dart';
 
 class AddImageController {
   BuildContext context;
-  AddImageController({required this.context});
+  AddImageController({this.context});
   ImageModel _imageModel = ImageModel();
 
   void onAccessPhotos() {
@@ -16,12 +16,6 @@ class AddImageController {
   void onAccessCamera() async {
     final cameras = await availableCameras();
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TakePictureScreen(
-            camera: cameras.first,
-          ),
-        ));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TakePhotoScreen(camera: cameras.first)));
   }
 }
