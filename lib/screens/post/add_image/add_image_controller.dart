@@ -9,13 +9,6 @@ class AddImageController {
   AddImageController({this.context});
   ImageModel _imageModel = ImageModel();
 
-  void onAccessPhotos() {
-    _imageModel.getImageFromGallery();
-  }
-
-  void onAccessCamera() async {
-    final cameras = await availableCameras();
-
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TakePhotoScreen(camera: cameras.first)));
-  }
+  void onAccessPhotos() => _imageModel.getImageFromGallery();
+  void onAccessCamera() => Navigator.pushNamed(context, '/takePhotoScreen');
 }

@@ -7,13 +7,14 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart' show getTemporaryDirectory;
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/take_photo/preview_photo_screen.dart';
+import 'package:shaboo/screens/post/take_photo/take_photo_controller.dart';
 
 class TakePhotoScreen extends StatefulWidget {
-  final CameraDescription camera;
+  //final CameraDescription camera;
 
   const TakePhotoScreen({
     Key key,
-    this.camera,
+    // this.camera,
   }) : super(key: key);
 
   @override
@@ -21,29 +22,31 @@ class TakePhotoScreen extends StatefulWidget {
 }
 
 class TakePhotoScreenState extends State<TakePhotoScreen> {
-  CameraController _controller;
-  Future<void> _initializeControllerFuture;
+  //CameraController _controller;
+  //Future<void> _initializeControllerFuture;
+  TakePhotoController _controller;
   String imagePath = '';
 
   @override
   void initState() {
     super.initState();
-
-    _controller = CameraController(
-      widget.camera,
-      ResolutionPreset.medium,
-    );
-    _initializeControllerFuture = _controller.initialize();
+    // _controller = CameraController(
+    //   widget.camera,
+    //   ResolutionPreset.medium,
+    // );
+    //_initializeControllerFuture = _controller.initialize();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    //_controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_controller == null) _controller = TakePhotoController(context: context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Take your book picture'),
@@ -57,10 +60,10 @@ class TakePhotoScreenState extends State<TakePhotoScreen> {
       body: Stack(
         children: [
           FutureBuilder<void>(
-            future: _initializeControllerFuture,
+            future: _controller.initCamera(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return CameraPreview(_controller);
+                return CameraPreview(_controller.cameraController);
               } else {
                 return Center(
                     child: ModalProgressHUD(
@@ -105,18 +108,19 @@ class TakePhotoScreenState extends State<TakePhotoScreen> {
           color: Colors.black,
         ),
         onPressed: () async {
-          try {
-            await _initializeControllerFuture;
-            final path = join(
-              (await getTemporaryDirectory()).path,
-              '${DateTime.now()}.png',
-            );
-            await _controller.takePicture(path);
+          _controller.takePhoto();
+          // try {
+          //   await _initializeControllerFuture;
+          //   final path = join(
+          //     (await getTemporaryDirectory()).path,
+          //     '${DateTime.now()}.png',
+          //   );
+          //   await _controller.takePicture(path);
 
-            setState(() => imagePath = path);
-          } catch (e) {
-            print(e);
-          }
+          //   setState(() => imagePath = path);
+          // } catch (e) {
+          //   print(e);
+          // }
         },
       ),
     );
