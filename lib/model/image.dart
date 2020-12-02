@@ -30,12 +30,7 @@ class ImageModel {
       final path = join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
       await controller.takePicture(path);
 
-      final result = await ImageGallerySaver.saveFile(
-        path,
-        // Uint8List.fromList(response.data),
-        // quality: 60,
-        // name: "hello",
-      );
+      final result = await ImageGallerySaver.saveFile(path);
       print(result);
     } catch (e) {
       print(e);

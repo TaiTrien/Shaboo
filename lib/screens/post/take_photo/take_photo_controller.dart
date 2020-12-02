@@ -17,12 +17,10 @@ class TakePhotoController {
     cameras = await availableCameras();
     CameraDescription camera = cameras.first;
     _cameraController = CameraController(camera, ResolutionPreset.medium);
+    await _cameraController.initialize();
   }
 
   void takePhoto() async {
-    final cameras = await availableCameras();
-    final CameraDescription camera = cameras.first;
-    final _cameraController = CameraController(camera, ResolutionPreset.medium);
     _imageModel.takePhoto(_cameraController);
   }
 
