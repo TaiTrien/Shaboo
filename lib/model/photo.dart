@@ -5,33 +5,33 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class ImageModel {
-  List<int> idImages = <int>[];
-  List<Asset> images = <Asset>[];
+class PhotoModel {
+  List<int> idPhotos = <int>[];
+  List<Asset> photos = <Asset>[];
 
-  Future<List<Asset>> getImageFromGallery() async {
+  Future<List<Asset>> getPhotosFromGallery() async {
     try {
       var status = await Permission.photos.request();
       if (!status.isGranted) return [];
 
-      images = await MultiImagePicker.pickImages(
+      photos = await MultiImagePicker.pickImages(
         maxImages: 300,
         enableCamera: true,
       );
     } catch (e) {
       print(e);
     }
-    return images;
+    return photos;
   }
 
-  Future<void> takePhoto(CameraController controller) async {
+  Future<dynamic> takePhoto(CameraController controller) async {
     try {
-      await controller.initialize();
       final path = join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
       await controller.takePicture(path);
 
       final result = await ImageGallerySaver.saveFile(path);
       print(result);
+      return path;
     } catch (e) {
       print(e);
     }

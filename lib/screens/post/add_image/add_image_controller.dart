@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shaboo/model/image.dart';
+import 'package:shaboo/model/photo.dart';
 
 class AddImageController {
   BuildContext context;
   AddImageController({this.context});
-  ImageModel _imageModel = ImageModel();
+  PhotoModel _photoModel = PhotoModel();
 
-  void onAccessPhotos() => _imageModel.getImageFromGallery();
+  void onAccessPhotos() => _photoModel.getPhotosFromGallery();
   void onAccessCamera() => Navigator.pushNamed(context, '/takePhotoScreen');
 }

@@ -1,28 +1,33 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shaboo/model/image.dart';
+import 'package:shaboo/model/photo.dart';
 
 class TakePhotoController {
+  var _cameras;
+  var _cameraController;
+  CameraDescription _camera;
+
   BuildContext context;
+  PhotoModel _photoModel = PhotoModel();
+
   TakePhotoController({this.context}) {
     initCamera();
   }
 
-  var cameras;
-  CameraDescription camera;
-  var _cameraController;
-  ImageModel _imageModel = ImageModel();
-
   Future<void> initCamera() async {
-    cameras = await availableCameras();
-    CameraDescription camera = cameras.first;
-    _cameraController = CameraController(camera, ResolutionPreset.medium);
+    _cameras = await availableCameras();
+    _camera = _cameras.first;
+    _cameraController = CameraController(_camera, ResolutionPreset.medium);
     await _cameraController.initialize();
   }
 
-  void takePhoto() async {
-    _imageModel.takePhoto(_cameraController);
+  Future<dynamic> takePhoto() async {
+    return _photoModel.takePhoto(_cameraController);
   }
 
+  void onAccessPhotos() => _photoModel.getPhotosFromGallery();
+  //Navigators
+  void toReturn() => Navigator.pop(context);
+  //Getters && Setters
   get cameraController => this._cameraController;
 }

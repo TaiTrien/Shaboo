@@ -39,11 +39,10 @@ class TakePhotoScreenState extends State<TakePhotoScreen> {
         title: Text('Take your book picture'),
         backgroundColor: kPrimaryColor,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: _controller.toReturn,
           icon: Icon(Icons.arrow_back_ios),
         ),
       ),
-
       body: Stack(
         children: [
           FutureBuilder<void>(
@@ -66,12 +65,15 @@ class TakePhotoScreenState extends State<TakePhotoScreen> {
               child: Row(
                 children: [
                   SizedBox(width: 10),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      image: imagePath.isEmpty ? null : DecorationImage(image: FileImage(File(imagePath)), fit: BoxFit.cover),
+                  GestureDetector(
+                    onTap: imagePath.isEmpty ? () => {} : _controller.onAccessPhotos,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        image: imagePath.isEmpty ? null : DecorationImage(image: FileImage(File(imagePath)), fit: BoxFit.cover),
+                      ),
                     ),
                   )
                 ],
@@ -80,16 +82,13 @@ class TakePhotoScreenState extends State<TakePhotoScreen> {
           ),
         ],
       ),
-      // bottomNavigationBar:
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        child: Icon(
-          Icons.camera_alt,
-          color: Colors.black,
-        ),
+        child: Icon(Icons.camera_alt, color: Colors.black),
         onPressed: () async {
-          _controller.takePhoto();
+          var result = await _controller.takePhoto();
+          setState(() => imagePath = result);
         },
       ),
     );
