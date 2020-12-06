@@ -22,7 +22,7 @@ class TakePhotoController {
   }
 
   Future<dynamic> takePhoto() async {
-    return _photoModel.takePhoto(_cameraController);
+    // return _photoModel.takePhoto(_cameraController);
   }
 
   void onAccessPhotos() => _photoModel.getPhotosFromGallery();

@@ -27,7 +27,10 @@ class _MainScreenState extends State<MainScreen> {
       showModalBottomSheet<void>(
         isScrollControlled: true,
         context: context,
-        builder: (context) => AddImageScreen(),
+        builder: (context) => Padding(
+          padding: const EdgeInsets.only(top: 24),
+          child: AddImageScreen(),
+        ),
       );
       return;
     }

@@ -1,8 +1,5 @@
-import 'package:camera/camera.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PhotoModel {
@@ -15,7 +12,7 @@ class PhotoModel {
       if (!status.isGranted) return [];
 
       photos = await MultiImagePicker.pickImages(
-        maxImages: 300,
+        maxImages: 6,
         enableCamera: true,
       );
     } catch (e) {
@@ -24,14 +21,13 @@ class PhotoModel {
     return photos;
   }
 
-  Future<dynamic> takePhoto(CameraController controller) async {
+  Future<dynamic> getPhotoFromCamera() async {
+    PickedFile photo;
     try {
-      final path = join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
-      await controller.takePicture(path);
-
-      final result = await ImageGallerySaver.saveFile(path);
-      print(result);
-      return path;
+      final picker = ImagePicker();
+      var status = await Permission.camera.request();
+      if (status.isGranted) photo = await picker.getImage(source: ImageSource.camera);
+      return photo;
     } catch (e) {
       print(e);
     }

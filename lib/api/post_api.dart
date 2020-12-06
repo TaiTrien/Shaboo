@@ -2,10 +2,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:shaboo/model/response.dart';
+import 'package:shaboo/utils/store.dart';
 
-class AuthApi {
+class PostApi {
   static String prefixUrl = 'http://192.168.1.13:3001';
-  static String urlGoogleSignin = '$prefixUrl/auth/google';
+  static String urlUploadPhoto = '$prefixUrl/images';
   static String urlFacebookSignin = '$prefixUrl/auth/facebook';
 
   // static String urlRegister = "https://fin.mal.vn/api/user/register";
@@ -13,13 +14,15 @@ class AuthApi {
   // static String urlChangePassword =
   //     'https://fin.mal.vn/api/user/password_change';
 
-  static Future<dynamic> signInByGoogle({String userID, String idToken}) async {
+  static Future<dynamic> uploadPhoto() async {
+    var token = await Store.getToken();
+
     var response = await http.post(
-      urlGoogleSignin,
-      body: {
-        "userID": userID,
-        "token": idToken,
+      urlUploadPhoto,
+      headers: {
+        "token": token,
       },
+      body: {},
     );
     if (response.statusCode != 200) return null;
     return Response.map(json.decode(response.body));
