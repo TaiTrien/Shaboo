@@ -6,7 +6,7 @@ import 'package:shaboo/model/response.dart';
 import 'package:shaboo/utils/store.dart';
 
 class PostApi {
-  static String prefixUrl = 'http://192.168.30.201:3001';
+  static String prefixUrl = 'http://192.168.137.1:3001';
   static String urlUploadPhoto = '$prefixUrl/images';
   static String urlFacebookSignin = '$prefixUrl/auth/facebook';
 
@@ -24,11 +24,15 @@ class PostApi {
       request.files.add(await http.MultipartFile.fromPath('images', photo.path));
     }
 
-    var response = await http.Response.fromStream(await request.send());
+    try {
+      var response = await http.Response.fromStream(await request.send());
 
-    int prefixStatusCode = response.statusCode ~/ 100;
-    if (prefixStatusCode != 2) return null;
+      int prefixStatusCode = response.statusCode ~/ 100;
+      if (prefixStatusCode != 2) return null;
 
-    return Response.map(json.decode(response.body));
+      return Response.map(json.decode(response.body));
+    } catch (e) {
+      print(e);
+    }
   }
 }

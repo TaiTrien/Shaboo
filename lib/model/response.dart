@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Response {
   int _statusCode;
   String _apiMessage;
@@ -15,4 +17,11 @@ class Response {
   String get apiMessagse => this._apiMessage;
   dynamic get data => this._data;
   dynamic get token => this._token;
+
+  Map<String, dynamic> toJson() => {
+        'statusCode': _statusCode,
+        'message': _apiMessage,
+        'data': _data,
+        'token': _token,
+      };
 }

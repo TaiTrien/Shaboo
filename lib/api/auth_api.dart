@@ -4,32 +4,38 @@ import 'dart:convert';
 import 'package:shaboo/model/response.dart';
 
 class AuthApi {
-  static String prefixUrl = 'http://192.168.30.201:3001';
+  static String prefixUrl = 'http://192.168.137.1:3001';
   static String urlGoogleSignin = '$prefixUrl/auth/google';
   static String urlFacebookSignin = '$prefixUrl/auth/facebook';
 
   static Future<dynamic> signInByGoogle({String userID, String idToken}) async {
-    var response = await http.post(
-      urlGoogleSignin,
-      body: {
-        "userID": userID,
-        "token": idToken,
-      },
-    );
-    if (response.statusCode != 200) return null;
-    return Response.map(json.decode(response.body));
+    try {
+      var response = await http.post(
+        urlGoogleSignin,
+        body: {
+          "userID": userID,
+          "token": idToken,
+        },
+      );
+      if (response.statusCode != 200) return null;
+      return Response.map(json.decode(response.body));
+    } catch (e) {
+      print(e);
+    }
   }
 
   static Future<dynamic> signInByFacebook({String userID, String idToken}) async {
-    var response = await http.post(
-      urlFacebookSignin,
-      body: {
-        "userID": userID,
-        "token": idToken,
-      },
-    );
-    if (response.statusCode != 200) return null;
-    return Response.map(json.decode(response.body));
+    try {
+      var response = await http.post(
+        urlFacebookSignin,
+        body: {
+          "userID": userID,
+          "token": idToken,
+        },
+      );
+      if (response.statusCode != 200) return null;
+      return Response.map(json.decode(response.body));
+    } catch (e) {}
   }
 }
 
