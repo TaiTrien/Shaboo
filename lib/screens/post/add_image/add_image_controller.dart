@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/photo.dart';
 
 class AddImageController {
@@ -21,6 +22,6 @@ class AddImageController {
     if (takenPhoto == null) return;
 
     final result = await ImageGallerySaver.saveFile(takenPhoto.path);
-    print(result);
+    await PostApi.uploadPhoto(image: File(takenPhoto.path));
   }
 }

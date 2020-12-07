@@ -56,7 +56,7 @@ class AddImageScreen extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    '9',
+                    '0/9',
                     style: kTitleTextStyle.copyWith(
                       fontWeight: FontWeight.normal,
                       color: kGreyColor,
@@ -65,10 +65,22 @@ class AddImageScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 3,
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: 10),
+              child: Container(
+                  height: 50,
+                  child: ListView.builder(
+                    itemExtent: 10,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 6,
+                    itemBuilder: (context, i) {
+                      return Container(
+                        height: 60,
+                        width: 60,
+                        color: Colors.red,
+                      );
+                    },
+                  )),
             ),
           ],
         ),

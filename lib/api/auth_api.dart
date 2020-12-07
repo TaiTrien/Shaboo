@@ -4,14 +4,9 @@ import 'dart:convert';
 import 'package:shaboo/model/response.dart';
 
 class AuthApi {
-  static String prefixUrl = 'http://192.168.1.13:3001';
+  static String prefixUrl = 'http://192.168.30.201:3001';
   static String urlGoogleSignin = '$prefixUrl/auth/google';
   static String urlFacebookSignin = '$prefixUrl/auth/facebook';
-
-  // static String urlRegister = "https://fin.mal.vn/api/user/register";
-  // static String urlGetUserInfo = 'https://fin.mal.vn/api/user/info';
-  // static String urlChangePassword =
-  //     'https://fin.mal.vn/api/user/password_change';
 
   static Future<dynamic> signInByGoogle({String userID, String idToken}) async {
     var response = await http.post(

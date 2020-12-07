@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:shaboo/constants.dart';
-import 'package:shaboo/screens/post/take_photo/preview_photo_screen.dart';
 import 'package:shaboo/screens/post/take_photo/take_photo_controller.dart';
 
 class TakePhotoScreen extends StatefulWidget {

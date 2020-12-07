@@ -26,7 +26,9 @@ class PhotoModel {
     try {
       final picker = ImagePicker();
       var status = await Permission.camera.request();
-      if (status.isGranted) photo = await picker.getImage(source: ImageSource.camera);
+      if (!status.isGranted) return null;
+
+      photo = await picker.getImage(source: ImageSource.camera);
       return photo;
     } catch (e) {
       print(e);
