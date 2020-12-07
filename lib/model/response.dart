@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Response {
   int _statusCode;
   String _apiMessage;

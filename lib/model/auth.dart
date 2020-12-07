@@ -4,7 +4,7 @@ import 'package:shaboo/api/auth_api.dart';
 import 'package:shaboo/model/user.dart';
 import 'package:shaboo/utils/store.dart';
 
-class Auth {
+class AuthModel {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FacebookLogin _facebooklogin = FacebookLogin();
 
@@ -25,7 +25,7 @@ class Auth {
       print(token);
 
       var userData = respone.data;
-      ShabooUser currentUser = new ShabooUser(
+      UserModel currentUser = new UserModel(
         userID: userData["id"],
         firstName: userData["firstName"],
         lastName: userData["lastName"],
@@ -56,7 +56,7 @@ class Auth {
       Store.setToken(token);
 
       var userData = respone.data;
-      ShabooUser currentUser = new ShabooUser(
+      UserModel currentUser = new UserModel(
         userID: userData["id"],
         firstName: userData["firstName"],
         lastName: userData["lastName"],

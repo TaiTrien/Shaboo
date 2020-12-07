@@ -8,5 +8,5 @@ abstract class UserEvent {
 }
 
 class UpdateUserData extends UserEvent {
-  UpdateUserData(ShabooUser currentUser) : super(payload: currentUser);
+  UpdateUserData(UserModel currentUser) : super(payload: currentUser);
 }

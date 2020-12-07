@@ -20,7 +20,7 @@ class ProfileController {
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FacebookLogin facebooklogin = FacebookLogin();
-  final Auth _authModel = Auth();
+  final AuthModel _authModel = AuthModel();
 
   ProfileController({this.context}) {
     _userBloc = BlocProvider.of<UserBloc>(context);
@@ -85,6 +85,7 @@ class ProfileController {
   }
 
   get currentUser => _userBloc.state.currentUser;
-  get userFullName => _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
+  get userFullName =>
+      _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
   get defaultAvatar => SvgPicture.asset('assets/images/reader.svg');
 }

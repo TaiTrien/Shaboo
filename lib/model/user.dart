@@ -1,4 +1,4 @@
-class ShabooUser {
+class UserModel {
   int _userID;
   String firstName;
   String lastName;
@@ -11,7 +11,7 @@ class ShabooUser {
   String birthday;
   String avatar;
 
-  ShabooUser({
+  UserModel({
     int userID,
     this.firstName,
     this.lastName,

@@ -14,7 +14,7 @@ class LoginController {
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FacebookLogin facebooklogin = FacebookLogin();
-  final Auth _authModel = Auth();
+  final AuthModel _authModel = AuthModel();
 
   TextEditingController usernameController;
   TextEditingController passwordController;
