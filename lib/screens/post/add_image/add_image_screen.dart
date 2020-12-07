@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shaboo/screens/post/add_image/add_image_controller.dart';
 import 'package:shaboo/screens/post/add_image/components/fancy_fab.dart';
 import 'package:shaboo/constants.dart';
+import 'package:shaboo/screens/post/add_image/components/image_list.dart';
 
 class AddImageScreen extends StatelessWidget {
   @override
@@ -12,17 +13,14 @@ class AddImageScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: _controller.toExit,
           icon: Icon(Icons.arrow_back_ios),
         ),
         backgroundColor: kPrimaryColor,
         elevation: 0,
         title: Text(
           'Images',
-          style: kHeadingTextStyle.copyWith(
-            fontSize: 25,
-            color: Colors.white,
-          ),
+          style: kHeadingTextStyle.copyWith(fontSize: 25, color: Colors.white),
         ),
         centerTitle: true,
         actions: [
@@ -30,10 +28,7 @@ class AddImageScreen extends StatelessWidget {
             onPressed: () {},
             child: Text(
               'Next',
-              style: kTitleTextStyle.copyWith(
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
-              ),
+              style: kTitleTextStyle.copyWith(fontWeight: FontWeight.normal, color: Colors.white),
             ),
           ),
         ],
@@ -50,37 +45,52 @@ class AddImageScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
               child: Row(
                 children: [
-                  Text(
-                    'Your images',
-                    style: kTitleTextStyle,
-                  ),
+                  Text('Your images', style: kTitleTextStyle),
                   SizedBox(width: 10),
-                  Text(
-                    '0/9',
-                    style: kTitleTextStyle.copyWith(
-                      fontWeight: FontWeight.normal,
-                      color: kGreyColor,
-                    ),
-                  )
+                  Text('0/6', style: kTitleTextStyle.copyWith(fontWeight: FontWeight.normal, color: kGreyColor)),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: 10),
-              child: Container(
-                  height: 50,
-                  child: ListView.builder(
-                    itemExtent: 10,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 6,
-                    itemBuilder: (context, i) {
-                      return Container(
-                        height: 60,
-                        width: 60,
-                        color: Colors.red,
-                      );
-                    },
-                  )),
+            ImageList(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  right: kDefaultPaddingHorizontal,
+                  left: kDefaultPaddingHorizontal,
+                  top: kDefaultPaddingVerical,
+                  bottom: 100,
+                ),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: kPrimaryColor.withOpacity(0.8), width: 2),
+                    color: kSecondaryColor.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(text: 'Notes:\n', style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
+                          TextSpan(
+                            text: '\n- You should ensure your images about your book are clear.\n',
+                            style: TextStyle(color: kPrimaryColor, fontSize: 18),
+                          ),
+                          TextSpan(
+                            text: '\n- Your images should contain front cover, back cover and book information.\n',
+                            style: TextStyle(color: kPrimaryColor, fontSize: 18),
+                          ),
+                          TextSpan(
+                            text: '\n- Your images should describe book quality.',
+                            style: TextStyle(color: kPrimaryColor, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

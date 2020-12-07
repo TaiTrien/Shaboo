@@ -22,6 +22,9 @@ class AddImageController {
     if (takenPhoto == null) return;
 
     final result = await ImageGallerySaver.saveFile(takenPhoto.path);
-    await PostApi.uploadPhoto(image: File(takenPhoto.path));
+    //await PostApi.uploadPhoto(image: File(takenPhoto.path));
   }
+
+  // Navigators
+  void toExit() => Navigator.pop(context);
 }

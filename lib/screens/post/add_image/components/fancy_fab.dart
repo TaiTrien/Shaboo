@@ -31,7 +31,7 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
       parent: _animationController,
       curve: Interval(
         0.00,
-        1.00,
+        0.5,
         curve: Curves.linear,
       ),
     ));
@@ -42,7 +42,7 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
       parent: _animationController,
       curve: Interval(
         0.0,
-        0.75,
+        0.5,
         curve: _curve,
       ),
     ));
