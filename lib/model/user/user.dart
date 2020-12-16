@@ -1,3 +1,5 @@
+import 'package:shaboo/constants.dart';
+
 class UserModel {
   int _userID;
   String firstName;
@@ -7,7 +9,7 @@ class UserModel {
   String role = "USER";
   String email;
   String phone;
-  String gender;
+  UserGender gender;
   String birthday;
   String avatar;
 

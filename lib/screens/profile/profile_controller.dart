@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants.dart';
-import 'package:shaboo/model/auth.dart';
+import 'package:shaboo/model/auth/auth.dart';
 
 enum MenuValue {
   SETTINGS,

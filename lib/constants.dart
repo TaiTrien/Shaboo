@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/size_config.dart';
 
+enum PostStatus {
+  OPENED,
+  CLOSED,
+}
+
+enum UserGender {
+  FEMALE,
+  MALE,
+  OTHER,
+}
+
 const kPrimaryColor = Color(0xFF0365B0);
 const kPrimaryLightColor = Color(0xFFE0F1FF);
 const kSecondaryColor = Color(0xFF5B97E8);

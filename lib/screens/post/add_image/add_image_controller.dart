@@ -7,7 +7,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/constants.dart';
-import 'package:shaboo/model/photo.dart';
+import 'package:shaboo/model/post/photo.dart';
 
 class AddImageController {
   PhotoModel _photoModel = PhotoModel();
@@ -33,7 +33,7 @@ class AddImageController {
     if (takenPhoto == null) return;
     photos.add(File(takenPhoto.path));
 
-    final result = await ImageGallerySaver.saveFile(takenPhoto.path);
+    await ImageGallerySaver.saveFile(takenPhoto.path);
     //await PostApi.uploadPhoto(photos: photos);
   }
 

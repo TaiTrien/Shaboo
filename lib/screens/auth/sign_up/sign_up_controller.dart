@@ -4,7 +4,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
-import 'package:shaboo/model/auth.dart';
+import 'package:shaboo/model/auth/auth.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class SignupController {
