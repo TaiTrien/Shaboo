@@ -5,37 +5,41 @@ import 'package:shaboo/model/post/category.dart';
 import 'package:shaboo/model/post/publisher.dart';
 
 class BookModel {
-  // String bookName;
-  // String version;
-  // String desc;
-  // String shortDesc;
-  // String thumbnailUrl;
-  // Map<String, dynamic> additionalDesc;
-  // List<CategoryModel> categories;
-  // List<AuthorModel> authors;
-  // PublisherModel publisher;
+  int _id;
+  String createdAt;
+  String updatedAt;
+  String bookName;
+  String version;
+  String desc;
+  String shortDesc;
+  String thumbnailUrl;
+  List<AuthorModel> authors;
+  List<CategoryModel> categories;
+  List<PublisherModel> publishers;
 
-  // BookModel({
-  //   this.bookName,
-  //   this.version,
-  //   this.desc,
-  //   this.shortDesc,
-  //   this.thumbnailUrl,
-  //   this.additionalDesc,
-  //   this.categories,
-  //   this.authors,
-  //   this.publisher,
-  // });
+  BookModel({
+    int id,
+    this.createdAt,
+    this.updatedAt,
+    this.bookName,
+    this.version,
+    this.desc,
+    this.shortDesc,
+    this.thumbnailUrl,
+    this.categories,
+    this.authors,
+    this.publishers,
+  }) : this._id = id;
 
-  // Map<String, dynamic> toJson() => {
-  //       'bookName': this.bookName,
-  //       'version': this.version,
-  //       'desc': this.desc,
-  //       'shortDesc': this.shortDesc,
-  //       'thumbnailUrl': this.thumbnailUrl,
-  //       'additionalDesc': this.additionalDesc,
-  //       'categories': this.categories,
-  //       'authors': this.authors,
-  //       'publisher': this.publisher,
-  //     };
+  Map<String, dynamic> toJson() => {
+        'id': this._id,
+        'bookName': this.bookName,
+        'version': this.version,
+        'desc': this.desc,
+        'shortDesc': this.shortDesc,
+        'thumbnailUrl': this.thumbnailUrl,
+        'categories': this.categories,
+        'authors': this.authors,
+        'publishers': this.publishers,
+      };
 }

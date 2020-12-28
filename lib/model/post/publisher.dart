@@ -4,7 +4,6 @@ class PublisherModel {
   String updatedAt;
   String name;
   String slug;
-  String additionalInfo;
 
   PublisherModel(
     int publisherID, {
@@ -12,7 +11,6 @@ class PublisherModel {
     this.updatedAt,
     this.name,
     this.slug,
-    this.additionalInfo,
   }) : _publisherID = publisherID;
 
   Map<String, dynamic> toJson() => {
@@ -21,6 +19,5 @@ class PublisherModel {
         'updatedAt': this.updatedAt,
         'name': this.name,
         'slug': this.slug,
-        'desc': this.additionalInfo,
       };
 }
