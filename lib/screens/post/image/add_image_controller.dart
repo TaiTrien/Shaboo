@@ -27,7 +27,6 @@ class AddImageController {
     //await PostApi.uploadPhoto(photos: photos);
   }
 
-  // void onAccessCamera() => Navigator.pushNamed(context, '/takePhotoScreen');
   void onAccessCamera() async {
     PickedFile takenPhoto = await _photoModel.getPhotoFromCamera();
     if (takenPhoto == null) return;

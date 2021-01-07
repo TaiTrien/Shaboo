@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shaboo/screens/post/add_image/add_image_controller.dart';
-import 'package:shaboo/screens/post/add_image/components/fancy_fab.dart';
+
 import 'package:shaboo/constants.dart';
-import 'package:shaboo/screens/post/add_image/components/image_list.dart';
-import 'package:shaboo/screens/post/add_image/components/note_board.dart';
+import 'package:shaboo/screens/post/image/add_image_controller.dart';
+import 'package:shaboo/screens/post/image/components/fancy_fab.dart';
+import 'package:shaboo/screens/post/image/components/image_list.dart';
+import 'package:shaboo/screens/post/image/components/note_board.dart';
 
 class AddImageScreen extends StatelessWidget {
   @override
@@ -12,28 +13,6 @@ class AddImageScreen extends StatelessWidget {
     var _controller = AddImageController(context: context);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: _controller.toExit,
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-        backgroundColor: kPrimaryColor,
-        elevation: 0,
-        title: Text(
-          'Images',
-          style: kHeadingTextStyle.copyWith(fontSize: 25, color: Colors.white),
-        ),
-        centerTitle: true,
-        actions: [
-          FlatButton(
-            onPressed: () {},
-            child: Text(
-              'Next',
-              style: kTitleTextStyle.copyWith(fontWeight: FontWeight.normal, color: Colors.white),
-            ),
-          ),
-        ],
-      ),
       floatingActionButton: FancyFab(
         onAccessPhotos: _controller.onAccessPhotos,
         onAccessCamera: _controller.onAccessCamera,
@@ -53,7 +32,23 @@ class AddImageScreen extends StatelessWidget {
               ),
             ),
             ImageList(onPress: _controller.onAccessCamera),
-            NoteBoard(),
+            NoteBoard(
+              notes: [
+                TextSpan(text: 'Notes:\n', style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
+                TextSpan(
+                  text: '\n- You should ensure your images about your book are clear.\n',
+                  style: TextStyle(color: kPrimaryColor, fontSize: 18),
+                ),
+                TextSpan(
+                  text: '\n- Your images should contain front cover, back cover and book information.\n',
+                  style: TextStyle(color: kPrimaryColor, fontSize: 18),
+                ),
+                TextSpan(
+                  text: '\n- Your images should describe book quality.',
+                  style: TextStyle(color: kPrimaryColor, fontSize: 18),
+                ),
+              ],
+            ),
           ],
         ),
       ),
