@@ -35,7 +35,7 @@ class LoginController {
 
     if (currentUser == null) return Notify().error(message: 'Sign in failed');
     _userBloc.add(UpdateUserData(currentUser));
-    toMainScreen();
+    toLoadingScreen();
   }
 
   Future<void> signInByFacebook() async {
@@ -45,11 +45,12 @@ class LoginController {
 
     if (currentUser == null) return Notify().error(message: 'Sign in failed');
     _userBloc.add(UpdateUserData(currentUser));
-    toMainScreen();
+    toLoadingScreen();
   }
 
   //Navigators
   toSignupScreen() => Navigator.pushNamed(context, '/signupScreen');
+  toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(context, '/loadingScreen', (context) => false);
   toMainScreen() => Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
   toGoogleSignIn() => Navigator.pushNamed(context, '/googleSigninScreen');
 }
