@@ -7,14 +7,18 @@ abstract class LocationEvent {
   LocationEvent({this.payload});
 }
 
-class UpdateCitiesState extends LocationEvent {
-  UpdateCitiesState(Map<String, dynamic> cities) : super(payload: cities);
+class UpdateLocationsState extends LocationEvent {
+  UpdateLocationsState(Map<String, dynamic> locations) : super(payload: locations);
 }
 
-class UpdateDistrictsState extends LocationEvent {
-  UpdateDistrictsState(Map<String, dynamic> districts) : super(payload: districts);
+class UpdateSelectedCity extends LocationEvent {
+  UpdateSelectedCity(Map<String, dynamic> selectedLocation) : super(payload: selectedLocation);
 }
 
-class UpdateWardsState extends LocationEvent {
-  UpdateWardsState(Map<String, dynamic> wards) : super(payload: wards);
+class UpdateSelectedDistrict extends LocationEvent {
+  UpdateSelectedDistrict(Map<String, dynamic> selectedDistrict) : super(payload: selectedDistrict);
+}
+
+class UpdateSelectedWard extends LocationEvent {
+  UpdateSelectedWard(Map<String, dynamic> selectedWard) : super(payload: selectedWard);
 }

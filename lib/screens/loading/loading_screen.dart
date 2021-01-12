@@ -6,6 +6,7 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _controller = LoadingController(context: context);
+
     return ModalProgressHUD(
       inAsyncCall: true,
       child: Scaffold(

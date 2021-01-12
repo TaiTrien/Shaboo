@@ -30,6 +30,7 @@ class LoginController {
 
   Future<void> signInByGoogle() async {
     _authBloc.add(Login(true));
+
     var currentUser = await _authModel.googleSignIn();
     _authBloc.add(Login(false));
 

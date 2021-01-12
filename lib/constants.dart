@@ -5,6 +5,11 @@ enum PostStatus {
   OPENED,
   CLOSED,
 }
+const kLimitCodeLocation = {
+  "city": 100,
+  "district": 1000,
+  "ward": 100000,
+};
 
 enum UserGender {
   FEMALE,

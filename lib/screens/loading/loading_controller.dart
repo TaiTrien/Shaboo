@@ -15,19 +15,14 @@ class LoadingController {
 
   handleLoad() async {
     await loadLocationData();
+    toMainScreen();
   }
 
   loadLocationData() async {
-    String cities = await DefaultAssetBundle.of(context).loadString("assets/jsons/cities.json");
-    String districts = await DefaultAssetBundle.of(context).loadString("assets/jsons/districts.json");
-    String wards = await DefaultAssetBundle.of(context).loadString("assets/jsons/wards.json");
-
-    final citiesJson = json.decode(cities);
-    final districtsJson = json.decode(districts);
-    final wardsJson = json.decode(wards);
-
-    _locationBloc.add(UpdateCitiesState(citiesJson));
-    _locationBloc.add(UpdateDistrictsState(districtsJson));
-    _locationBloc.add(UpdateWardsState(wardsJson));
+    String locations = await DefaultAssetBundle.of(context).loadString("assets/jsons/location-tree.json");
+    final locationsJson = await json.decode(locations);
+    _locationBloc.add(UpdateLocationsState(locationsJson));
   }
+
+  toMainScreen() => Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
 }

@@ -13,12 +13,29 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   Stream<LocationState> mapEventToState(
     LocationEvent event,
   ) async* {
-    if (event is UpdateCitiesState) {
-      yield UpdateState(state, cities: event.payload);
-    } else if (event is UpdateDistrictsState) {
-      yield UpdateState(state, districts: event.payload);
-    } else if (event is UpdateWardsState) {
-      yield UpdateState(state, wards: event.payload);
+    if (event is UpdateLocationsState) {
+      yield UpdateState(state, locations: event.payload);
+    } else if (event is UpdateSelectedCity) {
+      yield UpdateState(
+        state,
+        selectedCity: event.payload,
+        selectedDistrict: null,
+        selectedWard: null,
+      );
+    } else if (event is UpdateSelectedDistrict) {
+      yield UpdateState(
+        state,
+        selectedCity: state.selectedCity,
+        selectedDistrict: event.payload,
+        selectedWard: null,
+      );
+    } else if (event is UpdateSelectedWard) {
+      yield UpdateState(
+        state,
+        selectedCity: state.selectedCity,
+        selectedDistrict: state.selectedDistrict,
+        selectedWard: event.payload,
+      );
     }
   }
 }
