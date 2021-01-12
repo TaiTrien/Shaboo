@@ -28,7 +28,7 @@ class LocationScreen extends StatelessWidget {
                   ),
                   LocationSelector(
                     location: _controller.selectedCityName,
-                    onPress: () => _controller.toDetailedLocation(_controller.cities),
+                    onPress: () => _controller.toCityList(_controller.cities),
                   ),
                   SizedBox(height: 30),
                   SelectorTitle(
@@ -39,7 +39,7 @@ class LocationScreen extends StatelessWidget {
                   ),
                   LocationSelector(
                     location: _controller.selectedDistrictName,
-                    onPress: () => _controller.toDetailedLocation(_controller.districts),
+                    onPress: _controller.toDistrictList,
                   ),
                   SizedBox(height: 30),
                   SelectorTitle(
@@ -50,7 +50,7 @@ class LocationScreen extends StatelessWidget {
                   ),
                   LocationSelector(
                     location: _controller.selectedWardName,
-                    onPress: () => _controller.toDetailedLocation(_controller.wards),
+                    onPress: _controller.toWardList,
                   ),
                   SizedBox(height: 30),
                 ],

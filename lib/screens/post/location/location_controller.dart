@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/screens/post/location/detailed_location/detailed_location.dart';
+import 'package:shaboo/utils/notify.dart';
 
 class LocationController {
   BuildContext context;
@@ -10,7 +11,6 @@ class LocationController {
 
   LocationController({this.context}) {
     _locationBloc = BlocProvider.of<LocationBloc>(context);
-    print(_locationBloc.state.selectedWard);
   }
 
   get cities => _locationBloc.state.locations.values.toList();
@@ -25,10 +25,20 @@ class LocationController {
   get selectedDistrictName => selectedDistrict == null ? "Your district" : selectedDistrict["name_with_type"];
   get selectedWardName => selectedWard == null ? "Your ward" : selectedWard["name_with_type"];
 
-  toDetailedLocation(dynamic location) => Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailedLocationScreen(locations: location),
-      ));
+  toCityList(dynamic location) =>
+      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedLocationScreen(locations: location)));
+
+  toDistrictList() {
+    if (selectedCity == null) return Notify().error(message: 'Please select your city');
+    return toCityList(districts);
+  }
+
+  toWardList() {
+    if (selectedCity == null) return Notify().error(message: 'Please select your city');
+    if (selectedDistrict == null) return Notify().error(message: 'Please select your district');
+
+    return toCityList(wards);
+  }
+
   toExit() => Navigator.pop(context);
 }
