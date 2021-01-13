@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shaboo/constants.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -7,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboard;
   final bool isObscure;
   final IconData icon;
+  final Color mainColor;
 
   const CustomTextField({
     Key key,
@@ -15,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboard,
     this.isObscure = false,
     this.icon,
+    this.mainColor,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -23,9 +26,21 @@ class CustomTextField extends StatelessWidget {
       keyboardType: this.keyboard,
       obscureText: this.isObscure,
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
+        enabledBorder: new OutlineInputBorder(
+          borderSide: BorderSide(color: mainColor ?? kPrimaryColor),
+        ),
+        focusedBorder: new OutlineInputBorder(
+          borderSide: BorderSide(color: mainColor ?? kPrimaryColor),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: mainColor ?? kPrimaryColor),
+        ),
         labelText: this.labelText,
-        suffixIcon: Icon(this.icon),
+        labelStyle: TextStyle(color: mainColor ?? kPrimaryColor),
+        suffixIcon: Icon(
+          this.icon,
+          color: mainColor ?? kPrimaryColor,
+        ),
       ),
     );
   }

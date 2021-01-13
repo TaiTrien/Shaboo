@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/photo.dart';
 

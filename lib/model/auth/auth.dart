@@ -49,13 +49,13 @@ class AuthModel {
       var idToken = result.accessToken.token;
       if (idToken == null || uid == null) return;
 
-      var respone = await AuthApi.signInByFacebook(userID: uid, idToken: idToken);
-      if (respone == null) return null;
+      var response = await AuthApi.signInByFacebook(userID: uid, idToken: idToken);
+      if (response == null) return null;
 
-      var token = respone.token["accessToken"];
+      var token = response.token["accessToken"];
       Store.setToken(token);
 
-      var userData = respone.data;
+      var userData = response.data;
       UserModel currentUser = new UserModel(
         userID: userData["id"],
         firstName: userData["firstName"],

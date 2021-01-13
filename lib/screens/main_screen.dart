@@ -4,7 +4,6 @@ import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:shaboo/screens/home/home_screen.dart';
 import 'package:shaboo/screens/notification/notification_screen.dart';
-import 'package:shaboo/screens/post/image/add_image_screen.dart';
 import 'package:shaboo/screens/post/post_screen.dart';
 import 'package:shaboo/screens/profile/profile_screen.dart';
 

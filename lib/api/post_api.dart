@@ -6,9 +6,10 @@ import 'package:shaboo/model/response.dart';
 import 'package:shaboo/utils/store.dart';
 
 class PostApi {
-  static String prefixUrl = 'http:/192.168.137.1:3001';
+  static String prefixUrl = 'http://192.168.137.1:3001';
   static String urlUploadPhoto = '$prefixUrl/images';
   static String urlFacebookSignin = '$prefixUrl/auth/facebook';
+  static String urlGetBooks = '$prefixUrl/books?order=ASC';
 
   static Future<dynamic> uploadPhoto({List<File> photos}) async {
     var token = await Store.getToken();
@@ -30,6 +31,24 @@ class PostApi {
       int prefixStatusCode = response.statusCode ~/ 100;
       if (prefixStatusCode != 2) return null;
 
+      return Response.map(json.decode(response.body));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<dynamic> getBooks({int page, String bookName}) async {
+    var token = await Store.getToken();
+
+    try {
+      var response = await http.get(
+        urlGetBooks + "&page=${page ?? 1}&take=10&name=${bookName ?? ""}",
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+      );
+      if (response.statusCode != 200) return null;
       return Response.map(json.decode(response.body));
     } catch (e) {
       print(e);

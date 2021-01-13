@@ -4,6 +4,7 @@ import 'package:shaboo/screens/post/description/description_screen.dart';
 import 'package:shaboo/screens/post/image/add_image_screen.dart';
 import 'package:shaboo/screens/post/location/location_screen.dart';
 import 'package:shaboo/screens/post/post_controller.dart';
+import 'package:shaboo/screens/post/book/book_screen.dart';
 
 class PostScreen extends StatefulWidget {
   @override
@@ -64,6 +65,7 @@ class _PostScreenState extends State<PostScreen> {
           DescriptionScreen(),
           AddImageScreen(),
           LocationScreen(),
+          BookScreen(),
         ],
       ),
     );

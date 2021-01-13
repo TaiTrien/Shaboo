@@ -3,7 +3,6 @@ import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 import 'package:shaboo/screens/loading/loading_screen.dart';
 import 'package:shaboo/screens/main_screen.dart';
 import 'package:shaboo/screens/on_boarding/on_boarding_screen.dart';
-import 'package:shaboo/screens/post/location/detailed_location/detailed_location.dart';
 import 'package:shaboo/screens/profile/profile_screen.dart';
 
 final routes = {
