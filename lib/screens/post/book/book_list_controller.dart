@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shaboo/model/post/book.dart';
+import 'package:shaboo/screens/post/book/detailed_book/detailed_book_screen.dart';
 
 class BookListController {
   BuildContext context;
@@ -51,6 +53,8 @@ class BookListController {
     }
   }
 
+  toDetailedBookScreen(BookModel selectedBook) =>
+      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedBookScreen(selectedBook: selectedBook)));
   dispose() {
     _streamController.close();
   }

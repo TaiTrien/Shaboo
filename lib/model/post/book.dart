@@ -48,7 +48,7 @@ class BookModel {
                 shortDesc: book["shortDescription"],
                 thumbnailUrl: book["thumbnailUrl"],
                 categories: book["categories"],
-                authors: book["author"],
+                authors: book["authors"],
                 publishers: book["publishers"],
               ))
           .toList();
