@@ -23,7 +23,7 @@ class PostModel {
         'desc': this.desc,
         'status': this.status,
         'location': this.location,
-        'book': this.book,
+        'book': this.book.bookName,
         'images': this.images,
       };
 }

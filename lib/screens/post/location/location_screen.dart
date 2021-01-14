@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
+import 'package:shaboo/components/bottom_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/location/components/location_selector.dart';
 import 'package:shaboo/screens/post/location/components/selector_title.dart';
@@ -58,6 +59,10 @@ class LocationScreen extends StatelessWidget {
             );
           },
         ),
+      ),
+      bottomNavigationBar: BottomButton(
+        onPress: () {},
+        title: 'Next step',
       ),
     );
   }

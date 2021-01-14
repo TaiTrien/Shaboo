@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shaboo/components/bottom_button.dart';
 
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/image/add_image_controller.dart';
@@ -53,6 +54,10 @@ class AddImageScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomButton(
+        onPress: () {},
+        title: 'Next step',
       ),
     );
   }

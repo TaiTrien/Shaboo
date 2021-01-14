@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shaboo/components/bottom_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/description/components/des_textfield.dart';
 import 'package:shaboo/screens/post/description/description_controller.dart';
@@ -18,6 +19,7 @@ class DescriptionScreen extends StatelessWidget {
             child: Column(
               children: [
                 DescriptTextField(
+                  maxLines: 1,
                   controller: _controller.titleController,
                   label: 'Post Title',
                 ),
@@ -48,6 +50,10 @@ class DescriptionScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomButton(
+        onPress: () {},
+        title: 'Next step',
       ),
     );
   }

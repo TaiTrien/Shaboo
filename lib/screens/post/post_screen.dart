@@ -55,6 +55,7 @@ class _PostScreenState extends State<PostScreen> {
         ],
       ),
       body: PageView(
+        physics: new NeverScrollableScrollPhysics(),
         controller: _controller.pageController,
         onPageChanged: (index) {
           setState(() {

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:shaboo/components/default_button.dart';
+import 'package:shaboo/components/bottom_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/screens/post/book/detailed_book/detailed_book_controller.dart';
@@ -85,24 +85,9 @@ class DetailedBookScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 80,
-        padding: EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingHorizontal,
-          vertical: kDefaultPaddingVerical,
-        ),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              top: BorderSide(
-                color: kGreyColor.withOpacity(0.1),
-                width: 1.0,
-              ),
-            )),
-        child: DefaultButton(
-          onPress: () {},
-          text: 'Choose this book',
-        ),
+      bottomNavigationBar: BottomButton(
+        onPress: () {},
+        title: 'Next step',
       ),
     );
   }
