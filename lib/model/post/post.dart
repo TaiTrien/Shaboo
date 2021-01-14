@@ -1,5 +1,6 @@
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/book.dart';
+import 'package:shaboo/model/post/image.dart';
 
 class PostModel {
   String title;
@@ -7,7 +8,7 @@ class PostModel {
   PostStatus status;
   String location;
   BookModel book;
-  List<String> images;
+  List<ImageModel> images;
 
   PostModel({
     this.title,
@@ -17,6 +18,12 @@ class PostModel {
     this.book,
     this.images,
   });
+
+  set setTitle(String title) => this.title = title;
+  set setDesc(String desc) => this.desc = desc;
+  set setLocation(String location) => this.location = location;
+  set setBook(BookModel selectedBook) => this.book = selectedBook;
+  set setImages(List<ImageModel> imagesId) => this.images = imagesId;
 
   Map<String, dynamic> toJson() => {
         'title': this.title,
