@@ -26,14 +26,13 @@ class BookListController {
     refresh();
   }
 
-  Future<void> refresh() {
-    return loadMore(clearCachedData: true);
-  }
+  Future<void> refresh() => loadMore(clearCachedData: true);
 
   Future<void> loadMore({bool clearCachedData = false, int currentPage}) async {
     if (clearCachedData) {
       _data = List<dynamic>();
       hasMore = true;
+      this.currentPage = 1;
     }
     if (_isLoading || !hasMore) return Future.value();
 
@@ -41,14 +40,18 @@ class BookListController {
     this.currentPage++;
 
     try {
-      return await bookModel.getBooks(page: currentPage).then((book) => {
+      return await bookModel.getBooks(page: currentPage).then((books) => {
             _isLoading = false,
-            _data.addAll(book),
-            hasMore = (_data.length < 130),
+            _data.addAll(books.values.first),
+            hasMore = (_data.length < books.entries.first.key),
             _streamController.add(_data),
           });
     } catch (e) {
       print(e);
     }
+  }
+
+  dispose() {
+    _streamController.close();
   }
 }

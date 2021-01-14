@@ -32,11 +32,10 @@ class BookModel {
     this.publishers,
   }) : this._id = id;
 
-  Future<List<dynamic>> getBooks({int page, String bookName}) async {
+  Future<Map<int, List<dynamic>>> getBooks({int page, String bookName}) async {
     List<dynamic> books;
     var response = await PostApi.getBooks(page: page, bookName: bookName);
     if (response == null) return null;
-
     try {
       books = response.data
           .map((book) => new BookModel(
@@ -57,7 +56,7 @@ class BookModel {
       print(e);
     }
 
-    return books;
+    return {response.meta["itemCount"]: books};
   }
 
   Map<String, dynamic> toJson() => {

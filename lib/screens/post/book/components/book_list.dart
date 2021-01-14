@@ -25,6 +25,12 @@ class _BookListState extends State<BookList> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: _controller.bookStream,
@@ -96,7 +102,11 @@ class _BookListState extends State<BookList> {
                   } else {
                     return Padding(
                       padding: EdgeInsets.symmetric(vertical: 32.0),
-                      child: Center(child: Text('Nothing more to load!')),
+                      child: Center(
+                          child: Text(
+                        'Nothing more to load!',
+                        style: TextStyle(fontSize: 18),
+                      )),
                     );
                   }
                 },
