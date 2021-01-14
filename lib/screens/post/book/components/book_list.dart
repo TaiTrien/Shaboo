@@ -66,30 +66,33 @@ class _BookListState extends State<BookList> {
                 itemCount: _snapshot.data.length + 1,
                 itemBuilder: (BuildContext _context, int index) {
                   if (index < _snapshot.data.length) {
-                    return Center(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: kDefaultPaddingHorizontal,
-                          vertical: kDefaultPaddingVerical,
-                        ),
-                        child: ListTile(
-                          leading: Image.network(
-                            _snapshot.data[index].thumbnailUrl,
-                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return CircularProgressIndicator();
-                            },
+                    return GestureDetector(
+                      onTap: () => _controller.toDetailedBookScreen(_snapshot.data[index]),
+                      child: Center(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: kDefaultPaddingHorizontal,
+                            vertical: kDefaultPaddingVerical,
                           ),
-                          title: Text(
-                            _snapshot.data[index].bookName,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
+                          child: ListTile(
+                            leading: Image.network(
+                              _snapshot.data[index].thumbnailUrl,
+                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return CircularProgressIndicator();
+                              },
                             ),
-                          ),
-                          subtitle: Text(
-                            _snapshot.data[index].shortDesc,
-                            maxLines: 3,
-                            textAlign: TextAlign.justify,
+                            title: Text(
+                              _snapshot.data[index].bookName,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            subtitle: Text(
+                              _snapshot.data[index].shortDesc,
+                              maxLines: 3,
+                              textAlign: TextAlign.justify,
+                            ),
                           ),
                         ),
                       ),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:shaboo/model/post/post.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';
@@ -13,6 +14,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   Stream<PostState> mapEventToState(
     PostEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if (event is UpdateCurrentPost) {
+      yield UpdateState(state, currentPost: event.payload);
+    }
   }
 }
