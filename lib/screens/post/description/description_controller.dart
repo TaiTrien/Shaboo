@@ -15,8 +15,8 @@ class DescriptionController {
     titleController = TextEditingController();
     descController = TextEditingController();
     _postBloc = BlocProvider.of<PostBloc>(context);
-    titleController.text = _postBloc.state.currentPost.title ?? "";
-    descController.text = _postBloc.state.currentPost.desc ?? "";
+    titleController.text = currentPost == null ? "" : currentPost.title;
+    descController.text = currentPost == null ? "" : currentPost.desc;
   }
 
   handleUpdateCurrentPost() {
@@ -39,4 +39,6 @@ class DescriptionController {
 
   outFocus() => FocusScope.of(context).requestFocus(new FocusNode());
   toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
+
+  get currentPost => _postBloc.state.currentPost;
 }

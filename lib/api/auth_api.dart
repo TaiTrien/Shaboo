@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:shaboo/model/response.dart';
 
 class AuthApi {
-  static String prefixUrl = 'http://192.168.30.212:3001';
+  static String prefixUrl = 'http://10.0.128.70:3001';
   static String urlGoogleSignin = '$prefixUrl/auth/google';
   static String urlFacebookSignin = '$prefixUrl/auth/facebook';
 

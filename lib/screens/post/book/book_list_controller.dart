@@ -55,6 +55,7 @@ class BookListController {
 
   toDetailedBookScreen(BookModel selectedBook) =>
       Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedBookScreen(selectedBook: selectedBook)));
+
   dispose() {
     _streamController.close();
   }

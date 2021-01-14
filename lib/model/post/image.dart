@@ -17,10 +17,10 @@ class ImageModel {
     this.fileName,
     this.type,
     this.updatedBy,
-  }) : _imageID = imageID;
+  }) : this._imageID = imageID;
 
   Map<String, dynamic> toJson() => {
-        'categoryID': this._imageID,
+        'imageID': this._imageID,
         'createdAt': this.createdAt,
         'updatedAt': this.updatedAt,
         'name': this.fileName,

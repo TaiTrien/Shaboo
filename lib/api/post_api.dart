@@ -6,7 +6,7 @@ import 'package:shaboo/model/response.dart';
 import 'package:shaboo/utils/store.dart';
 
 class PostApi {
-  static String prefixUrl = 'http://192.168.30.212:3001';
+  static String prefixUrl = 'http://10.0.128.70:3001';
   static String urlUploadPhoto = '$prefixUrl/images';
   static String urlFacebookSignin = '$prefixUrl/auth/facebook';
   static String urlGetBooks = '$prefixUrl/books?order=ASC';
