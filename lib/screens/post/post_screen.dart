@@ -12,7 +12,7 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
-  var _controller;
+  PostController _controller;
   int _currentPageIndex;
 
   @override
@@ -63,7 +63,7 @@ class _PostScreenState extends State<PostScreen> {
           });
         },
         children: [
-          DescriptionScreen(),
+          DescriptionScreen(pageController: _controller.pageController),
           AddImageScreen(),
           LocationScreen(),
           BookScreen(),

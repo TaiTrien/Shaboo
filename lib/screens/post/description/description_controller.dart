@@ -7,23 +7,36 @@ import 'package:shaboo/utils/notify.dart';
 class DescriptionController {
   BuildContext context;
   TextEditingController titleController;
-  TextEditingController descriptionController;
+  TextEditingController descController;
+  PageController pageController;
   PostBloc _postBloc;
 
-  DescriptionController({this.context}) {
+  DescriptionController({this.context, this.pageController}) {
     titleController = TextEditingController();
-    descriptionController = TextEditingController();
+    descController = TextEditingController();
     _postBloc = BlocProvider.of<PostBloc>(context);
+    titleController.text = _postBloc.state.currentPost.title ?? "";
+    descController.text = _postBloc.state.currentPost.desc ?? "";
   }
 
   handleUpdateCurrentPost() {
     String title = titleController.text.trim();
-    String desc = titleController.text.trim();
+    String desc = descController.text.trim();
 
     if (title.isEmpty) return Notify().error(message: 'Post title must be filled');
     if (desc.isEmpty) return Notify().error(message: 'Post description must be filled');
 
     PostModel _currentPost = PostModel(title: title, desc: desc);
     _postBloc.add(UpdateCurrentPost(_currentPost));
+    toNextPage();
+    outFocus();
   }
+
+  dispose() {
+    titleController.dispose();
+    descController.dispose();
+  }
+
+  outFocus() => FocusScope.of(context).requestFocus(new FocusNode());
+  toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
 }
