@@ -23,7 +23,7 @@ class PostModel {
   set setDesc(String desc) => this.desc = desc;
   set setLocation(String location) => this.location = location;
   set setBook(BookModel selectedBook) => this.book = selectedBook;
-  set setImages(List<ImageModel> imagesId) => this.images = imagesId;
+  set setImages(List<ImageModel> images) => this.images = images;
 
   Map<String, dynamic> toJson() => {
         'title': this.title,

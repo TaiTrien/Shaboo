@@ -1,30 +1,23 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shaboo/components/bottom_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/post/post_bloc.dart';
 
+import 'package:shaboo/components/bottom_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/image/add_image_controller.dart';
 import 'package:shaboo/screens/post/image/components/fancy_fab.dart';
-import 'package:shaboo/screens/post/image/components/image_list.dart';
+import 'package:shaboo/screens/post/image/components/image_container.dart';
 import 'package:shaboo/screens/post/image/components/note_board.dart';
 
-class AddImageScreen extends StatefulWidget {
-  @override
-  _AddImageScreenState createState() => _AddImageScreenState();
-}
+class AddImageScreen extends StatelessWidget {
+  final PageController pageController;
 
-class _AddImageScreenState extends State<AddImageScreen> {
-  AddImageController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AddImageController(context: context);
-  }
-
+  const AddImageScreen({Key key, this.pageController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    AddImageController _controller = AddImageController(context: context, pageController: pageController);
+
     return Scaffold(
       // floatingActionButton: FancyFab(
       //   onAccessPhotos: _controller.handleUploadFromGallery,
@@ -41,11 +34,17 @@ class _AddImageScreenState extends State<AddImageScreen> {
                   children: [
                     Text('Your images', style: kTitleTextStyle),
                     SizedBox(width: 10),
-                    Text('0/6', style: kTitleTextStyle.copyWith(fontWeight: FontWeight.normal, color: kGreyColor)),
+                    BlocBuilder<PostBloc, PostState>(
+                      builder: (context, state) {
+                        return Text(
+                          '${_controller.numberOfImages}/6',
+                          style: kTitleTextStyle.copyWith(fontWeight: FontWeight.normal, color: kGreyColor),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: 10),
                 child: Container(
@@ -54,25 +53,20 @@ class _AddImageScreenState extends State<AddImageScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: 6,
                       itemBuilder: (context, i) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: DottedBorder(
-                            color: Colors.black,
-                            strokeWidth: 1,
-                            child: Container(
-                              height: 100,
-                              width: 80,
-                              child: IconButton(
-                                icon: Icon(Icons.photo_camera, size: 50),
-                                onPressed: _controller.onAccessCamera,
+                        return BlocBuilder<PostBloc, PostState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ImageContainer(
+                                onPress: _controller.uploadImageFromCamera,
+                                uploadedImage: _controller.getUpLoadedImages(i),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         );
                       },
                     )),
               ),
-              //ImageList(onPress: _controller.onAccessCamera),
               NoteBoard(
                 notes: [
                   TextSpan(text: 'Notes:\n', style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
@@ -95,9 +89,11 @@ class _AddImageScreenState extends State<AddImageScreen> {
         ),
       ),
       bottomNavigationBar: BottomButton(
-        onPress: () {},
+        onPress: _controller.handleUpdateCurrentPost,
         title: 'Next step',
       ),
     );
   }
 }
+
+//

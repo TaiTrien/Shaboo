@@ -1,12 +1,13 @@
 import 'package:http/http.dart' as http;
+import 'package:shaboo/constants.dart';
 import 'dart:convert';
 
 import 'package:shaboo/model/response.dart';
 
 class AuthApi {
-  static String prefixUrl = 'http://10.0.128.70:3001';
-  static String urlGoogleSignin = '$prefixUrl/auth/google';
-  static String urlFacebookSignin = '$prefixUrl/auth/facebook';
+  //static String prefixUrl = 'http://10.0.128.70:3001';
+  static String urlGoogleSignin = '$kPrefixUrl/auth/google';
+  static String urlFacebookSignin = '$kPrefixUrl/auth/facebook';
 
   static Future<dynamic> signInByGoogle({String userID, String idToken}) async {
     try {

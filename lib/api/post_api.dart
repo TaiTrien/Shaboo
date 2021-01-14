@@ -1,15 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/response.dart';
 
 import 'package:shaboo/utils/store.dart';
 
 class PostApi {
-  static String prefixUrl = 'http://10.0.128.70:3001';
-  static String urlUploadPhoto = '$prefixUrl/images';
-  static String urlFacebookSignin = '$prefixUrl/auth/facebook';
-  static String urlGetBooks = '$prefixUrl/books?order=ASC';
+  // static String prefixUrl = 'http://10.0.128.70:3001';
+  static String urlUploadPhoto = '$kPrefixUrl/images';
+  static String urlFacebookSignin = '$kPrefixUrl/auth/facebook';
+  static String urlGetBooks = '$kPrefixUrl/books?order=ASC';
 
   static Future<dynamic> uploadPhoto({List<File> photos}) async {
     var token = await Store.getToken();
