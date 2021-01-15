@@ -65,7 +65,7 @@ class _PostScreenState extends State<PostScreen> {
         children: [
           DescriptionScreen(pageController: _controller.pageController),
           AddImageScreen(pageController: _controller.pageController),
-          LocationScreen(),
+          LocationScreen(pageController: _controller.pageController),
           BookScreen(),
         ],
       ),

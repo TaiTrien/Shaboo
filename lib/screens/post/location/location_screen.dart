@@ -8,9 +8,12 @@ import 'package:shaboo/screens/post/location/components/selector_title.dart';
 import 'package:shaboo/screens/post/location/location_controller.dart';
 
 class LocationScreen extends StatelessWidget {
+  final PageController pageController;
+
+  const LocationScreen({Key key, this.pageController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var _controller = LocationController(context: context);
+    var _controller = LocationController(context: context, pageController: pageController);
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -61,7 +64,7 @@ class LocationScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomButton(
-        onPress: () {},
+        onPress: _controller.handleUpdateCurrentPost,
         title: 'Next step',
       ),
     );

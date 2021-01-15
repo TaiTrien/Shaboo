@@ -87,7 +87,7 @@ class DetailedBookScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomButton(
         onPress: () {},
-        title: 'Next step',
+        title: 'Select this book',
       ),
     );
   }
