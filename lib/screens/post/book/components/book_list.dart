@@ -84,13 +84,13 @@ class _BookListState extends State<BookList> {
                               },
                             ),
                             title: Text(
-                              _snapshot.data[index].bookName,
+                              _snapshot.data[index].name,
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             subtitle: Text(
-                              _snapshot.data[index].shortDesc,
+                              _snapshot.data[index].shortDescription,
                               maxLines: 3,
                               textAlign: TextAlign.justify,
                             ),

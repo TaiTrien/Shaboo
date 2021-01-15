@@ -10,3 +10,7 @@ abstract class PostEvent {
 class UpdateCurrentPost extends PostEvent {
   UpdateCurrentPost(PostModel currentPost) : super(payload: currentPost);
 }
+
+class ResetCurrentPost extends PostEvent {
+  ResetCurrentPost(PostModel currentPost) : super(payload: currentPost);
+}

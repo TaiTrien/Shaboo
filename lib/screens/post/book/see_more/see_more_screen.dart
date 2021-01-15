@@ -49,7 +49,7 @@ class SeeMoreScreen extends StatelessWidget {
                         },
                       ),
                       Text(
-                        selectedBook.desc,
+                        selectedBook.description,
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                           color: Colors.black,

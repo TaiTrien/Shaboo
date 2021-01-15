@@ -9,28 +9,30 @@ class BookModel {
   int _id;
   String createdAt;
   String updatedAt;
-  String bookName;
+  String name;
   int version;
-  String desc;
-  String shortDesc;
-  String thumbnailUrl;
   List<dynamic> authors;
+  String description;
+  String shortDescription;
+  String thumbnailUrl;
+  List<dynamic> publisher;
   List<dynamic> categories;
-  List<dynamic> publishers;
 
   BookModel({
     int id,
     this.createdAt,
     this.updatedAt,
-    this.bookName,
+    this.name,
     this.version,
-    this.desc,
-    this.shortDesc,
-    this.thumbnailUrl,
-    this.categories,
     this.authors,
-    this.publishers,
+    this.description,
+    this.shortDescription,
+    this.thumbnailUrl,
+    this.publisher,
+    this.categories,
   }) : this._id = id;
+
+  get id => this._id;
 
   Future<Map<int, List<dynamic>>> getBooks({int page, String bookName}) async {
     List<dynamic> books;
@@ -42,14 +44,14 @@ class BookModel {
                 id: book["id"],
                 createdAt: book["createdAt"],
                 updatedAt: book["updatedAt"],
-                bookName: book["name"],
+                name: book["name"],
                 version: book["version"],
-                desc: book["description"],
-                shortDesc: book["shortDescription"],
+                description: book["description"],
+                shortDescription: book["shortDescription"],
                 thumbnailUrl: book["thumbnailUrl"],
                 categories: book["categories"],
                 authors: book["authors"],
-                publishers: book["publishers"],
+                publisher: book["publishers"],
               ))
           .toList();
     } catch (e) {
@@ -61,13 +63,13 @@ class BookModel {
 
   Map<String, dynamic> toJson() => {
         'id': this._id,
-        'bookName': this.bookName,
+        'bookName': this.name,
         'version': this.version,
-        'desc': this.desc,
-        'shortDesc': this.shortDesc,
+        'desc': this.description,
+        'shortDesc': this.shortDescription,
         'thumbnailUrl': this.thumbnailUrl,
         'categories': this.categories,
         'authors': this.authors,
-        'publishers': this.publishers,
+        'publishers': this.publisher,
       };
 }

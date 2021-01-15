@@ -2,15 +2,40 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:shaboo/constants.dart';
+import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/model/response.dart';
 
 import 'package:shaboo/utils/store.dart';
 
 class PostApi {
   // static String prefixUrl = 'http://10.0.128.70:3001';
+  static String urlUploadPost = '$kPrefixUrl/posts';
   static String urlUploadPhoto = '$kPrefixUrl/images';
   static String urlFacebookSignin = '$kPrefixUrl/auth/facebook';
   static String urlGetBooks = '$kPrefixUrl/books?order=ASC';
+
+  static Future<dynamic> uploadPost({PostModel post}) async {
+    var token = await Store.getToken();
+    var requestedPost = PostModel.converPostToMap(post: post);
+
+    try {
+      var response = await http.post(
+        urlUploadPost,
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode(requestedPost),
+      );
+      print(json.decode(response.body));
+      int prefixStatusCode = response.statusCode ~/ 100;
+      if (prefixStatusCode != 2) return null;
+
+      return Response.map(json.decode(response.body));
+    } catch (e) {
+      print(e);
+    }
+  }
 
   static Future<dynamic> uploadPhoto({List<File> photos}) async {
     var token = await Store.getToken();

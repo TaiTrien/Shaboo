@@ -15,6 +15,8 @@ class CategoryModel {
     this.desc,
   }) : _categoryID = categoryID;
 
+  get categoryID => this._categoryID;
+
   Map<String, dynamic> toJson() => {
         'categoryID': this._categoryID,
         'createdAt': this.createdAt,

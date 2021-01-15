@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/description/description_screen.dart';
 import 'package:shaboo/screens/post/image/add_image_screen.dart';
@@ -40,17 +41,14 @@ class _PostScreenState extends State<PostScreen> {
         backgroundColor: kPrimaryColor,
         elevation: 0,
         title: Text(
-          'Post description',
+          'Fill your info',
           style: kHeadingTextStyle.copyWith(fontSize: 25, color: Colors.white),
         ),
         centerTitle: true,
         actions: [
-          FlatButton(
-            onPressed: _controller.toNextPage,
-            child: Text(
-              'Next',
-              style: kTitleTextStyle.copyWith(fontWeight: FontWeight.normal, color: Colors.white),
-            ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(MdiIcons.eye),
           ),
         ],
       ),

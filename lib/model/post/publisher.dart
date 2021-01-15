@@ -13,6 +13,8 @@ class PublisherModel {
     this.slug,
   }) : _publisherID = publisherID;
 
+  get publisherID => this._publisherID;
+
   Map<String, dynamic> toJson() => {
         'publisherID': this._publisherID,
         'createdAt': this.createdAt,

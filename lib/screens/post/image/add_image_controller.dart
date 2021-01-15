@@ -73,7 +73,7 @@ class AddImageController {
 
     PostModel _currentPost = PostModel(
       title: title,
-      desc: desc,
+      description: desc,
       images: uploadedImages,
     );
 
@@ -83,7 +83,7 @@ class AddImageController {
   //getter & setters
   get currentPost => _postBloc.state.currentPost;
   get title => currentPost.title;
-  get desc => currentPost.desc;
+  get desc => currentPost.description;
 
   getUpLoadedImages(int index) {
     if (currentPost.images == null || index >= currentPost.images.length) return null;

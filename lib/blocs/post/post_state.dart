@@ -14,3 +14,7 @@ class PostInitial extends PostState {
 class UpdateState extends PostState {
   UpdateState(PostState oldState, {PostModel currentPost}) : super(currentPost: currentPost ?? oldState.currentPost);
 }
+
+class ResetState extends PostState {
+  ResetState({PostModel currentPost}) : super(currentPost: currentPost);
+}

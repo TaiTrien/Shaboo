@@ -15,7 +15,7 @@ class DetailedBookScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var _controller = DetailedBookController(context: context);
+    var _controller = DetailedBookController(context: context, selectedBook: this.selectedBook);
     var random = new Random();
     return Scaffold(
       body: SingleChildScrollView(
@@ -57,7 +57,7 @@ class DetailedBookScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30),
-                Text(selectedBook.bookName,
+                Text(selectedBook.name,
                     style: kTitleTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -86,7 +86,7 @@ class DetailedBookScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomButton(
-        onPress: () {},
+        onPress: _controller.handleUploadPost,
         title: 'Select this book',
       ),
     );

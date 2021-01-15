@@ -23,13 +23,13 @@ class LocationController {
     if (selectedDistrict == null) return Notify().error(message: 'Please select your district');
     if (selectedWard == null) return Notify().error(message: 'Please select your ward');
     PostModel _currentPost =
-        PostModel(title: title, desc: desc, images: images, location: selectedWard["path_with_type"]);
+        PostModel(title: title, description: desc, images: images, location: selectedWard["path_with_type"]);
     _postBloc.add(UpdateCurrentPost(_currentPost));
     toNextPage();
   }
 
   get title => _postBloc.state.currentPost.title;
-  get desc => _postBloc.state.currentPost.desc;
+  get desc => _postBloc.state.currentPost.description;
   get images => _postBloc.state.currentPost.images;
 
   get cities => _locationBloc.state.locations.values.toList();

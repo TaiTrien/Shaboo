@@ -16,6 +16,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   ) async* {
     if (event is UpdateCurrentPost) {
       yield UpdateState(state, currentPost: event.payload);
+    } else if (event is ResetCurrentPost) {
+      yield ResetState(currentPost: event.payload);
     }
   }
 }

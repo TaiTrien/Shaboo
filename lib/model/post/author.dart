@@ -13,6 +13,8 @@ class AuthorModel {
     this.slug,
   }) : _authorID = authorID;
 
+  get authorID => this._authorID;
+
   Map<String, dynamic> toJson() => {
         'authorID': this._authorID,
         'createdAt': this.createdAt,

@@ -29,7 +29,7 @@ class BookInfoCard extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
               ),
               TextSpan(
-                  children: selectedBook.publishers
+                  children: selectedBook.publisher
                       .map((publisher) => TextSpan(
                             text: publisher["publisher"]["name"],
                             style: TextStyle(fontSize: 18, color: Colors.black),
@@ -57,7 +57,7 @@ class BookInfoCard extends StatelessWidget {
             style: kTitleTextStyle,
           ),
           Text(
-            selectedBook.desc,
+            selectedBook.description,
             textAlign: TextAlign.justify,
             maxLines: 5,
             style: TextStyle(

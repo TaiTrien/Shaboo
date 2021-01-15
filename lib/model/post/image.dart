@@ -19,6 +19,8 @@ class ImageModel {
     this.updatedBy,
   }) : this._imageID = imageID;
 
+  get imageID => this._imageID;
+
   Map<String, dynamic> toJson() => {
         'imageID': this._imageID,
         'createdAt': this.createdAt,

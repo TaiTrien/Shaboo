@@ -16,7 +16,7 @@ class DescriptionController {
     descController = TextEditingController();
     _postBloc = BlocProvider.of<PostBloc>(context);
     titleController.text = currentPost == null ? "" : currentPost.title;
-    descController.text = currentPost == null ? "" : currentPost.desc;
+    descController.text = currentPost == null ? "" : currentPost.description;
   }
 
   handleUpdateCurrentPost() {
@@ -26,7 +26,7 @@ class DescriptionController {
     if (title.isEmpty) return Notify().error(message: 'Post title must be filled');
     if (desc.isEmpty) return Notify().error(message: 'Post description must be filled');
 
-    PostModel _currentPost = PostModel(title: title, desc: desc);
+    PostModel _currentPost = PostModel(title: title, description: desc);
     _postBloc.add(UpdateCurrentPost(_currentPost));
     toNextPage();
     outFocus();
