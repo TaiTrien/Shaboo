@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,8 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants.dart';
-import 'package:shaboo/model/auth.dart';
-import 'package:shaboo/utils/store.dart';
+import 'package:shaboo/model/auth/auth.dart';
 
 enum MenuValue {
   SETTINGS,
@@ -22,7 +20,7 @@ class ProfileController {
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FacebookLogin facebooklogin = FacebookLogin();
-  final Auth _authModel = Auth();
+  final AuthModel _authModel = AuthModel();
 
   ProfileController({this.context}) {
     _userBloc = BlocProvider.of<UserBloc>(context);
@@ -87,6 +85,7 @@ class ProfileController {
   }
 
   get currentUser => _userBloc.state.currentUser;
-  get userFullName => _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
+  get userFullName =>
+      _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
   get defaultAvatar => SvgPicture.asset('assets/images/reader.svg');
 }

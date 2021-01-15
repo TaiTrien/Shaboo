@@ -1,27 +1,24 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shaboo/api/auth_api.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
-import 'package:shaboo/model/user.dart';
+import 'package:shaboo/model/auth/auth.dart';
 import 'package:shaboo/utils/notify.dart';
-import 'package:shaboo/utils/store.dart';
 
 class SignupController {
   AuthBloc _authBloc;
   UserBloc _userBloc;
 
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final FacebookLogin facebooklogin = FacebookLogin();
+  final AuthModel _authModel = AuthModel();
+
   TextEditingController emailController;
   TextEditingController passwordController;
   TextEditingController confirmPasswordController;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-  final FacebookLogin facebooklogin = FacebookLogin();
   BuildContext context;
 
   SignupController({this.context}) {
@@ -33,102 +30,28 @@ class SignupController {
     confirmPasswordController = new TextEditingController();
   }
 
-  Future<dynamic> signInByGoogle() async {
+  Future<void> signInByGoogle() async {
     _authBloc.add(Login(true));
-
-    await Firebase.initializeApp();
-    try {
-      final GoogleSignInAccount googleSignInAccount =
-          await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
-
-      var idToken = googleSignInAuthentication.idToken;
-      var uid = googleSignInAccount.id;
-      if (idToken == null || uid == null) return;
-
-      var respone = await AuthApi.signInByGoogle(userID: uid, idToken: idToken);
-      if (respone == null) return Notify().error(message: 'Sign in failed');
-
-      var token = respone.token["accessToken"];
-      Store.setToken(token);
-
-      var userData = respone.data;
-      ShabooUser currentUser = new ShabooUser(
-        userID: userData["id"],
-        firstName: userData["firstName"],
-        lastName: userData["lastName"],
-        userName: userData["username"],
-        email: userData["email"],
-        phone: userData["phone"],
-        avatar: userData["avatar"],
-      );
-
-      _userBloc.add(UpdateUserData(currentUser));
-      toMainScreen();
-    } catch (e) {
-      print(e);
-    }
+    var currentUser = await _authModel.googleSignIn();
     _authBloc.add(Login(false));
-    return null;
+
+    if (currentUser == null) return Notify().error(message: 'Sign in failed');
+    _userBloc.add(UpdateUserData(currentUser));
+    toLoadingScreen();
   }
 
-  Future<void> signOutGoogle() async {
-    await googleSignIn.disconnect();
-    await googleSignIn.signOut();
-    await _auth.signOut();
-    Navigator.pushNamed(context, '/loginScreen');
-  }
-
-  Future<dynamic> signInByFacebook() async {
-    facebooklogin.loginBehavior = FacebookLoginBehavior.nativeWithFallback;
+  Future<void> signInByFacebook() async {
     _authBloc.add(Login(true));
-    try {
-      final result = await facebooklogin.logIn(['email']);
-
-      var uid = result.accessToken.userId;
-      var idToken = result.accessToken.token;
-      if (idToken == null || uid == null) return;
-
-      var respone =
-          await AuthApi.signInByFacebook(userID: uid, idToken: idToken);
-      if (respone == null) return Notify().error(message: 'Sign in failed');
-
-      var token = respone.token["accessToken"];
-      Store.setToken(token);
-
-      var userData = respone.data;
-      ShabooUser currentUser = new ShabooUser(
-        userID: userData["id"],
-        firstName: userData["firstName"],
-        lastName: userData["lastName"],
-        userName: userData["username"],
-        email: userData["email"],
-        phone: userData["phone"],
-        avatar: userData["avatar"],
-      );
-
-      _userBloc.add(UpdateUserData(currentUser));
-      toMainScreen();
-    } catch (e) {
-      print(e);
-    }
+    var currentUser = await _authModel.facebookSignIn();
     _authBloc.add(Login(false));
-    return null;
+
+    if (currentUser == null) return Notify().error(message: 'Sign in failed');
+    _userBloc.add(UpdateUserData(currentUser));
+    toLoadingScreen();
   }
 
-  Future<void> signOutFacebook() async {
-    await facebooklogin.logOut();
-    await _auth.signOut();
-    Navigator.pushNamed(context, '/loginScreen');
-  }
-
-  toMainScreen() {
-    Navigator.pushNamedAndRemoveUntil(
-        context, '/mainScreen', (context) => false);
-  }
-
-  toLoginScreen() {
-    Navigator.pop(context);
-  }
+  //Navigators
+  toMainScreen() => Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
+  toLoginScreen() => Navigator.pop(context);
+  toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(context, '/loadingScreen', (context) => false);
 }

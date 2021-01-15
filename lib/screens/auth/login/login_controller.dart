@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
-import 'package:shaboo/model/auth.dart';
+import 'package:shaboo/model/auth/auth.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class LoginController {
@@ -14,7 +14,7 @@ class LoginController {
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FacebookLogin facebooklogin = FacebookLogin();
-  final Auth _authModel = Auth();
+  final AuthModel _authModel = AuthModel();
 
   TextEditingController usernameController;
   TextEditingController passwordController;
@@ -30,12 +30,13 @@ class LoginController {
 
   Future<void> signInByGoogle() async {
     _authBloc.add(Login(true));
+
     var currentUser = await _authModel.googleSignIn();
     _authBloc.add(Login(false));
 
     if (currentUser == null) return Notify().error(message: 'Sign in failed');
     _userBloc.add(UpdateUserData(currentUser));
-    toMainScreen();
+    toLoadingScreen();
   }
 
   Future<void> signInByFacebook() async {
@@ -45,11 +46,12 @@ class LoginController {
 
     if (currentUser == null) return Notify().error(message: 'Sign in failed');
     _userBloc.add(UpdateUserData(currentUser));
-    toMainScreen();
+    toLoadingScreen();
   }
 
   //Navigators
   toSignupScreen() => Navigator.pushNamed(context, '/signupScreen');
+  toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(context, '/loadingScreen', (context) => false);
   toMainScreen() => Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
   toGoogleSignIn() => Navigator.pushNamed(context, '/googleSigninScreen');
 }

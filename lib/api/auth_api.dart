@@ -1,41 +1,42 @@
 import 'package:http/http.dart' as http;
+import 'package:shaboo/constants.dart';
 import 'dart:convert';
 
 import 'package:shaboo/model/response.dart';
 
 class AuthApi {
-  static String prefixUrl = 'http://10.0.2.2:3001';
-  static String urlGoogleSignin = '$prefixUrl/auth/google';
-  static String urlFacebookSignin = '$prefixUrl/auth/facebook';
-
-  // static String urlRegister = "https://fin.mal.vn/api/user/register";
-  // static String urlGetUserInfo = 'https://fin.mal.vn/api/user/info';
-  // static String urlChangePassword =
-  //     'https://fin.mal.vn/api/user/password_change';
+  //static String prefixUrl = 'http://10.0.128.70:3001';
+  static String urlGoogleSignin = '$kPrefixUrl/auth/google';
+  static String urlFacebookSignin = '$kPrefixUrl/auth/facebook';
 
   static Future<dynamic> signInByGoogle({String userID, String idToken}) async {
-    var response = await http.post(
-      urlGoogleSignin,
-      body: {
-        "userID": userID,
-        "token": idToken,
-      },
-    );
-    if (response.statusCode != 200) return null;
-    return Response.map(json.decode(response.body));
+    try {
+      var response = await http.post(
+        urlGoogleSignin,
+        body: {
+          "userID": userID,
+          "token": idToken,
+        },
+      );
+      if (response.statusCode != 200) return null;
+      return Response.map(json.decode(response.body));
+    } catch (e) {
+      print(e);
+    }
   }
 
-  static Future<dynamic> signInByFacebook(
-      {String userID, String idToken}) async {
-    var response = await http.post(
-      urlFacebookSignin,
-      body: {
-        "userID": userID,
-        "token": idToken,
-      },
-    );
-    if (response.statusCode != 200) return null;
-    return Response.map(json.decode(response.body));
+  static Future<dynamic> signInByFacebook({String userID, String idToken}) async {
+    try {
+      var response = await http.post(
+        urlFacebookSignin,
+        body: {
+          "userID": userID,
+          "token": idToken,
+        },
+      );
+      if (response.statusCode != 200) return null;
+      return Response.map(json.decode(response.body));
+    } catch (e) {}
   }
 }
 

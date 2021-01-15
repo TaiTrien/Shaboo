@@ -7,10 +7,12 @@ class DefaultButton extends StatelessWidget {
   const DefaultButton({
     Key key,
     this.text,
-    this.press,
+    this.onPress,
+    this.circular,
   }) : super(key: key);
   final String text;
-  final Function press;
+  final Function onPress;
+  final double circular;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class DefaultButton extends StatelessWidget {
       width: double.infinity,
       height: getProportionateScreenHeight(56),
       child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circular ?? 5)),
         color: kPrimaryColor,
-        onPressed: press,
+        onPressed: onPress,
         child: Text(
           text,
           style: TextStyle(
