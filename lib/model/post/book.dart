@@ -1,9 +1,6 @@
 import 'dart:core';
 
 import 'package:shaboo/api/post_api.dart';
-import 'package:shaboo/model/post/author.dart';
-import 'package:shaboo/model/post/category.dart';
-import 'package:shaboo/model/post/publisher.dart';
 
 class BookModel {
   int _id;

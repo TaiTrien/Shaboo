@@ -1,5 +1,4 @@
 import 'package:shaboo/api/post_api.dart';
-import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/model/post/image.dart';
 

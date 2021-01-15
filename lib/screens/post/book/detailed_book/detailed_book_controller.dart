@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +25,7 @@ class DetailedBookController {
     var response = await _postModel.upload(post: _currentPost);
     if (response == null) return Notify().error(message: "Upload your post failed");
 
-    //_postBloc.add(ResetCurrentPost(null));
+    _postBloc.add(ResetCurrentPost(null));
     Notify().success(message: "Upload your post sucessfully");
     toExit();
     toExit();

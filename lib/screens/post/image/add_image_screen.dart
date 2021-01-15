@@ -6,7 +6,6 @@ import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/components/bottom_button.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/image/add_image_controller.dart';
-import 'package:shaboo/screens/post/image/components/fancy_fab.dart';
 import 'package:shaboo/screens/post/image/components/image_container.dart';
 import 'package:shaboo/screens/post/image/components/note_board.dart';
 

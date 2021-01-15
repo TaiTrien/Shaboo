@@ -18,7 +18,6 @@ class _PostScreenState extends State<PostScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _currentPageIndex = 0;
     _controller = PostController(context: context);

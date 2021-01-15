@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
+
 import 'package:shaboo/screens/home/home_screen.dart';
 import 'package:shaboo/screens/notification/notification_screen.dart';
 import 'package:shaboo/screens/post/post_screen.dart';
+import 'package:shaboo/screens/post/preview/preview_screen.dart';
 import 'package:shaboo/screens/profile/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,8 +17,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    SignupScreen(),
+    ProfileScreen(),
+    PreviewPostScreen(),
     PostScreen(),
     NotificationScreen(),
     ProfileScreen(),
