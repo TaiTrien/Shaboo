@@ -13,19 +13,21 @@ class LocationScreen extends StatelessWidget {
   const LocationScreen({Key key, this.pageController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var _controller = LocationController(context: context, pageController: pageController);
+    var _controller =
+        LocationController(context: context, pageController: pageController);
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: BlocBuilder<LocationBloc, LocationState>(
           builder: (context, state) {
             return Container(
-              padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+              padding:
+                  const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SelectorTitle(
-                    title: 'SELECT YOUR PROVINCE, CITY',
+                    title: 'Chọn tỉnh/thành phố của bạn ',
                   ),
                   SizedBox(
                     height: 10.0,
@@ -36,7 +38,7 @@ class LocationScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   SelectorTitle(
-                    title: 'SELECT YOUR DISTRICT',
+                    title: 'Chọn quận/huyện của bạn ',
                   ),
                   SizedBox(
                     height: 10.0,
@@ -47,7 +49,7 @@ class LocationScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   SelectorTitle(
-                    title: 'SELECT YOUR WARD',
+                    title: 'Chọn phường/xã của bạn ',
                   ),
                   SizedBox(
                     height: 10.0,
@@ -65,7 +67,7 @@ class LocationScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomButton(
         onPress: _controller.handleUpdateCurrentPost,
-        title: 'Next step',
+        title: 'Tiếp tục',
       ),
     );
   }

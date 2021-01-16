@@ -12,7 +12,7 @@ class PostModel {
   String status = "OPENED";
   String location;
   BookModel book;
-  String id;
+  int id;
   List<ImageModel> images;
   PostModel({
     this.title,
@@ -39,9 +39,9 @@ class PostModel {
         "version": post.book.version,
         "authors": post.book.authors
             .map((author) => {
-                  "id": author["author"]["id"],
-                  "name": "${author["author"]["name"]}",
-                  "slug": "${author["author"]["slug"]}",
+                  "id": author.authorID,
+                  "name": author.name,
+                  "slug": author.slug,
                 })
             .toList(),
         "description": "${post.book.description}",
@@ -49,9 +49,9 @@ class PostModel {
         "thumbnailUrl": "${post.book.thumbnailUrl}",
         "publisher": post.book.publisher
             .map((publisher) => {
-                  "id": publisher["publisher"]["id"],
-                  "name": "${publisher["publisher"]["name"]}",
-                  "slug": "${publisher["publisher"]["slug"]}",
+                  "id": publisher.publisherID,
+                  "name": publisher.name,
+                  "slug": publisher.slug,
                 })
             .toList(),
         "categories": post.book.categories
@@ -88,6 +88,7 @@ class PostModel {
       book: BookModel.fromJson(json['book']),
       images: ImageModel.toList(json['images']),
     );
+    postModel.id = json['id'];
     return postModel;
   }
 
@@ -97,6 +98,11 @@ class PostModel {
       list.add(PostModel.fromJson(item));
     });
     return list;
+  }
+
+  static getPost(int id) async {
+    final response = await PostApi.getPostById(id);
+    return PostModel.fromJson(response['data']);
   }
 }
 

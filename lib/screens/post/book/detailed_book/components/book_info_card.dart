@@ -13,49 +13,53 @@ class BookInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+      padding: EdgeInsets.symmetric(vertical: kDefaultPaddingVerical - 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'More information',
-            style: kTitleTextStyle,
-          ),
-          SizedBox(height: 15),
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                text: 'Published by: ',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
+                text: 'Nhà xuất bản: ',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
               ),
               TextSpan(
                   children: selectedBook.publisher
                       .map((publisher) => TextSpan(
-                            text: publisher["publisher"]["name"],
+                            text: publisher.name,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ))
                       .toList()),
             ]),
           ),
+          SizedBox(height: 7.0),
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                text: 'Authors: ',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black),
+                text: 'Tác giả: ',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
               ),
               TextSpan(
                   children: selectedBook.authors
-                      .map((publisher) => TextSpan(
-                            text: publisher["author"]["name"],
+                      .map((author) => TextSpan(
+                            text: author.name,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ))
                       .toList()),
             ]),
           ),
+          SizedBox(height: 10.0),
           Text(
-            'Book description',
+            'Giới thiệu sách',
             style: kTitleTextStyle,
           ),
+          SizedBox(height: 7.0),
           Text(
             selectedBook.description,
             textAlign: TextAlign.justify,
@@ -65,7 +69,7 @@ class BookInfoCard extends StatelessWidget {
               fontSize: 18,
             ),
           ),
-          SizedBox(height: 5),
+          SizedBox(height: 7.0),
           Container(
             alignment: Alignment.center,
             child: Text(

@@ -38,22 +38,16 @@ class _PostFormState extends State<PostForm> {
             onPressed: _currentPageIndex == 0
                 ? _controller.toExit
                 : _controller.toPreviousPage,
-            icon: Icon(Icons.arrow_back_ios),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           ),
-          backgroundColor: kPrimaryColor,
+          backgroundColor: Color(0xfffafafa),
           elevation: 0,
           title: Text(
-            'Fill your info',
+            'Nhập thông tin',
             style:
-                kHeadingTextStyle.copyWith(fontSize: 25, color: Colors.white),
+                kHeadingTextStyle.copyWith(fontSize: 22.0, color: Colors.black),
           ),
           centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(MdiIcons.eye),
-            ),
-          ],
         ),
         body: PageView(
           physics: new NeverScrollableScrollPhysics(),

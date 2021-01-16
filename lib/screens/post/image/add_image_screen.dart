@@ -15,7 +15,8 @@ class AddImageScreen extends StatelessWidget {
   const AddImageScreen({Key key, this.pageController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    AddImageController _controller = AddImageController(context: context, pageController: pageController);
+    AddImageController _controller =
+        AddImageController(context: context, pageController: pageController);
 
     return Scaffold(
       // floatingActionButton: FancyFab(
@@ -28,16 +29,18 @@ class AddImageScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: kDefaultPaddingHorizontal),
                 child: Row(
                   children: [
-                    Text('Your images', style: kTitleTextStyle),
+                    Text('Hình ảnh về sách', style: kTitleTextStyle),
                     SizedBox(width: 10),
                     BlocBuilder<PostBloc, PostState>(
                       builder: (context, state) {
                         return Text(
                           '${_controller.numberOfImages}/6',
-                          style: kTitleTextStyle.copyWith(fontWeight: FontWeight.normal, color: kGreyColor),
+                          style: kTitleTextStyle.copyWith(
+                              fontWeight: FontWeight.normal, color: kGreyColor),
                         );
                       },
                     ),
@@ -45,9 +48,10 @@ class AddImageScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: kDefaultPaddingHorizontal, vertical: 10.0),
                 child: Container(
-                    height: 100,
+                    height: 150.0,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: 6,
@@ -55,7 +59,7 @@ class AddImageScreen extends StatelessWidget {
                         return BlocBuilder<PostBloc, PostState>(
                           builder: (context, state) {
                             return Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: ImageContainer(
                                 onPress: _controller.uploadImageFromCamera,
                                 uploadedImage: _controller.getUpLoadedImages(i),
@@ -68,17 +72,21 @@ class AddImageScreen extends StatelessWidget {
               ),
               NoteBoard(
                 notes: [
-                  TextSpan(text: 'Notes:\n', style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
                   TextSpan(
-                    text: '\n- You should ensure your images about your book are clear.\n',
+                      text: 'Lưu ý:\n',
+                      style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
+                  TextSpan(
+                    text: '\n- Chụp rõ nét chi tiết về sách của bạn.\n',
                     style: TextStyle(color: kPrimaryColor, fontSize: 18),
                   ),
                   TextSpan(
-                    text: '\n- Your images should contain front cover, back cover and book information.\n',
+                    text:
+                        '\n- Hình ảnh nên rõ mặt bìa, mặt sau và gáy của sách .\n',
                     style: TextStyle(color: kPrimaryColor, fontSize: 18),
                   ),
                   TextSpan(
-                    text: '\n- Your images should describe book quality.',
+                    text:
+                        '\n- Hãy chụp trong điều kiện ánh sáng tốt để hình ảnh đẹp hơn.',
                     style: TextStyle(color: kPrimaryColor, fontSize: 18),
                   ),
                 ],
@@ -89,7 +97,7 @@ class AddImageScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomButton(
         onPress: _controller.handleUpdateCurrentPost,
-        title: 'Next step',
+        title: 'Tiếp tục',
       ),
     );
   }

@@ -101,4 +101,17 @@ class PostApi {
       print(e);
     }
   }
+
+  static Future<dynamic> getPostById(int id) async {
+    try {
+      var response = await http.get(
+        '$urlPosts/$id',
+        headers: await getHeader(),
+      );
+      if (!successCodes.contains(response.statusCode)) return null;
+      return json.decode(response.body);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

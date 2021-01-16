@@ -58,13 +58,17 @@ class _PostScreenState extends State<PostScreen> {
                   return ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: list.listPost.length,
-                      itemBuilder: (context, index) => PostCard(
-                            key: Key(index.toString()),
-                            imgUrl: list.listPost[index].images[0].link,
-                            title: list.listPost[index].title,
-                            description: list.listPost[index].description,
-                            range: '1.5km',
-                            location: list.listPost[index].location,
+                      itemBuilder: (context, index) => InkWell(
+                            onTap: () => _controller
+                                .toPreviewPostScreen(list.listPost[index]),
+                            child: PostCard(
+                              key: Key(index.toString()),
+                              imgUrl: list.listPost[index].images[0].link,
+                              title: list.listPost[index].title,
+                              description: list.listPost[index].description,
+                              range: '1.5km',
+                              location: list.listPost[index].location,
+                            ),
                           ));
                 }),
           ),
