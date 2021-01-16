@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/book/book_list_controller.dart';
+import 'package:shaboo/screens/post/book/components/book_card.dart';
 
 class BookList extends StatefulWidget {
   @override
@@ -15,7 +16,8 @@ class _BookListState extends State<BookList> {
     super.initState();
     _controller = BookListController(context: context);
     _controller.scrollController.addListener(() {
-      if (_controller.scrollController.position.maxScrollExtent == _controller.scrollController.offset) {
+      if (_controller.scrollController.position.maxScrollExtent ==
+          _controller.scrollController.offset) {
         try {
           _controller.loadMore(currentPage: _controller.currentPage);
         } catch (e) {
@@ -60,44 +62,20 @@ class _BookListState extends State<BookList> {
           return Expanded(
             child: RefreshIndicator(
               onRefresh: _controller.refresh,
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: ListView.builder(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
                 controller: _controller.scrollController,
-                separatorBuilder: (context, index) => Divider(),
                 itemCount: _snapshot.data.length + 1,
                 itemBuilder: (BuildContext _context, int index) {
                   if (index < _snapshot.data.length) {
                     return GestureDetector(
-                      onTap: () => _controller.toDetailedBookScreen(_snapshot.data[index]),
-                      child: Center(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: kDefaultPaddingHorizontal,
-                            vertical: kDefaultPaddingVerical,
-                          ),
-                          child: ListTile(
-                            leading: Image.network(
-                              _snapshot.data[index].thumbnailUrl,
-                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return CircularProgressIndicator();
-                              },
-                            ),
-                            title: Text(
-                              _snapshot.data[index].name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            subtitle: Text(
-                              _snapshot.data[index].shortDescription,
-                              maxLines: 3,
-                              textAlign: TextAlign.justify,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+                        onTap: () => _controller
+                            .toDetailedBookScreen(_snapshot.data[index]),
+                        child: BookCard(
+                          imgUrl: _snapshot.data[index].thumbnailUrl,
+                          title: _snapshot.data[index].name,
+                          description: _snapshot.data[index].shortDescription,
+                        ));
                   } else if (_controller.hasMore) {
                     return Padding(
                       padding: EdgeInsets.symmetric(vertical: 32.0),

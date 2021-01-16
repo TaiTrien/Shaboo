@@ -53,8 +53,6 @@ class AddImageController {
         .map(
           (e) => ImageModel(
             e["id"],
-            createdAt: e["createdAt"],
-            updatedAt: e["updatedAt"],
             link: e["link"],
             slug: e["slug"],
             fileName: e["filename"],
@@ -84,18 +82,22 @@ class AddImageController {
   get desc => currentPost.description;
 
   getUpLoadedImages(int index) {
-    if (currentPost.images == null || index >= currentPost.images.length) return null;
+    if (currentPost.images == null || index >= currentPost.images.length)
+      return null;
     return currentPost.images[index];
   }
 
-  get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
+  get numberOfImages =>
+      currentPost.images != null ? currentPost.images.length : 0;
 
   handleUpdateCurrentPost() {
-    if (currentPost.images == null) return Notify().error(message: 'You must add least 1 image');
+    if (currentPost.images == null)
+      return Notify().error(message: 'You must add least 1 image');
     toNextPage();
   }
 
   // Navigators
   void toExit() => Navigator.pop(context);
-  toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
+  toNextPage() => pageController.nextPage(
+      duration: Duration(milliseconds: 500), curve: Curves.ease);
 }

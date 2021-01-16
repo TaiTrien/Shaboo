@@ -1,14 +1,10 @@
 class PublisherModel {
   int _publisherID;
-  String createdAt;
-  String updatedAt;
   String name;
   String slug;
 
   PublisherModel(
     int publisherID, {
-    this.createdAt,
-    this.updatedAt,
     this.name,
     this.slug,
   }) : _publisherID = publisherID;
@@ -17,9 +13,21 @@ class PublisherModel {
 
   Map<String, dynamic> toJson() => {
         'publisherID': this._publisherID,
-        'createdAt': this.createdAt,
-        'updatedAt': this.updatedAt,
         'name': this.name,
         'slug': this.slug,
       };
+  factory PublisherModel.fromJson(Map<String, dynamic> json) {
+    return PublisherModel(
+      json['id'],
+      name: json['name'],
+      slug: json['slug'],
+    );
+  }
+  static List<PublisherModel> toList(List<dynamic> dynamicList) {
+    List<PublisherModel> list = [];
+    dynamicList.forEach((item) {
+      list.add(PublisherModel.fromJson(item['publisher']));
+    });
+    return list;
+  }
 }

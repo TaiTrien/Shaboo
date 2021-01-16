@@ -17,12 +17,14 @@ class BookScreen extends StatelessWidget {
         child: BlocBuilder<LocationBloc, LocationState>(
           builder: (context, state) {
             return Container(
-              padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+              padding:
+                  const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal + 10),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: kDefaultPaddingHorizontal + 10),
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
@@ -31,7 +33,7 @@ class BookScreen extends StatelessWidget {
                     ),
                     child: CustomTextField(
                       controller: _controller.searchController,
-                      labelText: 'Search your book',
+                      labelText: 'Tìm kiếm sách của bạn',
                       icon: Icons.search,
                     ),
                   ),

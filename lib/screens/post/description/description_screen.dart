@@ -19,7 +19,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = DescriptionController(context: context, pageController: widget.pageController);
+    _controller = DescriptionController(
+        context: context, pageController: widget.pageController);
   }
 
   @override
@@ -38,34 +39,42 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: size.height),
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+              padding:
+                  const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
               child: Column(
                 children: [
                   DescriptTextField(
                     maxLines: 1,
                     controller: _controller.titleController,
-                    label: 'Post Title',
+                    label: 'Tiêu đề',
                   ),
                   SizedBox(height: 20),
                   DescriptTextField(
                     controller: _controller.descController,
-                    label: 'Description',
+                    label: 'Mô tả bài đăng',
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.0),
                   NoteBoard(
                     notes: [
-                      TextSpan(text: 'Notes:\n', style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
                       TextSpan(
-                        text: '\n- You should write status of your book.\n',
+                          text: '*Lưu ý:\n',
+                          style:
+                              kTitleTextStyle.copyWith(color: kPrimaryColor)),
+                      TextSpan(
+                        text: '\n- Mô tả rõ ràng về tình trạng của sách.\n',
                         style: TextStyle(color: kPrimaryColor, fontSize: 18),
                       ),
                       TextSpan(
-                        text: '\n- Please describe your book and your expection as detailed as possible.\n',
+                        text:
+                            '\n- Hãy thêm mô tả về tựa sách mà bạn mong muốn được trao đổi.\n',
                         style: TextStyle(color: kPrimaryColor, fontSize: 18),
                       ),
                       TextSpan(
-                        text: '\n- PLEASE DO NOT TRY TO SALE ANYTHING.',
-                        style: TextStyle(color: kPrimaryColor, fontSize: 18, fontWeight: FontWeight.bold),
+                        text: '\n- Nghiêm cấm bán hàng bằng mọi hình thức.',
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -77,7 +86,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
       ),
       bottomNavigationBar: BottomButton(
         onPress: _controller.handleUpdateCurrentPost,
-        title: 'Next step',
+        title: 'Tiếp tục',
       ),
     );
   }

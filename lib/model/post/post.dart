@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:shaboo/api/constants.dart';
 import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/model/post/image.dart';
@@ -5,11 +8,12 @@ import 'package:shaboo/model/post/image.dart';
 class PostModel {
   String title;
   String description;
+  String range;
   String status = "OPENED";
   String location;
   BookModel book;
+  int id;
   List<ImageModel> images;
-
   PostModel({
     this.title,
     this.description,
@@ -35,9 +39,9 @@ class PostModel {
         "version": post.book.version,
         "authors": post.book.authors
             .map((author) => {
-                  "id": author["author"]["id"],
-                  "name": "${author["author"]["name"]}",
-                  "slug": "${author["author"]["slug"]}",
+                  "id": author.authorID,
+                  "name": author.name,
+                  "slug": author.slug,
                 })
             .toList(),
         "description": "${post.book.description}",
@@ -45,12 +49,14 @@ class PostModel {
         "thumbnailUrl": "${post.book.thumbnailUrl}",
         "publisher": post.book.publisher
             .map((publisher) => {
-                  "id": publisher["publisher"]["id"],
-                  "name": "${publisher["publisher"]["name"]}",
-                  "slug": "${publisher["publisher"]["slug"]}",
+                  "id": publisher.publisherID,
+                  "name": publisher.name,
+                  "slug": publisher.slug,
                 })
             .toList(),
-        "categories": post.book.categories.map((category) => category["category"]["id"]).toList(),
+        "categories": post.book.categories
+            .map((category) => category["category"]["id"])
+            .toList(),
       },
       "images": post.images.map((image) => image.imageID).toList(),
     };
@@ -72,4 +78,54 @@ class PostModel {
         'book': this.book,
         'images': this.images,
       };
+
+  factory PostModel.fromJson(Map<String, dynamic> json) {
+    final postModel = PostModel(
+      title: json['title'],
+      description: json['description'],
+      status: json['status'],
+      location: json['location'],
+      book: BookModel.fromJson(json['book']),
+      images: ImageModel.toList(json['images']),
+    );
+    postModel.id = json['id'];
+    return postModel;
+  }
+
+  static List<PostModel> toList(List<dynamic> dynamicList) {
+    List<PostModel> list = [];
+    dynamicList.forEach((item) {
+      list.add(PostModel.fromJson(item));
+    });
+    return list;
+  }
+
+  static getPost(int id) async {
+    final response = await PostApi.getPostById(id);
+    return PostModel.fromJson(response['data']);
+  }
+}
+
+class ListPost {
+  List<PostModel> listPost;
+  int page, take;
+  int itemCount, pageCount;
+
+  ListPost(
+      {this.listPost, this.page, this.take, this.itemCount, this.pageCount});
+
+  factory ListPost.fromJson(Map<String, dynamic> json) {
+    return ListPost(
+      take: json['meta']['take'],
+      page: json['meta']['page'],
+      itemCount: json['meta']['itemCount'],
+      pageCount: json['meta']['pageCount'],
+      listPost: PostModel.toList(json['data']),
+    );
+  }
+
+  static Future<ListPost> getPosts(EOrder eOrder, int page, int take) async {
+    final response = await PostApi.getPosts(eOrder, page, take);
+    return ListPost.fromJson(response);
+  }
 }

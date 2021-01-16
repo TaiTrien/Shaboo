@@ -12,8 +12,7 @@ class NoteBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: kDefaultPaddingHorizontal,
-      ),
+          horizontal: kDefaultPaddingHorizontal, vertical: 15.0),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -22,7 +21,8 @@ class NoteBoard extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: kDefaultPaddingVerical + 5),
+          padding: EdgeInsets.symmetric(
+              horizontal: 20.0, vertical: kDefaultPaddingVerical + 5),
           child: RichText(
             text: TextSpan(
               children: this.notes,

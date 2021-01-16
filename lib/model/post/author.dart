@@ -1,14 +1,10 @@
 class AuthorModel {
   int _authorID;
-  String createdAt;
-  String updatedAt;
   String name;
   String slug;
 
   AuthorModel(
     int authorID, {
-    this.createdAt,
-    this.updatedAt,
     this.name,
     this.slug,
   }) : _authorID = authorID;
@@ -17,9 +13,22 @@ class AuthorModel {
 
   Map<String, dynamic> toJson() => {
         'authorID': this._authorID,
-        'createdAt': this.createdAt,
-        'updatedAt': this.updatedAt,
         'name': this.name,
         'slug': this.slug,
       };
+
+  factory AuthorModel.fromJson(Map<String, dynamic> json) {
+    return AuthorModel(
+      json['id'],
+      name: json['name'],
+      slug: json['slug'],
+    );
+  }
+  static List<AuthorModel> toList(List<dynamic> dynamicList) {
+    List<AuthorModel> list = [];
+    dynamicList.forEach((item) {
+      list.add(AuthorModel.fromJson(item['author']));
+    });
+    return list;
+  }
 }
