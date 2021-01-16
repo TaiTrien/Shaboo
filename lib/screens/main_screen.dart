@@ -25,17 +25,17 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    if (index == 2) {
-      showModalBottomSheet<void>(
-        isScrollControlled: true,
-        context: context,
-        builder: (context) => Padding(
-          padding: const EdgeInsets.only(top: 24),
-          child: PostScreen(),
-        ),
-      );
-      return;
-    }
+    // if (index == 2) {
+    //   showModalBottomSheet<void>(
+    //     isScrollControlled: true,
+    //     context: context,
+    //     builder: (context) => Padding(
+    //       padding: const EdgeInsets.only(top: 24),
+    //       child: PostScreen(),
+    //     ),
+    //   );
+    //   return;
+    // }
     setState(() {
       _selectedIndex = index;
     });
@@ -60,8 +60,8 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Event',
           ),
           BottomNavigationBarItem(
-            icon: Icon(MdiIcons.plusBox),
-            label: 'Add',
+            icon: Icon(MdiIcons.newspaper),
+            label: 'Post',
           ),
           BottomNavigationBarItem(
             icon: Icon(MdiIcons.bell),
