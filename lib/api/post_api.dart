@@ -1,18 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:shaboo/api/constants.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/model/response.dart';
 
 import 'package:shaboo/utils/store.dart';
+import './constants.dart';
 
 class PostApi {
   // static String prefixUrl = 'http://10.0.128.70:3001';
   static String urlUploadPost = '$kPrefixUrl/posts';
+  static String urlPosts = '$kPrefixUrl/posts';
   static String urlUploadPhoto = '$kPrefixUrl/images';
-  static String urlFacebookSignin = '$kPrefixUrl/auth/facebook';
   static String urlGetBooks = '$kPrefixUrl/books?order=ASC';
+  static getHeader() async => {
+        "Authorization": "Bearer ${await Store.getToken()}",
+        "Content-Type": "application/json",
+      };
 
   static Future<dynamic> uploadPost({PostModel post}) async {
     var token = await Store.getToken();
@@ -48,7 +55,8 @@ class PostApi {
     request.headers.addAll(headers);
 
     for (var photo in photos) {
-      request.files.add(await http.MultipartFile.fromPath('images', photo.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('images', photo.path));
     }
 
     try {
@@ -76,6 +84,19 @@ class PostApi {
       );
       if (response.statusCode != 200) return null;
       return Response.map(json.decode(response.body));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<dynamic> getPosts(EOrder eOrder, int page, int take) async {
+    try {
+      var response = await http.get(
+        '$urlPosts?order=${order[eOrder.index]}&page=$page&take=$take&status=OPENED',
+        headers: await getHeader(),
+      );
+      if (!successCodes.contains(response.statusCode)) return null;
+      return json.decode(response.body);
     } catch (e) {
       print(e);
     }

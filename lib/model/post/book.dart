@@ -4,8 +4,6 @@ import 'package:shaboo/api/post_api.dart';
 
 class BookModel {
   int _id;
-  String createdAt;
-  String updatedAt;
   String name;
   int version;
   List<dynamic> authors;
@@ -17,8 +15,6 @@ class BookModel {
 
   BookModel({
     int id,
-    this.createdAt,
-    this.updatedAt,
     this.name,
     this.version,
     this.authors,
@@ -31,6 +27,20 @@ class BookModel {
 
   get id => this._id;
 
+  factory BookModel.fromJson(Map<String, dynamic> json) {
+    return BookModel(
+      id: json['id'],
+      name: json['name'],
+      version: json['version'],
+      authors: json['authors'],
+      description: json['description'],
+      shortDescription: json['shortDescription'],
+      thumbnailUrl: json['thumbnailUrl'],
+      publisher: json['publisher'],
+      categories: json['categories'],
+    );
+  }
+
   Future<Map<int, List<dynamic>>> getBooks({int page, String bookName}) async {
     List<dynamic> books;
     var response = await PostApi.getBooks(page: page, bookName: bookName);
@@ -39,8 +49,6 @@ class BookModel {
       books = response.data
           .map((book) => new BookModel(
                 id: book["id"],
-                createdAt: book["createdAt"],
-                updatedAt: book["updatedAt"],
                 name: book["name"],
                 version: book["version"],
                 description: book["description"],

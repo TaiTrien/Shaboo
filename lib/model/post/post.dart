@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:shaboo/api/constants.dart';
 import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/model/post/image.dart';
@@ -5,11 +8,12 @@ import 'package:shaboo/model/post/image.dart';
 class PostModel {
   String title;
   String description;
+  String range;
   String status = "OPENED";
   String location;
   BookModel book;
+  String id;
   List<ImageModel> images;
-
   PostModel({
     this.title,
     this.description,
@@ -50,7 +54,9 @@ class PostModel {
                   "slug": "${publisher["publisher"]["slug"]}",
                 })
             .toList(),
-        "categories": post.book.categories.map((category) => category["category"]["id"]).toList(),
+        "categories": post.book.categories
+            .map((category) => category["category"]["id"])
+            .toList(),
       },
       "images": post.images.map((image) => image.imageID).toList(),
     };
@@ -72,4 +78,48 @@ class PostModel {
         'book': this.book,
         'images': this.images,
       };
+
+  factory PostModel.fromJson(Map<String, dynamic> json) {
+    final postModel = PostModel(
+      title: json['title'],
+      description: json['description'],
+      status: json['status'],
+      location: json['location'],
+      book: BookModel.fromJson(json['book']),
+      images: ImageModel.toList(json['images']),
+    );
+    return postModel;
+  }
+
+  static List<PostModel> toList(List<dynamic> dynamicList) {
+    List<PostModel> list = [];
+    dynamicList.forEach((item) {
+      list.add(PostModel.fromJson(item));
+    });
+    return list;
+  }
+}
+
+class ListPost {
+  List<PostModel> listPost;
+  int page, take;
+  int itemCount, pageCount;
+
+  ListPost(
+      {this.listPost, this.page, this.take, this.itemCount, this.pageCount});
+
+  factory ListPost.fromJson(Map<String, dynamic> json) {
+    return ListPost(
+      take: json['meta']['take'],
+      page: json['meta']['page'],
+      itemCount: json['meta']['itemCount'],
+      pageCount: json['meta']['pageCount'],
+      listPost: PostModel.toList(json['data']),
+    );
+  }
+
+  static Future<ListPost> getPosts(EOrder eOrder, int page, int take) async {
+    final response = await PostApi.getPosts(eOrder, page, take);
+    return ListPost.fromJson(response);
+  }
 }

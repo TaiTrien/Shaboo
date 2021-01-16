@@ -1,7 +1,7 @@
+import 'package:shaboo/constants.dart';
+
 class ImageModel {
   int _imageID;
-  String createdAt;
-  String updatedAt;
   String link;
   String slug;
   String fileName;
@@ -10,8 +10,6 @@ class ImageModel {
 
   ImageModel(
     int imageID, {
-    this.createdAt,
-    this.updatedAt,
     this.link,
     this.slug,
     this.fileName,
@@ -23,10 +21,25 @@ class ImageModel {
 
   Map<String, dynamic> toJson() => {
         'imageID': this._imageID,
-        'createdAt': this.createdAt,
-        'updatedAt': this.updatedAt,
         'name': this.fileName,
         'slug': this.slug,
         'desc': this.type,
       };
+
+  factory ImageModel.fromJson(Map<String, dynamic> json) {
+    return ImageModel(
+      int.parse(json['image']['id'].toString()),
+      link: kPrefixUrl + json['image']['link'],
+      slug: json['image']['slug'],
+      type: json['image']['type'],
+    );
+  }
+
+  static List<ImageModel> toList(List<dynamic> dynamicList) {
+    List<ImageModel> list = [];
+    dynamicList.forEach((item) {
+      list.add(ImageModel.fromJson(item));
+    });
+    return list;
+  }
 }
