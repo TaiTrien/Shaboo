@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/post.dart';
 
 class PreviewPostController {
@@ -18,8 +17,7 @@ class PreviewPostController {
               child: Container(
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Image.network(item.link,
-                        fit: BoxFit.cover, width: 1000.0)),
+                    child: Image.network(item.link, fit: BoxFit.cover, width: 1000.0)),
               ),
             ))
         .toList();

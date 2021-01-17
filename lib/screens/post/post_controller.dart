@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/api/constants.dart';
-import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/screens/post/preview/preview_screen.dart';
 
@@ -11,8 +10,6 @@ class PostController {
   PostController({this.context}) {
     pageController = new PageController(initialPage: 0);
   }
-
-  onPageChanged(int index) {}
 
   dispose() {
     pageController.dispose();

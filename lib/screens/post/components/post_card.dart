@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/components/loading_widget.dart';
 
 class PostCard extends StatelessWidget {

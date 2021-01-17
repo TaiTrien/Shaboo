@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/description/description_screen.dart';
 import 'package:shaboo/screens/post/image/add_image_screen.dart';
@@ -35,17 +34,14 @@ class _PostFormState extends State<PostForm> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: _currentPageIndex == 0
-                ? _controller.toExit
-                : _controller.toPreviousPage,
+            onPressed: _currentPageIndex == 0 ? _controller.toExit : _controller.toPreviousPage,
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           ),
           backgroundColor: Color(0xfffafafa),
           elevation: 0,
           title: Text(
             'Nhập thông tin',
-            style:
-                kHeadingTextStyle.copyWith(fontSize: 22.0, color: Colors.black),
+            style: kHeadingTextStyle.copyWith(fontSize: 22.0, color: Colors.black),
           ),
           centerTitle: true,
         ),

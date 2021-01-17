@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/api/constants.dart';
-import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/screens/post/components/post_card.dart';
@@ -15,12 +13,10 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   PostController _controller;
-  int _currentPageIndex;
 
   @override
   void initState() {
     super.initState();
-    _currentPageIndex = 0;
     _controller = PostController(context: context);
   }
 
