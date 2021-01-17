@@ -15,13 +15,14 @@ import 'package:shaboo/utils/notify.dart';
 class AddImageController {
   PhotoModel _photoModel = PhotoModel();
   List<File> photos = List<File>();
-  List<ImageModel> uploadedImages = List<ImageModel>();
+  List<ImageModel> uploadedImages;
   PostBloc _postBloc;
   PageController pageController;
 
   BuildContext context;
   AddImageController({this.context, this.pageController}) {
     _postBloc = BlocProvider.of<PostBloc>(context);
+    uploadedImages = List<ImageModel>();
     uploadedImages = currentPost.images ?? null;
   }
 
@@ -65,21 +66,20 @@ class AddImageController {
     _postBloc.add(UpdateCurrentPost(_currentPost));
   }
 
+  handleUpdateCurrentPost() {
+    if (currentPost.images == null) return Notify().error(message: 'You must add least 1 image');
+    toNextPage();
+  }
+
   //getter & setters
   get currentPost => _postBloc.state.currentPost;
   get title => currentPost.title;
   get desc => currentPost.description;
+  get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
 
   getUpLoadedImages(int index) {
     if (currentPost.images == null || index >= currentPost.images.length) return null;
     return currentPost.images[index];
-  }
-
-  get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
-
-  handleUpdateCurrentPost() {
-    if (currentPost.images == null) return Notify().error(message: 'You must add least 1 image');
-    toNextPage();
   }
 
   // Navigators

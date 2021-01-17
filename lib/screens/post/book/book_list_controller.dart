@@ -46,7 +46,7 @@ class BookListController {
             _isLoading = false,
             _data.addAll(books.values.first),
             hasMore = (_data.length < books.entries.first.key),
-            _streamController.add(_data),
+            _streamController.sink.add(_data),
           });
     } catch (e) {
       print(e);
