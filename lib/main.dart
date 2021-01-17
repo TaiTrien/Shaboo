@@ -5,12 +5,13 @@ import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
+import 'package:shaboo/constants.dart';
 import 'package:shaboo/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.blue, // navigation bar color
+      systemNavigationBarColor: kPrimaryColor, // navigation bar color
       statusBarColor: Color(0xfffafafa), // status bar color
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark));

@@ -57,9 +57,9 @@ class BookModel {
                 description: book["description"],
                 shortDescription: book["shortDescription"],
                 thumbnailUrl: book["thumbnailUrl"],
-                categories: book["categories"],
-                authors: book["authors"],
-                publisher: book["publishers"],
+                categories: CategoryModel.toList(book["categories"]),
+                authors: AuthorModel.toList(book["authors"]),
+                publisher: PublisherModel.toList(book["publishers"]),
               ))
           .toList();
     } catch (e) {

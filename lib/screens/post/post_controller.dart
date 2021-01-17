@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/api/constants.dart';
-import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/screens/post/preview/preview_screen.dart';
 
@@ -12,22 +11,18 @@ class PostController {
     pageController = new PageController(initialPage: 0);
   }
 
-  onPageChanged(int index) {}
-
   dispose() {
     pageController.dispose();
   }
 
-  toPreviewPostScreen(PostModel postModel) => Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => PreviewPostScreen(id: postModel.id)));
+  toPreviewPostScreen(PostModel postModel) =>
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PreviewPostScreen(id: postModel.id)));
 
-  toNextPage() => pageController.nextPage(
-      duration: Duration(milliseconds: 500), curve: Curves.ease);
-  toPreviousPage() => pageController.previousPage(
-      duration: Duration(milliseconds: 500), curve: Curves.ease);
+  toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
+  toPreviousPage() => pageController.previousPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
   toExit() => Navigator.pop(context);
 
   getPost() async => await ListPost.getPosts(EOrder.ASC, 1, 10);
+
+  get defaultImage => "https://bitly.com.vn/pdmjnn";
 }

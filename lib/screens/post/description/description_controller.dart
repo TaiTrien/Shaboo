@@ -23,8 +23,8 @@ class DescriptionController {
     String title = titleController.text.trim();
     String desc = descController.text.trim();
 
-    if (title.isEmpty) return Notify().error(message: 'Post title must be filled');
-    if (desc.isEmpty) return Notify().error(message: 'Post description must be filled');
+    if (title.isEmpty) return Notify().error(message: 'VUi lòng điền tiêu đề của bài đăng');
+    if (desc.isEmpty) return Notify().error(message: 'Bạn chưa mô tả bài đăng của mình');
 
     PostModel _currentPost = PostModel(title: title, description: desc);
     _postBloc.add(UpdateCurrentPost(_currentPost));

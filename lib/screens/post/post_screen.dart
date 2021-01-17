@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/api/constants.dart';
-import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/screens/post/components/post_card.dart';
@@ -15,12 +13,10 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   PostController _controller;
-  int _currentPageIndex;
 
   @override
   void initState() {
     super.initState();
-    _currentPageIndex = 0;
     _controller = PostController(context: context);
   }
 
@@ -50,20 +46,21 @@ class _PostScreenState extends State<PostScreen> {
             child: FutureBuilder(
                 future: _controller.getPost(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData ||
-                      snapshot.connectionState != ConnectionState.done) {
+                  if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done) {
                     return Center(child: CircularProgressIndicator());
                   }
+
                   ListPost list = snapshot.data;
                   return ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: list.listPost.length,
                       itemBuilder: (context, index) => InkWell(
-                            onTap: () => _controller
-                                .toPreviewPostScreen(list.listPost[index]),
+                            onTap: () => _controller.toPreviewPostScreen(list.listPost[index]),
                             child: PostCard(
                               key: Key(index.toString()),
-                              imgUrl: list.listPost[index].images[0].link,
+                              imgUrl: list.listPost[index].images.length == 0
+                                  ? _controller.defaultImage
+                                  : list.listPost[index].images[0].link,
                               title: list.listPost[index].title,
                               description: list.listPost[index].description,
                               range: '1.5km',

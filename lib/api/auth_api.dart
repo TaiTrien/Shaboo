@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:shaboo/api/constants.dart';
 import 'package:shaboo/constants.dart';
 import 'dart:convert';
 
@@ -18,7 +19,7 @@ class AuthApi {
           "token": idToken,
         },
       );
-      if (response.statusCode != 200) return null;
+      if (!successCodes.contains(response.statusCode)) return null;
       return Response.map(json.decode(response.body));
     } catch (e) {
       print(e);
@@ -34,7 +35,7 @@ class AuthApi {
           "token": idToken,
         },
       );
-      if (response.statusCode != 200) return null;
+      if (!successCodes.contains(response.statusCode)) return null;
       return Response.map(json.decode(response.body));
     } catch (e) {}
   }

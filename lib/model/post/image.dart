@@ -28,17 +28,17 @@ class ImageModel {
 
   factory ImageModel.fromJson(Map<String, dynamic> json) {
     return ImageModel(
-      int.parse(json['image']['id'].toString()),
-      link: kPrefixUrl + json['image']['link'],
-      slug: json['image']['slug'],
-      type: json['image']['type'],
+      int.parse(json['id'].toString()),
+      link: kPrefixUrl + json['link'],
+      slug: json['slug'],
+      type: json['type'],
     );
   }
 
   static List<ImageModel> toList(List<dynamic> dynamicList) {
     List<ImageModel> list = [];
     dynamicList.forEach((item) {
-      list.add(ImageModel.fromJson(item));
+      list.add(ImageModel.fromJson(item["image"]));
     });
     return list;
   }

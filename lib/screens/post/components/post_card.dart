@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/components/loading_widget.dart';
 
 class PostCard extends StatelessWidget {
@@ -51,11 +50,11 @@ class PostCard extends StatelessWidget {
                     ),
                     errorWidget: (context, url, error) => Image.asset(
                       'assets/icons/book-placeholder.png',
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       height: 150.0,
                       width: 110.0,
                     ),
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     height: 150.0,
                     width: 120.0,
                   ),

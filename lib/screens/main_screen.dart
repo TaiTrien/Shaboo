@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants.dart';
-import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
 
-import 'package:shaboo/screens/home/home_screen.dart';
 import 'package:shaboo/screens/notification/notification_screen.dart';
 import 'package:shaboo/screens/post/post_screen.dart';
 import 'package:shaboo/screens/post/preview/preview_screen.dart';
@@ -25,17 +23,6 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    // if (index == 2) {
-    //   showModalBottomSheet<void>(
-    //     isScrollControlled: true,
-    //     context: context,
-    //     builder: (context) => Padding(
-    //       padding: const EdgeInsets.only(top: 24),
-    //       child: PostScreen(),
-    //     ),
-    //   );
-    //   return;
-    // }
     setState(() {
       _selectedIndex = index;
     });
