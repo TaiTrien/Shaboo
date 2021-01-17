@@ -51,11 +51,11 @@ class PostCard extends StatelessWidget {
                     ),
                     errorWidget: (context, url, error) => Image.asset(
                       'assets/icons/book-placeholder.png',
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       height: 150.0,
                       width: 110.0,
                     ),
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     height: 150.0,
                     width: 120.0,
                   ),
