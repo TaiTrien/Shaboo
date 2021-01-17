@@ -8,8 +8,7 @@ class ImageContainer extends StatelessWidget {
   final ImageModel uploadedImage;
   final Function onPress;
 
-  const ImageContainer({Key key, this.uploadedImage, this.onPress})
-      : super(key: key);
+  const ImageContainer({Key key, this.uploadedImage, this.onPress}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return uploadedImage == null
@@ -29,10 +28,9 @@ class ImageContainer extends StatelessWidget {
             height: 150,
             width: 100,
             child: Image.network(
-              "$kPrefixUrl" + uploadedImage.link,
+              uploadedImage.link,
               fit: BoxFit.cover,
-              loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent loadingProgress) {
+              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
                 if (loadingProgress == null) return child;
                 return Center(child: CircularProgressIndicator());
               },
