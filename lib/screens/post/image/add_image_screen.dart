@@ -56,7 +56,7 @@ class AddImageScreen extends StatelessWidget {
                           itemBuilder: (context, i) {
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: ImageContainer(),
+                              child: ImageContainer(id: i),
                             );
                           },
                         );
