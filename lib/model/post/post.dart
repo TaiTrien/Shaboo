@@ -55,7 +55,7 @@ class PostModel {
                 })
             .toList(),
         "categories": post.book.categories
-            .map((category) => category["category"]["id"])
+            .map((category) => category.categoryID)
             .toList(),
       },
       "images": post.images.map((image) => image.imageID).toList(),

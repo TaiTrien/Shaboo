@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
@@ -8,6 +9,11 @@ import 'package:shaboo/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.blue, // navigation bar color
+      statusBarColor: Color(0xfffafafa), // status bar color
+      statusBarBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.dark));
   runApp(MyApp());
 }
 

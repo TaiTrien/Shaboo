@@ -26,7 +26,7 @@ class AuthorModel {
   }
   static List<AuthorModel> toList(List<dynamic> dynamicList) {
     List<AuthorModel> list = [];
-    dynamicList.forEach((item) {
+    dynamicList?.forEach((item) {
       list.add(AuthorModel.fromJson(item['author']));
     });
     return list;

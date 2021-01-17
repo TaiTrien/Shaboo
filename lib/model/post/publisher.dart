@@ -25,7 +25,7 @@ class PublisherModel {
   }
   static List<PublisherModel> toList(List<dynamic> dynamicList) {
     List<PublisherModel> list = [];
-    dynamicList.forEach((item) {
+    dynamicList?.forEach((item) {
       list.add(PublisherModel.fromJson(item['publisher']));
     });
     return list;

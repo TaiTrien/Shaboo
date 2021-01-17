@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/post/author.dart';
+import 'package:shaboo/model/post/category.dart';
 import 'package:shaboo/model/post/publisher.dart';
 
 class BookModel {
@@ -13,7 +14,7 @@ class BookModel {
   String thumbnailUrl;
   List<AuthorModel> authors;
   List<PublisherModel> publisher;
-  List<dynamic> categories;
+  List<CategoryModel> categories;
 
   BookModel({
     int id,
@@ -39,7 +40,7 @@ class BookModel {
       shortDescription: json['shortDescription'],
       thumbnailUrl: json['thumbnailUrl'],
       publisher: PublisherModel.toList(json['publishers']),
-      categories: json['categories'],
+      categories: CategoryModel.toList(json['categories']),
     );
   }
 

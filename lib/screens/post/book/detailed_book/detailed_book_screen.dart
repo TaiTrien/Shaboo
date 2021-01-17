@@ -71,7 +71,7 @@ class DetailedBookScreen extends StatelessWidget {
                         .map(
                           (category) => Chip(
                             label: Text(
-                              category["category"]["name"],
+                              category.name,
                               style: TextStyle(color: Colors.white),
                             ),
                             backgroundColor:

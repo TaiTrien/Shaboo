@@ -100,7 +100,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                   child: Text(
                     postModel.book.name,
                     style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -129,7 +129,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                             TextSpan(
                                 text: postModel.book.authors
                                     .map((item) => item.name)
-                                    .join(',')
+                                    .join(', ')
                                     .toString(),
                                 style: TextStyle(fontWeight: FontWeight.w400)),
                           ],
@@ -145,7 +145,10 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                               color: Colors.black),
                           children: <TextSpan>[
                             TextSpan(
-                                text: 'Self-help, Novel',
+                                text: postModel.book.categories
+                                    .map((item) => item.name)
+                                    .join(', ')
+                                    .toString(),
                                 style: TextStyle(fontWeight: FontWeight.w400)),
                           ],
                         ),
@@ -160,7 +163,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                               color: Colors.black),
                           children: <TextSpan>[
                             TextSpan(
-                                text: 'KTX B Zone, DHQG - TPHCM',
+                                text: postModel.location,
                                 style: TextStyle(fontWeight: FontWeight.w400)),
                           ],
                         ),
@@ -184,7 +187,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                       ),
                       SizedBox(height: 5.0),
                       Text(
-                        "I'd like to exchange Dac Nhan Tam book. My book is new 80%. Thank you very much!!",
+                        postModel.description,
                         style: TextStyle(fontSize: 16.0),
                       ),
                     ],
