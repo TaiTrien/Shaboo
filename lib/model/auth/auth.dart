@@ -10,8 +10,10 @@ class AuthModel {
 
   Future<dynamic> googleSignIn() async {
     try {
-      final GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+      final GoogleSignInAccount googleSignInAccount =
+          await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
       var idToken = googleSignInAuthentication.idToken;
       var uid = googleSignInAccount.id;
@@ -43,13 +45,14 @@ class AuthModel {
   Future<dynamic> facebookSignIn() async {
     _facebooklogin.loginBehavior = FacebookLoginBehavior.nativeWithFallback;
     try {
-      final result = await _facebooklogin.logIn(['email']);
+      final result = await _facebooklogin.logIn([]);
 
       var uid = result.accessToken.userId;
       var idToken = result.accessToken.token;
       if (idToken == null || uid == null) return;
 
-      var response = await AuthApi.signInByFacebook(userID: uid, idToken: idToken);
+      var response =
+          await AuthApi.signInByFacebook(userID: uid, idToken: idToken);
       if (response == null) return null;
 
       var token = response.token["accessToken"];

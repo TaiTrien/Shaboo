@@ -1,3 +1,4 @@
+import 'package:shaboo/api/user_api.dart';
 import 'package:shaboo/constants.dart';
 
 class UserModel {
@@ -6,12 +7,12 @@ class UserModel {
   String lastName;
   String userName;
   String _password;
-  String role = "USER";
   String email;
   String phone;
   UserGender gender;
   String birthday;
   String avatar;
+  String facebook;
 
   UserModel({
     int userID,
@@ -19,12 +20,12 @@ class UserModel {
     this.lastName,
     this.userName,
     String password,
-    this.role,
     this.email,
     this.phone,
     this.gender,
     this.birthday,
     this.avatar,
+    this.facebook,
   })  : _userID = userID,
         _password = password;
 
@@ -34,11 +35,30 @@ class UserModel {
         'lastName': lastName,
         'userName': userName,
         'password': _password,
-        'role': role,
         'email': email,
         'phone': phone,
         'gender': gender,
         'birthday': birthday,
         'avatar': avatar,
       };
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    final userModel = UserModel(
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      userName: json['userName'],
+      email: json['email'],
+      phone: json['phone'],
+      gender: json['gender'],
+      birthday: json['birthday'],
+      avatar: json['avatar'],
+      facebook: json['facebook'],
+    );
+    userModel._userID = json['id'];
+    return userModel;
+  }
+
+  static getGeneralInfoUser(String id) async {
+    final response = await UserApi.getUserById(id);
+    return UserModel.fromJson(response['data']);
+  }
 }

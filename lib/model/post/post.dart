@@ -11,9 +11,11 @@ class PostModel {
   String location;
   BookModel book;
   int id;
+  String userId;
   List<ImageModel> images;
   PostModel({
     this.title,
+    this.userId,
     this.description,
     this.status = "OPENED",
     this.location,
@@ -52,7 +54,9 @@ class PostModel {
                   "slug": publisher.slug,
                 })
             .toList(),
-        "categories": post.book.categories.map((category) => category.categoryID).toList(),
+        "categories": post.book.categories
+            .map((category) => category.categoryID)
+            .toList(),
       },
       "images": post.images.map((image) => image.imageID).toList(),
     };
@@ -81,6 +85,7 @@ class PostModel {
       description: json['description'],
       status: json['status'],
       location: json['location'],
+      userId: json['userId'].toString(),
       book: BookModel.fromJson(json['book']),
       images: ImageModel.toList(json['images']),
     );
@@ -107,7 +112,8 @@ class ListPost {
   int page, take;
   int itemCount, pageCount;
 
-  ListPost({this.listPost, this.page, this.take, this.itemCount, this.pageCount});
+  ListPost(
+      {this.listPost, this.page, this.take, this.itemCount, this.pageCount});
 
   factory ListPost.fromJson(Map<String, dynamic> json) {
     return ListPost(
