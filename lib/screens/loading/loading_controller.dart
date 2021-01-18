@@ -15,7 +15,7 @@ class LoadingController {
 
   handleLoad() async {
     await loadLocationData();
-    toMainScreen();
+    toCategoryScreen();
   }
 
   loadLocationData() async {
@@ -25,4 +25,5 @@ class LoadingController {
   }
 
   toMainScreen() => Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
+  toCategoryScreen() => Navigator.pushNamedAndRemoveUntil(context, '/categoryScreen', (context) => false);
 }

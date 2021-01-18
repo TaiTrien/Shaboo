@@ -1,5 +1,6 @@
 import 'package:shaboo/api/user_api.dart';
 import 'package:shaboo/constants.dart';
+import 'package:shaboo/model/post/category.dart';
 
 class UserModel {
   int _userID;
@@ -13,6 +14,7 @@ class UserModel {
   String birthday;
   String avatar;
   String facebook;
+  List<CategoryModel> categories;
 
   UserModel({
     int userID,
@@ -26,6 +28,7 @@ class UserModel {
     this.birthday,
     this.avatar,
     this.facebook,
+    this.categories,
   })  : _userID = userID,
         _password = password;
 
@@ -40,6 +43,7 @@ class UserModel {
         'gender': gender,
         'birthday': birthday,
         'avatar': avatar,
+        'categories': categories,
       };
   factory UserModel.fromJson(Map<String, dynamic> json) {
     final userModel = UserModel(
@@ -52,6 +56,7 @@ class UserModel {
       birthday: json['birthday'],
       avatar: json['avatar'],
       facebook: json['facebook'],
+      categories: json['categories'],
     );
     userModel._userID = json['id'];
     return userModel;

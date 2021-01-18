@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'package:shaboo/model/response.dart';
 
 class AuthApi {
-  //static String prefixUrl = 'http://10.0.128.70:3001';
   static String urlGoogleSignin = '$kPrefixUrl/auth/google';
   static String urlFacebookSignin = '$kPrefixUrl/auth/facebook';
 
@@ -40,50 +39,3 @@ class AuthApi {
     } catch (e) {}
   }
 }
-
-// static Future<dynamic> getRegisterResponse(
-//     {String name, String userName, String password}) async {
-//   var response = await http.post(
-//     urlRegister,
-//     body: {
-//       "name": name,
-//       "user_name": userName,
-//       "password": password,
-//     },
-//   );
-//   //var data = Response.map(json.decode(response.body));
-//   //return data;
-// }
-
-//   static Future<dynamic> getUserInfo() async {
-//     var token = await Store.getToken();
-//     var response = await http.get(
-//       urlGetUserInfo,
-//       headers: {
-//         "Authorization": token,
-//       },
-//     );
-//     var data = Response.map(json.decode(response.body));
-//     if (data.code != 200) {
-//       return data.apiMessagse;
-//     }
-//     return data;
-//   }
-
-//   static Future<dynamic> changePassword(
-//       {String currentPassword, String newPassword}) async {
-//     var token = await Store.getToken();
-//     var response = await http.put(
-//       urlChangePassword,
-//       headers: {
-//         "Authorization": token,
-//       },
-//       body: {
-//         "current_password": currentPassword,
-//         "new_password": newPassword,
-//       },
-//     );
-//     var data = Response.map(json.decode(response.body));
-//     return data;
-//   }
-// }

@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:shaboo/api/book_api.dart';
 import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/post/author.dart';
 import 'package:shaboo/model/post/category.dart';
@@ -40,13 +41,13 @@ class BookModel {
       shortDescription: json['shortDescription'],
       thumbnailUrl: json['thumbnailUrl'],
       publisher: PublisherModel.toList(json['publishers']),
-      categories: CategoryModel.toList(json['categories']),
+      categories: CategoryModel.toList(json['categories']['category']),
     );
   }
 
   Future<Map<int, List<dynamic>>> getBooks({int page, String bookName}) async {
     List<dynamic> books;
-    var response = await PostApi.getBooks(page: page, bookName: bookName);
+    var response = await BookApi.getBooks(page: page, bookName: bookName);
     if (response == null) return null;
     try {
       books = response.data
@@ -57,7 +58,7 @@ class BookModel {
                 description: book["description"],
                 shortDescription: book["shortDescription"],
                 thumbnailUrl: book["thumbnailUrl"],
-                categories: CategoryModel.toList(book["categories"]),
+                categories: CategoryModel.toList(book["categories"]['category']),
                 authors: AuthorModel.toList(book["authors"]),
                 publisher: PublisherModel.toList(book["publishers"]),
               ))
