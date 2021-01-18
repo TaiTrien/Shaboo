@@ -58,7 +58,8 @@ class CategoryScreen extends StatelessWidget {
                   );
                 } else if (!_snapshot.hasData) {
                   return Center(
-                    child: Text('Không tìm thấy danh mục nào', style: kTitleTextStyle),
+                    child: Text('Không tìm thấy danh mục nào',
+                        style: kTitleTextStyle.copyWith(fontWeight: FontWeight.w400, color: kGreyColor)),
                   );
                 }
                 return BlocBuilder<UserBloc, UserState>(builder: (context, state) {

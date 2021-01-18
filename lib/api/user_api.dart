@@ -45,7 +45,7 @@ class UserApi {
         body: json.encode(requestedUser),
       );
       if (!successCodes.contains(response.statusCode)) return null;
-      return json.decode(response.body);
+      return Response.map(json.decode(response.body));
     } catch (e) {
       print(e);
     }

@@ -58,7 +58,7 @@ class UserModel {
       birthday: json['birthday'],
       avatar: json['avatar'],
       facebook: json['facebook'],
-      categories: json['categories'],
+      categories: CategoryModel.toList(json['categories']),
     );
     userModel._userID = json['id'];
     return userModel;

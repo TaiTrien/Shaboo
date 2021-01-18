@@ -32,7 +32,9 @@ class CategoryController {
   handleSelectCategories() async {
     if (categories.isEmpty) return Notify().error(message: "Vui lòng chọn ít nhất 1 thể loại");
     var response = await UserApi.editInfo(currentUser: currentUser);
-    print(response);
+    if (response == null) return Notify().error(message: "Đã xảy ra lỗi");
+
+    Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (route) => false);
   }
 
   updateSelectedCategories({CategoryModel selectCategory}) {
@@ -47,17 +49,15 @@ class CategoryController {
       else
         selectedCategories.add(selectCategory);
     }
-    //TODO: fix data here in User model after make edit info page
+
     UserModel _currentUser = UserModel(
-      userID: userId ?? 'string',
-      firstName: firstName ?? 'string',
-      lastName: lastName ?? 'string',
-      email: email ?? 'email@gmail.com',
-      phone: phone ?? '0906839130',
-      gender: gender ?? 'MALE',
-      userName: userName ?? 'string',
-      avatar: avatar ?? '',
-      birthday: birthday ?? '1999-05-28',
+      userID: userId,
+      firstName: firstName,
+      lastName: lastName,
+      userName: userName,
+      email: email,
+      phone: phone,
+      avatar: avatar,
       categories: selectedCategories,
     );
     _userBloc.add(UpdateUserData(_currentUser));
@@ -81,5 +81,5 @@ class CategoryController {
   get facebook => currentUser.facebook;
   get avatar => currentUser.avatar;
   get categories => currentUser.categories;
-  get numberOfSelectedCategories => currentUser.categories != null ? categories.length : 0;
+  get numberOfSelectedCategories => categories != null ? categories.length : 0;
 }
