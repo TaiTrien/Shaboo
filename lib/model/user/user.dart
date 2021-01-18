@@ -45,6 +45,8 @@ class UserModel {
         'avatar': avatar,
         'categories': categories,
       };
+
+  get userId => this._userID;
   factory UserModel.fromJson(Map<String, dynamic> json) {
     final userModel = UserModel(
       firstName: json['firstName'],
