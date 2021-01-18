@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/api/book_api.dart';
 import 'package:shaboo/api/constants.dart';
+import 'package:shaboo/api/user_api.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/model/post/category.dart';
 import 'package:shaboo/model/user/user.dart';
+import 'package:shaboo/utils/notify.dart';
 
 class CategoryController {
   BuildContext context;
@@ -27,7 +29,13 @@ class CategoryController {
     return Future.value();
   }
 
-  updateCurrentUserCategories({CategoryModel selectCategory}) {
+  handleSelectCategories() async {
+    if (categories.isEmpty) return Notify().error(message: "Vui lòng chọn ít nhất 1 thể loại");
+    var response = await UserApi.editInfo(currentUser: currentUser);
+    print(response);
+  }
+
+  updateSelectedCategories({CategoryModel selectCategory}) {
     selectedCategories = currentUser.categories;
 
     if (selectedCategories == null)
@@ -39,18 +47,19 @@ class CategoryController {
       else
         selectedCategories.add(selectCategory);
     }
-
+    //TODO: fix data here in User model after make edit info page
     UserModel _currentUser = UserModel(
-      userID: userId,
-      firstName: firstName,
-      lastName: lastName,
-      userName: userName,
-      email: email,
-      phone: phone,
-      avatar: avatar,
+      userID: userId ?? 'string',
+      firstName: firstName ?? 'string',
+      lastName: lastName ?? 'string',
+      email: email ?? 'email@gmail.com',
+      phone: phone ?? '0906839130',
+      gender: gender ?? 'MALE',
+      userName: userName ?? 'string',
+      avatar: avatar ?? '',
+      birthday: birthday ?? '1999-05-28',
       categories: selectedCategories,
     );
-
     _userBloc.add(UpdateUserData(_currentUser));
   }
 
@@ -67,6 +76,10 @@ class CategoryController {
   get userName => currentUser.userName;
   get email => currentUser.email;
   get phone => currentUser.phone;
+  get gender => currentUser.gender;
+  get birthday => currentUser.birthday;
+  get facebook => currentUser.facebook;
   get avatar => currentUser.avatar;
-  get categories => _userBloc.state.currentUser.categories;
+  get categories => currentUser.categories;
+  get numberOfSelectedCategories => currentUser.categories != null ? categories.length : 0;
 }

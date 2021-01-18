@@ -24,6 +24,26 @@ class CategoryScreen extends StatelessWidget {
             style: kHeadingTextStyle,
             textAlign: TextAlign.center,
           ),
+          actions: [
+            FlatButton(
+              onPressed: _controller.handleSelectCategories,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: 10),
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    return Text(
+                      'Tiếp theo (${_controller.numberOfSelectedCategories}/10)',
+                      style: TextStyle(color: Colors.white),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
@@ -50,7 +70,7 @@ class CategoryScreen extends StatelessWidget {
                       mainAxisSpacing: 20,
                     ),
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => _controller.updateCurrentUserCategories(selectCategory: _snapshot.data[index]),
+                      onTap: () => _controller.updateSelectedCategories(selectCategory: _snapshot.data[index]),
                       child: ListTile(
                         title: Stack(
                           children: [
