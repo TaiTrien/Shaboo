@@ -13,8 +13,15 @@ class ContactController {
   //         builder: (context) => PreviewPostScreen(id: postModel.id)));
 
   openMessenger(String username) async {
-    print(username);
     await launch('https://m.me/$username');
+  }
+
+  openTel(String phone) async {
+    await launch('tel:$phone');
+  }
+
+  openMessage(String phone) async {
+    await launch('sms:$phone');
   }
 
   toExit() => Navigator.pop(context);

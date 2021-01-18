@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/model/user/user.dart';
 import 'package:shaboo/screens/post/components/loading_widget.dart';
 import 'package:shaboo/screens/post/pop_contact/popup_contact_controller.dart';
@@ -54,7 +55,7 @@ class _PopupContactState extends State<PopupContact> {
               Container(
                 padding: EdgeInsets.only(
                     left: 20.0, top: 45.0 + 20.0, right: 20.0, bottom: 20.0),
-                margin: EdgeInsets.only(top: 40.0),
+                margin: EdgeInsets.only(top: 45.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Colors.white,
@@ -77,52 +78,81 @@ class _PopupContactState extends State<PopupContact> {
                       height: 15,
                     ),
                     Text(
-                      'widget.descriptions',
-                      style: TextStyle(fontSize: 14),
+                      'Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn',
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.grey[900],
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic),
                     ),
                     SizedBox(
-                      height: 22,
+                      height: 20.0,
                     ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: FlatButton(
-                          onPressed: () =>
-                              _controller.openMessenger(userModel.facebook),
-                          child: Text(
-                            'Nhắn tin',
-                            style: TextStyle(fontSize: 18),
-                          )),
-                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlatButton(
+                            color: Colors.green,
+                            shape: CircleBorder(),
+                            onPressed: () =>
+                                _controller.openTel(userModel.phone),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Icon(
+                                MdiIcons.phone,
+                                size: 25.0,
+                                color: Colors.white,
+                              ),
+                            )),
+                        FlatButton(
+                            color: Colors.orange,
+                            shape: CircleBorder(),
+                            onPressed: () =>
+                                _controller.openMessage(userModel.phone),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Icon(MdiIcons.message,
+                                  size: 25.0, color: Colors.white),
+                            )),
+                        FlatButton(
+                            color: Colors.blue,
+                            shape: CircleBorder(),
+                            onPressed: () =>
+                                _controller.openMessenger(userModel.facebook),
+                            child: Padding(
+                              padding: const EdgeInsets.all(7.0),
+                              child: Icon(MdiIcons.facebookMessenger,
+                                  size: 30.0, color: Colors.white),
+                            )),
+                      ],
+                    )
                   ],
                 ),
               ),
-              Positioned(
-                left: 20.0,
-                right: 20.0,
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  radius: 45.0,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                    child: CachedNetworkImage(
-                        imageUrl: userModel.avatar,
-                        placeholder: (context, url) => Container(
-                              height: 150.0,
-                              width: 110.0,
-                              child: LoadingWidget(
-                                isImage: true,
-                              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CachedNetworkImage(
+                      imageUrl: userModel.avatar,
+                      imageBuilder: (context, imageProvider) => Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover),
                             ),
-                        errorWidget: (context, url, error) => Image.asset(
-                              'assets/icons/book-placeholder.png',
-                              fit: BoxFit.cover,
-                              height: 150.0,
-                              width: 110.0,
-                            ),
-                        fit: BoxFit.cover),
-                  ),
-                ),
+                          ),
+                      placeholder: (context, url) => Container(
+                            child: Icon(MdiIcons.accountCircle),
+                          ),
+                      errorWidget: (context, url, error) => Image.asset(
+                            'assets/icons/book-placeholder.png',
+                            fit: BoxFit.cover,
+                          ),
+                      fit: BoxFit.cover),
+                ],
               ),
             ],
           );

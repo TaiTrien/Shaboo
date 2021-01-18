@@ -13,7 +13,7 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   PostController _controller;
-
+  String dropdownValue = 'One';
   @override
   void initState() {
     super.initState();
@@ -46,7 +46,8 @@ class _PostScreenState extends State<PostScreen> {
             child: FutureBuilder(
                 future: _controller.getPost(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done) {
+                  if (!snapshot.hasData ||
+                      snapshot.connectionState != ConnectionState.done) {
                     return Center(child: CircularProgressIndicator());
                   }
 
@@ -54,19 +55,22 @@ class _PostScreenState extends State<PostScreen> {
                   return ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: list.listPost.length,
-                      itemBuilder: (context, index) => InkWell(
-                            onTap: () => _controller.toPreviewPostScreen(list.listPost[index]),
-                            child: PostCard(
-                              key: Key(index.toString()),
-                              imgUrl: list.listPost[index].images.length == 0
-                                  ? _controller.defaultImage
-                                  : list.listPost[index].images[0].link,
-                              title: list.listPost[index].title,
-                              description: list.listPost[index].description,
-                              range: '1.5km',
-                              location: list.listPost[index].location,
-                            ),
-                          ));
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () => _controller
+                              .toPreviewPostScreen(list.listPost[index]),
+                          child: PostCard(
+                            key: Key(index.toString()),
+                            imgUrl: list.listPost[index].images.length == 0
+                                ? _controller.defaultImage
+                                : list.listPost[index].images[0].link,
+                            title: list.listPost[index].title,
+                            description: list.listPost[index].description,
+                            range: '1.5km',
+                            location: list.listPost[index].location,
+                          ),
+                        );
+                      });
                 }),
           ),
           floatingActionButton: IconButton(
@@ -89,4 +93,24 @@ class _PostScreenState extends State<PostScreen> {
       ),
     );
   }
+
+  Widget dropdown() => DropdownButton<String>(
+        value: dropdownValue,
+        // icon: Icon(Icons.arrow_downward),
+        iconSize: 24,
+        // elevation: 16,
+        style: TextStyle(color: Colors.deepPurple),
+        onChanged: (String newValue) {
+          setState(() {
+            dropdownValue = newValue;
+          });
+        },
+        items: <String>['One', 'Two', 'Free', 'Four']
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      );
 }
