@@ -16,8 +16,7 @@ class _BookListState extends State<BookList> {
     super.initState();
     _controller = BookListController(context: context);
     _controller.scrollController.addListener(() {
-      if (_controller.scrollController.position.maxScrollExtent ==
-          _controller.scrollController.offset) {
+      if (_controller.scrollController.position.maxScrollExtent == _controller.scrollController.offset) {
         try {
           _controller.loadMore(currentPage: _controller.currentPage);
         } catch (e) {
@@ -69,8 +68,7 @@ class _BookListState extends State<BookList> {
                 itemBuilder: (BuildContext _context, int index) {
                   if (index < _snapshot.data.length) {
                     return GestureDetector(
-                        onTap: () => _controller
-                            .toDetailedBookScreen(_snapshot.data[index]),
+                        onTap: () => _controller.toDetailedBookScreen(_snapshot.data[index]),
                         child: BookCard(
                           imgUrl: _snapshot.data[index].thumbnailUrl,
                           title: _snapshot.data[index].name,

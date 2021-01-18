@@ -26,7 +26,13 @@ class DescriptionController {
     if (title.isEmpty) return Notify().error(message: 'VUi lòng điền tiêu đề của bài đăng');
     if (desc.isEmpty) return Notify().error(message: 'Bạn chưa mô tả bài đăng của mình');
 
-    PostModel _currentPost = PostModel(title: title, description: desc);
+    PostModel _currentPost = PostModel(
+      title: title,
+      description: desc,
+      images: images ?? null,
+      location: location ?? null,
+      book: book ?? null,
+    );
     _postBloc.add(UpdateCurrentPost(_currentPost));
     toNextPage();
     outFocus();
@@ -41,4 +47,8 @@ class DescriptionController {
   toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
 
   get currentPost => _postBloc.state.currentPost;
+  get images => currentPost != null ? currentPost.images : null;
+  get location => currentPost != null ? currentPost.location : null;
+  get book => currentPost != null ? currentPost.book : null;
+  get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
 }
