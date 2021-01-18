@@ -37,7 +37,8 @@ class DetailedBookController {
   get images => _postBloc.state.currentPost.images;
   get location => _postBloc.state.currentPost.location;
 
-  //navigators
+  // Navigations
+
   toExit() => Navigator.pop(context);
   toSeeMoreScreen(BookModel selectedBook) =>
       Navigator.push(context, MaterialPageRoute(builder: (context) => SeeMoreScreen(selectedBook: selectedBook)));
