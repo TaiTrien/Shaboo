@@ -45,33 +45,27 @@ class _PopupContactState extends State<PopupContact> {
     return FutureBuilder(
         future: _controller.getInfoUser(widget.userId),
         builder: (context, snapshot) {
-          if (!snapshot.hasData ||
-              snapshot.connectionState != ConnectionState.done)
+          if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done)
             return Center(child: CircularProgressIndicator());
           UserModel userModel = snapshot.data;
           return Stack(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(
-                    left: 20.0, top: 45.0 + 20.0, right: 20.0, bottom: 20.0),
+                padding: EdgeInsets.only(left: 20.0, top: 45.0 + 20.0, right: 20.0, bottom: 20.0),
                 margin: EdgeInsets.only(top: 40.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20.0),
                     boxShadow: [
-                      BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0, 10),
-                          blurRadius: 5),
+                      BoxShadow(color: Colors.black12, offset: Offset(0, 10), blurRadius: 5),
                     ]),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
                       '${userModel.lastName} ${userModel.firstName}',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 15,
@@ -87,8 +81,7 @@ class _PopupContactState extends State<PopupContact> {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: FlatButton(
-                          onPressed: () =>
-                              _controller.openMessenger(userModel.facebook),
+                          onPressed: () => _controller.openMessenger(userModel.facebook),
                           child: Text(
                             'Nhắn tin',
                             style: TextStyle(fontSize: 18),

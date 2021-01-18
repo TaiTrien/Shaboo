@@ -18,17 +18,12 @@ class DetailedBookController {
   }
 
   handleUploadPost() async {
-    PostModel _currentPost = PostModel(
-        title: title,
-        description: desc,
-        images: images,
-        location: location,
-        book: selectedBook);
+    PostModel _currentPost =
+        PostModel(title: title, description: desc, images: images, location: location, book: selectedBook);
 
     _postBloc.add(UpdateCurrentPost(_currentPost));
     var response = await _postModel.upload(post: _currentPost);
-    if (response == null)
-      return Notify().error(message: "Tạo bài đăng thất bại");
+    if (response == null) return Notify().error(message: "Tạo bài đăng thất bại");
 
     _postBloc.add(ResetCurrentPost(null));
     Notify().success(message: "Tạo bài đăng thành công");
@@ -44,8 +39,6 @@ class DetailedBookController {
 
   //navigators
   toExit() => Navigator.pop(context);
-  toSeeMoreScreen(BookModel selectedBook) => Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => SeeMoreScreen(selectedBook: selectedBook)));
+  toSeeMoreScreen(BookModel selectedBook) =>
+      Navigator.push(context, MaterialPageRoute(builder: (context) => SeeMoreScreen(selectedBook: selectedBook)));
 }
