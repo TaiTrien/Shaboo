@@ -105,8 +105,8 @@ class ListBook {
     );
   }
 
-  static Future<ListBook> getPosts(EOrder eOrder, int page, int take) async {
-    final response = await PostApi.getPosts(eOrder, page, take);
+  static Future<ListBook> getBooks({EOrder eOrder, int page, int take, String bookName}) async {
+    final response = await BookApi.getBooks(eOrder: EOrder.ASC, page: page, bookName: bookName);
     return ListBook.fromJson(response);
   }
 }

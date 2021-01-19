@@ -22,7 +22,7 @@ class BookApi {
         headers: await getHeader(),
       );
       if (!successCodes.contains(response.statusCode)) return null;
-      return Response.map(json.decode(response.body));
+      return json.decode(response.body);
     } catch (e) {
       print(e);
     }
