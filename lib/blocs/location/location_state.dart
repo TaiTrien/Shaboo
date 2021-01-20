@@ -27,3 +27,13 @@ class UpdateState extends LocationState {
             selectedDistrict: selectedDistrict,
             selectedWard: selectedWard);
 }
+
+class ResetState extends LocationState {
+  ResetState(LocationState oldState, {selectedCity, selectedDistrict, selectedWard})
+      : super(
+          locations: oldState.locations,
+          selectedCity: selectedCity,
+          selectedDistrict: selectedDistrict,
+          selectedWard: selectedWard,
+        );
+}

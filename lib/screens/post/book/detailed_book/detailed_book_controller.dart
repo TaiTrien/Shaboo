@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/model/post/post.dart';
@@ -10,10 +11,12 @@ import 'package:shaboo/utils/notify.dart';
 class DetailedBookController {
   BuildContext context;
   PostBloc _postBloc;
+  LocationBloc _locationBloc;
   BookModel selectedBook;
   PostModel _postModel;
   DetailedBookController({this.context, this.selectedBook}) {
     _postBloc = BlocProvider.of<PostBloc>(context);
+    _locationBloc = BlocProvider.of<LocationBloc>(context);
     _postModel = PostModel();
   }
 
@@ -26,6 +29,8 @@ class DetailedBookController {
     if (response == null) return Notify().error(message: "Tạo bài đăng thất bại");
 
     _postBloc.add(ResetCurrentPost(null));
+    _locationBloc.add(ResetCurrentLocation(null));
+
     Notify().success(message: "Tạo bài đăng thành công");
     toExit();
     toExit();

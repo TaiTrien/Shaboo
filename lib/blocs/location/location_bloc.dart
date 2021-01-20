@@ -36,6 +36,13 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         selectedDistrict: state.selectedDistrict,
         selectedWard: event.payload,
       );
+    } else if (event is ResetCurrentLocation) {
+      yield ResetState(
+        state,
+        selectedCity: event.payload,
+        selectedDistrict: event.payload,
+        selectedWard: event.payload,
+      );
     }
   }
 }

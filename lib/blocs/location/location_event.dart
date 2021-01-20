@@ -22,3 +22,7 @@ class UpdateSelectedDistrict extends LocationEvent {
 class UpdateSelectedWard extends LocationEvent {
   UpdateSelectedWard(Map<String, dynamic> selectedWard) : super(payload: selectedWard);
 }
+
+class ResetCurrentLocation extends LocationEvent {
+  ResetCurrentLocation(dynamic currentLocation) : super(payload: currentLocation);
+}
