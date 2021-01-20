@@ -6,6 +6,7 @@ import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/screens/post/book/detailed_book/detailed_book_controller.dart';
 import 'package:shaboo/screens/post/book/detailed_book/components/book_info_card.dart';
+import 'package:shaboo/screens/post/components/loading_widget.dart';
 
 class DetailedBookScreen extends StatelessWidget {
   final BookModel selectedBook;
@@ -15,8 +16,7 @@ class DetailedBookScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var _controller = DetailedBookController(
-        context: context, selectedBook: this.selectedBook);
+    var _controller = DetailedBookController(context: context, selectedBook: this.selectedBook);
     var random = new Random();
     return SafeArea(
       child: Scaffold(
@@ -42,10 +42,9 @@ class DetailedBookScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Image.network(
                             selectedBook.thumbnailUrl,
-                            loadingBuilder: (BuildContext context, Widget child,
-                                ImageChunkEvent loadingProgress) {
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
                               if (loadingProgress == null) return child;
-                              return CircularProgressIndicator();
+                              return LoadingWidget(isImage: true);
                             },
                           ),
                         ),
@@ -71,12 +70,10 @@ class DetailedBookScreen extends StatelessWidget {
                         .map(
                           (category) => Chip(
                             label: Text(
-                              category.name,
+                              'Thể loại',
                               style: TextStyle(color: Colors.white),
                             ),
-                            backgroundColor:
-                                Color((random.nextDouble() * 0xFF5781).toInt())
-                                    .withOpacity(1.0),
+                            backgroundColor: Color((random.nextDouble() * 0xFF5781).toInt()).withOpacity(1.0),
                           ),
                         )
                         .toList(),

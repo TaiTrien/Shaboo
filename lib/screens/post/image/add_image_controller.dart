@@ -33,7 +33,8 @@ class AddImageController {
   get desc => currentPost.description;
   get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
 
-  // Navigators
+  //  Navigations
+
   void toExit() => Navigator.pop(context);
   toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
 }

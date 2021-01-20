@@ -20,16 +20,12 @@ class PostApi {
       };
 
   static Future<dynamic> uploadPost({PostModel post}) async {
-    var token = await Store.getToken();
     var requestedPost = PostModel.converPostToMap(post: post);
 
     try {
       var response = await http.post(
         urlUploadPost,
-        headers: {
-          "Authorization": "Bearer $token",
-          "Content-Type": "application/json",
-        },
+        headers: await getHeader(),
         body: jsonEncode(requestedPost),
       );
       if (!successCodes.contains(response.statusCode)) return null;
@@ -40,13 +36,9 @@ class PostApi {
   }
 
   static Future<dynamic> uploadPhoto({List<File> photos}) async {
-    var token = await Store.getToken();
     var request = http.MultipartRequest('POST', Uri.parse(urlUploadPhoto));
 
-    Map<String, String> headers = {
-      "Authorization": "Bearer $token",
-      "Content-Type": "multipart/form-data",
-    };
+    Map<String, String> headers = await getHeader();
     request.headers.addAll(headers);
 
     for (var photo in photos) {
@@ -56,24 +48,6 @@ class PostApi {
     try {
       var response = await http.Response.fromStream(await request.send());
 
-      if (!successCodes.contains(response.statusCode)) return null;
-      return Response.map(json.decode(response.body));
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  static Future<dynamic> getBooks({int page, String bookName}) async {
-    var token = await Store.getToken();
-
-    try {
-      var response = await http.get(
-        urlGetBooks + "&page=${page ?? 1}&take=10&name=${bookName ?? ""}",
-        headers: {
-          "Authorization": "Bearer $token",
-          "Content-Type": "application/json",
-        },
-      );
       if (!successCodes.contains(response.statusCode)) return null;
       return Response.map(json.decode(response.body));
     } catch (e) {

@@ -50,7 +50,8 @@ class SignupController {
     toLoadingScreen();
   }
 
-  //Navigators
+  // Navigations
+
   toMainScreen() => Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
   toLoginScreen() => Navigator.pop(context);
   toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(context, '/loadingScreen', (context) => false);

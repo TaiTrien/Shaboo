@@ -1,6 +1,5 @@
-import 'dart:core';
-
-import 'package:shaboo/api/post_api.dart';
+import 'package:shaboo/api/book_api.dart';
+import 'package:shaboo/api/constants.dart';
 import 'package:shaboo/model/post/author.dart';
 import 'package:shaboo/model/post/category.dart';
 import 'package:shaboo/model/post/publisher.dart';
@@ -43,30 +42,12 @@ class BookModel {
       categories: CategoryModel.toList(json['categories']),
     );
   }
-
-  Future<Map<int, List<dynamic>>> getBooks({int page, String bookName}) async {
-    List<dynamic> books;
-    var response = await PostApi.getBooks(page: page, bookName: bookName);
-    if (response == null) return null;
-    try {
-      books = response.data
-          .map((book) => new BookModel(
-                id: book["id"],
-                name: book["name"],
-                version: book["version"],
-                description: book["description"],
-                shortDescription: book["shortDescription"],
-                thumbnailUrl: book["thumbnailUrl"],
-                categories: CategoryModel.toList(book["categories"]),
-                authors: AuthorModel.toList(book["authors"]),
-                publisher: PublisherModel.toList(book["publishers"]),
-              ))
-          .toList();
-    } catch (e) {
-      print(e);
-    }
-
-    return {response.meta["itemCount"]: books};
+  static List<BookModel> toList(List<dynamic> dynamicList) {
+    List<BookModel> list = [];
+    dynamicList?.forEach((item) {
+      list.add(BookModel.fromJson(item));
+    });
+    return list;
   }
 
   Map<String, dynamic> toJson() => {
@@ -80,4 +61,32 @@ class BookModel {
         'authors': this.authors,
         'publishers': this.publisher,
       };
+}
+
+class ListBook {
+  List<BookModel> listBook;
+  int page, take;
+  int itemCount, pageCount;
+
+  ListBook({this.listBook, this.page, this.take, this.itemCount, this.pageCount});
+
+  factory ListBook.fromJson(Map<String, dynamic> json) {
+    return ListBook(
+      take: json['meta']['take'],
+      page: json['meta']['page'],
+      itemCount: json['meta']['itemCount'],
+      pageCount: json['meta']['pageCount'],
+      listBook: BookModel.toList(json['data']),
+    );
+  }
+
+  static Future<ListBook> getBooks({EOrder eOrder, int page, int take, String bookName}) async {
+    final response = await BookApi.getBooks(eOrder: EOrder.ASC, page: page, bookName: bookName);
+    return ListBook.fromJson(response);
+  }
+
+  static Future<ListBook> getRecommendBooks(EOrder eOrder, int page) async {
+    final response = await BookApi.getRecommendBooks(eOrder: eOrder, page: page ?? 1);
+    return ListBook.fromJson(response);
+  }
 }
