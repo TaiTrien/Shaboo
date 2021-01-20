@@ -46,15 +46,19 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: size.height),
                   child: Column(children: [
-                    CarouselSlider(
-                      items: _controller.getImgSlider(),
-                      carouselController: carouselController,
-                      options: CarouselOptions(
-                          autoPlay: true,
-                          enlargeCenterPage: true,
-                          autoPlayInterval: Duration(seconds: 4),
-                          aspectRatio: 1.2,
-                          viewportFraction: 1),
+                    Container(
+                      height: size.height * 0.4,
+                      width: double.infinity,
+                      child: CarouselSlider(
+                        items: _controller.getImgSlider(),
+                        carouselController: carouselController,
+                        options: CarouselOptions(
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            autoPlayInterval: Duration(seconds: 4),
+                            aspectRatio: 1.2,
+                            viewportFraction: 1),
+                      ),
                     ),
                     Container(
                       height: 100.0,
