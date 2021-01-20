@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shaboo/components/template_screens/error_screens/article_not_found_screen.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/screens/home/posts_by_id_book/post_by_id_controller.dart';
@@ -30,17 +31,23 @@ class PostByIdScreen extends StatelessWidget {
             color: Colors.white,
             child: FutureBuilder(
                 future: _controller.getPost(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done) {
+                builder: (context, _snapshot) {
+                  if (!_snapshot.hasData || _snapshot.connectionState != ConnectionState.done) {
                     return Center(child: CircularProgressIndicator());
+                  } else if (_snapshot.data.listPost.isEmpty) {
+                    return Center(
+                        child: ArticleNotFoundScreen(
+                      onPress: _controller.toExit,
+                    ));
                   }
 
-                  ListPost list = snapshot.data;
+                  ListPost list = _snapshot.data;
                   return ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: list.listPost.length,
                       itemBuilder: (context, index) {
                         return InkWell(
+                          onTap: () {},
                           // onTap: () => _controller
                           //     .toPreviewPostScreen(list.listPost[index]),
                           child: PostCard(

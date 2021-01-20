@@ -55,10 +55,10 @@ class PostApi {
     }
   }
 
-  static Future<dynamic> getPosts(EOrder eOrder, int page, int take) async {
+  static Future<dynamic> getPosts(EOrder eOrder, int page, int take, int bookId) async {
     try {
       var response = await http.get(
-        '$urlPosts?order=${order[eOrder.index]}&page=$page&take=$take&status=OPENED',
+        '$urlPosts?order=${order[eOrder.index]}&page=$page&take=$take&status=OPENED&bookId=${bookId ?? ''}',
         headers: await getHeader(),
       );
       if (!successCodes.contains(response.statusCode)) return null;

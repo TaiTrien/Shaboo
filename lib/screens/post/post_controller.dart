@@ -22,7 +22,7 @@ class PostController {
   toPreviousPage() => pageController.previousPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
   toExit() => Navigator.pop(context);
 
-  getPost() async => await ListPost.getPosts(EOrder.ASC, 1, 10);
+  getPost() async => await ListPost.getPosts(eOrder: EOrder.ASC, page: 1, take: 10);
 
   get defaultImage => "https://bitly.com.vn/pdmjnn";
 }
