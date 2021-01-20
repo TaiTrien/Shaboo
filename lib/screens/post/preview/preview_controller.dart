@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/model/post/post.dart';
+import 'package:shaboo/screens/post/components/loading_widget.dart';
 import 'package:shaboo/screens/post/pop_contact/popup_contact.dart';
 
 class PreviewPostController {
@@ -19,14 +20,21 @@ class PreviewPostController {
         return PopupContact(userId: userId);
       });
 
+  toExit() => Navigator.pop(context);
+
   List<Widget> getImgSlider() {
     final List<Widget> imageSliders = _postModel.images
         .map((item) => Container(
               child: Container(
-                child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Image.network(item.link,
-                        fit: BoxFit.cover, width: 1000.0)),
+                child: Image.network(
+                  item.link,
+                  fit: BoxFit.cover,
+                  width: 1000.0,
+                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return LoadingWidget(isImage: true);
+                  },
+                ),
               ),
             ))
         .toList();

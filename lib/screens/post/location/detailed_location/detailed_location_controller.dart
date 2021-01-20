@@ -24,7 +24,6 @@ class DetailedLocationController {
       _locationBloc.add(UpdateSelectedWard(selectedLocation));
     }
     Navigator.pop(context);
-    //print(selectedLocation["quan-huyen"]);
   }
 
   toExit() => Navigator.pop(context);

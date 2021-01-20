@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/post.dart';
+import 'package:shaboo/screens/post/components/loading_widget.dart';
 import 'package:shaboo/screens/post/preview/preview_controller.dart';
 
 class PreviewPostScreen extends StatefulWidget {
@@ -37,7 +39,14 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
         future: _controller.getPost(widget.id),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done) {
-            return Center(child: CircularProgressIndicator());
+            return Container(
+              height: size.height,
+              width: size.width,
+              color: Colors.white,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           }
           PostModel postModel = snapshot.data;
           return SafeArea(
@@ -46,21 +55,41 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: size.height),
                   child: Column(children: [
-                    Container(
-                      height: size.height * 0.4,
-                      width: double.infinity,
-                      child: CarouselSlider(
-                        items: _controller.getImgSlider(),
-                        carouselController: carouselController,
-                        options: CarouselOptions(
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            autoPlayInterval: Duration(seconds: 4),
-                            aspectRatio: 1.2,
-                            viewportFraction: 1),
-                      ),
+                    Stack(
+                      children: [
+                        Container(
+                          height: size.height * 0.4,
+                          width: double.infinity,
+                          child: CarouselSlider(
+                            items: _controller.getImgSlider(),
+                            carouselController: carouselController,
+                            options: CarouselOptions(
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                                autoPlayInterval: Duration(seconds: 4),
+                                aspectRatio: 1.2,
+                                viewportFraction: 1),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: GestureDetector(
+                            onTap: _controller.toExit,
+                            child: Container(
+                              margin: EdgeInsets.all(20.0),
+                              padding: EdgeInsets.all(2.0),
+                              decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(width: 2, color: Colors.white)),
+                              child: Icon(Icons.close, color: Colors.white, size: 25),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Container(
+                      alignment: Alignment.centerLeft,
                       height: 100.0,
                       child: ListView.builder(
                         primary: false,
@@ -85,6 +114,11 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                                       fit: BoxFit.cover,
                                       width: 100.0,
                                       height: 100.0,
+                                      loadingBuilder:
+                                          (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return LoadingWidget(isImage: true);
+                                      },
                                     ),
                                     Container(
                                       color: _current == index ? Colors.transparent : Color.fromRGBO(0, 0, 0, 0.2),
@@ -156,29 +190,24 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                       alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Lời nhắn:',
-                            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
-                          ),
-                          SizedBox(height: 5.0),
-                          Text(
-                            postModel.description,
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                        ],
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Lời nhắn: ',
+                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
+                          children: <TextSpan>[
+                            TextSpan(text: postModel.description, style: TextStyle(fontWeight: FontWeight.w400)),
+                          ],
+                        ),
                       ),
                     ),
+                    SizedBox(height: 30),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
                       alignment: Alignment.center,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           RaisedButton(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                             color: Color(0xFFA81C1C),
                             textColor: Colors.white,
                             padding: EdgeInsets.all(15.0),
@@ -199,9 +228,9 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                           ),
                           SizedBox(width: 15.0),
                           RaisedButton(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                             onPressed: () => _controller.toPopupContact(postModel.userId),
-                            color: Color(0xFF0365B0),
+                            color: kPrimaryColor,
                             textColor: Colors.white,
                             padding: EdgeInsets.all(15.0),
                             child: Container(
