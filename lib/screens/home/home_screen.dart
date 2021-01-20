@@ -92,9 +92,12 @@ class HomeScreen extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: ListView.builder(
                           itemCount: recommendBookList.listBook.length,
-                          itemBuilder: (context, index) => VerticalBookTile(
-                            title: recommendBookList.listBook[index].name,
-                            imageLink: recommendBookList.listBook[index].thumbnailUrl,
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () => _controller.toPostByIdScreen(recommendBookList.listBook[index].id),
+                            child: VerticalBookTile(
+                              title: recommendBookList.listBook[index].name,
+                              imageLink: recommendBookList.listBook[index].thumbnailUrl,
+                            ),
                           ),
                           scrollDirection: Axis.horizontal,
                         ),
@@ -135,10 +138,13 @@ class HomeScreen extends StatelessWidget {
                       ListBook bookList = _snapshot.data;
                       return ListView.builder(
                           itemCount: bookList.listBook.length,
-                          itemBuilder: (context, index) => BooksTile(
-                                title: bookList.listBook[index].name,
-                                description: bookList.listBook[index].description,
-                                imageLink: bookList.listBook[index].thumbnailUrl,
+                          itemBuilder: (context, index) => GestureDetector(
+                                onTap: () => _controller.toPostByIdScreen(bookList.listBook[index].id),
+                                child: BooksTile(
+                                  title: bookList.listBook[index].name,
+                                  description: bookList.listBook[index].description,
+                                  imageLink: bookList.listBook[index].thumbnailUrl,
+                                ),
                               ));
                     }),
               ),

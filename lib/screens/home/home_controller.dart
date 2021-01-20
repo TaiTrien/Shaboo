@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/api/constants.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/model/post/book.dart';
+import 'package:shaboo/screens/home/posts_by_id_book/post_by_id_screen.dart';
 
 class HomeController {
   BuildContext context;
@@ -16,4 +18,7 @@ class HomeController {
 
   get currentUser => _userBloc.state.currentUser;
   get avatarLink => _userBloc.state.currentUser.avatar;
+
+  toPostByIdScreen(int bookId) =>
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PostByIdScreen(bookId: bookId)));
 }
