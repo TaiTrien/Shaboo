@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shaboo/components/template_screens/error_screens/article_not_found_screen.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/model/post/post.dart';
 import 'package:shaboo/screens/post/components/post_card.dart';
@@ -7,6 +8,9 @@ import 'package:shaboo/screens/post/post_controller.dart';
 import 'package:shaboo/screens/post/post_form.dart';
 
 class PostScreen extends StatefulWidget {
+  final int bookId;
+
+  const PostScreen({Key key, this.bookId}) : super(key: key);
   @override
   _PostScreenState createState() => _PostScreenState();
 }
@@ -32,6 +36,7 @@ class _PostScreenState extends State<PostScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Colors.white,
             elevation: 0,
             title: Text(
@@ -44,21 +49,23 @@ class _PostScreenState extends State<PostScreen> {
             color: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             child: FutureBuilder(
-                future: _controller.getPost(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData ||
-                      snapshot.connectionState != ConnectionState.done) {
+                future: _controller.getPost(widget.bookId),
+                builder: (context, _snapshot) {
+                  if (!_snapshot.hasData || _snapshot.connectionState != ConnectionState.done) {
                     return Center(child: CircularProgressIndicator());
+                  } else if (_snapshot.data.listPost.isEmpty) {
+                    return Center(
+                        child: ArticleNotFoundScreen(
+                      onPress: _controller.toExit,
+                    ));
                   }
-
-                  ListPost list = snapshot.data;
+                  ListPost list = _snapshot.data;
                   return ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: list.listPost.length,
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () => _controller
-                              .toPreviewPostScreen(list.listPost[index]),
+                          onTap: () => _controller.toPreviewPostScreen(list.listPost[index]),
                           child: PostCard(
                             key: Key(index.toString()),
                             imgUrl: list.listPost[index].images.length == 0
@@ -105,8 +112,7 @@ class _PostScreenState extends State<PostScreen> {
             dropdownValue = newValue;
           });
         },
-        items: <String>['One', 'Two', 'Free', 'Four']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: <String>['One', 'Two', 'Free', 'Four'].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),

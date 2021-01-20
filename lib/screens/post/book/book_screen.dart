@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
-import 'package:shaboo/components/custom_textfield.dart';
 import 'package:shaboo/components/search_bar.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/book/book_controller.dart';

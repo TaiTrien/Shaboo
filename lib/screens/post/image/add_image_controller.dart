@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/model/post/image.dart';
-import 'package:shaboo/model/post/photo.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class AddImageController {
-  PhotoModel _photoModel = PhotoModel();
   List<File> photos = List<File>();
   List<ImageModel> uploadedImages;
   PostBloc _postBloc;

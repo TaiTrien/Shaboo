@@ -5,7 +5,6 @@ import 'package:shaboo/screens/home/home_screen.dart';
 
 import 'package:shaboo/screens/notification/notification_screen.dart';
 import 'package:shaboo/screens/post/post_screen.dart';
-import 'package:shaboo/screens/post/preview/preview_screen.dart';
 import 'package:shaboo/screens/profile/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {

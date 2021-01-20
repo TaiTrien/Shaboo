@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/model/user/user.dart';
-import 'package:shaboo/screens/post/components/loading_widget.dart';
 import 'package:shaboo/screens/post/pop_contact/popup_contact_controller.dart';
 
 class PopupContact extends StatefulWidget {
@@ -46,33 +45,27 @@ class _PopupContactState extends State<PopupContact> {
     return FutureBuilder(
         future: _controller.getInfoUser(widget.userId),
         builder: (context, snapshot) {
-          if (!snapshot.hasData ||
-              snapshot.connectionState != ConnectionState.done)
+          if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done)
             return Center(child: CircularProgressIndicator());
           UserModel userModel = snapshot.data;
           return Stack(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(
-                    left: 20.0, top: 45.0 + 20.0, right: 20.0, bottom: 20.0),
+                padding: EdgeInsets.only(left: 20.0, top: 45.0 + 20.0, right: 20.0, bottom: 20.0),
                 margin: EdgeInsets.only(top: 45.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20.0),
                     boxShadow: [
-                      BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0, 10),
-                          blurRadius: 5),
+                      BoxShadow(color: Colors.black12, offset: Offset(0, 10), blurRadius: 5),
                     ]),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
                       '${userModel.lastName} ${userModel.firstName}',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 15,
@@ -95,8 +88,7 @@ class _PopupContactState extends State<PopupContact> {
                         FlatButton(
                             color: Colors.green,
                             shape: CircleBorder(),
-                            onPressed: () =>
-                                _controller.openTel(userModel.phone),
+                            onPressed: () => _controller.openTel(userModel.phone),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Icon(
@@ -108,22 +100,18 @@ class _PopupContactState extends State<PopupContact> {
                         FlatButton(
                             color: Colors.orange,
                             shape: CircleBorder(),
-                            onPressed: () =>
-                                _controller.openMessage(userModel.phone),
+                            onPressed: () => _controller.openMessage(userModel.phone),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Icon(MdiIcons.message,
-                                  size: 25.0, color: Colors.white),
+                              child: Icon(MdiIcons.message, size: 25.0, color: Colors.white),
                             )),
                         FlatButton(
                             color: Colors.blue,
                             shape: CircleBorder(),
-                            onPressed: () =>
-                                _controller.openMessenger(userModel.facebook),
+                            onPressed: () => _controller.openMessenger(userModel.facebook),
                             child: Padding(
                               padding: const EdgeInsets.all(7.0),
-                              child: Icon(MdiIcons.facebookMessenger,
-                                  size: 30.0, color: Colors.white),
+                              child: Icon(MdiIcons.facebookMessenger, size: 30.0, color: Colors.white),
                             )),
                       ],
                     )
@@ -140,8 +128,7 @@ class _PopupContactState extends State<PopupContact> {
                             height: 100.0,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover),
+                              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
                             ),
                           ),
                       placeholder: (context, url) => Container(
