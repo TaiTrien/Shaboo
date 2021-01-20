@@ -18,7 +18,7 @@ class VerticalBookTile extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.all(0),
         title: Container(
-          height: size.height / 4,
+          height: size.height / 5,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
             child: Image.network(

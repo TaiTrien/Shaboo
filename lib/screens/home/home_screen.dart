@@ -101,7 +101,6 @@ class HomeScreen extends StatelessWidget {
                       );
                     }),
               ),
-              SizedBox(height: 20),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
