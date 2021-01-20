@@ -14,6 +14,7 @@ class VerticalBookTile extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
+      margin: const EdgeInsets.only(right: 20.0),
       width: size.width / 3,
       child: ListTile(
         contentPadding: EdgeInsets.all(0),

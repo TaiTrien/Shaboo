@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/components/custom_textfield.dart';
+import 'package:shaboo/components/search_bar.dart';
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/post/book/book_controller.dart';
 import 'package:shaboo/screens/post/book/components/book_list.dart';
@@ -17,25 +18,19 @@ class BookScreen extends StatelessWidget {
         child: BlocBuilder<LocationBloc, LocationState>(
           builder: (context, state) {
             return Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+              padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: kDefaultPaddingHorizontal + 10),
+                    margin: EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal + 10),
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
                       color: kGreyColor.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: CustomTextField(
-                      controller: _controller.searchController,
-                      labelText: 'Tìm kiếm sách của bạn',
-                      icon: Icons.search,
-                    ),
+                    child: SearchBar(),
                   ),
                   SizedBox(height: 20),
                   BookList(),

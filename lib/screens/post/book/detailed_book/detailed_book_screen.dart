@@ -70,7 +70,7 @@ class DetailedBookScreen extends StatelessWidget {
                         .map(
                           (category) => Chip(
                             label: Text(
-                              category.name,
+                              'Thể loại',
                               style: TextStyle(color: Colors.white),
                             ),
                             backgroundColor: Color((random.nextDouble() * 0xFF5781).toInt()).withOpacity(1.0),
