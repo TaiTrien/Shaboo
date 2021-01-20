@@ -122,8 +122,8 @@ class ListPost {
     );
   }
 
-  static Future<ListPost> getPosts({EOrder eOrder, int page, int take, int bookId}) async {
-    final response = await PostApi.getPosts(eOrder, page, take, bookId);
+  static Future<ListPost> getPosts({EOrder eOrder, int page, int take, int bookId, bool owned}) async {
+    final response = await PostApi.getPosts(eOrder, page, take, bookId, owned);
     return ListPost.fromJson(response);
   }
 }

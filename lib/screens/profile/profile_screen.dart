@@ -4,20 +4,20 @@ import 'package:shaboo/components/popup_menu.dart';
 
 import 'package:shaboo/constants.dart';
 import 'package:shaboo/screens/profile/profile_controller.dart';
-
+import 'components/list_post.dart';
 import 'components/field_info.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = ProfileController(context: context);
-
+    var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: Text('Profile', style: kHeadingTextStyle),
+          title: Text('Trang cá nhân', style: kHeadingTextStyle),
           actions: [
             PopupMenu(
               onSelect: controller.onMenuSelect,
@@ -46,88 +46,51 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(
-              horizontal: kDefaultPaddingHorizontal + 10,
-              vertical: kDefaultPaddingVerical + 10,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+        body: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: size.height),
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(controller.currentUser.avatar) ?? controller.defaultAvatar,
+                radius: 50,
               ),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 20,
-                  offset: Offset(0, 5),
-                  color: Color(0xFFebf2f8),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                controller.userFullName,
+                style: TextStyle(
+                  color: kTitleColor,
+                  fontFamily: 'Helvetica Neue',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
                 ),
-              ],
-            ),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  backgroundImage:
-                      NetworkImage(controller.currentUser.avatar) ??
-                          controller.defaultAvatar,
-                  radius: 50,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Bài đăng của bạn',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    Text(
+                      'Xem tất cả',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16, color: kGreyColor),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  controller.userFullName,
-                  style: TextStyle(
-                    color: kTitleColor,
-                    fontFamily: 'Helvetica Neue',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  '\"The journey of a thousand miles begins with one step\"',
-                  style: TextStyle(
-                    color: kGreyColor,
-                    fontFamily: 'Helvetica Neue',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 22,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: kDefaultPaddingVerical,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      FieldInfo(
-                        title: 'Posts',
-                        data: 10,
-                      ),
-                      FieldInfo(
-                        title: 'Books',
-                        data: 33,
-                      ),
-                      FieldInfo(
-                        title: 'Interest',
-                        data: 125,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+              ListPost(),
+            ],
           ),
         ),
       ),

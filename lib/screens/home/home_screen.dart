@@ -6,7 +6,6 @@ import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/screens/home/components/book_tile.dart';
 import 'package:shaboo/screens/home/components/vertical_book_tile.dart';
 import 'package:shaboo/screens/home/home_controller.dart';
-import 'package:shaboo/screens/post/book/components/book_list.dart';
 import 'package:shaboo/screens/post/components/loading_widget.dart';
 import 'package:shaboo/components/search_bar.dart';
 

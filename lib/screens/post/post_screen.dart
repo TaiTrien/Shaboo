@@ -100,12 +100,7 @@ class _PostScreenState extends State<PostScreen> {
                       );
                     } else {
                       return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 32.0),
-                        child: Center(
-                            child: Text(
-                          'Nothing more to load!',
-                          style: TextStyle(fontSize: 18),
-                        )),
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
                       );
                     }
                   },
