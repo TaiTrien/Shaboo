@@ -44,10 +44,14 @@ class _ListPostState extends State<ListPost> {
         if (!_snapshot.hasData || _snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         } else if (_snapshot.data.isEmpty) {
-          return Center(
-              child: ArticleNotFoundScreen(
-            onPress: _controller.toExit,
-          ));
+          return Expanded(
+            child: Center(
+              child: Text(
+                'Bạn chưa có bài đăng nào',
+                style: TextStyle(fontSize: 20, color: kGreyColor),
+              ),
+            ),
+          );
         } else if (_snapshot.hasError) {
           return Expanded(
             child: Center(

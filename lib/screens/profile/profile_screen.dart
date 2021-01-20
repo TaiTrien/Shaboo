@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shaboo/components/popup_menu.dart';
 
 import 'package:shaboo/constants.dart';
+import 'package:shaboo/screens/post/post_form.dart';
 import 'package:shaboo/screens/profile/profile_controller.dart';
 import 'components/list_post.dart';
 import 'components/field_info.dart';
@@ -92,6 +93,22 @@ class ProfileScreen extends StatelessWidget {
               ListPost(),
             ],
           ),
+        ),
+        floatingActionButton: IconButton(
+          iconSize: 60.0,
+          padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+          color: Color(0xFF0365B0),
+          icon: Icon(MdiIcons.plusCircle),
+          onPressed: () => {
+            showModalBottomSheet<void>(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) => Padding(
+                padding: const EdgeInsets.only(top: 28.0),
+                child: PostForm(),
+              ),
+            )
+          },
         ),
       ),
     );

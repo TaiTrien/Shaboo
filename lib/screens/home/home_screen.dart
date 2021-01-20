@@ -79,23 +79,28 @@ class HomeScreen extends StatelessWidget {
                 child: FutureBuilder(
                     future: _controller.getRecommendBooks(),
                     builder: (context, _snapshot) {
-                      if (_snapshot.connectionState != ConnectionState.done) {
+                      if (_snapshot.connectionState != ConnectionState.done || !_snapshot.hasData) {
                         return Center(child: CircularProgressIndicator());
                       } else if (_snapshot.hasError) {
                         return Center(
                           child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
                         );
+                      } else if (_snapshot.data.listBook.isEmpty) {
+                        return Center(
+                          child: Text('Không tìm thấy cuốn sách phù hợp',
+                              style: TextStyle(color: kGreyColor, fontSize: 18)),
+                        );
                       }
-                      ListBook recommendBookList = _snapshot.data;
+                      //ListBook recommendBookList = _snapshot.data;
                       return Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: ListView.builder(
-                          itemCount: recommendBookList.listBook.length,
+                          itemCount: _snapshot.data.listBook.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            onTap: () => _controller.toPostByIdScreen(recommendBookList.listBook[index].id),
+                            onTap: () => _controller.toPostByIdScreen(_snapshot.data.listBook[index].id),
                             child: VerticalBookTile(
-                              title: recommendBookList.listBook[index].name,
-                              imageLink: recommendBookList.listBook[index].thumbnailUrl,
+                              title: _snapshot.data.listBook[index].name,
+                              imageLink: _snapshot.data.listBook[index].thumbnailUrl,
                             ),
                           ),
                           scrollDirection: Axis.horizontal,
