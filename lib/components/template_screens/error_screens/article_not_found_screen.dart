@@ -23,7 +23,7 @@ class ArticleNotFoundScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.10,
+              bottom: MediaQuery.of(context).size.height * 0.07,
               left: MediaQuery.of(context).size.width * 0.3,
               right: MediaQuery.of(context).size.width * 0.3,
               child: Container(
