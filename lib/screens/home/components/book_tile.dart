@@ -11,7 +11,7 @@ class BooksTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        height: 200,
+        height: 180,
         width: double.infinity,
         alignment: Alignment.bottomLeft,
         padding: EdgeInsets.symmetric(horizontal: 15.0),
@@ -21,7 +21,8 @@ class BooksTile extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20),
               alignment: Alignment.bottomLeft,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 15),
+                alignment: Alignment.topRight,
                 height: 160,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -36,7 +37,7 @@ class BooksTile extends StatelessWidget {
                   ],
                 ),
                 child: Container(
-                  margin: EdgeInsets.only(left: 140),
+                  margin: EdgeInsets.only(left: 120),
                   child: ListTile(
                     title: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -44,13 +45,15 @@ class BooksTile extends StatelessWidget {
                         title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                       ),
                     ),
                     subtitle: Text(
                       description,
-                      maxLines: 4,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.justify,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: kGreyColor),
                     ),
                   ),
@@ -58,16 +61,20 @@ class BooksTile extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5.0),
-                child: Image.network(
-                  imageLink,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return LoadingWidget(isImage: true);
-                  },
+              margin: EdgeInsets.symmetric(horizontal: 15),
+              child: Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: Image.network(
+                    imageLink,
+                    height: 150,
+                    width: 100,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return LoadingWidget(isImage: true);
+                    },
+                  ),
                 ),
               ),
             )

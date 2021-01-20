@@ -14,12 +14,13 @@ class VerticalBookTile extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      width: size.width * 0.4,
+      width: size.width / 3,
       child: ListTile(
+        contentPadding: EdgeInsets.all(0),
         title: Container(
           height: size.height / 4,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BorderRadius.circular(10.0),
             child: Image.network(
               imageLink,
               fit: BoxFit.cover,
@@ -31,9 +32,11 @@ class VerticalBookTile extends StatelessWidget {
           ),
         ),
         subtitle: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
           child: Text(
             title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),

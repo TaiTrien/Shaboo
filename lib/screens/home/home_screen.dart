@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants.dart';
+import 'package:shaboo/model/post/book.dart';
 import 'package:shaboo/screens/home/components/book_tile.dart';
 import 'package:shaboo/screens/home/components/vertical_book_tile.dart';
+import 'package:shaboo/screens/home/home_controller.dart';
+import 'package:shaboo/screens/post/book/components/book_list.dart';
 import 'package:shaboo/screens/post/components/loading_widget.dart';
 import 'package:shaboo/components/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    HomeController _controller = HomeController(context: context);
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                       radius: 18,
                       child: ClipOval(
                           child: Image.network(
-                        state.currentUser.avatar,
+                        _controller.avatarLink,
                         fit: BoxFit.cover,
                         loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
                           if (loadingProgress == null) return child;
@@ -73,13 +77,29 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
                 height: size.height / 3,
-                child: ListView.builder(
-                  itemBuilder: (context, index) => VerticalBookTile(
-                    title: 'hihihi',
-                    imageLink: 'https://bitly.com.vn/ndbgoi',
-                  ),
-                  scrollDirection: Axis.horizontal,
-                ),
+                child: FutureBuilder(
+                    future: _controller.getRecommendBooks(),
+                    builder: (context, _snapshot) {
+                      if (_snapshot.connectionState != ConnectionState.done) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (_snapshot.hasError) {
+                        return Center(
+                          child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
+                        );
+                      }
+                      ListBook recommendBookList = _snapshot.data;
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: ListView.builder(
+                          itemCount: recommendBookList.listBook.length,
+                          itemBuilder: (context, index) => VerticalBookTile(
+                            title: recommendBookList.listBook[index].name,
+                            imageLink: recommendBookList.listBook[index].thumbnailUrl,
+                          ),
+                          scrollDirection: Axis.horizontal,
+                        ),
+                      );
+                    }),
               ),
               SizedBox(height: 20),
               Padding(
@@ -103,12 +123,25 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Expanded(
-                child: ListView.builder(
-                    itemBuilder: (context, index) => BooksTile(
-                          title: 'Ông già và biển cả',
-                          description: 'Ngày xửa ngày xưa',
-                          imageLink: "https://bitly.com.vn/ndbgoi",
-                        )),
+                child: FutureBuilder(
+                    future: _controller.getBooks(),
+                    builder: (context, _snapshot) {
+                      if (_snapshot.connectionState != ConnectionState.done) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (_snapshot.hasError) {
+                        return Center(
+                          child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
+                        );
+                      }
+                      ListBook bookList = _snapshot.data;
+                      return ListView.builder(
+                          itemCount: bookList.listBook.length,
+                          itemBuilder: (context, index) => BooksTile(
+                                title: bookList.listBook[index].name,
+                                description: bookList.listBook[index].description,
+                                imageLink: bookList.listBook[index].thumbnailUrl,
+                              ));
+                    }),
               ),
             ],
           ),

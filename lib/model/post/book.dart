@@ -1,6 +1,5 @@
 import 'package:shaboo/api/book_api.dart';
 import 'package:shaboo/api/constants.dart';
-import 'package:shaboo/api/post_api.dart';
 import 'package:shaboo/model/post/author.dart';
 import 'package:shaboo/model/post/category.dart';
 import 'package:shaboo/model/post/publisher.dart';
@@ -51,30 +50,6 @@ class BookModel {
     return list;
   }
 
-  Future<Map<int, List<dynamic>>> getBooks({int page, String bookName}) async {
-    List<dynamic> books;
-    var response = await BookApi.getBooks(eOrder: EOrder.ASC, page: page, bookName: bookName);
-    if (response == null) return null;
-    try {
-      books = response.data
-          .map((book) => new BookModel(
-                id: book["id"],
-                name: book["name"],
-                version: book["version"],
-                description: book["description"],
-                shortDescription: book["shortDescription"],
-                thumbnailUrl: book["thumbnailUrl"],
-                categories: CategoryModel.toList(book["categories"]),
-                authors: AuthorModel.toList(book["authors"]),
-                publisher: PublisherModel.toList(book["publishers"]),
-              ))
-          .toList();
-    } catch (e) {
-      print(e);
-    }
-    return {response.meta["itemCount"]: books};
-  }
-
   Map<String, dynamic> toJson() => {
         'id': this._id,
         'bookName': this.name,
@@ -107,6 +82,11 @@ class ListBook {
 
   static Future<ListBook> getBooks({EOrder eOrder, int page, int take, String bookName}) async {
     final response = await BookApi.getBooks(eOrder: EOrder.ASC, page: page, bookName: bookName);
+    return ListBook.fromJson(response);
+  }
+
+  static Future<ListBook> getRecommendBooks(EOrder eOrder, int page) async {
+    final response = await BookApi.getRecommendBooks(eOrder: eOrder, page: page ?? 1);
     return ListBook.fromJson(response);
   }
 }
