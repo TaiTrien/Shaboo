@@ -32,7 +32,7 @@ class BookApi {
   static Future<dynamic> getRecommendBooks({EOrder eOrder, int page}) async {
     try {
       var response = await http.get(
-        urlGetRecommendBooks + "?order=${order[eOrder.index] ?? order[0]}&page=${page ?? 1}&take=10",
+        urlGetRecommendBooks + "?order=${order[0]}&page=${page ?? 1}&take=10",
         headers: await getHeader(),
       );
       if (!successCodes.contains(response.statusCode)) return null;
