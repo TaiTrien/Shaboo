@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/size_config.dart';
 
-const kPrefixUrl = 'http://10.0.143.157:3001';
+const kPrefixUrl = 'http://10.45.228.238:3001';
 enum PostStatus {
   OPENED,
   CLOSED,

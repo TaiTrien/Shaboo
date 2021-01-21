@@ -91,7 +91,6 @@ class HomeScreen extends StatelessWidget {
                               style: TextStyle(color: kGreyColor, fontSize: 18)),
                         );
                       }
-                      //ListBook recommendBookList = _snapshot.data;
                       return Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: ListView.builder(

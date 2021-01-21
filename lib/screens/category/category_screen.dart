@@ -26,7 +26,7 @@ class CategoryScreen extends StatelessWidget {
           ),
           actions: [
             FlatButton(
-              onPressed: _controller.handleSelectCategories,
+              onPressed: () async => _controller.handleSelectCategories(),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: 10),
                 decoration: BoxDecoration(
