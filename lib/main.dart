@@ -5,7 +5,8 @@ import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
-import 'package:shaboo/constants.dart';
+import 'package:shaboo/constants/ui_constants.dart';
+
 import 'package:shaboo/routes.dart';
 
 Future<void> main() async {

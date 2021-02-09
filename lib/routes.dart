@@ -1,10 +1,11 @@
-import 'package:shaboo/screens/auth/login/login_screen.dart';
-import 'package:shaboo/screens/auth/sign_up/sign_up_screen.dart';
-import 'package:shaboo/screens/category/category_screen.dart';
-import 'package:shaboo/screens/loading/loading_screen.dart';
-import 'package:shaboo/screens/main_screen.dart';
-import 'package:shaboo/screens/on_boarding/on_boarding_screen.dart';
-import 'package:shaboo/screens/profile/profile_screen.dart';
+import 'package:shaboo/modules/pick_category/views/category_screen.dart';
+import 'package:shaboo/modules/loading/views/loading_screen.dart';
+import 'package:shaboo/modules/main_screen.dart';
+import 'package:shaboo/modules/on_boarding/views/on_boarding_screen.dart';
+
+import 'modules/auth/login/views/login_screen.dart';
+import 'modules/auth/sign_up/views/sign_up_screen.dart';
+import 'modules/main/profile/views/profile_screen.dart';
 
 final routes = {
   '/onBoardingScreen': (context) => OnBoardingScreen(),
