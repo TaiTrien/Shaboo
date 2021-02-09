@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/modules/main/notification/components/notification_board.dart';
 
-import 'components/notification_board.dart';
 
 class NotificationScreen extends StatelessWidget {
   @override

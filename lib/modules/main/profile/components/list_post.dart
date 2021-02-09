@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/modules/main/post/components/post_card.dart';
 import 'package:shaboo/modules/main/profile/controllers/list_post_controller.dart';
-import 'package:shaboo/modules/post/components/post_card.dart';
 
 class ListPost extends StatefulWidget {
   const ListPost({Key key}) : super(key: key);
