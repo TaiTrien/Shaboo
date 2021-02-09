@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/modules/main/post/add_post/post_form.dart';
+import 'package:shaboo/modules/main/post/components/post_card.dart';
 import 'package:shaboo/modules/main/post/feed/controllers/feed_controller.dart';
-import 'package:shaboo/modules/post/components/post_card.dart';
 import 'package:shaboo/shared_components/template_screens/error_screens/article_not_found_screen.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
