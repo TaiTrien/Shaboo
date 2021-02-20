@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text('Trang cá nhân', style: kHeadingTextStyle),
           actions: [

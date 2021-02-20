@@ -3,29 +3,39 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/api_constants.dart';
+import 'package:shaboo/modules/main/post/book/modules/detailed_book/views/detailed_book_screen.dart';
 import 'package:shaboo/shared_models/post/book.dart';
-import 'package:shaboo/modules/main/post/book/detailed_book/views/detailed_book_screen.dart';
 
 class BookListController {
   BuildContext context;
-  BookModel bookModel;
-  Stream<List<dynamic>> bookStream;
-  bool hasMore;
-  bool _isLoading;
-  int currentPage;
-  List<dynamic> _data;
   StreamController<List<dynamic>> _streamController;
   ScrollController scrollController;
+  Stream<List<dynamic>> bookStream;
+  List<dynamic> _books;
+
+  int currentPage;
+  bool hasMore;
+  bool _isLoading;
 
   BookListController({this.context}) {
-    bookModel = BookModel();
-    scrollController = ScrollController();
-    _data = List<dynamic>();
     _streamController = StreamController<List<dynamic>>.broadcast();
-    _isLoading = false;
+    scrollController = ScrollController();
     bookStream = _streamController.stream;
+    _books = List<dynamic>();
+
     currentPage = 1;
     hasMore = true;
+    _isLoading = false;
+
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent == scrollController.offset) {
+        try {
+          loadMore(currentPage: currentPage);
+        } catch (e) {
+          print(e);
+        }
+      }
+    });
     refresh();
   }
 
@@ -33,10 +43,11 @@ class BookListController {
 
   Future<void> loadMore({bool clearCachedData = false, int currentPage}) async {
     if (clearCachedData) {
-      _data = List<dynamic>();
+      _books = List<dynamic>();
       hasMore = true;
       this.currentPage = 1;
     }
+
     if (_isLoading || !hasMore) return Future.value();
 
     _isLoading = true;
@@ -45,15 +56,16 @@ class BookListController {
     try {
       return await ListBook.getBooks(eOrder: EOrder.ASC, page: currentPage).then((book) => {
             _isLoading = false,
-            _data.addAll(book.listBook),
-            hasMore = (_data.length < book.itemCount),
-            _streamController.sink.add(_data),
+            _books.addAll(book.listBook),
+            hasMore = (_books.length < book.itemCount),
+            _streamController.sink.add(_books),
           });
     } catch (e) {
       print(e);
     }
   }
 
+  //Navigations
   toDetailedBookScreen(BookModel selectedBook) =>
       Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedBookScreen(selectedBook: selectedBook)));
 

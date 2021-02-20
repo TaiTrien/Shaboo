@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:shaboo/modules/main/post/book/detailed_book/components/book_info_card.dart';
+import 'package:shaboo/modules/main/post/book/modules/detailed_book/components/book_info_card.dart';
+import 'package:shaboo/modules/main/post/book/modules/detailed_book/controllers/detailed_book_controller.dart';
 import 'package:shaboo/shared_components/stateless/bottom_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/shared_models/post/book.dart';
-import 'package:shaboo/modules/main/post/book/detailed_book/controllers/detailed_book_controller.dart';
 import 'package:shaboo/shared_components/stateless/loading_widget.dart';
 
 class DetailedBookScreen extends StatelessWidget {

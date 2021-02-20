@@ -15,15 +15,6 @@ class _BookListState extends State<BookList> {
   void initState() {
     super.initState();
     _controller = BookListController(context: context);
-    _controller.scrollController.addListener(() {
-      if (_controller.scrollController.position.maxScrollExtent == _controller.scrollController.offset) {
-        try {
-          _controller.loadMore(currentPage: _controller.currentPage);
-        } catch (e) {
-          print(e);
-        }
-      }
-    });
   }
 
   @override
