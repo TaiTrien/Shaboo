@@ -21,17 +21,11 @@ class ImageContainerController {
   ImageContainerController({this.context}) {
     _photoModel = PhotoModel();
     _postBloc = BlocProvider.of<PostBloc>(context);
-    _streamController = StreamController<ImageModel>();
+    _streamController = StreamController<ImageModel>.broadcast();
     uploadedImages = List<ImageModel>();
   }
 
-  Future<File> getImageFromCamera() async {
-    PickedFile takenPhoto = await _photoModel.getPhotoFromCamera();
-    if (takenPhoto == null) return null;
-    return File(takenPhoto.path);
-  }
-
-  uploadImageFromCamera({File takenPhoto}) async {
+  Future<dynamic> uploadImageFromCamera({File takenPhoto}) async {
     var response;
     try {
       response = await PostApi.uploadPhoto(photos: [takenPhoto]);
@@ -64,14 +58,34 @@ class ImageContainerController {
     _postBloc.add(UpdateCurrentPost(_currentPost));
   }
 
-  dipose() {
-    _streamController.close();
+  removeUploadedImage({ImageModel uploadedImage}) {
+    uploadedImages = currentPost.images ?? null;
+    uploadedImages.removeWhere((image) => image.imageID == uploadedImage.imageID);
+
+    PostModel _currentPost = PostModel(
+      title: title,
+      description: desc,
+      images: uploadedImages,
+      location: location ?? null,
+      book: book ?? null,
+    );
+    _postBloc.add(UpdateCurrentPost(_currentPost));
+  }
+
+  Future<File> getImageFromCamera() async {
+    PickedFile takenPhoto = await _photoModel.getPhotoFromCamera();
+    if (takenPhoto == null) return null;
+    return File(takenPhoto.path);
   }
 
   bool hasData({int index}) {
     if (currentPost.images == null) return false;
     if (currentPost.images.length <= index) return false;
     return true;
+  }
+
+  dipose() {
+    _streamController.close();
   }
 
   //getter & setters

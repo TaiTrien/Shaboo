@@ -3,11 +3,11 @@ import 'package:shaboo/shared_components/stateless/loading_widget.dart';
 
 class ImageWithCloseBtn extends StatelessWidget {
   final String url;
-  final Function onPress;
+  final Function onClose;
   const ImageWithCloseBtn({
     Key key,
     @required this.url,
-    @required this.onPress,
+    @required this.onClose,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class ImageWithCloseBtn extends StatelessWidget {
             alignment: Alignment.topRight,
             child: IconButton(
               icon: Icon(Icons.close_rounded, size: 20, color: Colors.white),
-              onPressed: this.onPress,
+              onPressed: this.onClose,
             ),
           ),
         ],
