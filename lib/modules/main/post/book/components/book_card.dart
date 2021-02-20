@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shaboo/shared_components/loading_widget.dart';
+import 'package:shaboo/shared_components/stateless/loading_widget.dart';
 
 class BookCard extends StatelessWidget {
   final String title;

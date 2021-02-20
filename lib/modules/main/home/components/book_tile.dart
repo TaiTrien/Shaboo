@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
-import 'package:shaboo/shared_components/loading_widget.dart';
+import 'package:shaboo/shared_components/stateless/loading_widget.dart';
 
 class BooksTile extends StatelessWidget {
   final String imageLink, title, description;

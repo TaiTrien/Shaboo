@@ -7,8 +7,8 @@ import 'package:shaboo/modules/main/home/components/vertical_book_tile.dart';
 import 'package:shaboo/modules/main/home/controllers/home_controller.dart';
 
 import 'package:shaboo/shared_models/post/book.dart';
-import 'package:shaboo/shared_components/loading_widget.dart';
-import 'package:shaboo/shared_components/search_bar.dart';
+import 'package:shaboo/shared_components/stateless/loading_widget.dart';
+import 'package:shaboo/shared_components/stateless/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

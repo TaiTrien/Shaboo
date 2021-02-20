@@ -29,7 +29,7 @@ class ImageModel {
   factory ImageModel.fromJson(Map<String, dynamic> json) {
     return ImageModel(
       int.parse(json['id'].toString()),
-      link: kPrefixUrl + json['link'],
+      link: kPrefixUploadImageUrl + json['filename'],
       slug: json['slug'],
       type: json['type'],
     );

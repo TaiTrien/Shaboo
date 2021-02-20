@@ -1,4 +1,4 @@
-import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/shared_models/model_constant.dart';
 import 'package:shaboo/shared_models/post/category.dart';
 import 'package:shaboo/services/api/user_api.dart';
 
@@ -46,7 +46,6 @@ class UserModel {
         'categories': categories,
       };
 
-  get userId => this._userID;
   factory UserModel.fromJson(Map<String, dynamic> json) {
     final userModel = UserModel(
       firstName: json['firstName'],

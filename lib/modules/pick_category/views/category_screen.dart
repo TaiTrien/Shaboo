@@ -7,7 +7,7 @@ import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/pick_category/controllers/category_controller.dart';
 import 'package:shaboo/modules/pick_category/views/sample-image.dart';
-import 'package:shaboo/shared_components/loading_widget.dart';
+import 'package:shaboo/shared_components/stateless/loading_widget.dart';
 
 class CategoryScreen extends StatelessWidget {
   @override

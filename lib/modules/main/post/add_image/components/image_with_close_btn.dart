@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shaboo/shared_components/loading_widget.dart';
+import 'package:shaboo/shared_components/stateless/loading_widget.dart';
 
 class ImageWithCloseBtn extends StatelessWidget {
   final String url;

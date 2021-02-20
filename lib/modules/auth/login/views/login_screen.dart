@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
-import 'package:shaboo/shared_components/custom_textfield.dart';
-import 'package:shaboo/shared_components/default_button.dart';
+import 'package:shaboo/shared_components/stateful/custom_textfield.dart';
+import 'package:shaboo/shared_components/stateless/default_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';

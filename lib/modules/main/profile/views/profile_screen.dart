@@ -3,7 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shaboo/modules/main/post/add_post/post_form.dart';
 import 'package:shaboo/modules/main/profile/components/list_post.dart';
 import 'package:shaboo/modules/main/profile/controllers/profile_controller.dart';
-import 'package:shaboo/shared_components/popup_menu.dart';
+import 'package:shaboo/shared_components/stateless/popup_menu.dart';
 
 import 'package:shaboo/constants/ui_constants.dart';
 

@@ -27,8 +27,6 @@ class BookModel {
     this.categories,
   }) : this._id = id;
 
-  get id => this._id;
-
   factory BookModel.fromJson(Map<String, dynamic> json) {
     return BookModel(
       id: json['id'],
@@ -61,6 +59,8 @@ class BookModel {
         'authors': this.authors,
         'publishers': this.publisher,
       };
+
+  get id => this._id;
 }
 
 class ListBook {

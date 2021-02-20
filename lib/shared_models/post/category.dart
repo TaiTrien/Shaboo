@@ -28,6 +28,7 @@ class CategoryModel {
       desc: json['descriptions'],
     );
   }
+
   static List<CategoryModel> toList(List<dynamic> dynamicList) {
     List<CategoryModel> list = [];
     dynamicList?.forEach((item) {

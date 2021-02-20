@@ -5,7 +5,7 @@ import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/modules/main/post/add_image/components/image_container.dart';
 import 'package:shaboo/modules/main/post/components/note_board.dart';
 
-import 'package:shaboo/shared_components/bottom_button.dart';
+import 'package:shaboo/shared_components/stateless/bottom_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/main/post/add_image/controllers/add_image_controller.dart';
@@ -53,7 +53,7 @@ class AddImageScreen extends StatelessWidget {
                       builder: (context, state) {
                         return ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 6,
+                          itemCount: _controller.numberOfImages == 6 ? 6 : _controller.numberOfImages + 1,
                           itemBuilder: (context, i) {
                             return Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -92,5 +92,3 @@ class AddImageScreen extends StatelessWidget {
     );
   }
 }
-
-//

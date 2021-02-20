@@ -51,12 +51,7 @@ class _ImageContainerState extends State<ImageContainer> {
                 child: CircularProgressIndicator(),
               ),
             );
-          else if (_snapshot.hasData) {
-            return ImageWithCloseBtn(
-              onPress: () {},
-              url: _snapshot.data.link,
-            );
-          } else if (_snapshot.hasError) {
+          else if (_snapshot.hasError) {
             return Container(
               height: 150,
               width: 100,

@@ -24,6 +24,7 @@ class AuthorModel {
       slug: json['slug'],
     );
   }
+
   static List<AuthorModel> toList(List<dynamic> dynamicList) {
     List<AuthorModel> list = [];
     dynamicList?.forEach((item) {

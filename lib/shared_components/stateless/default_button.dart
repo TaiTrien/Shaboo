@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
-import '../size_config.dart';
+import '../../size_config.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
