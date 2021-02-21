@@ -32,7 +32,7 @@ class CategoryModel {
   static List<CategoryModel> toList(List<dynamic> dynamicList) {
     List<CategoryModel> list = [];
     dynamicList?.forEach((item) {
-      list.add(CategoryModel.fromJson(item));
+      list.add(CategoryModel.fromJson(item["category"]));
     });
     return list;
   }

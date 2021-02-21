@@ -67,4 +67,7 @@ class UserModel {
     final response = await UserApi.getUserById(id);
     return UserModel.fromJson(response['data']);
   }
+
+  //Getters & setters
+  get userId => this._userID;
 }

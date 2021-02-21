@@ -13,6 +13,7 @@ class CategoryController {
   BuildContext context;
   UserBloc _userBloc;
   List<CategoryModel> selectedCategories;
+
   CategoryController({this.context}) {
     _userBloc = BlocProvider.of<UserBloc>(context);
     selectedCategories = List<CategoryModel>();
@@ -20,9 +21,9 @@ class CategoryController {
 
   Future<List<CategoryModel>> loadCategories() async {
     var response = await BookApi.getCategories(eOrder: EOrder.ASC);
-    List<CategoryModel> categories;
+    List<CategoryModel> categories = [];
     try {
-      categories = CategoryModel.toList(response.data);
+      response.data.forEach((category) => categories.add(CategoryModel.fromJson(category)));
       return categories;
     } catch (e) {
       print(e);
