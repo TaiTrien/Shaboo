@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shaboo/size_config.dart';
 
 const kPrimaryColor = Color(0xFF0365B0);
-const kPrimaryLightColor = Color(0xFFE0F1FF);
-const kSecondaryColor = Color(0xFF5B97E8);
+const kSecondaryColor = Color(0xFFFF6824);
+const kLightblueColor = Color(0xFFD6E3F3);
 const kTitleColor = Color(0xFF334a68);
 const kGreyColor = Color(0xFF979797);
-const kLightWhiteColor = Color(0xFFF6F6F6);
-const kTextColor = Color(0xFF757575);
+const kBorderColor = Color(0xFFBCBCBC);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
@@ -24,6 +23,14 @@ final kTitleTextStyle = TextStyle(
   color: Colors.black,
   height: 1.5,
 );
+
+final kDefaultTextStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.normal,
+  fontFamily: 'Helvetica Neue',
+  color: Colors.black,
+);
+
 const kDefaultPaddingVerical = 15.0;
 const kDefaultPaddingHorizontal = 20.0;
 const defaultDuration = Duration(milliseconds: 250);

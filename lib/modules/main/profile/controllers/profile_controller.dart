@@ -59,7 +59,7 @@ class ProfileController {
               child: Text(
                 'Cancel',
                 style: TextStyle(
-                  color: kSecondaryColor,
+                  color: kLightblueColor,
                   fontFamily: 'Helvetica Neue',
                   fontWeight: FontWeight.w500,
                   fontSize: 20,

@@ -5,24 +5,28 @@ import 'package:shaboo/shared_components/stateless/loading_widget.dart';
 
 class BooksTile extends StatelessWidget {
   final String imageLink, title, description;
-  BooksTile({@required this.description, @required this.title, @required this.imageLink});
+  BooksTile({
+    @required this.description,
+    @required this.title,
+    @required this.imageLink,
+  });
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
-      height: 180,
-      width: double.infinity,
+      height: size.height / 6,
+      width: size.width * 0.8,
       alignment: Alignment.bottomLeft,
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: kDefaultPaddingVerical),
       child: Stack(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.only(top: 20),
             alignment: Alignment.bottomLeft,
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15),
               alignment: Alignment.topRight,
-              height: 160,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),

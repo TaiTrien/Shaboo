@@ -16,7 +16,7 @@ class NoteBoard extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(color: kPrimaryColor.withOpacity(0.8), width: 2),
-          color: kSecondaryColor.withOpacity(0.2),
+          color: kLightblueColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Padding(

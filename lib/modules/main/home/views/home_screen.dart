@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/main/home/components/book_tile.dart';
+import 'package:shaboo/modules/main/home/components/books_row.dart';
+import 'package:shaboo/modules/main/home/components/see_more_row.dart';
 import 'package:shaboo/modules/main/home/components/vertical_book_tile.dart';
 import 'package:shaboo/modules/main/home/controllers/home_controller.dart';
 
@@ -20,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Color(0xfffafafa),
         elevation: 0,
         title: Text(
-          'Dành cho bạn',
+          'Trang chủ',
           style: kHeadingTextStyle,
           textAlign: TextAlign.center,
         ),
@@ -46,7 +48,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: size.height),
+          constraints: BoxConstraints(minHeight: size.height),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,80 +57,28 @@ class HomeScreen extends StatelessWidget {
                 child: SearchBar(),
               ),
               SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Dựa vào thể loại sách của bạn',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      'Xem thêm',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16, color: kGreyColor),
-                    ),
-                  ],
-                ),
+              SeeMoreRow(
+                title: 'Có thể bạn sẽ thích',
+                onSeeMoreTap: () {},
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
-                height: size.height / 3,
-                child: FutureBuilder(
-                    future: _controller.getRecommendBooks(),
-                    builder: (context, _snapshot) {
-                      if (_snapshot.connectionState != ConnectionState.done || !_snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (_snapshot.hasError) {
-                        return Center(
-                          child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
-                        );
-                      } else if (_snapshot.data.listBook.isEmpty) {
-                        return Center(
-                          child: Text('Không tìm thấy cuốn sách phù hợp',
-                              style: TextStyle(color: kGreyColor, fontSize: 18)),
-                        );
-                      }
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: ListView.builder(
-                          itemCount: _snapshot.data.listBook.length,
-                          itemBuilder: (context, index) => GestureDetector(
-                            onTap: () => _controller.toPostByIdScreen(_snapshot.data.listBook[index].id),
-                            child: VerticalBookTile(
-                              title: _snapshot.data.listBook[index].name,
-                              imageLink: _snapshot.data.listBook[index].thumbnailUrl,
-                            ),
-                          ),
-                          scrollDirection: Axis.horizontal,
-                        ),
-                      );
-                    }),
+              BooksRow(
+                bookGetter: _controller.getRecommendBooks(),
+                onMoveToScreen: _controller.toPostByIdScreen,
+              ),
+              SeeMoreRow(
+                title: 'Sách được đánh giá tốt',
+                onSeeMoreTap: () {},
+              ),
+              BooksRow(
+                bookGetter: _controller.getRecommendBooks(),
+                onMoveToScreen: _controller.toPostByIdScreen,
+              ),
+              SeeMoreRow(
+                title: 'Sách có nhiều đánh giá',
+                onSeeMoreTap: () {},
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Có thể bạn sẽ thích',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      'Xem thêm',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16, color: kGreyColor),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              Expanded(
+                padding: EdgeInsets.symmetric(vertical: 10),
                 child: FutureBuilder(
                     future: _controller.getBooks(),
                     builder: (context, _snapshot) {
@@ -140,18 +90,51 @@ class HomeScreen extends StatelessWidget {
                         );
                       }
                       ListBook bookList = _snapshot.data;
-                      return ListView.builder(
-                          itemCount: bookList.listBook.length,
-                          itemBuilder: (context, index) => GestureDetector(
-                                onTap: () => _controller.toPostByIdScreen(bookList.listBook[index].id),
-                                child: BooksTile(
-                                  title: bookList.listBook[index].name,
-                                  description: bookList.listBook[index].description,
-                                  imageLink: bookList.listBook[index].thumbnailUrl,
-                                ),
-                              ));
+                      return Container(
+                        height: size.height / 4,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 5,
+                            itemBuilder: (context, index) => GestureDetector(
+                                  onTap: () => _controller.toPostByIdScreen(bookList.listBook[index].id),
+                                  child: BooksTile(
+                                    title: bookList.listBook[index].name,
+                                    description: bookList.listBook[index].description,
+                                    imageLink: bookList.listBook[index].thumbnailUrl,
+                                  ),
+                                )),
+                      );
                     }),
               ),
+
+              // Expanded(
+              //   child: FutureBuilder(
+              //       future: _controller.getBooks(),
+              //       builder: (context, _snapshot) {
+              //         if (_snapshot.connectionState != ConnectionState.done) {
+              //           return Center(child: CircularProgressIndicator());
+              //         } else if (_snapshot.hasError) {
+              //           return Center(
+              //             child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
+              //           );
+              //         }
+              //         ListBook bookList = _snapshot.data;
+              //         return Container(
+              //           height: 100,
+              //           child: ListView.builder(
+              //               scrollDirection: Axis.horizontal,
+              //               itemCount: bookList.listBook.length,
+              //               itemBuilder: (context, index) => GestureDetector(
+              //                     onTap: () => _controller.toPostByIdScreen(bookList.listBook[index].id),
+              //                     child: BooksTile(
+              //                       title: bookList.listBook[index].name,
+              //                       description: bookList.listBook[index].description,
+              //                       imageLink: bookList.listBook[index].thumbnailUrl,
+              //                     ),
+              //                   )),
+              //         );
+              //       }),
+              // ),
             ],
           ),
         ),
