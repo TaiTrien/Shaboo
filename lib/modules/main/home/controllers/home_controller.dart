@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
+import 'package:shaboo/modules/main/post/book/modules/detailed_book/views/detailed_book_screen.dart';
 import 'package:shaboo/modules/main/post/feed/views/feed_screen.dart';
 import 'package:shaboo/shared_models/post/book.dart';
 import 'package:shaboo/constants/api_constants.dart';
+import 'package:shaboo/modules/detail_book/views/detail_book_screen.dart';
 
 class HomeController {
   BuildContext context;
@@ -21,4 +23,9 @@ class HomeController {
 
   toPostByIdScreen(int bookId) =>
       Navigator.push(context, MaterialPageRoute(builder: (context) => FeedScreen(bookId: bookId)));
+
+  toDetailedBookScreen(BookModel selectedBook) =>
+      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailBookScreen()));
+  //  toDetailedBookScreen(BookModel selectedBook) =>
+  // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedBookScreen(selectedBook: selectedBook)));
 }

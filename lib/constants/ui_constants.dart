@@ -25,7 +25,7 @@ final kTitleTextStyle = TextStyle(
 );
 
 final kDefaultTextStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 22,
   fontWeight: FontWeight.normal,
   fontFamily: 'Helvetica Neue',
   color: Colors.black,

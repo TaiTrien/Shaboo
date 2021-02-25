@@ -77,64 +77,32 @@ class HomeScreen extends StatelessWidget {
                 title: 'Sách có nhiều đánh giá',
                 onSeeMoreTap: () {},
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: FutureBuilder(
-                    future: _controller.getBooks(),
-                    builder: (context, _snapshot) {
-                      if (_snapshot.connectionState != ConnectionState.done) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (_snapshot.hasError) {
-                        return Center(
-                          child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
-                        );
-                      }
-                      ListBook bookList = _snapshot.data;
-                      return Container(
-                        height: size.height / 4,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, index) => GestureDetector(
-                                  onTap: () => _controller.toPostByIdScreen(bookList.listBook[index].id),
-                                  child: BooksTile(
-                                    title: bookList.listBook[index].name,
-                                    description: bookList.listBook[index].description,
-                                    imageLink: bookList.listBook[index].thumbnailUrl,
-                                  ),
-                                )),
+              FutureBuilder(
+                  future: _controller.getBooks(),
+                  builder: (context, _snapshot) {
+                    if (_snapshot.connectionState != ConnectionState.done) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (_snapshot.hasError) {
+                      return Center(
+                        child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
                       );
-                    }),
-              ),
-
-              // Expanded(
-              //   child: FutureBuilder(
-              //       future: _controller.getBooks(),
-              //       builder: (context, _snapshot) {
-              //         if (_snapshot.connectionState != ConnectionState.done) {
-              //           return Center(child: CircularProgressIndicator());
-              //         } else if (_snapshot.hasError) {
-              //           return Center(
-              //             child: Text('Đã xảy ra lỗi', style: kTitleTextStyle),
-              //           );
-              //         }
-              //         ListBook bookList = _snapshot.data;
-              //         return Container(
-              //           height: 100,
-              //           child: ListView.builder(
-              //               scrollDirection: Axis.horizontal,
-              //               itemCount: bookList.listBook.length,
-              //               itemBuilder: (context, index) => GestureDetector(
-              //                     onTap: () => _controller.toPostByIdScreen(bookList.listBook[index].id),
-              //                     child: BooksTile(
-              //                       title: bookList.listBook[index].name,
-              //                       description: bookList.listBook[index].description,
-              //                       imageLink: bookList.listBook[index].thumbnailUrl,
-              //                     ),
-              //                   )),
-              //         );
-              //       }),
-              // ),
+                    }
+                    ListBook bookList = _snapshot.data;
+                    return Container(
+                      height: size.height / 4,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 5,
+                          itemBuilder: (context, index) => GestureDetector(
+                                onTap: () => _controller.toDetailedBookScreen(bookList.listBook[index]),
+                                child: BooksTile(
+                                  title: bookList.listBook[index].name,
+                                  description: bookList.listBook[index].description,
+                                  imageLink: bookList.listBook[index].thumbnailUrl,
+                                ),
+                              )),
+                    );
+                  }),
             ],
           ),
         ),
