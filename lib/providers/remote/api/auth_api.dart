@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:shaboo/shared_models/response.dart';
+import 'package:shaboo/models/response/response.dart';
 import 'package:shaboo/constants/api_constants.dart';
 
 class AuthApi {

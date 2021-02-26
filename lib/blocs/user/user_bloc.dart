@@ -2,7 +2,7 @@ import 'dart:async';
 
 import "package:bloc/bloc.dart";
 import 'package:meta/meta.dart';
-import 'package:shaboo/shared_models/user/user.dart';
+import 'package:shaboo/models/user/user.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';

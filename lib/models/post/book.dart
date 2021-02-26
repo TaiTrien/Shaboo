@@ -1,10 +1,11 @@
-import 'package:shaboo/services/api/book_api.dart';
+import 'package:shaboo/models/model.dart';
+import 'package:shaboo/providers/remote/api/book_api.dart';
 import 'package:shaboo/constants/api_constants.dart';
-import 'package:shaboo/shared_models/post/author.dart';
-import 'package:shaboo/shared_models/post/category.dart';
-import 'package:shaboo/shared_models/post/publisher.dart';
+import 'package:shaboo/models/post/author.dart';
+import 'package:shaboo/models/post/category.dart';
+import 'package:shaboo/models/post/publisher.dart';
 
-class BookModel {
+class BookModel implements Model {
   int _id;
   String name;
   int version;

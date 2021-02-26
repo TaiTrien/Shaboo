@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/modules/auth/login/models/auth.dart';
-import 'package:shaboo/services/utils/notify.dart';
+import 'package:shaboo/utils/notify.dart';
 
 class SignupController {
   AuthBloc _authBloc;

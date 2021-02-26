@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:shaboo/constants/api_constants.dart';
 
-import 'package:shaboo/shared_models/post/post.dart';
-import 'package:shaboo/shared_models/response.dart';
+import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/models/response/response.dart';
 
-import 'package:shaboo/services/utils/store.dart';
-import '../../constants/api_constants.dart';
+import 'package:shaboo/utils/store.dart';
 
 class PostApi {
   static String urlUploadPost = '$kPrefixUrl/posts';

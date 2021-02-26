@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
-import 'package:shaboo/shared_models/post/post.dart';
-import 'package:shaboo/services/utils/notify.dart';
+import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/utils/notify.dart';
 
 class DescriptionController {
   BuildContext context;

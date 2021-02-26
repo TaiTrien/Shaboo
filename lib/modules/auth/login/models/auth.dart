@@ -1,9 +1,9 @@
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shaboo/services/api/auth_api.dart';
-import 'package:shaboo/services/utils/store.dart';
-import 'package:shaboo/shared_models/post/category.dart';
-import 'package:shaboo/shared_models/user/user.dart';
+import 'package:shaboo/providers/remote/api/auth_api.dart';
+import 'package:shaboo/utils/store.dart';
+import 'package:shaboo/models/post/category.dart';
+import 'package:shaboo/models/user/user.dart';
 
 class AuthModel {
   final GoogleSignIn _googleSignIn = GoogleSignIn();

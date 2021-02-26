@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/modules/main/post/book/components/book_list.dart';
-import 'package:shaboo/shared_components/stateless/search_bar.dart';
+import 'package:shaboo/components/stateless/search_bar.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/main/post/book/controllers/book_controller.dart';

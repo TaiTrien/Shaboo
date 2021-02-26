@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shaboo/shared_components/stateless/default_button.dart';
+import 'package:shaboo/components/stateless/default_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/size_config.dart';
 

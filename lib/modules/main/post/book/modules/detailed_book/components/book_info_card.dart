@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/ui_constants.dart';
-import 'package:shaboo/shared_models/post/book.dart';
+import 'package:shaboo/models/post/book.dart';
 
 class BookInfoCard extends StatelessWidget {
   const BookInfoCard({

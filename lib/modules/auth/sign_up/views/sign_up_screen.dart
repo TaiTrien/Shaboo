@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
-import 'package:shaboo/shared_components/stateful/custom_textfield.dart';
-import 'package:shaboo/shared_components/stateless/default_button.dart';
+import 'package:shaboo/components/stateful/custom_textfield.dart';
+import 'package:shaboo/components/stateless/default_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';

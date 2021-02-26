@@ -1,4 +1,6 @@
-class PublisherModel {
+import 'package:shaboo/models/model.dart';
+
+class PublisherModel implements Model {
   int _publisherID;
   String name;
   String slug;

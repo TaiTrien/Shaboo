@@ -1,9 +1,10 @@
 import 'package:shaboo/constants/api_constants.dart';
-import 'package:shaboo/shared_models/post/book.dart';
-import 'package:shaboo/shared_models/post/image.dart';
-import 'package:shaboo/services/api/post_api.dart';
+import 'package:shaboo/models/model.dart';
+import 'package:shaboo/models/post/book.dart';
+import 'package:shaboo/models/post/image.dart';
+import 'package:shaboo/providers/remote/api/post_api.dart';
 
-class PostModel {
+class PostModel implements Model {
   String title;
   String description;
   String range;

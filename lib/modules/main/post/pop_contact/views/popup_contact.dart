@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/shared_models/user/user.dart';
+import 'package:shaboo/models/user/user.dart';
 import 'package:shaboo/modules/main/post/pop_contact/controllers/popup_contact_controller.dart';
 
 class PopupContact extends StatefulWidget {

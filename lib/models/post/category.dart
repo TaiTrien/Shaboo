@@ -1,4 +1,6 @@
-class CategoryModel {
+import 'package:shaboo/models/model.dart';
+
+class CategoryModel implements Model {
   int _categoryID;
   String name;
   String slug;

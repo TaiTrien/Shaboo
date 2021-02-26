@@ -5,7 +5,7 @@ import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/modules/main/post/add_image/components/image_container.dart';
 import 'package:shaboo/modules/main/post/components/note_board.dart';
 
-import 'package:shaboo/shared_components/stateless/bottom_button.dart';
+import 'package:shaboo/components/stateless/bottom_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/main/post/add_image/controllers/add_image_controller.dart';

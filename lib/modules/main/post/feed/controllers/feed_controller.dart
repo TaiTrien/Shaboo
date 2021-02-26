@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shaboo/shared_models/post/post.dart';
+import 'package:shaboo/models/post/post.dart';
 import 'package:shaboo/modules/main/post/preview/views/preview_screen.dart';
 import 'package:shaboo/constants/api_constants.dart';
 

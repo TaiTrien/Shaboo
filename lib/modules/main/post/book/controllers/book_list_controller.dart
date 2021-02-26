@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/modules/main/post/book/modules/detailed_book/views/detailed_book_screen.dart';
-import 'package:shaboo/shared_models/post/book.dart';
+import 'package:shaboo/models/post/book.dart';
 
 class BookListController {
   BuildContext context;

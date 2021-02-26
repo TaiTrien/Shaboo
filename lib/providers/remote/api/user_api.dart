@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shaboo/constants/api_constants.dart';
 
-import 'package:shaboo/shared_models/response.dart';
-import 'package:shaboo/shared_models/user/user.dart';
-import 'package:shaboo/services/utils/store.dart';
+import 'package:shaboo/models/response/response.dart';
+import 'package:shaboo/models/user/user.dart';
+import 'package:shaboo/utils/store.dart';
 
 class UserApi {
   static String urlUsers = '$kPrefixUrl/users';

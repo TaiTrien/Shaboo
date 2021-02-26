@@ -1,4 +1,6 @@
-class LocationModel {
+import 'package:shaboo/models/model.dart';
+
+class LocationModel implements Model {
   String code;
   String parentCode;
   String name;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shaboo/modules/main/post/add_post/description/components/des_textfield.dart';
 import 'package:shaboo/modules/main/post/components/note_board.dart';
 import 'package:shaboo/modules/main/post/add_post/description/controllers/description_controller.dart';
-import 'package:shaboo/shared_components/stateless/bottom_button.dart';
+import 'package:shaboo/components/stateless/bottom_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 class DescriptionScreen extends StatefulWidget {

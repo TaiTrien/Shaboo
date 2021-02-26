@@ -1,4 +1,6 @@
-class AuthorModel {
+import 'package:shaboo/models/model.dart';
+
+class AuthorModel implements Model {
   int _authorID;
   String name;
   String slug;

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 
-import 'package:shaboo/services/utils/notify.dart';
-import 'package:shaboo/shared_models/model_constant.dart';
+import 'package:shaboo/utils/notify.dart';
+import 'package:shaboo/constants/model_constant.dart';
 
 class DetailedLocationController {
   BuildContext context;

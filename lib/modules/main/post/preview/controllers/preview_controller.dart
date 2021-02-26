@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shaboo/shared_models/post/post.dart';
-import 'package:shaboo/shared_components/stateless/loading_widget.dart';
+import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/modules/main/post/pop_contact/views/popup_contact.dart';
 
 class PreviewPostController {

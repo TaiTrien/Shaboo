@@ -1,4 +1,6 @@
-class Response {
+import 'package:shaboo/models/model.dart';
+
+class Response implements Model {
   int _statusCode;
   String _apiMessage;
   dynamic _data;

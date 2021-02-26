@@ -4,8 +4,8 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
-import 'package:shaboo/shared_models/post/post.dart';
-import 'package:shaboo/shared_components/stateless/loading_widget.dart';
+import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/modules/main/post/preview/controllers/preview_controller.dart';
 
 class PreviewPostScreen extends StatefulWidget {

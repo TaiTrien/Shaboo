@@ -1,8 +1,9 @@
-import 'package:shaboo/shared_models/model_constant.dart';
-import 'package:shaboo/shared_models/post/category.dart';
-import 'package:shaboo/services/api/user_api.dart';
+import 'package:shaboo/constants/model_constant.dart';
+import 'package:shaboo/models/model.dart';
+import 'package:shaboo/models/post/category.dart';
+import 'package:shaboo/providers/remote/api/user_api.dart';
 
-class UserModel {
+class UserModel implements Model {
   int _userID;
   String firstName;
   String lastName;

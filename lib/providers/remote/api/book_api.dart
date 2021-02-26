@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:shaboo/shared_models/response.dart';
+import 'package:shaboo/models/response/response.dart';
 import 'package:shaboo/constants/api_constants.dart';
-import 'package:shaboo/services/utils/store.dart';
+import 'package:shaboo/utils/store.dart';
 import 'package:http/http.dart' as http;
 
 class BookApi {

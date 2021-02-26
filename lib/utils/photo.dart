@@ -2,11 +2,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class PhotoModel {
-  List<int> idPhotos = <int>[];
-  List<Asset> photos = <Asset>[];
+class Photo {
+  static Future<List<Asset>> getPhotosFromGallery() async {
+    List<Asset> photos = <Asset>[];
 
-  Future<List<Asset>> getPhotosFromGallery() async {
     try {
       var status = await Permission.photos.request();
       if (!status.isGranted) return [];
@@ -21,7 +20,7 @@ class PhotoModel {
     return photos;
   }
 
-  Future<dynamic> getPhotoFromCamera() async {
+  static Future<dynamic> getPhotoFromCamera() async {
     PickedFile photo;
     try {
       final picker = ImagePicker();

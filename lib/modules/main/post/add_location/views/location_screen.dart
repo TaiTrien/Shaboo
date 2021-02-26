@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/modules/main/post/add_location/components/location_selector.dart';
 import 'package:shaboo/modules/main/post/add_location/components/selector_title.dart';
-import 'package:shaboo/shared_components/stateless/bottom_button.dart';
+import 'package:shaboo/components/stateless/bottom_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/main/post/add_location/controllers/location_controller.dart';

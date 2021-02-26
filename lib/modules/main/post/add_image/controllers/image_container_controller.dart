@@ -5,21 +5,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
-import 'package:shaboo/shared_models/post/image.dart';
-import 'package:shaboo/shared_models/post/photo.dart';
-import 'package:shaboo/shared_models/post/post.dart';
-import 'package:shaboo/services/api/post_api.dart';
-import 'package:shaboo/services/utils/notify.dart';
+import 'package:shaboo/models/post/image.dart';
+import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/providers/remote/api/post_api.dart';
+import 'package:shaboo/utils/notify.dart';
+import 'package:shaboo/utils/photo.dart';
 
 class ImageContainerController {
   BuildContext context;
-  PhotoModel _photoModel;
   PostBloc _postBloc;
   StreamController _streamController;
   List<ImageModel> uploadedImages;
 
   ImageContainerController({this.context}) {
-    _photoModel = PhotoModel();
     _postBloc = BlocProvider.of<PostBloc>(context);
     _streamController = StreamController<ImageModel>.broadcast();
     uploadedImages = List<ImageModel>();
@@ -73,7 +71,7 @@ class ImageContainerController {
   }
 
   Future<File> getImageFromCamera() async {
-    PickedFile takenPhoto = await _photoModel.getPhotoFromCamera();
+    PickedFile takenPhoto = await Photo.getPhotoFromCamera();
     if (takenPhoto == null) return null;
     return File(takenPhoto.path);
   }

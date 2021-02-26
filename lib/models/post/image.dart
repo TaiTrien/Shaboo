@@ -1,6 +1,7 @@
 import 'package:shaboo/constants/api_constants.dart';
+import 'package:shaboo/models/model.dart';
 
-class ImageModel {
+class ImageModel implements Model {
   int _imageID;
   String link;
   String slug;
