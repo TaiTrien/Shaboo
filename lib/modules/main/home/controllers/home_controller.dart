@@ -17,6 +17,10 @@ class HomeController {
 
   getRecommendBooks() async => await ListBook.getRecommendBooks(EOrder.ASC, 1);
   getBooks() async => await ListBook.getBooks(eOrder: EOrder.ASC, page: 1, take: 10, bookName: '');
+  getMostReviewedBooks() async =>
+      await ListBook.getBooks(eOrder: EOrder.ASC, page: 1, take: 10, bookName: '', orderBy: EOrder.RatingCount);
+  getHighestScoreBooks() async =>
+      await ListBook.getBooks(eOrder: EOrder.ASC, page: 1, take: 10, bookName: '', orderBy: EOrder.FinalScore);
 
   get currentUser => _userBloc.state.currentUser;
   get avatarLink => _userBloc.state.currentUser.avatar;

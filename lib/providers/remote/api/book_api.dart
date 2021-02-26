@@ -15,10 +15,11 @@ class BookApi {
         "Content-Type": "application/json",
       };
 
-  static Future<dynamic> getBooks({EOrder eOrder, int page, String bookName}) async {
+  static Future<dynamic> getBooks({EOrder eOrder, int page, String bookName, EOrder orderBy}) async {
     try {
       var response = await http.get(
-        urlGetBooks + "?order=${order[eOrder.index] ?? order[0]}&page=${page ?? 1}&take=10&name=${bookName ?? ""}",
+        urlGetBooks +
+            "?order=${order[eOrder.index] ?? order[0]}&page=${page ?? 1}&take=10&orderBy=${order[orderBy.index] ?? order[0]}&name=${bookName ?? ""}",
         headers: await getHeader(),
       );
       if (!successCodes.contains(response.statusCode)) return null;

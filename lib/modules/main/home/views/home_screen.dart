@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                 onSeeMoreTap: () {},
               ),
               BooksRow(
-                bookGetter: _controller.getRecommendBooks(),
+                bookGetter: _controller.getMostReviewedBooks(),
                 onMoveToScreen: _controller.toPostByIdScreen,
               ),
               SeeMoreRow(
@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                 onSeeMoreTap: () {},
               ),
               FutureBuilder(
-                  future: _controller.getBooks(),
+                  future: _controller.getMostReviewedBooks(),
                   builder: (context, _snapshot) {
                     if (_snapshot.connectionState != ConnectionState.done) {
                       return Center(child: CircularProgressIndicator());

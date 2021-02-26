@@ -81,8 +81,8 @@ class ListBook {
     );
   }
 
-  static Future<ListBook> getBooks({EOrder eOrder, int page, int take, String bookName}) async {
-    final response = await BookApi.getBooks(eOrder: EOrder.ASC, page: page, bookName: bookName);
+  static Future<ListBook> getBooks({EOrder eOrder, int page, int take, String bookName, EOrder orderBy}) async {
+    final response = await BookApi.getBooks(eOrder: EOrder.ASC, page: page, bookName: bookName, orderBy: orderBy);
     return ListBook.fromJson(response);
   }
 
