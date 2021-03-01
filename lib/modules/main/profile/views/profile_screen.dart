@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/modules/detail_book/views/book_desc_tab.dart';
-import 'package:shaboo/modules/detail_book/views/posts_tab.dart';
 import 'package:shaboo/modules/detail_book/views/reviews_tab.dart';
 import 'package:shaboo/modules/main/post/add_post/post_form.dart';
 import 'package:shaboo/modules/main/profile/components/header_info.dart';
@@ -10,6 +8,7 @@ import 'package:shaboo/modules/main/profile/controllers/profile_controller.dart'
 import 'package:shaboo/components/stateless/popup_menu.dart';
 
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/modules/main/profile/views/info_tab.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -75,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
       body: NestedScrollView(
         body: TabBarView(
           children: [
-            BookDescriptionScreen(),
+            InfoTab(),
             ReviewsTab(),
             ListPost(),
           ],
@@ -89,6 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                 automaticallyImplyLeading: false,
                 expandedHeight: size.height / 4,
                 title: Text('Trang cá nhân', style: kHeadingTextStyle),
+                elevation: 0.0,
                 backgroundColor: Colors.white,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Stack(children: [

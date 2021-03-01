@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
-class BookDescriptionScreen extends StatelessWidget {
+class BookDescTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(

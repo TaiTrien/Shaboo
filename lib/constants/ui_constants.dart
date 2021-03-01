@@ -6,6 +6,7 @@ const kSecondaryColor = Color(0xFFFF6824);
 const kLightblueColor = Color(0xFFD6E3F3);
 const kTitleColor = Color(0xFF334a68);
 const kGreyColor = Color(0xFF979797);
+const kGreenColor = Color(0xFF1D9800);
 const kBorderColor = Color(0xFFBCBCBC);
 
 const kAnimationDuration = Duration(milliseconds: 200);

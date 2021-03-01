@@ -61,7 +61,7 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
         body: NestedScrollView(
           body: TabBarView(
             children: <Widget>[
-              BookDescriptionScreen(),
+              BookDescTab(),
               ReviewsTab(),
               PostsTab(),
             ],
