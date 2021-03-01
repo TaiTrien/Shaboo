@@ -11,7 +11,7 @@ const kBorderColor = Color(0xFFBCBCBC);
 const kAnimationDuration = Duration(milliseconds: 200);
 
 final kHeadingTextStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(28),
+  fontSize: getProportionateScreenWidth(25),
   fontWeight: FontWeight.bold,
   color: Colors.black,
   height: 1.5,

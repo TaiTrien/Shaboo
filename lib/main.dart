@@ -41,6 +41,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            foregroundColor: Colors.white,
+            backgroundColor: kPrimaryColor,
+          ),
         ),
         initialRoute: '/onBoardingScreen',
         routes: routes,
