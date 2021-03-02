@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 20),
               SeeMoreRow(
                 title: 'Có thể bạn sẽ thích',
-                onSeeMoreTap: () {},
+                onSeeMoreTap: _controller.toSeeMoreRecommendBooks,
               ),
               BooksRow(
                 bookGetter: _controller.getRecommendBooks(),
@@ -67,15 +67,15 @@ class HomeScreen extends StatelessWidget {
               ),
               SeeMoreRow(
                 title: 'Sách được đánh giá tốt',
-                onSeeMoreTap: () {},
+                onSeeMoreTap: _controller.toSeeMoreHighestScoreBooks,
               ),
               BooksRow(
-                bookGetter: _controller.getMostReviewedBooks(),
+                bookGetter: _controller.getHighestScoreBooks(),
                 onMoveToScreen: _controller.toPostByIdScreen,
               ),
               SeeMoreRow(
                 title: 'Sách có nhiều đánh giá',
-                onSeeMoreTap: () {},
+                onSeeMoreTap: _controller.toSeeMoreMostReviewedBooks,
               ),
               FutureBuilder(
                   future: _controller.getMostReviewedBooks(),
