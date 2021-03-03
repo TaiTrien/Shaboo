@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
               ),
               BooksRow(
                 bookGetter: _controller.getRecommendBooks(),
-                onMoveToScreen: _controller.toPostByIdScreen,
+                onMoveToScreen: _controller.toDetailedBookScreen,
               ),
               SeeMoreRow(
                 title: 'Sách được đánh giá tốt',
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
               ),
               BooksRow(
                 bookGetter: _controller.getHighestScoreBooks(),
-                onMoveToScreen: _controller.toPostByIdScreen,
+                onMoveToScreen: _controller.toDetailedBookScreen,
               ),
               SeeMoreRow(
                 title: 'Sách có nhiều đánh giá',

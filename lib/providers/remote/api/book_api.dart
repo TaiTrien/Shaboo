@@ -17,9 +17,16 @@ class BookApi {
 
   static Future<dynamic> getBooks({EOrder eOrder, int page, String bookName, EOrder orderBy}) async {
     try {
+      var _query;
+      if (orderBy != null) {
+        _query =
+            "?order=${order[eOrder.index] ?? order[0]}&page=${page ?? 1}&take=10&orderBy=${order[orderBy.index]}&name=${bookName ?? ""}";
+      } else {
+        _query = "?order=${order[eOrder.index] ?? order[0]}&page=${page ?? 1}&take=10&name=${bookName ?? ""}";
+      }
+
       var response = await http.get(
-        urlGetBooks +
-            "?order=${order[eOrder.index] ?? order[0]}&page=${page ?? 1}&take=10&orderBy=${order[orderBy.index] ?? order[0]}&name=${bookName ?? ""}",
+        urlGetBooks + _query,
         headers: await getHeader(),
       );
       if (!successCodes.contains(response.statusCode)) return null;

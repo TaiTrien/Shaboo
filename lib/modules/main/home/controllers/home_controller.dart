@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/model_constant.dart';
-import 'package:shaboo/modules/main/post/feed/views/feed_screen.dart';
+import 'package:shaboo/modules/main/feed/feed/views/feed_screen.dart';
 import 'package:shaboo/models/post/book.dart';
 import 'package:shaboo/constants/api_constants.dart';
-import 'package:shaboo/modules/detail_book/views/detail_book_screen.dart';
-import 'package:shaboo/modules/see_more/views/see_more_screen.dart';
+import 'package:shaboo/modules/book/detail_book/views/detail_book_screen.dart';
+import 'package:shaboo/modules/book/see_more/views/see_more_screen.dart';
 
 class HomeController {
   BuildContext context;
@@ -25,11 +25,14 @@ class HomeController {
   get currentUser => _userBloc.state.currentUser;
   get avatarLink => _userBloc.state.currentUser.avatar;
 
-  toPostByIdScreen(int bookId) =>
-      Navigator.push(context, MaterialPageRoute(builder: (context) => FeedScreen(bookId: bookId)));
+  toPostByIdScreen(int bookId) => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedScreen()));
 
-  toDetailedBookScreen(BookModel selectedBook) =>
-      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailBookScreen()));
+  toDetailedBookScreen(BookModel selectedBook) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => DetailBookScreen(
+                selectedBook: selectedBook,
+              )));
 
   toSeeMoreRecommendBooks() => Navigator.push(
       context,

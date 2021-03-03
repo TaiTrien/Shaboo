@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shaboo/modules/detail_book/views/reviews_tab.dart';
-import 'package:shaboo/modules/main/post/add_post/post_form.dart';
+import 'package:shaboo/constants/model_constant.dart';
+import 'package:shaboo/modules/book/detail_book/views/reviews_tab.dart';
+import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
 import 'package:shaboo/modules/main/profile/components/header_info.dart';
-import 'package:shaboo/modules/main/profile/components/list_post.dart';
+import 'package:shaboo/modules/post/list_post/views/list_post.dart';
 import 'package:shaboo/modules/main/profile/controllers/profile_controller.dart';
 import 'package:shaboo/components/stateless/popup_menu.dart';
 
@@ -76,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
           children: [
             InfoTab(),
             ReviewsTab(),
-            ListPost(),
+            ListPost(postType: PostType.Owned),
           ],
           controller: _tabController,
         ),
@@ -143,8 +144,8 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: [
                   Tab(text: 'Miêu tả'),
-                  Tab(text: 'Đánh giá(10)'),
-                  Tab(text: 'Trao đổi(10)'),
+                  Tab(text: 'Đánh giá'),
+                  Tab(text: 'Trao đổi'),
                 ],
                 controller: _tabController,
               ),

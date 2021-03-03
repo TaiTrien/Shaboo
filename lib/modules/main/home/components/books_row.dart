@@ -37,7 +37,7 @@ class BooksRow extends StatelessWidget {
               child: ListView.builder(
                 itemCount: _snapshot.data.listBook.length,
                 itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => onMoveToScreen(_snapshot.data.listBook[index].id),
+                  onTap: () => onMoveToScreen(_snapshot.data.listBook[index]),
                   child: VerticalBookTile(
                     title: _snapshot.data.listBook[index].name,
                     imageLink: _snapshot.data.listBook[index].thumbnailUrl,
