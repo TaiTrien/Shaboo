@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/model_constant.dart';
-import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/modules/post/preview/views/preview_screen.dart';
 
@@ -34,7 +34,7 @@ class ListPostController {
 
   Future<void> loadMore({bool clearCachedData = false, int currentPage}) async {
     if (clearCachedData) {
-      _postList = List<dynamic>();
+      _postList = [];
       hasMore = true;
       this.currentPage = 0;
     }

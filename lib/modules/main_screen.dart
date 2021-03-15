@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/main/feed/feed/views/feed_screen.dart';
+import 'package:shaboo/modules/review/add/add_review_screen.dart';
 import 'package:shaboo/modules/review/detail/views/detail_review_screen.dart';
-import 'package:shaboo/modules/review/edit/views/add_review_screen.dart';
 
 import 'main/home/views/home_screen.dart';
-import 'main/notification/views/notification_screen.dart';
 import 'main/profile/views/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     DetailReviewScreen(),
     FeedScreen(),
-    EditReviewScreen(),
+    ReviewScreen(),
     ProfileScreen(),
   ];
 

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/data/models/post/post.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';

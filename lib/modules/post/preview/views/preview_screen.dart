@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
-import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/modules/post/preview/controllers/preview_controller.dart';
 

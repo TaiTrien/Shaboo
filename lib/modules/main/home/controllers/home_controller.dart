@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/modules/main/feed/feed/views/feed_screen.dart';
-import 'package:shaboo/models/post/book.dart';
+import 'package:shaboo/data/models/post/book.dart';
 import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/modules/book/detail_book/views/detail_book_screen.dart';
 import 'package:shaboo/modules/book/see_more/views/see_more_screen.dart';

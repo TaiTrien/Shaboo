@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
+import 'package:shaboo/blocs/review/review_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/data/repositories/implement/review/review_repo_impl.dart';
 
 import 'package:shaboo/routes.dart';
 
@@ -22,32 +24,42 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider<UserBloc>(
-          create: (context) => UserBloc(),
-        ),
-        BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(),
-        ),
-        BlocProvider<LocationBloc>(
-          create: (context) => LocationBloc(),
-        ),
-        BlocProvider<PostBloc>(
-          create: (context) => PostBloc(),
-        ),
+        RepositoryProvider(
+          create: (context) => ReviewRepoImpl(),
+        )
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          floatingActionButtonTheme: FloatingActionButtonThemeData(
-            foregroundColor: Colors.white,
-            backgroundColor: kPrimaryColor,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<UserBloc>(
+            create: (context) => UserBloc(),
           ),
+          BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(),
+          ),
+          BlocProvider<LocationBloc>(
+            create: (context) => LocationBloc(),
+          ),
+          BlocProvider<PostBloc>(
+            create: (context) => PostBloc(),
+          ),
+          BlocProvider<ReviewBloc>(
+            create: (context) => ReviewBloc(reviewRepo: RepositoryProvider.of<ReviewRepoImpl>(context)),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              foregroundColor: Colors.white,
+              backgroundColor: kPrimaryColor,
+            ),
+          ),
+          initialRoute: '/onBoardingScreen',
+          routes: routes,
         ),
-        initialRoute: '/onBoardingScreen',
-        routes: routes,
       ),
     );
   }

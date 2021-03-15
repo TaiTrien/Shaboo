@@ -5,10 +5,9 @@ import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/main/home/components/book_tile.dart';
 import 'package:shaboo/modules/main/home/components/books_row.dart';
 import 'package:shaboo/modules/main/home/components/see_more_row.dart';
-import 'package:shaboo/modules/main/home/components/vertical_book_tile.dart';
 import 'package:shaboo/modules/main/home/controllers/home_controller.dart';
 
-import 'package:shaboo/models/post/book.dart';
+import 'package:shaboo/data/models/post/book.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/components/stateless/search_bar.dart';
 

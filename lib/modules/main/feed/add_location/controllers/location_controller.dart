@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
-import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/modules/main/feed/add_location/detailed_location/views/detailed_location.dart';
 import 'package:shaboo/utils/notify.dart';
 

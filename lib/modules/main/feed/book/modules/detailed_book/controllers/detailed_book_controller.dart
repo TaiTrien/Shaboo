@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/modules/main/feed/book/modules/see_more/see_more_screen.dart';
-import 'package:shaboo/models/post/book.dart';
-import 'package:shaboo/models/post/post.dart';
+import 'package:shaboo/data/models/post/book.dart';
+import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class DetailedBookController {

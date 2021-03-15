@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shaboo/models/post/book.dart';
+import 'package:shaboo/data/models/post/book.dart';
 
 class BookController {
   BuildContext context;

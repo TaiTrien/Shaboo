@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
-import 'package:shaboo/models/post/image.dart';
+import 'package:shaboo/data/models/post/image.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class AddImageController {
-  List<File> photos = List<File>();
+  List<File> photos = [];
   List<ImageModel> uploadedImages;
   PostBloc _postBloc;
   PageController pageController;
@@ -16,7 +16,7 @@ class AddImageController {
   BuildContext context;
   AddImageController({this.context, this.pageController}) {
     _postBloc = BlocProvider.of<PostBloc>(context);
-    uploadedImages = List<ImageModel>();
+    uploadedImages = [];
     uploadedImages = currentPost.images ?? null;
   }
 

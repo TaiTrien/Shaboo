@@ -135,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      child: FlatButton(
+                      child: TextButton(
                         onPressed: controller.toSignupScreen,
                         child: RichText(
                           text: TextSpan(

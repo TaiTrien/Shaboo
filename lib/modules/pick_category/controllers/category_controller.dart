@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shaboo/providers/remote/api/book_api.dart';
+import 'package:shaboo/data/providers/remote/api/book_api.dart';
 
 import 'package:shaboo/blocs/user/user_bloc.dart';
-import 'package:shaboo/models/post/category.dart';
-import 'package:shaboo/models/user/user.dart';
+import 'package:shaboo/data/models/post/category.dart';
+import 'package:shaboo/data/models/user/user.dart';
 import 'package:shaboo/constants/api_constants.dart';
-import 'package:shaboo/providers/remote/api/user_api.dart';
+import 'package:shaboo/data/providers/remote/api/user_api.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class CategoryController {
@@ -16,7 +16,7 @@ class CategoryController {
 
   CategoryController({this.context}) {
     _userBloc = BlocProvider.of<UserBloc>(context);
-    selectedCategories = List<CategoryModel>();
+    selectedCategories = [];
   }
 
   Future<List<CategoryModel>> loadCategories() async {

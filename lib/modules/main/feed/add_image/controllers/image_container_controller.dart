@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
-import 'package:shaboo/models/post/image.dart';
-import 'package:shaboo/models/post/post.dart';
-import 'package:shaboo/providers/remote/api/post_api.dart';
+import 'package:shaboo/data/models/post/image.dart';
+import 'package:shaboo/data/models/post/post.dart';
+import 'package:shaboo/data/providers/remote/api/post_api.dart';
 import 'package:shaboo/utils/notify.dart';
 import 'package:shaboo/utils/photo.dart';
 
@@ -20,7 +20,7 @@ class ImageContainerController {
   ImageContainerController({this.context}) {
     _postBloc = BlocProvider.of<PostBloc>(context);
     _streamController = StreamController<ImageModel>.broadcast();
-    uploadedImages = List<ImageModel>();
+    uploadedImages = [];
   }
 
   Future<dynamic> uploadImageFromCamera({File takenPhoto}) async {

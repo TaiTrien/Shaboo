@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/constants/model_constant.dart';
-import 'package:shaboo/models/post/book.dart';
+import 'package:shaboo/data/models/post/book.dart';
 import 'package:shaboo/modules/book/detail_book/views/detail_book_screen.dart';
 
 class SeeMoreController {
@@ -21,7 +21,7 @@ class SeeMoreController {
 
   SeeMoreController({this.context, this.bookType}) {
     scrollController = ScrollController();
-    _dataList = List<dynamic>();
+    _dataList = [];
     _streamController = StreamController<List<dynamic>>.broadcast();
     _isLoading = false;
     dataStream = _streamController.stream;
@@ -33,7 +33,7 @@ class SeeMoreController {
 
   Future<void> loadMore({bool clearCachedData = false, int currentPage}) async {
     if (clearCachedData) {
-      _dataList = List<dynamic>();
+      _dataList = [];
       hasMore = true;
       this.currentPage = 0;
     }

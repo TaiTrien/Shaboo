@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/constants/ui_constants.dart';
-import 'package:shaboo/models/post/book.dart';
+import 'package:shaboo/data/models/post/book.dart';
 import 'package:shaboo/modules/book/detail_book/components/sliver_hearder_section.dart';
 import 'package:shaboo/modules/book/detail_book/views/book_desc_tab.dart';
 import 'package:shaboo/modules/book/detail_book/views/reviews_tab.dart';
 import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
 import 'package:shaboo/modules/post/list_post/views/list_post.dart';
+import 'package:shaboo/modules/review/add/add_review_screen.dart';
 
 class DetailBookScreen extends StatefulWidget {
   final BookModel selectedBook;
@@ -42,7 +43,12 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
     switch (_tabController.index) {
       case 1:
         return FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ReviewScreen(
+                        selectedBook: widget.selectedBook,
+                      ))),
           child: Icon(Icons.edit),
           backgroundColor: kPrimaryColor,
         );

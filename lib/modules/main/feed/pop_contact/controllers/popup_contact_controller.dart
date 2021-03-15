@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shaboo/models/user/user.dart';
+import 'package:shaboo/data/models/user/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactController {

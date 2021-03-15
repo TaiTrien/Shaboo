@@ -5,7 +5,7 @@ import 'package:shaboo/modules/main/feed/book/modules/detailed_book/components/b
 import 'package:shaboo/modules/main/feed/book/modules/detailed_book/controllers/detailed_book_controller.dart';
 import 'package:shaboo/components/stateless/bottom_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
-import 'package:shaboo/models/post/book.dart';
+import 'package:shaboo/data/models/post/book.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 
 class DetailedBookScreen extends StatelessWidget {
