@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
+import 'package:shaboo/blocs/connection/connection_cubit.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/blocs/review/review_bloc.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider<InternetCubit>(
+            create: (context) => InternetCubit(),
+          ),
           BlocProvider<UserBloc>(
             create: (context) => UserBloc(),
           ),

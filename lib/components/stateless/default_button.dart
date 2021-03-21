@@ -9,10 +9,12 @@ class DefaultButton extends StatelessWidget {
     this.text,
     this.onPress,
     this.circular,
+    this.color,
   }) : super(key: key);
   final String text;
   final Function onPress;
   final double circular;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class DefaultButton extends StatelessWidget {
       height: getProportionateScreenHeight(56),
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(circular ?? 5)),
-        color: kPrimaryColor,
+        color: color ?? kPrimaryColor,
         onPressed: onPress,
         child: Text(
           text,

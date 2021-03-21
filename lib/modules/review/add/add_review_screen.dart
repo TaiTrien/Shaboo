@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/connection/connection_cubit.dart';
 import 'package:shaboo/blocs/review/review_bloc.dart';
 import 'package:shaboo/components/stateless/default_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
@@ -74,6 +75,8 @@ class _BodyState extends State<Body> {
   double _sliderValue;
   ReviewBloc _reviewBloc;
   ReviewModel _currentReview;
+
+  bool _canSubmit = true;
 
   @override
   void initState() {
@@ -182,12 +185,33 @@ class _BodyState extends State<Body> {
               },
             ),
             SizedBox(height: 20),
-            DefaultButton(
-              onPress: () {
-                if (_currentReview.review.isEmpty) return Notify().error(message: "Chưa đánh giá cuốn sách này");
-                _reviewBloc.add(AddReview(_currentReview));
+            BlocConsumer<InternetCubit, InternetState>(
+              listener: (context, state) {
+                if (state is InternetDisconnected) {
+                  setState(() {
+                    _canSubmit = false;
+                  });
+                  Notify().error(message: "Chưa kết nối với Internet");
+                } else if (state is InternetConnected) {
+                  setState(() {
+                    _canSubmit = true;
+                  });
+                  Notify().success(message: "Kết nối thành công với Internet");
+                }
               },
-              text: 'Gửi',
+              builder: (context, state) {
+                return DefaultButton(
+                  color: _canSubmit ? kPrimaryColor : kGreyColor,
+                  onPress: state is InternetConnected
+                      ? () {
+                          if (_currentReview.review.isEmpty)
+                            return Notify().error(message: "Chưa đánh giá cuốn sách này");
+                          _reviewBloc.add(AddReview(_currentReview));
+                        }
+                      : () {},
+                  text: 'Gửi',
+                );
+              },
             ),
           ],
         ),
