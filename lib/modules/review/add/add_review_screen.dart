@@ -132,18 +132,17 @@ class _BodyState extends State<Body> {
             Container(
               width: double.infinity,
               child: Slider(
-                onChanged: (value) {
-                  _currentReview.score = value.toInt();
-                  _reviewBloc.add(UpdateCurrentReview(_currentReview));
-                  setState(() {
-                    _sliderValue = value;
-                  });
-                },
-                value: _sliderValue,
-                max: 10,
-                min: 0,
-                activeColor: kPrimaryColor,
-              ),
+                  onChanged: (value) {
+                    _currentReview.score = value.toInt();
+                    _reviewBloc.add(UpdateCurrentReview(_currentReview));
+                    setState(() {
+                      _sliderValue = value;
+                    });
+                  },
+                  value: _sliderValue,
+                  max: 10,
+                  min: 0,
+                  activeColor: kPrimaryColor),
             ),
             SizedBox(height: 20),
             Text('Tags', style: kHeadingTextStyle),
