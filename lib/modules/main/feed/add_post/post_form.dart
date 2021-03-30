@@ -33,6 +33,7 @@ class _PostFormState extends State<PostForm> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: IconButton(
             onPressed: _currentPageIndex == 0 ? _controller.toExit : _controller.toPreviousPage,

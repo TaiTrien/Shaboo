@@ -1,28 +1,31 @@
 part of 'lazyload_bloc.dart';
 
-abstract class LazyloadState extends Equatable {
-  final List<dynamic> data;
+abstract class LazyLoadState extends Equatable {
+  final dynamic data;
 
-  LazyloadState({this.data});
+  LazyLoadState({this.data});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [data];
 }
 
-class LazyloadInitial extends LazyloadState {
+class LazyloadInitial extends LazyLoadState {
   LazyloadInitial() : super(data: []);
 }
 
-class LoadingState extends LazyloadState {}
+class LoadingState extends LazyLoadState {}
 
-class NoMoreState extends LazyloadState {}
+class NoMoreState extends LazyLoadState {}
 
-class ErrorState extends LazyloadState {
+class ErrorState extends LazyLoadState {
   final String errorMessage;
   ErrorState({this.errorMessage});
 }
 
-class UpdateState extends LazyloadState {
-  final dynamic newData;
+class SuccessfulState extends LazyLoadState {}
 
-  UpdateState(LazyloadState oldState, {this.newData}) : super(data: newData ?? oldState.data);
+class UpdateState extends LazyLoadState {
+  final dynamic newData;
+  final int numberOfItems;
+
+  UpdateState(LazyLoadState oldState, {this.newData, this.numberOfItems}) : super(data: newData ?? oldState.data);
 }

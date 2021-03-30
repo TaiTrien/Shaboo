@@ -7,10 +7,10 @@ import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/models/review/review.dart';
 import 'package:shaboo/utils/notify.dart';
 
-class ReviewScreen extends StatelessWidget {
+class AddReviewScreen extends StatelessWidget {
   final selectedBook;
 
-  const ReviewScreen({Key key, this.selectedBook}) : super(key: key);
+  const AddReviewScreen({Key key, this.selectedBook}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

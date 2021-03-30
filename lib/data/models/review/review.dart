@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:shaboo/data/models/model.dart';
+import 'package:shaboo/data/models/post/book.dart';
+import 'package:shaboo/data/models/user/user.dart';
 
+// ignore: must_be_immutable
 class ReviewModel extends Equatable implements Model {
   ReviewModel({
     int id,
@@ -8,6 +11,8 @@ class ReviewModel extends Equatable implements Model {
     this.tags,
     this.score,
     this.bookId,
+    this.bookModel,
+    this.userModel,
   }) : this._id = id;
 
   int _id;
@@ -15,6 +20,8 @@ class ReviewModel extends Equatable implements Model {
   String tags;
   int score;
   int bookId;
+  BookModel bookModel;
+  UserModel userModel;
 
   //getters and setters
   set setReview(String review) => this.review = review;
@@ -30,6 +37,8 @@ class ReviewModel extends Equatable implements Model {
         tags: json["tags"],
         score: json["score"],
         bookId: json["bookId"],
+        bookModel: BookModel.fromJson(json['book']),
+        userModel: UserModel.fromJson(json['user']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,4 +76,5 @@ class ListReview {
       listReview: ReviewModel.toList(json['data']),
     );
   }
+  get listData => this.listReview;
 }

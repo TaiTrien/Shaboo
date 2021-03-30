@@ -3,12 +3,14 @@ import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/models/post/book.dart';
+import 'package:shaboo/data/models/review/review.dart';
 import 'package:shaboo/modules/book/detail_book/components/sliver_hearder_section.dart';
 import 'package:shaboo/modules/book/detail_book/views/book_desc_tab.dart';
 import 'package:shaboo/modules/book/detail_book/views/reviews_tab.dart';
 import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
 import 'package:shaboo/modules/post/list_post/views/list_post.dart';
 import 'package:shaboo/modules/review/add/add_review_screen.dart';
+import 'package:shaboo/modules/review/list_review/list_review_screen.dart';
 
 class DetailBookScreen extends StatefulWidget {
   final BookModel selectedBook;
@@ -46,7 +48,7 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
           onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ReviewScreen(
+                  builder: (context) => AddReviewScreen(
                         selectedBook: widget.selectedBook,
                       ))),
           child: Icon(Icons.edit),
@@ -83,7 +85,10 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
           body: TabBarView(
             children: <Widget>[
               BookDescTab(bookDesc: widget.selectedBook.description),
-              ReviewsTab(),
+              ListReviewScreen(
+                bookId: widget.selectedBook.id.toString(),
+                reviewType: ReviewType.BasedOnBook,
+              ),
               ListPost(postType: PostType.BasedOnBook, bookId: widget.selectedBook.id),
             ],
             controller: _tabController,

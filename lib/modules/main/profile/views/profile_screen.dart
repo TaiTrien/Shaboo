@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/modules/book/detail_book/views/reviews_tab.dart';
 import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
@@ -10,6 +12,7 @@ import 'package:shaboo/components/stateless/popup_menu.dart';
 
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/main/profile/views/info_tab.dart';
+import 'package:shaboo/modules/review/list_review/list_review_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -73,13 +76,20 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
     return SafeArea(
         child: Scaffold(
       body: NestedScrollView(
-        body: TabBarView(
-          children: [
-            InfoTab(),
-            ReviewsTab(),
-            ListPost(postType: PostType.Owned),
-          ],
-          controller: _tabController,
+        body: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            return TabBarView(
+              children: [
+                InfoTab(),
+                ListReviewScreen(
+                  userId: state.currentUser.userId.toString(),
+                  reviewType: ReviewType.Owned,
+                ),
+                ListPost(postType: PostType.Owned),
+              ],
+              controller: _tabController,
+            );
+          },
         ),
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[

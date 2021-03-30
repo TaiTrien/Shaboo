@@ -55,15 +55,14 @@ class ReviewApi {
     }
   }
 
-  static Future<dynamic> getReviews({EOrder eOrder, int page, String bookId}) async {
+  static Future<dynamic> getReviews({EOrder eOrder, int page, String bookId, String userId}) async {
     try {
       var response = await http.get(
-        Uri.parse(urlGeneralReview + "?${order[eOrder.index] ?? order[0]}&page=${page ?? 1}&take=10&bookId=$bookId"),
+        Uri.parse(urlGeneralReview + "?${order[eOrder.index]}&page=$page&take=10&bookId=$bookId&userId=$userId"),
         headers: await getHeader(),
       );
-      if (!successCodes.contains(response.statusCode)) return null;
-      print(json.decode(response.body));
-      //return Response.map(json.decode(response.body));
+      if (!successCodes.contains(response.statusCode)) throw Exception(json.decode(response.body)['message']);
+      return json.decode(response.body)['data'];
     } catch (e) {
       print(e);
     }

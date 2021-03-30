@@ -6,37 +6,28 @@ import 'package:equatable/equatable.dart';
 part 'lazyload_event.dart';
 part 'lazyload_state.dart';
 
-class LazyloadBloc extends Bloc<LazyloadEvent, LazyloadState> {
+class LazyLoadBloc extends Bloc<LazyloadEvent, LazyLoadState> {
   final Future<dynamic> fetchData;
-  LazyloadBloc({this.fetchData}) : super(LazyloadInitial());
+  LazyLoadBloc({this.fetchData}) : super(LazyloadInitial());
 
   @override
-  Stream<LazyloadState> mapEventToState(
+  Stream<LazyLoadState> mapEventToState(
     LazyloadEvent event,
   ) async* {
     try {
-      if (event is Refresh) {
-        yield UpdateState(state, newData: []);
+      if (event is LoadMore) {
+        if (event.clearCachedData) {
+          yield UpdateState(state, newData: []);
+        }
         yield LoadingState();
-
         var newData = await fetchData;
         if (newData == null)
-          yield ErrorState(errorMessage: "Đã xảy ra lỗi");
-        else if (newData.isEmpty)
-          yield NoMoreState();
-        else
-          yield UpdateState(state, newData: newData);
-      } else if (event is LoadMore) {
-        yield LoadingState();
-
-        var newData = await fetchData;
-        if (newData == null)
-          yield ErrorState(errorMessage: "Đã xảy ra lỗi");
-        else if (newData.isEmpty)
-          yield NoMoreState();
-        else {
-          newData.addAll(state.data);
-          yield UpdateState(state, newData: newData);
+          yield ErrorState(errorMessage: "Something went wrong");
+        else if (state.data != null) {
+          if (state.data.listData.length >= newData.totalElement) yield NoMoreState();
+        } else {
+          if (state.data != null) newData.listData.addAll(state.data);
+          yield UpdateState(state, newData: newData.listData);
         }
       }
     } catch (exception) {

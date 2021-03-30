@@ -6,7 +6,7 @@ abstract class ReviewReposity {
 
   Future<dynamic> editReview({ReviewModel review});
 
-  Future<List<dynamic>> getReviews({EOrder eOrder, int page, String bookId});
+  Future<dynamic> getReviews({EOrder eOrder, int page, String bookId});
 
   Future<dynamic> deleteReview({int reviewId});
 }

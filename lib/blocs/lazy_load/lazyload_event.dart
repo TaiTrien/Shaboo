@@ -9,4 +9,8 @@ abstract class LazyloadEvent extends Equatable {
 
 class Refresh extends LazyloadEvent {}
 
-class LoadMore extends LazyloadEvent {}
+class LoadMore extends LazyloadEvent {
+  final bool clearCachedData;
+
+  LoadMore({this.clearCachedData = false});
+}

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:shaboo/data/providers/remote/api/review_api.dart';
 import 'package:shaboo/data/models/review/review.dart';
 import 'package:shaboo/constants/api_constants.dart';
@@ -26,8 +28,11 @@ class ReviewRepoImpl implements ReviewReposity {
   }
 
   @override
-  Future<List> getReviews({EOrder eOrder, int page, String bookId}) {
-    // TODO: implement getReviews
-    throw UnimplementedError();
+  Future<dynamic> getReviews({EOrder eOrder, int page, String bookId, String userId}) async {
+    var response = await ReviewApi.getReviews(
+        eOrder: eOrder ?? EOrder.ASC, page: page ?? 1, bookId: bookId ?? '', userId: userId ?? '');
+    if (response != null)
+      return ListReview.fromJson(response);
+    else if (response == null) throw Exception('Fetching data error');
   }
 }

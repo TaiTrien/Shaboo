@@ -21,6 +21,11 @@ enum PostType {
   Feed,
 }
 
+enum ReviewType {
+  Owned,
+  BasedOnBook,
+}
+
 const kLimitCodeLocation = {
   "city": 100,
   "district": 1000,
