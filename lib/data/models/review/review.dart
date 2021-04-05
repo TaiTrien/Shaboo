@@ -77,4 +77,5 @@ class ListReview {
     );
   }
   get listData => this.listReview;
+  get totalElement => this.itemCount;
 }

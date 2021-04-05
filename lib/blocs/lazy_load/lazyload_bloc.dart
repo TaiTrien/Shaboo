@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 
 part 'lazyload_event.dart';
 part 'lazyload_state.dart';
 
 class LazyLoadBloc extends Bloc<LazyloadEvent, LazyLoadState> {
-  final Future<dynamic> fetchData;
-  LazyLoadBloc({this.fetchData}) : super(LazyloadInitial());
+  LazyLoadBloc() : super(LazyloadInitial());
 
   @override
   Stream<LazyLoadState> mapEventToState(
@@ -17,21 +15,27 @@ class LazyLoadBloc extends Bloc<LazyloadEvent, LazyLoadState> {
     try {
       if (event is LoadMore) {
         if (event.clearCachedData) {
-          yield UpdateState(state, newData: []);
-        }
-        yield LoadingState();
-        var newData = await fetchData;
-        if (newData == null)
-          yield ErrorState(errorMessage: "Something went wrong");
-        else if (state.data != null) {
-          if (state.data.listData.length >= newData.totalElement) yield NoMoreState();
-        } else {
-          if (state.data != null) newData.listData.addAll(state.data);
-          yield UpdateState(state, newData: newData.listData);
+          yield UpdateState(state, newData: [], totalElement: 0);
+          yield LoadingState(state);
+          var newData = await event.fetchData;
+          yield UpdateState(state, newData: newData.listData, totalElement: newData.totalElement);
+        } else if (!event.clearCachedData) {
+          if (state.data.length >= state.totalElement)
+            yield NoMoreState(state);
+          else if (state.data.length <= state.totalElement) {
+            yield HasMoreState(state);
+            var newData = await event.fetchData;
+            if (newData == null)
+              yield ErrorState(state, errorMessage: "Something went wrong");
+            else if (newData != null) {
+              state.data.addAll(newData.listData);
+              yield UpdateState(state, newData: state.data);
+            }
+          }
         }
       }
     } catch (exception) {
-      yield ErrorState(errorMessage: exception.toString());
+      yield ErrorState(state, errorMessage: exception.toString());
     }
   }
 }

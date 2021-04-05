@@ -1,16 +1,14 @@
 part of 'lazyload_bloc.dart';
 
-abstract class LazyloadEvent extends Equatable {
+abstract class LazyloadEvent {
   const LazyloadEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class Refresh extends LazyloadEvent {}
 
 class LoadMore extends LazyloadEvent {
   final bool clearCachedData;
+  final dynamic fetchData;
 
-  LoadMore({this.clearCachedData = false});
+  LoadMore({this.clearCachedData = false, this.fetchData});
 }
