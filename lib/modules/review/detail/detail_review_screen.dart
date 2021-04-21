@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/ui_constants.dart';
-import 'package:shaboo/modules/review/detail/components/sliver_header_review.dart';
+import 'package:shaboo/data/models/review/review.dart';
+import 'package:shaboo/modules/review/components/sliver_header_review.dart';
+import 'package:shaboo/modules/review/edit/edit_review_screen.dart';
 
-class DetailReviewScreen extends StatelessWidget {
+class DetailReviewScreen extends StatefulWidget {
+  final ReviewModel selectedReview;
+
+  const DetailReviewScreen({Key key, @required this.selectedReview}) : super(key: key);
+
+  @override
+  _DetailReviewScreenState createState() => _DetailReviewScreenState();
+}
+
+class _DetailReviewScreenState extends State<DetailReviewScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
       body: NestedScrollView(
-        body: Body(),
+        body: Body(reviewContent: widget.selectedReview.review),
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
@@ -28,9 +40,16 @@ class DetailReviewScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/avatar.jpg'),
-                      radius: 50,
-                    ),
+                        radius: 50,
+                        child: ClipOval(
+                            child: Image.network(
+                          widget.selectedReview.userModel.avatar,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return LoadingWidget(isImage: true);
+                          },
+                        ))),
                   )
                 ])),
                 actions: [
@@ -39,12 +58,16 @@ class DetailReviewScreen extends StatelessWidget {
                       Icons.edit,
                       color: Colors.black,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return EditReviewScreen(selectedReview: widget.selectedReview);
+                      }));
+                    },
                   ),
                 ]),
             SliverHeaderView(
-              userName: 'Michael Jack',
-              score: 9.5,
+              userName: widget.selectedReview.userModel.firstName + ' ' + widget.selectedReview.userModel.lastName,
+              score: widget.selectedReview.score.toDouble(),
             ),
           ];
         },
@@ -54,8 +77,10 @@ class DetailReviewScreen extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
+  final String reviewContent;
   const Body({
     Key key,
+    this.reviewContent,
   }) : super(key: key);
 
   @override
@@ -96,7 +121,7 @@ class Body extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+              reviewContent,
               style: kDefaultTextStyle.copyWith(fontSize: 18),
               overflow: TextOverflow.clip,
               textAlign: TextAlign.justify,

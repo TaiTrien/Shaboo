@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/data/models/review/review.dart';
 import 'package:shaboo/data/repositories/implement/review/review_repo_impl.dart';
 
@@ -31,17 +32,13 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
     } else if (event is EditReview) {
       yield ReviewLoadingState();
       try {
-        if (state.currentReview == null || state.currentReview.review == null)
-          yield ReviewErrorState(message: "Chưa thêm đánh giá");
-        else {
-          var result = await reviewRepo.editReview(review: event.payload);
-          if (result == null)
-            yield ReviewErrorState(message: 'Đã có lỗi xảy ra');
-          else
-            yield ReviewSuccessState();
-        }
+        var result = await reviewRepo.editReview(review: event.payload);
+        if (result != null && successCodes.contains(result['status'])) {
+          yield ReviewSuccessState();
+        } else
+          yield ReviewErrorState(message: 'Đã có lỗi xảy ra');
       } catch (e) {
-        yield ReviewErrorState(message: e);
+        yield ReviewErrorState(message: e.toString());
       }
     } else if (event is DeleteReview) {
       yield ReviewLoadingState();

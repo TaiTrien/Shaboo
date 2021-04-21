@@ -16,8 +16,8 @@ class ReviewRepoImpl implements ReviewReposity {
   @override
   Future<dynamic> editReview({ReviewModel review}) async {
     var response = await ReviewApi.editReview(review: review);
-    if (response != null) return ReviewModel.fromJson(response["data"]);
-    return null;
+    if (response != null) return response;
+    throw NullThrownError();
   }
 
   @override

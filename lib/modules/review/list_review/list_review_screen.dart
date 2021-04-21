@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/lazy_load/lazyload_bloc.dart';
 import 'package:shaboo/components/stateful/lazy_load_item.dart';
 import 'package:shaboo/components/stateful/lazy_load_list.dart';
-import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/data/models/review/review.dart';
 import 'package:shaboo/data/repositories/implement/review/review_repo_impl.dart';
 import 'package:shaboo/modules/review/components/review_tile.dart';
+import 'package:shaboo/modules/review/detail/detail_review_screen.dart';
 
 class ListReviewScreen extends StatelessWidget {
   final String bookId;
@@ -70,6 +71,7 @@ class _ListReviewOwnedState extends State<ListReviewOwned> {
           urlImage: LazyLoadItem.of(context).itemData.userModel.avatar,
           title: LazyLoadItem.of(context).itemData.bookModel.name,
           subTitle: LazyLoadItem.of(context).itemData.review,
+          onPress: () => toDetailScreen(selectedReview: LazyLoadItem.of(context).itemData),
         );
       }),
     );
@@ -86,6 +88,14 @@ class _ListReviewOwnedState extends State<ListReviewOwned> {
   handleLoadMore() {
     _currentPage++;
     _lazyLoadBloc.add(LoadMore(fetchData: _reviewRepo.getReviews(page: _currentPage, userId: widget.userId)));
+  }
+
+  toDetailScreen({ReviewModel selectedReview}) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return DetailReviewScreen(
+        selectedReview: selectedReview,
+      );
+    }));
   }
 }
 
