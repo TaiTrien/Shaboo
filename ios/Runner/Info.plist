@@ -41,5 +41,44 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
+<!-- Google Sign-in Section -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- TODO Replace this value: -->
+				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+				<string>com.googleusercontent.apps.492602638278-eu7k81h0fb03m9sm45pd8kqdd7m390hk</string>
+				<string>fb453533645619041</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+
+	<!-- Replace "000000000000" with your Facebook App ID here. -->
+	<string>453533645619041</string>
+	<key>FacebookDisplayName</key>
+
+	<!-- Replace "YOUR_APP_NAME" with your Facebook App name. -->
+	<string>Shaboo</string>
+
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<!--Production need to delete this section, because this section is to access http req-->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+	</dict>
+	<!--end of delete section-->
 </dict>
 </plist>

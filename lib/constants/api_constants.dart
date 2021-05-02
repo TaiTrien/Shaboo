@@ -1,4 +1,4 @@
-const kPrefixUrl = 'http://api.youridea.studio';
+const kPrefixUrl = 'http://192.168.1.3:3000';
 const kPrefixUploadImageUrl = 'http://upload.youridea.studio/';
 
 const successCodes = [200, 201, 202, 204];

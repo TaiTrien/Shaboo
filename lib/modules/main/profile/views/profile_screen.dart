@@ -19,7 +19,8 @@ class ProfileScreen extends StatefulWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProviderStateMixin {
+class _ProfileScreenState extends State<ProfileScreen>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
   ProfileController _controller;
 
@@ -73,8 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: NestedScrollView(
         body: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
@@ -103,13 +103,16 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                 backgroundColor: Colors.white,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Stack(children: [
-                  LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                  LayoutBuilder(builder:
+                      (BuildContext context, BoxConstraints constraints) {
                     return Container(height: constraints.maxHeight - 50);
                   }),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: CircleAvatar(
-                        backgroundImage: NetworkImage(_controller.currentUser.avatar) ?? _controller.defaultAvatar,
+                        backgroundImage:
+                            NetworkImage(_controller.currentUser.avatar) ??
+                                _controller.defaultAvatar,
                         radius: 50),
                   )
                 ])),
@@ -148,7 +151,8 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
               titleSpacing: 0.0,
               title: TabBar(
                 labelColor: Colors.black,
-                labelStyle: kDefaultTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.w500),
+                labelStyle: kDefaultTextStyle.copyWith(
+                    fontSize: 18, fontWeight: FontWeight.w500),
                 indicatorColor: kSecondaryColor,
                 unselectedLabelColor: kGreyColor,
                 indicatorSize: TabBarIndicatorSize.label,
@@ -164,6 +168,6 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
         },
       ),
       floatingActionButton: _floatingBtn(),
-    ));
+    );
   }
 }

@@ -51,7 +51,11 @@ class ProfileController {
                 size: 30,
               ),
               SizedBox(width: 5),
-              Text('Are you sure to sign out ?'),
+              Text('Are you sure to sign out ?',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 18,
+                  )),
             ],
           ),
           actions: <Widget>[
@@ -59,7 +63,7 @@ class ProfileController {
               child: Text(
                 'Cancel',
                 style: TextStyle(
-                  color: kLightblueColor,
+                  color: kPrimaryColor,
                   fontFamily: 'Helvetica Neue',
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
@@ -87,6 +91,8 @@ class ProfileController {
 
   get currentUser => _userBloc.state.currentUser;
   get userFullName =>
-      _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
+      _userBloc.state.currentUser.firstName.toUpperCase() +
+      ' ' +
+      _userBloc.state.currentUser.lastName.toUpperCase();
   get defaultAvatar => SvgPicture.asset('assets/images/reader.svg');
 }
