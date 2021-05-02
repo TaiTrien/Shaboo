@@ -85,7 +85,8 @@ class _BodyState extends State<Body> {
     _sliderValue = 5.0;
     _reviewBloc = BlocProvider.of<ReviewBloc>(context);
 
-    if (_reviewBloc.state.currentReview != null && _reviewBloc.state.currentReview.bookId == widget.selectedBook.id) {
+    if (_reviewBloc.state.currentReview != null &&
+        _reviewBloc.state.currentReview.bookId == widget.selectedBook.id) {
       _sliderValue = _reviewBloc.state.currentReview.score.toDouble();
       tagController.text = _reviewBloc.state.currentReview.tags;
       reviewController.text = _reviewBloc.state.currentReview.review;
@@ -107,7 +108,9 @@ class _BodyState extends State<Body> {
         child: ConstrainedBox(
       constraints: BoxConstraints(minHeight: size.height),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: kDefaultPaddingVerical),
+        padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPaddingHorizontal,
+            vertical: kDefaultPaddingVerical),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -126,7 +129,8 @@ class _BodyState extends State<Body> {
             Container(
               width: double.infinity,
               alignment: Alignment.center,
-              child: Text('Cực kì thích', style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+              child: Text('Cực kì thích',
+                  style: kDefaultTextStyle.copyWith(color: kGreyColor)),
             ),
             SizedBox(height: 20),
             Container(
@@ -147,14 +151,16 @@ class _BodyState extends State<Body> {
             SizedBox(height: 20),
             Text('Tags', style: kHeadingTextStyle),
             SizedBox(height: 10),
-            Text('Thêm tags như: #kinhdi, #kinhte, ...', style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+            Text('Thêm tags như: #kinhdi, #kinhte, ...',
+                style: kDefaultTextStyle.copyWith(color: kGreyColor)),
             SizedBox(height: 20),
             TextField(
               controller: tagController,
               cursorColor: Colors.black,
               decoration: new InputDecoration(
                 border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                contentPadding:
+                    EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                 hintText: "Thêm tags của bạn",
               ),
               onChanged: (value) {
@@ -173,7 +179,8 @@ class _BodyState extends State<Body> {
                   maxLines: 10,
                   decoration: new InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                    contentPadding: EdgeInsets.only(
+                        left: 15, bottom: 11, top: 11, right: 15),
                     hintText: "Hãy chia sẻ cảm nghĩ của bạn về cuốn sách nhé",
                   ),
                   onChanged: (value) {
@@ -201,13 +208,11 @@ class _BodyState extends State<Body> {
               builder: (context, state) {
                 return DefaultButton(
                   color: _canSubmit ? kPrimaryColor : kGreyColor,
-                  onPress: state is InternetConnected
-                      ? () {
-                          if (_currentReview.review.isEmpty)
-                            return Notify().error(message: "Chưa đánh giá cuốn sách này");
-                          _reviewBloc.add(AddReview(_currentReview));
-                        }
-                      : () {},
+                  onPress: () => {
+                    _currentReview.review.isEmpty
+                        ? Notify().error(message: "Chưa đánh giá cuốn sách này")
+                        : _reviewBloc.add(AddReview(_currentReview))
+                  },
                   text: 'Gửi',
                 );
               },

@@ -10,7 +10,8 @@ import 'package:shaboo/utils/notify.dart';
 class EditReviewScreen extends StatelessWidget {
   final ReviewModel selectedReview;
 
-  const EditReviewScreen({Key key, @required this.selectedReview}) : super(key: key);
+  const EditReviewScreen({Key key, @required this.selectedReview})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,9 @@ class _BodyState extends State<Body> {
         child: ConstrainedBox(
       constraints: BoxConstraints(minHeight: size.height),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: kDefaultPaddingVerical),
+        padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPaddingHorizontal,
+            vertical: kDefaultPaddingVerical),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -123,7 +126,8 @@ class _BodyState extends State<Body> {
             Container(
               width: double.infinity,
               alignment: Alignment.center,
-              child: Text('Cực kì thích', style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+              child: Text('Cực kì thích',
+                  style: kDefaultTextStyle.copyWith(color: kGreyColor)),
             ),
             SizedBox(height: 20),
             Container(
@@ -142,14 +146,16 @@ class _BodyState extends State<Body> {
             SizedBox(height: 20),
             Text('Tags', style: kHeadingTextStyle),
             SizedBox(height: 10),
-            Text('Thêm tags như: #kinhdi, #kinhte, ...', style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+            Text('Thêm tags như: #kinhdi, #kinhte, ...',
+                style: kDefaultTextStyle.copyWith(color: kGreyColor)),
             SizedBox(height: 20),
             TextField(
               controller: tagController,
               cursorColor: Colors.black,
               decoration: new InputDecoration(
                 border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                contentPadding:
+                    EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                 hintText: "Thêm tags của bạn",
               ),
             ),
@@ -164,7 +170,8 @@ class _BodyState extends State<Body> {
                   maxLines: 10,
                   decoration: new InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                    contentPadding: EdgeInsets.only(
+                        left: 15, bottom: 11, top: 11, right: 15),
                     hintText: "Hãy chia sẻ cảm nghĩ của bạn về cuốn sách nhé",
                   ),
                 );
@@ -188,24 +195,24 @@ class _BodyState extends State<Body> {
               builder: (context, state) {
                 return DefaultButton(
                   color: _canSubmit ? kPrimaryColor : kGreyColor,
-                  onPress: state is InternetConnected
-                      ? () {
-                          if (reviewController.text.isEmpty)
-                            return Notify().error(message: "Chưa đánh giá cuốn sách này");
-                          if (tagController.text.isEmpty)
-                            return Notify().error(message: "Chưa thêm tag cho đánh giá này");
-                          _currentReview = ReviewModel(
-                            id: widget.selectedReview.id,
-                            review: reviewController.text,
-                            tags: tagController.text,
-                            score: _sliderValue.toInt(),
-                            bookId: widget.selectedReview.bookId,
-                            bookModel: widget.selectedReview.bookModel,
-                            userModel: widget.selectedReview.userModel,
-                          );
-                          _reviewBloc.add(EditReview(_currentReview));
-                        }
-                      : () {},
+                  onPress: () {
+                    if (reviewController.text.isEmpty)
+                      return Notify()
+                          .error(message: "Chưa đánh giá cuốn sách này");
+                    if (tagController.text.isEmpty)
+                      return Notify()
+                          .error(message: "Chưa thêm tag cho đánh giá này");
+                    _currentReview = ReviewModel(
+                      id: widget.selectedReview.id,
+                      review: reviewController.text,
+                      tags: tagController.text,
+                      score: _sliderValue.toInt(),
+                      bookId: widget.selectedReview.bookId,
+                      bookModel: widget.selectedReview.bookModel,
+                      userModel: widget.selectedReview.userModel,
+                    );
+                    _reviewBloc.add(EditReview(_currentReview));
+                  },
                   text: 'Cập nhập',
                 );
               },

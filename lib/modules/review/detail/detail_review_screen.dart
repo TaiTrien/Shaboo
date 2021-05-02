@@ -8,7 +8,8 @@ import 'package:shaboo/modules/review/edit/edit_review_screen.dart';
 class DetailReviewScreen extends StatefulWidget {
   final ReviewModel selectedReview;
 
-  const DetailReviewScreen({Key key, @required this.selectedReview}) : super(key: key);
+  const DetailReviewScreen({Key key, @required this.selectedReview})
+      : super(key: key);
 
   @override
   _DetailReviewScreenState createState() => _DetailReviewScreenState();
@@ -31,21 +32,28 @@ class _DetailReviewScreenState extends State<DetailReviewScreen> {
                 expandedHeight: size.height / 4,
                 elevation: 0.0,
                 title: Text('Chi tiết', style: kHeadingTextStyle),
+                leading: IconButton(
+                    icon: Icon(Icons.close, color: Colors.black),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
                 backgroundColor: Colors.white,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Stack(children: [
-                  LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                  LayoutBuilder(builder:
+                      (BuildContext context, BoxConstraints constraints) {
                     return Container(height: constraints.maxHeight - 50);
                   }),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: CircleAvatar(
-                        radius: 50,
+                        radius: 45,
                         child: ClipOval(
                             child: Image.network(
                           widget.selectedReview.userModel.avatar,
                           fit: BoxFit.cover,
-                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent loadingProgress) {
                             if (loadingProgress == null) return child;
                             return LoadingWidget(isImage: true);
                           },
@@ -59,14 +67,18 @@ class _DetailReviewScreenState extends State<DetailReviewScreen> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return EditReviewScreen(selectedReview: widget.selectedReview);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return EditReviewScreen(
+                            selectedReview: widget.selectedReview);
                       }));
                     },
                   ),
                 ]),
             SliverHeaderView(
-              userName: widget.selectedReview.userModel.firstName + ' ' + widget.selectedReview.userModel.lastName,
+              userName: widget.selectedReview.userModel.firstName +
+                  ' ' +
+                  widget.selectedReview.userModel.lastName,
               score: widget.selectedReview.score.toDouble(),
             ),
           ];
@@ -87,7 +99,8 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
+        padding:
+            const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -98,24 +111,32 @@ class Body extends StatelessWidget {
               alignment: WrapAlignment.center,
               children: [
                 Chip(
-                  label: Text('#Tieuthuyet', style: kDefaultTextStyle.copyWith(color: Colors.white)),
+                  label: Text('#Tieuthuyet',
+                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
                   backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
                 ),
                 Chip(
-                  label: Text('#laptrinh', style: kDefaultTextStyle.copyWith(color: Colors.white)),
+                  label: Text('#laptrinh',
+                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
                   backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
                 ),
                 Chip(
-                  label: Text('#kinhdi', style: kDefaultTextStyle.copyWith(color: Colors.white)),
+                  label: Text('#kinhdi',
+                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
                   backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
                 ),
                 Chip(
-                  label: Text('#lichsu', style: kDefaultTextStyle.copyWith(color: Colors.white)),
+                  label: Text('#lichsu',
+                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
                   backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
                 ),
               ],
             ),

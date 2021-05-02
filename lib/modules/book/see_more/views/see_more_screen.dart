@@ -9,7 +9,8 @@ class SeeMoreScreen extends StatefulWidget {
   final String screenHeader;
   final BookType bookType;
 
-  const SeeMoreScreen({Key key, this.screenHeader, this.bookType}) : super(key: key);
+  const SeeMoreScreen({Key key, this.screenHeader, this.bookType})
+      : super(key: key);
   @override
   _SeeMoreScreenState createState() => _SeeMoreScreenState();
 }
@@ -19,10 +20,12 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = SeeMoreController(context: context, bookType: widget.bookType);
+    _controller =
+        SeeMoreController(context: context, bookType: widget.bookType);
 
     _controller.scrollController.addListener(() {
-      if (_controller.scrollController.position.maxScrollExtent == _controller.scrollController.offset) {
+      if (_controller.scrollController.position.maxScrollExtent ==
+          _controller.scrollController.offset) {
         try {
           _controller.loadMore(currentPage: _controller.currentPage);
         } catch (e) {
@@ -43,7 +46,15 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+          ),
           backgroundColor: Colors.white,
           elevation: 0,
           title: Text(
@@ -56,7 +67,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
         body: StreamBuilder(
           stream: _controller.dataStream,
           builder: (BuildContext _context, AsyncSnapshot _snapshot) {
-            if (!_snapshot.hasData || _snapshot.connectionState == ConnectionState.waiting) {
+            if (!_snapshot.hasData ||
+                _snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (_snapshot.data.isEmpty) {
               return Center(
@@ -76,7 +88,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               return RefreshIndicator(
                 onRefresh: _controller.refresh,
                 child: ListView.separated(
-                  padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
                   controller: _controller.scrollController,
                   itemCount: _snapshot.data.length + 1,
                   itemBuilder: (BuildContext _context, int index) {
@@ -85,7 +98,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                         imageLink: _snapshot.data[index].thumbnailUrl,
                         subTitle: _snapshot.data[index].description,
                         title: _snapshot.data[index].name,
-                        onPress: () => _controller.toDetailedBookScreen(_snapshot.data[index]),
+                        onPress: () => _controller
+                            .toDetailedBookScreen(_snapshot.data[index]),
                       );
                     } else if (_controller.hasMore) {
                       return Padding(

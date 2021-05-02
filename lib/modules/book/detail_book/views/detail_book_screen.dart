@@ -20,7 +20,8 @@ class DetailBookScreen extends StatefulWidget {
   _DetailBookScreenState createState() => _DetailBookScreenState();
 }
 
-class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerProviderStateMixin {
+class _DetailBookScreenState extends State<DetailBookScreen>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
@@ -89,7 +90,9 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
                 bookId: widget.selectedBook.id.toString(),
                 reviewType: ReviewType.BasedOnBook,
               ),
-              ListPost(postType: PostType.BasedOnBook, bookId: widget.selectedBook.id),
+              ListPost(
+                  postType: PostType.BasedOnBook,
+                  bookId: widget.selectedBook.id),
             ],
             controller: _tabController,
           ),
@@ -108,11 +111,14 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
                     ),
                     Center(
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.2, vertical: size.width * 0.1),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.2,
+                            vertical: size.width * 0.1),
                         child: Image.network(
                           widget.selectedBook.thumbnailUrl,
                           fit: BoxFit.cover,
-                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent loadingProgress) {
                             if (loadingProgress == null) return child;
                             return LoadingWidget(isImage: true);
                           },
@@ -123,7 +129,9 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
                       right: 0,
                       child: IconButton(
                         icon: Icon(Icons.close_rounded, size: 30),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     )
                   ],
@@ -132,7 +140,9 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
               SliverHeaderSection(
                 backgroundColor: Colors.white,
                 bookName: widget.selectedBook.name,
-                author: widget.selectedBook.authors.isEmpty ? 'Trống' : widget.selectedBook.authors[0].name,
+                author: widget.selectedBook.authors.isEmpty
+                    ? 'Trống'
+                    : widget.selectedBook.authors[0].name,
                 score: 9.5,
               ),
               SliverAppBar(
@@ -143,7 +153,8 @@ class _DetailBookScreenState extends State<DetailBookScreen> with SingleTickerPr
                 titleSpacing: 0.0,
                 title: TabBar(
                   labelColor: Colors.black,
-                  labelStyle: kDefaultTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.w500),
+                  labelStyle: kDefaultTextStyle.copyWith(
+                      fontSize: 18, fontWeight: FontWeight.w500),
                   indicatorColor: kSecondaryColor,
                   unselectedLabelColor: kGreyColor,
                   indicatorSize: TabBarIndicatorSize.label,

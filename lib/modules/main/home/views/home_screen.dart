@@ -36,7 +36,8 @@ class HomeScreen extends StatelessWidget {
                           child: Image.network(
                         _controller.avatarLink,
                         fit: BoxFit.cover,
-                        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent loadingProgress) {
                           if (loadingProgress == null) return child;
                           return LoadingWidget(isImage: true);
                         },
@@ -52,7 +53,8 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical, horizontal: 15),
+                padding: const EdgeInsets.symmetric(
+                    vertical: kDefaultPaddingVerical, horizontal: 15),
                 child: SearchBar(),
               ),
               SizedBox(height: 20),
@@ -93,11 +95,14 @@ class HomeScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: 5,
                           itemBuilder: (context, index) => GestureDetector(
-                                onTap: () => _controller.toDetailedBookScreen(bookList.listBook[index]),
+                                onTap: () => _controller.toDetailedBookScreen(
+                                    bookList.listBook[index]),
                                 child: BooksTile(
                                   title: bookList.listBook[index].name,
-                                  description: bookList.listBook[index].description,
-                                  imageLink: bookList.listBook[index].thumbnailUrl,
+                                  description:
+                                      bookList.listBook[index].description,
+                                  imageLink:
+                                      bookList.listBook[index].thumbnailUrl,
                                 ),
                               )),
                     );
