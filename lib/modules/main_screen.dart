@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/modules/comming_soon.dart';
 import 'package:shaboo/modules/main/feed/feed/views/feed_screen.dart';
 import 'package:shaboo/modules/review/add/add_review_screen.dart';
 import 'package:shaboo/modules/review/detail/detail_review_screen.dart';
@@ -17,9 +18,9 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    HomeScreen(),
+    CommingSoonScreen(),
     FeedScreen(),
-    AddReviewScreen(),
+    CommingSoonScreen(),
     ProfileScreen(),
   ];
 

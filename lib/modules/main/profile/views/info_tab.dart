@@ -6,8 +6,9 @@ class InfoTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal + 10, vertical: kDefaultPaddingVerical),
+        padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPaddingHorizontal + 10,
+            vertical: kDefaultPaddingVerical),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,52 +22,32 @@ class InfoTab extends StatelessWidget {
               textAlign: TextAlign.justify,
             ),
             SizedBox(height: 20),
-            Text('Liên hệ', style: kHeadingTextStyle.copyWith(fontSize: 24)),
-            Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              spacing: 15.0,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FlatButton.icon(
-                  padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                FlatButton(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  shape: CircleBorder(),
                   onPressed: () {},
-                  icon: Icon(
-                    Icons.message,
-                    color: Colors.white,
-                  ),
-                  label: Text('Chat',
-                      style: kDefaultTextStyle.copyWith(
-                        color: Colors.white,
-                      )),
+                  child: Icon(Icons.mail, color: Colors.white),
+                  color: Colors.purple,
+                ),
+                FlatButton(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  shape: CircleBorder(),
+                  onPressed: () {},
+                  child: Icon(Icons.chat, color: Colors.white),
                   color: kPrimaryColor,
                 ),
-                FlatButton.icon(
-                  padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                FlatButton(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  shape: CircleBorder(),
                   onPressed: () {},
-                  icon: Icon(
-                    Icons.call,
-                    color: Colors.white,
-                  ),
-                  label: Text('Gọi',
-                      style: kDefaultTextStyle.copyWith(
-                        color: Colors.white,
-                      )),
-                  color: kGreenColor,
-                ),
-                FlatButton.icon(
-                  padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  onPressed: () {},
-                  icon: Icon(
-                    (Icons.sms),
-                    color: Colors.white,
-                  ),
-                  label: Text('SMS',
-                      style: kDefaultTextStyle.copyWith(
-                        color: Colors.white,
-                      )),
-                  color: kSecondaryColor,
+                  child: Icon(Icons.phone, color: Colors.white),
+                  color: Colors.green,
                 ),
               ],
             ),
