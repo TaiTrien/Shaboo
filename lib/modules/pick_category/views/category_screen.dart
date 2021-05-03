@@ -29,7 +29,8 @@ class CategoryScreen extends StatelessWidget {
             FlatButton(
               onPressed: () async => _controller.handleSelectCategories(),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: 10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: kDefaultPaddingHorizontal, vertical: 10),
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -60,19 +61,22 @@ class CategoryScreen extends StatelessWidget {
                 } else if (!_snapshot.hasData) {
                   return Center(
                     child: Text('Không tìm thấy danh mục nào',
-                        style: kTitleTextStyle.copyWith(fontWeight: FontWeight.w400, color: kGreyColor)),
+                        style: kTitleTextStyle.copyWith(
+                            fontWeight: FontWeight.w400, color: kGreyColor)),
                   );
                 }
-                return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+                return BlocBuilder<UserBloc, UserState>(
+                    builder: (context, state) {
                   return GridView.builder(
                     itemCount: sampleImageLink.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
-                      mainAxisSpacing: 20,
+                      mainAxisSpacing: 40,
                     ),
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => _controller.updateSelectedCategories(selectCategory: _snapshot.data[index]),
+                      onTap: () => _controller.updateSelectedCategories(
+                          selectCategory: _snapshot.data[index]),
                       child: ListTile(
                         title: Stack(
                           children: [
@@ -81,7 +85,9 @@ class CategoryScreen extends StatelessWidget {
                               child: Image.network(
                                 sampleImageLink[index],
                                 fit: BoxFit.cover,
-                                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent loadingProgress) {
                                   if (loadingProgress == null) return child;
                                   return LoadingWidget(isImage: true);
                                 },
@@ -89,10 +95,12 @@ class CategoryScreen extends StatelessWidget {
                             ),
                             Container(
                               height: size.height / 4,
-                              color: _controller.isSelected(_snapshot.data[index])
-                                  ? Colors.black.withOpacity(0.4)
-                                  : Colors.black.withOpacity(0),
-                              child: _controller.isSelected(_snapshot.data[index])
+                              color:
+                                  _controller.isSelected(_snapshot.data[index])
+                                      ? Colors.black.withOpacity(0.4)
+                                      : Colors.black.withOpacity(0),
+                              child: _controller
+                                      .isSelected(_snapshot.data[index])
                                   ? Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Align(
@@ -101,9 +109,13 @@ class CategoryScreen extends StatelessWidget {
                                           padding: EdgeInsets.all(2.0),
                                           decoration: BoxDecoration(
                                               color: kPrimaryColor,
-                                              borderRadius: BorderRadius.circular(100),
-                                              border: Border.all(width: 2, color: Colors.white)),
-                                          child: Icon(Icons.check, color: Colors.white, size: 18),
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: Colors.white)),
+                                          child: Icon(Icons.check,
+                                              color: Colors.white, size: 18),
                                         ),
                                       ),
                                     )
@@ -115,7 +127,10 @@ class CategoryScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 5.0),
                           child: Text(
                             _snapshot.data[index].name,
-                            style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

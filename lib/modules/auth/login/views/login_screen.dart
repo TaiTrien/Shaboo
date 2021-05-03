@@ -45,13 +45,13 @@ class LoginScreen extends StatelessWidget {
                     CustomTextField(
                       controller: controller.usernameController,
                       keyboard: TextInputType.emailAddress,
-                      labelText: 'Your email',
+                      labelText: 'Email',
                       icon: MdiIcons.account,
                     ),
                     SizedBox(height: 20),
                     CustomTextField(
                       controller: controller.passwordController,
-                      labelText: 'Your password',
+                      labelText: 'Mật khẩu',
                       isObscure: true,
                       icon: MdiIcons.lock,
                     ),
@@ -60,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                       child: FlatButton(
                         onPressed: () {},
                         child: Text(
-                          'Forgot password?',
+                          'Quên mật khẩu?',
                           style: TextStyle(
                             fontSize: 18,
                             color: kPrimaryColor,
@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 20),
                     DefaultButton(
                       onPress: () {},
-                      text: 'Login',
+                      text: 'Đăng nhập',
                     ),
                     SizedBox(height: 20),
                     Container(
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Or login with',
+                            'hoặc đăng nhập với',
                             style: TextStyle(fontSize: 20),
                           ),
                           Expanded(
@@ -112,6 +112,7 @@ class LoginScreen extends StatelessWidget {
                             width: double.infinity,
                             child: GoogleSignInButton(
                               onPressed: controller.signInByGoogle,
+                              text: 'Đăng nhập bằng Google',
                               darkMode: false,
                               textStyle: TextStyle(
                                   fontSize: 18, color: Colors.black87),
@@ -124,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                             width: double.infinity,
                             child: FacebookSignInButton(
                               onPressed: controller.signInByFacebook,
-                              text: '   Sign in with Facebook',
+                              text: '   Đăng nhập bằng Facebook',
                               textStyle:
                                   TextStyle(fontSize: 18, color: Colors.white),
                             ),
@@ -143,14 +144,14 @@ class LoginScreen extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: 'Don\'t have an account? ',
+                                text: 'Không có tài khoản? ',
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 18,
                                 ),
                               ),
                               TextSpan(
-                                text: ' Sign Up',
+                                text: ' Đăng kí ngay',
                                 style: TextStyle(
                                   color: kPrimaryColor,
                                   fontSize: 18,

@@ -17,11 +17,12 @@ class BooksRow extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
-      height: size.height / 3,
+      height: size.height / 4,
       child: FutureBuilder(
           future: bookGetter,
           builder: (context, _snapshot) {
-            if (_snapshot.connectionState != ConnectionState.done || !_snapshot.hasData) {
+            if (_snapshot.connectionState != ConnectionState.done ||
+                !_snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
             } else if (_snapshot.hasError) {
               return Center(
@@ -29,7 +30,8 @@ class BooksRow extends StatelessWidget {
               );
             } else if (_snapshot.data.listBook.isEmpty) {
               return Center(
-                child: Text('Không tìm thấy cuốn sách phù hợp', style: TextStyle(color: kGreyColor, fontSize: 18)),
+                child: Text('Không tìm thấy cuốn sách phù hợp',
+                    style: TextStyle(color: kGreyColor, fontSize: 18)),
               );
             }
             return Container(

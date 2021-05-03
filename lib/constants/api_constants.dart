@@ -1,4 +1,4 @@
-const kPrefixUrl = 'http://192.168.1.3:3000';
+const kPrefixUrl = 'http://Quocs-MacBook-Pro.local:3000';
 const kPrefixUploadImageUrl = 'http://upload.youridea.studio/';
 
 const successCodes = [200, 201, 202, 204];

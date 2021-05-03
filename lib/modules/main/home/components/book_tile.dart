@@ -15,10 +15,9 @@ class BooksTile extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      height: size.height / 6,
       width: size.width * 0.8,
       alignment: Alignment.bottomLeft,
-      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: kDefaultPaddingVerical),
+      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 30),
       child: Stack(
         children: <Widget>[
           Container(
@@ -49,7 +48,8 @@ class BooksTile extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   ),
                   subtitle: Text(
@@ -57,7 +57,10 @@ class BooksTile extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.justify,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: kGreyColor),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: kGreyColor),
                   ),
                 ),
               ),
@@ -73,7 +76,8 @@ class BooksTile extends StatelessWidget {
                   height: 150,
                   width: 100,
                   fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent loadingProgress) {
                     if (loadingProgress == null) return child;
                     return LoadingWidget(isImage: true);
                   },

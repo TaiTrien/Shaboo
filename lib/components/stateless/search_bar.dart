@@ -80,7 +80,7 @@ class DataSearch extends SearchDelegate {
                 selectedItem = suggestionList[index];
                 showResults(context);
               },
-              leading: Icon(Icons.bookmarks),
+              leading: Icon(Icons.search),
               title: RichText(
                 text: TextSpan(
                   text: suggestionList[index].substring(0, query.length),
