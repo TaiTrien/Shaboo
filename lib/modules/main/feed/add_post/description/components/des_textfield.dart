@@ -19,7 +19,8 @@ class DescriptionTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
+      padding:
+          const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

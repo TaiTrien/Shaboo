@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'hoặc đăng nhập với',
+                            'Hoặc đăng nhập với',
                             style: TextStyle(fontSize: 20),
                           ),
                           Expanded(

@@ -49,7 +49,8 @@ class MyApp extends StatelessWidget {
             create: (context) => PostBloc(),
           ),
           BlocProvider<ReviewBloc>(
-            create: (context) => ReviewBloc(reviewRepo: RepositoryProvider.of<ReviewRepoImpl>(context)),
+            create: (context) => ReviewBloc(
+                reviewRepo: RepositoryProvider.of<ReviewRepoImpl>(context)),
           ),
         ],
         child: MaterialApp(
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: kPrimaryColor,
             ),
           ),
-          initialRoute: '/onBoardingScreen',
+          initialRoute: '/updateGeneralInfo',
           routes: routes,
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:shaboo/modules/on_boarding/views/on_boarding_screen.dart';
 import 'modules/auth/login/views/login_screen.dart';
 import 'modules/auth/sign_up/views/sign_up_screen.dart';
 import 'modules/main/profile/views/profile_screen.dart';
+import 'modules/updateInfo/update_general.dart';
 
 final routes = {
   '/onBoardingScreen': (context) => OnBoardingScreen(),
@@ -15,4 +16,5 @@ final routes = {
   '/mainScreen': (context) => MainScreen(),
   '/profileScreen': (context) => ProfileScreen(),
   '/loadingScreen': (context) => LoadingScreen(),
+  '/updateGeneralInfo': (context) => UpdateGeneralInfo(),
 };

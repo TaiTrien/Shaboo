@@ -28,7 +28,7 @@ class SignupScreen extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Create account',
+                  'Đăng kí',
                   style: TextStyle(
                     fontFamily: 'Pacifico',
                     fontSize: 40,
@@ -39,27 +39,27 @@ class SignupScreen extends StatelessWidget {
               CustomTextField(
                 controller: controller.emailController,
                 keyboard: TextInputType.emailAddress,
-                labelText: 'Your email',
+                labelText: 'Email',
                 icon: MdiIcons.account,
               ),
               SizedBox(height: 20),
               CustomTextField(
                 controller: controller.passwordController,
-                labelText: 'Your password',
+                labelText: 'Mật khẩu',
                 isObscure: true,
                 icon: MdiIcons.lock,
               ),
               SizedBox(height: 20),
               CustomTextField(
                 controller: controller.confirmPasswordController,
-                labelText: 'Confirm password',
+                labelText: 'Xác thực mật khẩu',
                 isObscure: true,
                 icon: MdiIcons.lock,
               ),
               SizedBox(height: 20),
               DefaultButton(
                 onPress: () {},
-                text: 'Sign up',
+                text: 'Đăng kí',
               ),
               SizedBox(height: 20),
               Container(
@@ -75,7 +75,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Or sign up with',
+                      'Hoặc đăng kí với',
                       style: TextStyle(fontSize: 20),
                     ),
                     Expanded(
@@ -101,8 +101,9 @@ class SignupScreen extends StatelessWidget {
                       child: GoogleSignInButton(
                         onPressed: controller.signInByGoogle,
                         darkMode: false,
-                        text: 'Sign up with Google',
-                        textStyle: TextStyle(fontSize: 20, color: Colors.black87),
+                        text: 'Đăng kí với Google',
+                        textStyle:
+                            TextStyle(fontSize: 20, color: Colors.black87),
                       ),
                     ),
                     SizedBox(
@@ -112,7 +113,7 @@ class SignupScreen extends StatelessWidget {
                       width: double.infinity,
                       child: FacebookSignInButton(
                         onPressed: controller.signInByFacebook,
-                        text: '   Sign up with Facebook',
+                        text: '   Đăng kí với Facebook',
                         textStyle: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
@@ -130,14 +131,14 @@ class SignupScreen extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Already have an account? ',
+                          text: 'Đã có tài khoản? ',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 18,
                           ),
                         ),
                         TextSpan(
-                          text: ' Login',
+                          text: ' Đăng nhập ngay',
                           style: TextStyle(
                             color: kPrimaryColor,
                             fontSize: 18,
