@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: kPrimaryColor,
             ),
           ),
-          initialRoute: '/updateGeneralInfo',
+          initialRoute: '/loginScreen',
           routes: routes,
         ),
       ),

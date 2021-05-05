@@ -34,7 +34,7 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
       body: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: kDefaultPaddingHorizontal,
-            vertical: kDefaultPaddingVerical),
+            vertical: kDefaultPaddingVerical + 20),
         child: Container(
           height: size.height,
           child: Column(

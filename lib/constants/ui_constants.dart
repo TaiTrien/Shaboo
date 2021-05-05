@@ -32,7 +32,7 @@ final kDefaultTextStyle = TextStyle(
   color: Colors.black,
 );
 
-const kDefaultPaddingVerical = 30.0;
+const kDefaultPaddingVerical = 15.0;
 const kDefaultPaddingHorizontal = 20.0;
 const defaultDuration = Duration(milliseconds: 250);
 
