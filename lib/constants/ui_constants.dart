@@ -12,14 +12,14 @@ const kBorderColor = Color(0xFFBCBCBC);
 const kAnimationDuration = Duration(milliseconds: 200);
 
 final kHeadingTextStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(25),
+  fontSize: 25,
   fontWeight: FontWeight.bold,
   color: Colors.black,
   height: 1.5,
 );
 
 final kTitleTextStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(22),
+  fontSize: 22,
   fontWeight: FontWeight.bold,
   color: Colors.black,
   height: 1.5,
@@ -32,7 +32,7 @@ final kDefaultTextStyle = TextStyle(
   color: Colors.black,
 );
 
-const kDefaultPaddingVerical = 15.0;
+const kDefaultPaddingVerical = 30.0;
 const kDefaultPaddingHorizontal = 20.0;
 const defaultDuration = Duration(milliseconds: 250);
 

@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/components/stateful/custom_textfield.dart';
 import 'package:shaboo/components/stateful/date_time_picker.dart';
+import 'package:shaboo/components/stateless/default_button.dart';
+import 'package:shaboo/components/stateless/widget_with_label.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/modules/updateInfo/update_contact.dart';
 
 class UpdateGeneralInfo extends StatefulWidget {
   @override
@@ -29,12 +32,13 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
         elevation: 0,
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
+        padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPaddingHorizontal,
+            vertical: kDefaultPaddingVerical),
         child: Container(
           height: size.height,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               WidgetWithLabel(
                   label: 'Họ của bạn',
@@ -43,6 +47,7 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
                     controller: firstNameController,
                     keyboard: TextInputType.emailAddress,
                     mainColor: kBorderColor,
+                    labelText: 'VD: Nguyễn',
                   )),
               SizedBox(height: 20),
               WidgetWithLabel(
@@ -52,6 +57,7 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
                   controller: lastNameController,
                   keyboard: TextInputType.emailAddress,
                   mainColor: kBorderColor,
+                  labelText: 'VD: Như',
                 ),
               ),
               SizedBox(height: 20),
@@ -61,44 +67,18 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
                   onConfirmCallBack: (selectedDate) => print(selectedDate),
                 ),
               ),
+              Spacer(),
+              DefaultButton(
+                text: 'Tiếp tục',
+                onPress: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => UpdateContactInfo()));
+                },
+              ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class WidgetWithLabel extends StatelessWidget {
-  final String label;
-  final bool isRequired;
-  final Widget child;
-
-  const WidgetWithLabel(
-      {Key key,
-      @required this.label,
-      this.isRequired = false,
-      @required this.child})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RichText(
-          text: TextSpan(
-            text: '$label ',
-            style: TextStyle(color: Colors.black, fontSize: 18),
-            children: [
-              isRequired
-                  ? TextSpan(text: '*', style: TextStyle(color: Colors.red))
-                  : TextSpan(text: '')
-            ],
-          ),
-        ),
-        SizedBox(height: 5),
-        child,
-      ],
     );
   }
 }
