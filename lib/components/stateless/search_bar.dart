@@ -19,7 +19,6 @@ class SearchBar extends StatelessWidget {
               context: context,
               delegate: DataSearch(dataSource: this.dataSource));
         },
-        onChanged: (value) => print(value),
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
               horizontal: kDefaultPaddingHorizontal,

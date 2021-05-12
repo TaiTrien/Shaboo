@@ -10,7 +10,13 @@ class LazyLoadList extends StatefulWidget {
   final Widget listSeperator;
   final dynamic onRefresh;
   final dynamic onLoadMore;
-  const LazyLoadList({Key key, this.child, this.listSeperator, this.onRefresh, this.onLoadMore}) : super(key: key);
+  const LazyLoadList(
+      {Key key,
+      this.child,
+      this.listSeperator,
+      this.onRefresh,
+      this.onLoadMore})
+      : super(key: key);
 
   @override
   _LazyLoadListState createState() => _LazyLoadListState();
@@ -27,7 +33,8 @@ class _LazyLoadListState extends State<LazyLoadList> {
     _lazyLoadBloc = BlocProvider.of<LazyLoadBloc>(context);
     widget.onRefresh();
     _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent == _scrollController.offset) {
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.offset) {
         try {
           widget.onLoadMore();
         } catch (e) {
@@ -51,7 +58,10 @@ class _LazyLoadListState extends State<LazyLoadList> {
           return Center(
             child: Text(
               'No internet connection',
-              style: Theme.of(context).textTheme.headline5.copyWith(color: kGreyColor),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  .copyWith(color: kGreyColor),
             ),
           );
         return RefreshIndicator(
@@ -67,10 +77,9 @@ class _LazyLoadListState extends State<LazyLoadList> {
                     child: CircularProgressIndicator(),
                   );
                 else if (state.data == null || state.data.isEmpty) {
-                  return Center(
-                    child: Text(
-                      'There is nothing',
-                      style: Theme.of(context).textTheme.headline5.copyWith(color: kGreyColor),
+                  return Container(
+                    child: Center(
+                      child: Text('Hiện tại chưa có đánh giá'),
                     ),
                   );
                 }
@@ -88,7 +97,8 @@ class _LazyLoadListState extends State<LazyLoadList> {
                       );
                     } else if (state is ErrorState) {
                       return Center(
-                        child: Text(state.errorMessage, style: TextStyle(fontSize: 20, color: kGreyColor)),
+                        child: Text(state.errorMessage,
+                            style: TextStyle(fontSize: 20, color: kGreyColor)),
                       );
                     } else if (state is HasMoreState) {
                       return Center(child: CircularProgressIndicator());

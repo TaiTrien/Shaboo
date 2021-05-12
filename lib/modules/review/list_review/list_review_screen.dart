@@ -15,7 +15,9 @@ class ListReviewScreen extends StatelessWidget {
   final String userId;
   final ReviewType reviewType;
 
-  const ListReviewScreen({Key key, this.bookId, this.userId, @required this.reviewType}) : super(key: key);
+  const ListReviewScreen(
+      {Key key, this.bookId, this.userId, @required this.reviewType})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,12 @@ class ListReviewScreen extends StatelessWidget {
           vertical: kDefaultPaddingVerical,
         ),
         child: reviewType == ReviewType.Owned
-            ? BlocProvider<LazyLoadBloc>(create: (context) => LazyLoadBloc(), child: ListReviewOwned(userId: userId))
-            : ListViewBasedOnBook(),
+            ? BlocProvider<LazyLoadBloc>(
+                create: (context) => LazyLoadBloc(),
+                child: ListReviewOwned(userId: userId))
+            : ListViewBasedOnBook(
+                bookId: this.bookId,
+              ),
       ),
     );
   }
@@ -66,12 +72,14 @@ class _ListReviewOwnedState extends State<ListReviewOwned> {
       onRefresh: handleRefresh,
       onLoadMore: handleLoadMore,
       listSeperator: Divider(color: kBorderColor),
-      child: BlocBuilder<LazyLoadBloc, LazyLoadState>(builder: (context, state) {
+      child:
+          BlocBuilder<LazyLoadBloc, LazyLoadState>(builder: (context, state) {
         return ReviewTile(
           urlImage: LazyLoadItem.of(context).itemData.userModel.avatar,
           title: LazyLoadItem.of(context).itemData.bookModel.name,
           subTitle: LazyLoadItem.of(context).itemData.review,
-          onPress: () => toDetailScreen(selectedReview: LazyLoadItem.of(context).itemData),
+          onPress: () =>
+              toDetailScreen(selectedReview: LazyLoadItem.of(context).itemData),
         );
       }),
     );
@@ -81,13 +89,16 @@ class _ListReviewOwnedState extends State<ListReviewOwned> {
     _currentPage = 1;
     _lazyLoadBloc.add(LoadMore(
       clearCachedData: true,
-      fetchData: _reviewRepo.getReviews(page: _currentPage, userId: widget.userId),
+      fetchData:
+          _reviewRepo.getReviews(page: _currentPage, userId: widget.userId),
     ));
   }
 
   handleLoadMore() {
     _currentPage++;
-    _lazyLoadBloc.add(LoadMore(fetchData: _reviewRepo.getReviews(page: _currentPage, userId: widget.userId)));
+    _lazyLoadBloc.add(LoadMore(
+        fetchData:
+            _reviewRepo.getReviews(page: _currentPage, userId: widget.userId)));
   }
 
   toDetailScreen({ReviewModel selectedReview}) {
@@ -132,7 +143,8 @@ class _ListViewBasedOnBookState extends State<ListViewBasedOnBook> {
       onRefresh: handleRefresh,
       onLoadMore: handleLoadMore,
       listSeperator: Divider(color: kBorderColor),
-      child: BlocBuilder<LazyLoadBloc, LazyLoadState>(builder: (context, state) {
+      child:
+          BlocBuilder<LazyLoadBloc, LazyLoadState>(builder: (context, state) {
         return ReviewTile(
           urlImage: LazyLoadItem.of(context).itemData.userModel.avatar,
           title: LazyLoadItem.of(context).itemData.review,
@@ -146,12 +158,15 @@ class _ListViewBasedOnBookState extends State<ListViewBasedOnBook> {
     _currentPage = 1;
     _lazyLoadBloc.add(LoadMore(
       clearCachedData: true,
-      fetchData: _reviewRepo.getReviews(page: _currentPage, bookId: widget.bookId),
+      fetchData:
+          _reviewRepo.getReviews(page: _currentPage, bookId: widget.bookId),
     ));
   }
 
   handleLoadMore() {
     _currentPage++;
-    _lazyLoadBloc.add(LoadMore(fetchData: _reviewRepo.getReviews(page: _currentPage, bookId: widget.bookId)));
+    _lazyLoadBloc.add(LoadMore(
+        fetchData:
+            _reviewRepo.getReviews(page: _currentPage, bookId: widget.bookId)));
   }
 }

@@ -17,10 +17,12 @@ class _ListPostState extends State<ListPost> {
   @override
   void initState() {
     super.initState();
-    _controller = ListPostController(context: context, postType: widget.postType, bookId: widget.bookId);
+    _controller = ListPostController(
+        context: context, postType: widget.postType, bookId: widget.bookId);
 
     _controller.scrollController.addListener(() {
-      if (_controller.scrollController.position.maxScrollExtent == _controller.scrollController.offset) {
+      if (_controller.scrollController.position.maxScrollExtent ==
+          _controller.scrollController.offset) {
         try {
           _controller.loadMore(currentPage: _controller.currentPage);
         } catch (e) {
@@ -41,20 +43,19 @@ class _ListPostState extends State<ListPost> {
     return StreamBuilder(
       stream: _controller.postStream,
       builder: (BuildContext _context, AsyncSnapshot _snapshot) {
-        if (!_snapshot.hasData || _snapshot.connectionState == ConnectionState.waiting) {
+        if (!_snapshot.hasData ||
+            _snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         } else if (_snapshot.data.isEmpty) {
-          return Center(
-            child: Text(
-              'Chưa có bài đăng nào',
-              style: TextStyle(fontSize: 20, color: kGreyColor),
+          return Container(
+            child: Center(
+              child: Text('Hiện tại chưa có bài đăng nào'),
             ),
           );
         } else if (_snapshot.hasError) {
-          return Center(
-            child: Text(
-              'ERROR',
-              style: TextStyle(fontSize: 20, color: kGreyColor),
+          return Container(
+            child: Center(
+              child: Text('Đã xảy ra lỗi'),
             ),
           );
         } else {
@@ -70,7 +71,8 @@ class _ListPostState extends State<ListPost> {
                 itemBuilder: (BuildContext _context, int index) {
                   if (index < _snapshot.data.length) {
                     return GestureDetector(
-                      onTap: () => _controller.toPreviewPostScreen(_snapshot.data[index]),
+                      onTap: () => _controller
+                          .toPreviewPostScreen(_snapshot.data[index]),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Container(
