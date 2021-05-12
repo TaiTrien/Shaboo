@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                               text: 'Đăng nhập bằng Google',
                               darkMode: false,
                               textStyle: TextStyle(
-                                  fontSize: 18, color: Colors.black87),
+                                  fontSize: 16, color: Colors.black87),
                             ),
                           ),
                           SizedBox(
@@ -127,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                               onPressed: controller.signInByFacebook,
                               text: '   Đăng nhập bằng Facebook',
                               textStyle:
-                                  TextStyle(fontSize: 18, color: Colors.white),
+                                  TextStyle(fontSize: 16, color: Colors.white),
                             ),
                           ),
                         ],

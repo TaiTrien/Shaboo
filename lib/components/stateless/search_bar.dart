@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/modules/book/detail_book/views/detail_book_screen.dart';
 
 class SearchBar extends StatelessWidget {
+  final dynamic dataSource;
+
+  const SearchBar({Key key, this.dataSource}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +15,9 @@ class SearchBar extends StatelessWidget {
       ),
       child: TextField(
         onTap: () {
-          showSearch(context: context, delegate: DataSearch());
+          showSearch(
+              context: context,
+              delegate: DataSearch(dataSource: this.dataSource));
         },
         onChanged: (value) => print(value),
         decoration: InputDecoration(
@@ -32,9 +38,10 @@ class SearchBar extends StatelessWidget {
 }
 
 class DataSearch extends SearchDelegate {
-  final cities = ['HCM', 'Hn', 'USA', 'TEst', 'test 2', 'test 3'];
-  final recentCities = ['test 2', 'test 3'];
-  var selectedItem = '';
+  final dataSource;
+  var selectedItem;
+
+  DataSearch({this.dataSource});
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -62,40 +69,60 @@ class DataSearch extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return Container(
-      child: Text(selectedItem),
+      child: Center(child: Image.network(selectedItem.thumbnailUrl)),
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty
-        ? recentCities
-        : cities
-            .where((element) =>
-                element.toLowerCase().startsWith(query.toLowerCase()))
-            .toList();
-    return ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-              onTap: () {
-                selectedItem = suggestionList[index];
-                showResults(context);
-              },
-              leading: Icon(Icons.search),
-              title: RichText(
-                text: TextSpan(
-                  text: suggestionList[index].substring(0, query.length),
-                  style: kDefaultTextStyle.copyWith(
-                      fontSize: 16, fontWeight: FontWeight.bold),
-                  children: [
-                    TextSpan(
-                        text: suggestionList[index].substring(query.length),
-                        style: kDefaultTextStyle.copyWith(
-                            color: kGreyColor, fontSize: 16))
-                  ],
-                ),
-              ),
+    return FutureBuilder(
+      future: this.dataSource(query),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (!snapshot.hasData)
+          return Container();
+        else if (snapshot.hasError)
+          return Container(
+            child: Center(
+              child: Text('Đã xảy ra lỗi'),
             ),
-        itemCount: suggestionList.length);
+          );
+        else if (snapshot.data.listBook.isEmpty)
+          return Container(
+            child: Center(
+              child: Text('Không tìm thấy kết quả'),
+            ),
+          );
+        return ListView.builder(
+            itemBuilder: (context, index) => ListTile(
+                  onTap: () {
+                    selectedItem = snapshot.data.listBook[index];
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailBookScreen(
+                                  selectedBook: selectedItem,
+                                )));
+                  },
+                  leading: Icon(Icons.search),
+                  title: RichText(
+                    text: TextSpan(
+                      text: snapshot.data.listBook[index].name
+                          .substring(0, query.length),
+                      style: kDefaultTextStyle.copyWith(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                      children: [
+                        TextSpan(
+                            text: snapshot.data.listBook[index].name
+                                .substring(query.length),
+                            style: kDefaultTextStyle.copyWith(
+                                color: kGreyColor, fontSize: 16))
+                      ],
+                    ),
+                  ),
+                ),
+            itemCount: snapshot.data.listBook.length);
+      },
+    );
   }
 
   @override

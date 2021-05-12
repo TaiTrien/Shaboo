@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
+import 'package:shaboo/data/repositories/implement/book/book_repo_impl.dart';
 import 'package:shaboo/modules/main/home/components/book_tile.dart';
 import 'package:shaboo/modules/main/home/components/books_row.dart';
 import 'package:shaboo/modules/main/home/components/see_more_row.dart';
@@ -55,7 +56,11 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: kDefaultPaddingVerical, horizontal: 15),
-                child: SearchBar(),
+                child: SearchBar(
+                  dataSource: (query) =>
+                      RepositoryProvider.of<BookRepoImpl>(context)
+                          .search(bookName: query),
+                ),
               ),
               SizedBox(height: 20),
               SeeMoreRow(
