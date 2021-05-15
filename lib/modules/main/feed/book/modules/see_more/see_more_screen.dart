@@ -41,13 +41,20 @@ class SeeMoreScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Column(
                     children: [
-                      Image.network(
-                        selectedBook.thumbnailUrl,
-                        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return CircularProgressIndicator();
-                        },
-                      ),
+                      this.selectedBook.thumbnailUrl != null
+                          ? Image.network(
+                              selectedBook.thumbnailUrl,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return CircularProgressIndicator();
+                              },
+                            )
+                          : Image.asset(
+                              'assets/icons/book-placeholder.png',
+                              fit: BoxFit.cover,
+                            ),
                       Text(
                         selectedBook.description,
                         textAlign: TextAlign.justify,

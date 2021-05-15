@@ -28,35 +28,33 @@ class _FeedScreenState extends State<FeedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Text(
-            'Trao đổi sách',
-            style: kHeadingTextStyle,
-            textAlign: TextAlign.center,
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          'Trao đổi sách',
+          style: kHeadingTextStyle,
+          textAlign: TextAlign.center,
         ),
-        body: ListPost(postType: PostType.Feed),
-        floatingActionButton: IconButton(
-          iconSize: 60.0,
-          padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-          color: Color(0xFF0365B0),
-          icon: Icon(MdiIcons.plusCircle),
-          onPressed: () => {
-            showModalBottomSheet<void>(
-              isScrollControlled: true,
-              context: context,
-              builder: (context) => Padding(
-                padding: const EdgeInsets.only(top: 28.0),
-                child: PostForm(),
-              ),
-            )
-          },
-        ),
+      ),
+      body: ListPost(postType: PostType.Feed),
+      floatingActionButton: IconButton(
+        iconSize: 60.0,
+        padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+        color: Color(0xFF0365B0),
+        icon: Icon(MdiIcons.plusCircle),
+        onPressed: () => {
+          showModalBottomSheet<void>(
+            isScrollControlled: true,
+            context: context,
+            builder: (context) => Padding(
+              padding: const EdgeInsets.only(top: 28.0),
+              child: PostForm(),
+            ),
+          )
+        },
       ),
     );
   }

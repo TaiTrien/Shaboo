@@ -34,17 +34,22 @@ class PostCard extends StatelessWidget {
               borderRadius: BorderRadius.all(
                 Radius.circular(5.0),
               ),
-              child: CachedNetworkImage(
-                imageUrl: thumbnailUrl,
-                placeholder: (context, url) => LoadingWidget(
-                  isImage: true,
-                ),
-                errorWidget: (context, url, error) => Image.asset(
-                  'assets/icons/book-placeholder.png',
-                  fit: BoxFit.cover,
-                ),
-                fit: BoxFit.cover,
-              ),
+              child: thumbnailUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: thumbnailUrl,
+                      placeholder: (context, url) => LoadingWidget(
+                        isImage: true,
+                      ),
+                      errorWidget: (context, url, error) => Image.asset(
+                        'assets/icons/book-placeholder.png',
+                        fit: BoxFit.cover,
+                      ),
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      'assets/icons/book-placeholder.png',
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
         ),

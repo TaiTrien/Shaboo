@@ -26,15 +26,21 @@ class PreviewPostController {
     final List<Widget> imageSliders = _postModel.images
         .map((item) => Container(
               child: Container(
-                child: Image.network(
-                  item.link,
-                  fit: BoxFit.cover,
-                  width: 1000.0,
-                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return LoadingWidget(isImage: true);
-                  },
-                ),
+                child: item.link != null
+                    ? Image.network(
+                        item.link,
+                        fit: BoxFit.cover,
+                        width: 1000.0,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return LoadingWidget(isImage: true);
+                        },
+                      )
+                    : Image.asset(
+                        'assets/icons/book-placeholder.png',
+                        fit: BoxFit.cover,
+                      ),
               ),
             ))
         .toList();

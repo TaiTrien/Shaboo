@@ -35,25 +35,30 @@ class BookCard extends StatelessWidget {
                 ),
                 child: Hero(
                   tag: 'img-${this.key}',
-                  child: CachedNetworkImage(
-                    imageUrl: this.imgUrl,
-                    placeholder: (context, url) => Container(
-                      height: 120.0,
-                      width: 100.0,
-                      child: LoadingWidget(
-                        isImage: true,
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Image.asset(
-                      'assets/icons/book-placeholder.png',
-                      fit: BoxFit.fill,
-                      height: 120.0,
-                      width: 100.0,
-                    ),
-                    fit: BoxFit.cover,
-                    height: 120.0,
-                    width: 100.0,
-                  ),
+                  child: this.imgUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: this.imgUrl,
+                          placeholder: (context, url) => Container(
+                            height: 120.0,
+                            width: 100.0,
+                            child: LoadingWidget(
+                              isImage: true,
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Image.asset(
+                            'assets/icons/book-placeholder.png',
+                            fit: BoxFit.fill,
+                            height: 120.0,
+                            width: 100.0,
+                          ),
+                          fit: BoxFit.cover,
+                          height: 120.0,
+                          width: 100.0,
+                        )
+                      : Image.asset(
+                          'assets/icons/book-placeholder.png',
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
               elevation: 0,

@@ -114,15 +114,21 @@ class _DetailBookScreenState extends State<DetailBookScreen>
                         padding: EdgeInsets.symmetric(
                             horizontal: size.width * 0.2,
                             vertical: size.width * 0.1),
-                        child: Image.network(
-                          widget.selectedBook.thumbnailUrl,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (BuildContext context, Widget child,
-                              ImageChunkEvent loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return LoadingWidget(isImage: true);
-                          },
-                        ),
+                        child: widget.selectedBook.thumbnailUrl != null
+                            ? Image.network(
+                                widget.selectedBook.thumbnailUrl,
+                                fit: BoxFit.cover,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return LoadingWidget(isImage: true);
+                                },
+                              )
+                            : Image.asset(
+                                'assets/icons/book-placeholder.png',
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     Positioned(

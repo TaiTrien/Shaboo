@@ -32,40 +32,38 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(MdiIcons.calendarMultipleCheck),
-              label: 'Event',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(MdiIcons.newspaper),
-              label: 'Feed',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(MdiIcons.bell),
-              label: 'Notifications',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              label: 'Profile',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: kPrimaryColor,
-          onTap: _onItemTapped,
-        ),
+    return Scaffold(
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.calendarMultipleCheck),
+            label: 'Event',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.newspaper),
+            label: 'Feed',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MdiIcons.bell),
+            label: 'Notifications',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: kPrimaryColor,
+        onTap: _onItemTapped,
       ),
     );
   }
