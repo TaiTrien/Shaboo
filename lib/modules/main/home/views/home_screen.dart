@@ -57,9 +57,10 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     vertical: kDefaultPaddingVerical, horizontal: 15),
                 child: SearchBar(
-                  dataSource: (query) =>
-                      RepositoryProvider.of<BookRepoImpl>(context)
-                          .search(bookName: query),
+                  dataSource: (query) => Future.delayed(
+                      const Duration(seconds: 1),
+                      () => RepositoryProvider.of<BookRepoImpl>(context)
+                          .search(bookName: query)),
                 ),
               ),
               SizedBox(height: 20),

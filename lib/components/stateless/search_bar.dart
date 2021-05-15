@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/book/detail_book/views/detail_book_screen.dart';
+import 'package:shaboo/utils/strings.dart';
 
 class SearchBar extends StatelessWidget {
   final dynamic dataSource;
@@ -72,10 +73,14 @@ class DataSearch extends SearchDelegate {
     );
   }
 
+  Stream<dynamic> dataStream() async* {
+    yield await this.dataSource(query);
+  }
+
   @override
   Widget buildSuggestions(BuildContext context) {
-    return FutureBuilder(
-      future: this.dataSource(query),
+    return StreamBuilder(
+      stream: this.dataStream(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (!snapshot.hasData)
           return Container();
@@ -95,27 +100,14 @@ class DataSearch extends SearchDelegate {
             itemBuilder: (context, index) => ListTile(
                   onTap: () {
                     selectedItem = snapshot.data.listBook[index];
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailBookScreen(
-                                  selectedBook: selectedItem,
-                                )));
+                    toDetailScreen(context, selectedItem);
                   },
                   leading: Icon(Icons.search),
                   title: RichText(
                     text: TextSpan(
-                      text: snapshot.data.listBook[index].name
-                          .substring(0, query.length),
-                      style: kDefaultTextStyle.copyWith(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                      children: [
-                        TextSpan(
-                            text: snapshot.data.listBook[index].name
-                                .substring(query.length),
-                            style: kDefaultTextStyle.copyWith(
-                                color: kGreyColor, fontSize: 16))
-                      ],
+                      children: StringUtils.highlightOccurrences(
+                          snapshot.data.listBook[index].name, query),
+                      style: TextStyle(color: Colors.grey),
                     ),
                   ),
                 ),
@@ -126,4 +118,11 @@ class DataSearch extends SearchDelegate {
 
   @override
   String get searchFieldLabel => "Tìm kiếm";
+
+  toDetailScreen(context, selectedBook) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => DetailBookScreen(
+                selectedBook: selectedBook,
+              )));
 }
