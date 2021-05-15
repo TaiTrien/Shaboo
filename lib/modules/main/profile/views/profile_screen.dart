@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         leading: Icon(Icons.settings),
                         title: Transform(
                           transform: Matrix4.translationValues(-16, 0.0, 0.0),
-                          child: Text("Settings"),
+                          child: Text("Cài đặt"),
                         ),
                       ),
                     ),
@@ -134,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           leading: Icon(MdiIcons.logout),
                           title: Transform(
                             transform: Matrix4.translationValues(-16, 0.0, 0.0),
-                            child: Text("Sign out"),
+                            child: Text("Đăng xuất"),
                           ),
                         ))
                   ])
