@@ -23,8 +23,10 @@ class DescriptionController {
     String title = titleController.text.trim();
     String desc = descController.text.trim();
 
-    if (title.isEmpty) return Notify().error(message: 'VUi lòng điền tiêu đề của bài đăng');
-    if (desc.isEmpty) return Notify().error(message: 'Bạn chưa mô tả bài đăng của mình');
+    if (title.isEmpty)
+      return Notify().error(message: 'Vui lòng điền tiêu đề của bài đăng');
+    if (desc.isEmpty)
+      return Notify().error(message: 'Bạn chưa mô tả bài đăng của mình');
 
     PostModel _currentPost = PostModel(
       title: title,
@@ -44,11 +46,13 @@ class DescriptionController {
   }
 
   outFocus() => FocusScope.of(context).requestFocus(new FocusNode());
-  toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
+  toNextPage() => pageController.nextPage(
+      duration: Duration(milliseconds: 500), curve: Curves.ease);
 
   get currentPost => _postBloc.state.currentPost;
   get images => currentPost != null ? currentPost.images : null;
   get location => currentPost != null ? currentPost.location : null;
   get book => currentPost != null ? currentPost.book : null;
-  get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
+  get numberOfImages =>
+      currentPost.images != null ? currentPost.images.length : 0;
 }

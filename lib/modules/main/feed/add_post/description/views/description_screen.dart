@@ -19,7 +19,8 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = DescriptionController(context: context, pageController: widget.pageController);
+    _controller = DescriptionController(
+        context: context, pageController: widget.pageController);
   }
 
   @override
@@ -32,13 +33,16 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: GestureDetector(
         onTap: () => _controller.outFocus(),
         child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: size.height),
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+              padding:
+                  const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
               child: Column(
                 children: [
                   DescriptionTextField(
@@ -54,18 +58,25 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                   SizedBox(height: 20.0),
                   NoteBoard(
                     notes: [
-                      TextSpan(text: '*Lưu ý:\n', style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
+                      TextSpan(
+                          text: '*Lưu ý:\n',
+                          style:
+                              kTitleTextStyle.copyWith(color: kPrimaryColor)),
                       TextSpan(
                         text: '\n- Mô tả rõ ràng về tình trạng của sách.\n',
                         style: TextStyle(color: kPrimaryColor, fontSize: 18),
                       ),
                       TextSpan(
-                        text: '\n- Hãy thêm mô tả về tựa sách mà bạn mong muốn được trao đổi.\n',
+                        text:
+                            '\n- Hãy thêm mô tả về tựa sách mà bạn mong muốn được trao đổi.\n',
                         style: TextStyle(color: kPrimaryColor, fontSize: 18),
                       ),
                       TextSpan(
                         text: '\n- Nghiêm cấm bán hàng bằng mọi hình thức.',
-                        style: TextStyle(color: kPrimaryColor, fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
