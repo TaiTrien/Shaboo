@@ -37,8 +37,10 @@ class ReviewModel extends Equatable implements Model {
         tags: json["tags"],
         score: json["score"],
         bookId: json["bookId"],
-        bookModel: BookModel.fromJson(json['book']),
-        userModel: UserModel.fromJson(json['user']),
+        bookModel:
+            json['book'] != null ? BookModel.fromJson(json['book']) : null,
+        userModel:
+            json['user'] != null ? UserModel.fromJson(json['user']) : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,7 +67,8 @@ class ListReview {
   int page, take;
   int itemCount, pageCount;
 
-  ListReview({this.listReview, this.page, this.take, this.itemCount, this.pageCount});
+  ListReview(
+      {this.listReview, this.page, this.take, this.itemCount, this.pageCount});
 
   factory ListReview.fromJson(Map<String, dynamic> json) {
     return ListReview(

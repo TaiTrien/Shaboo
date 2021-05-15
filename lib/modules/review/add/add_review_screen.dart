@@ -16,7 +16,9 @@ class AddReviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ReviewBloc, ReviewState>(
       listener: (context, state) {
-        if (state is ReviewSuccessState) Navigator.pop(context);
+        if (state is ReviewSuccessState) {
+          Navigator.pop(context);
+        }
       },
       builder: (context, state) {
         if (state is ReviewErrorState)
@@ -24,7 +26,6 @@ class AddReviewScreen extends StatelessWidget {
             body: Center(
               child: Text(
                 state.message,
-                style: Theme.of(context).textTheme.headline4,
               ),
             ),
           );
@@ -37,7 +38,7 @@ class AddReviewScreen extends StatelessWidget {
         }
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             elevation: 0.0,
             leading: IconButton(
               icon: Icon(
