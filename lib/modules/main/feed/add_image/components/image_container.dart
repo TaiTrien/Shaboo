@@ -35,7 +35,8 @@ class _ImageContainerState extends State<ImageContainer> {
   Widget build(BuildContext context) {
     if (_controller.hasData(index: widget.id))
       return ImageWithCloseBtn(
-        onClose: () => _controller.removeUploadedImage(uploadedImage: _controller.currentPost.images[widget.id]),
+        onClose: () => _controller.removeUploadedImage(
+            uploadedImage: _controller.currentPost.images[widget.id]),
         url: _controller.currentPost.images[widget.id].link,
       );
     else if (isUploading)

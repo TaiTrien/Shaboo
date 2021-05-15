@@ -5,8 +5,11 @@ import 'package:shaboo/utils/strings.dart';
 
 class SearchBar extends StatelessWidget {
   final dynamic dataSource;
+  final Function onItemSelected;
 
-  const SearchBar({Key key, this.dataSource}) : super(key: key);
+  const SearchBar(
+      {Key key, @required this.dataSource, @required this.onItemSelected})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +21,9 @@ class SearchBar extends StatelessWidget {
         onTap: () {
           showSearch(
               context: context,
-              delegate: DataSearch(dataSource: this.dataSource));
+              delegate: DataSearch(
+                  dataSource: this.dataSource,
+                  onItemSelected: this.onItemSelected));
         },
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
@@ -39,9 +44,10 @@ class SearchBar extends StatelessWidget {
 
 class DataSearch extends SearchDelegate {
   final dataSource;
+  final onItemSelected;
   var selectedItem;
 
-  DataSearch({this.dataSource});
+  DataSearch({this.dataSource, this.onItemSelected});
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -100,7 +106,7 @@ class DataSearch extends SearchDelegate {
             itemBuilder: (context, index) => ListTile(
                   onTap: () {
                     selectedItem = snapshot.data.listBook[index];
-                    toDetailScreen(context, selectedItem);
+                    this.onItemSelected(selectedItem);
                   },
                   leading: Icon(Icons.search),
                   title: RichText(
@@ -118,11 +124,4 @@ class DataSearch extends SearchDelegate {
 
   @override
   String get searchFieldLabel => "Tìm kiếm";
-
-  toDetailScreen(context, selectedBook) => Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => DetailBookScreen(
-                selectedBook: selectedBook,
-              )));
 }

@@ -17,13 +17,17 @@ class DetailedLocationScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: _controller.toExit,
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
         ),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Select your province',
-          style: kHeadingTextStyle.copyWith(fontSize: 25, color: Colors.white),
+          'Địa điểm của bạn',
+          style:
+              kHeadingTextStyle.copyWith(fontSize: 22.0, color: Colors.black),
         ),
         centerTitle: true,
       ),
@@ -34,7 +38,8 @@ class DetailedLocationScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               return LocationSelector(
                 location: locations[index]["name_with_type"].toString(),
-                onPress: () => _controller.handleUpdateSelectedLocation(locations[index]),
+                onPress: () =>
+                    _controller.handleUpdateSelectedLocation(locations[index]),
               );
             },
           );

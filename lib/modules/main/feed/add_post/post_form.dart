@@ -36,14 +36,17 @@ class _PostFormState extends State<PostForm> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: IconButton(
-            onPressed: _currentPageIndex == 0 ? _controller.toExit : _controller.toPreviousPage,
+            onPressed: _currentPageIndex == 0
+                ? _controller.toExit
+                : _controller.toPreviousPage,
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           ),
-          backgroundColor: Color(0xfffafafa),
+          backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text(
             'Nhập thông tin',
-            style: kHeadingTextStyle.copyWith(fontSize: 22.0, color: Colors.black),
+            style:
+                kHeadingTextStyle.copyWith(fontSize: 22.0, color: Colors.black),
           ),
           centerTitle: true,
         ),

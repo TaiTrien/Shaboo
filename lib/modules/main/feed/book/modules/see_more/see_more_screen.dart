@@ -13,13 +13,17 @@ class SeeMoreScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.close),
+          icon: Icon(
+            Icons.close,
+            color: Colors.black,
+          ),
         ),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Book description',
-          style: kHeadingTextStyle.copyWith(fontSize: 25, color: Colors.white),
+          'Mô tả',
+          style:
+              kHeadingTextStyle.copyWith(fontSize: 22.0, color: Colors.black),
         ),
         centerTitle: true,
       ),

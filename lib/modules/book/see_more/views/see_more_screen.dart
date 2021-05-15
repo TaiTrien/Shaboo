@@ -79,7 +79,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               return Expanded(
                 child: Center(
                   child: Text(
-                    'ERROR',
+                    'Lỗi',
                     style: TextStyle(fontSize: 20, color: kGreyColor),
                   ),
                 ),

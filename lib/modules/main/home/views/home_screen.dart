@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/repositories/implement/book/book_repo_impl.dart';
+import 'package:shaboo/modules/book/detail_book/views/detail_book_screen.dart';
 import 'package:shaboo/modules/main/home/components/book_tile.dart';
 import 'package:shaboo/modules/main/home/components/books_row.dart';
 import 'package:shaboo/modules/main/home/components/see_more_row.dart';
@@ -57,6 +58,8 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     vertical: kDefaultPaddingVerical, horizontal: 15),
                 child: SearchBar(
+                  onItemSelected: (selectedItem) =>
+                      this.toDetailScreen(context, selectedItem),
                   dataSource: (query) => Future.delayed(
                       const Duration(seconds: 1),
                       () => RepositoryProvider.of<BookRepoImpl>(context)
@@ -119,4 +122,11 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  toDetailScreen(context, selectedBook) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => DetailBookScreen(
+                selectedBook: selectedBook,
+              )));
 }

@@ -21,14 +21,20 @@ class ImageWithCloseBtn extends StatelessWidget {
             alignment: Alignment.center,
             child: Container(
               width: 100,
-              child: Image.network(
-                this.url,
-                fit: BoxFit.cover,
-                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(child: LoadingWidget(isImage: true));
-                },
-              ),
+              child: this.url != null
+                  ? Image.network(
+                      this.url,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(child: LoadingWidget(isImage: true));
+                      },
+                    )
+                  : Image.asset(
+                      'assets/icons/book-placeholder.png',
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           Align(
