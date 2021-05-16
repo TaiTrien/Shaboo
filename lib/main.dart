@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
             create: (context) => LocationBloc(),
           ),
           BlocProvider<PostBloc>(
-            create: (context) => PostBloc(),
+            create: (context) => PostBloc(
+                postRepo: RepositoryProvider.of<PostRepoImpl>(context)),
           ),
           BlocProvider<ReviewBloc>(
             create: (context) => ReviewBloc(

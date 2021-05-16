@@ -34,8 +34,8 @@ class _BookListState extends State<BookList> {
           return Expanded(
             child: Center(
               child: Text(
-                'No matchingbook was found',
-                style: TextStyle(fontSize: 20, color: kGreyColor),
+                'Không tìm thấy sách phù hợp',
+                style: TextStyle(fontSize: 18),
               ),
             ),
           );
@@ -43,8 +43,8 @@ class _BookListState extends State<BookList> {
           return Expanded(
             child: Center(
               child: Text(
-                'ERROR',
-                style: TextStyle(fontSize: 20, color: kGreyColor),
+                'Đã xảy ra lỗi',
+                style: TextStyle(fontSize: 18),
               ),
             ),
           );
@@ -59,7 +59,8 @@ class _BookListState extends State<BookList> {
                 itemBuilder: (BuildContext _context, int index) {
                   if (index < _snapshot.data.length) {
                     return GestureDetector(
-                        onTap: () => _controller.toDetailedBookScreen(_snapshot.data[index]),
+                        onTap: () => _controller
+                            .toDetailedBookScreen(_snapshot.data[index]),
                         child: BookCard(
                           imgUrl: _snapshot.data[index].thumbnailUrl,
                           title: _snapshot.data[index].name,
