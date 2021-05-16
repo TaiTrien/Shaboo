@@ -4,15 +4,15 @@ import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/post/components/post_card.dart';
 import 'package:shaboo/modules/post/list_post/controllers/list_post_controller.dart';
 
-class ListPost extends StatefulWidget {
+class ListPostWidget extends StatefulWidget {
   final PostType postType;
   final int bookId;
-  const ListPost({Key key, this.postType, this.bookId}) : super(key: key);
+  const ListPostWidget({Key key, this.postType, this.bookId}) : super(key: key);
   @override
-  _ListPostState createState() => _ListPostState();
+  _ListPostWidgetState createState() => _ListPostWidgetState();
 }
 
-class _ListPostState extends State<ListPost> {
+class _ListPostWidgetState extends State<ListPostWidget> {
   ListPostController _controller;
   @override
   void initState() {

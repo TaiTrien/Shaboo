@@ -65,7 +65,7 @@ class PostCard extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       title,
-                      style: kHeadingTextStyle.copyWith(fontSize: 20),
+                      style: kHeadingTextStyle.copyWith(fontSize: 18),
                       overflow: TextOverflow.ellipsis,
                     ),
                     Row(
@@ -74,6 +74,7 @@ class PostCard extends StatelessWidget {
                         SizedBox(width: 10),
                         Text(
                           range.toString() + ' km',
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500,

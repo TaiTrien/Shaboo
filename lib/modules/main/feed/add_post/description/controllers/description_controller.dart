@@ -27,7 +27,6 @@ class DescriptionController {
       return Notify().error(message: 'Vui lòng điền tiêu đề của bài đăng');
     if (desc.isEmpty)
       return Notify().error(message: 'Bạn chưa mô tả bài đăng của mình');
-
     PostModel _currentPost = PostModel(
       title: title,
       description: desc,

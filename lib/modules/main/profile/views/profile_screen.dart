@@ -85,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   userId: state.currentUser.userId.toString(),
                   reviewType: ReviewType.Owned,
                 ),
-                ListPost(postType: PostType.Owned),
+                ListPostWidget(postType: PostType.Owned),
               ],
               controller: _tabController,
             );

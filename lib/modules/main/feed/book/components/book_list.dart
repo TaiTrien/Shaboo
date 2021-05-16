@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/main/feed/book/components/book_card.dart';
 import 'package:shaboo/modules/main/feed/book/controllers/book_list_controller.dart';
 
@@ -34,7 +33,7 @@ class _BookListState extends State<BookList> {
           return Expanded(
             child: Center(
               child: Text(
-                'Không tìm thấy sách phù hợp',
+                'Không tìm thấy sách',
                 style: TextStyle(fontSize: 18),
               ),
             ),

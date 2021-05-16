@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shaboo/blocs/location/location_bloc.dart';
+import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/data/models/post/book.dart';
 import 'package:shaboo/data/repositories/implement/book/book_repo_impl.dart';
 import 'package:shaboo/modules/main/feed/book/components/book_list.dart';
@@ -8,17 +8,25 @@ import 'package:shaboo/components/stateless/search_bar.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/main/feed/book/modules/detailed_book/views/detailed_book_screen.dart';
+import 'package:shaboo/utils/notify.dart';
 
 class BookScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: size.height),
-        child: BlocBuilder<LocationBloc, LocationState>(
-          builder: (context, state) {
-            return Container(
+    return BlocListener<PostBloc, PostState>(
+        listener: (context, state) {
+          if (state is PostSucceed) {
+            var _postBloc = BlocProvider.of<PostBloc>(context);
+            _postBloc.add(ResetCurrentPost(null));
+            Notify().success(message: 'Tạo bài đăng thành công');
+            Navigator.pop(context);
+          }
+        },
+        child: Scaffold(
+          body: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: size.height),
+            child: Container(
               padding:
                   const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
               child: Column(
@@ -42,11 +50,9 @@ class BookScreen extends StatelessWidget {
                   BookList(),
                 ],
               ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          ),
+        ));
   }
 
   toDetailedBookScreen(context, BookModel selectedBook) => Navigator.push(

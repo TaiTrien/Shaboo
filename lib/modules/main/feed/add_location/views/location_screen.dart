@@ -14,13 +14,15 @@ class LocationScreen extends StatelessWidget {
   const LocationScreen({Key key, this.pageController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var _controller = LocationController(context: context, pageController: pageController);
+    var _controller =
+        LocationController(context: context, pageController: pageController);
     return Scaffold(
       body: SingleChildScrollView(
         child: BlocBuilder<LocationBloc, LocationState>(
           builder: (context, state) {
             return Container(
-              padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
+              padding:
+                  const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -65,7 +67,7 @@ class LocationScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomButton(
         onPress: _controller.handleUpdateCurrentPost,
-        title: 'Tiếp tục',
+        title: _controller.book != null ? 'Đăng bài' : 'Tiếp tục',
       ),
     );
   }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/models/post/book.dart';
+import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/modules/book/detail_book/components/sliver_hearder_section.dart';
 import 'package:shaboo/modules/book/detail_book/views/book_desc_tab.dart';
 import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
@@ -21,10 +24,12 @@ class DetailBookScreen extends StatefulWidget {
 class _DetailBookScreenState extends State<DetailBookScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  PostBloc _postBloc;
 
   @override
   void initState() {
     super.initState();
+    _postBloc = BlocProvider.of<PostBloc>(context);
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabChange);
   }
@@ -38,6 +43,17 @@ class _DetailBookScreenState extends State<DetailBookScreen>
 
   _handleTabChange() {
     setState(() {});
+  }
+
+  _updateCurrentPost() {
+    PostModel _currentPost = PostModel(
+      title: '',
+      description: '',
+      images: null,
+      location: null,
+      book: widget.selectedBook,
+    );
+    _postBloc.add(UpdateCurrentPost(_currentPost));
   }
 
   Widget _floatingBtn() {
@@ -57,6 +73,7 @@ class _DetailBookScreenState extends State<DetailBookScreen>
       case 2:
         return FloatingActionButton(
           onPressed: () => {
+            this._updateCurrentPost(),
             showModalBottomSheet<void>(
                 isScrollControlled: true,
                 context: context,
@@ -88,7 +105,7 @@ class _DetailBookScreenState extends State<DetailBookScreen>
                 bookId: widget.selectedBook.id.toString(),
                 reviewType: ReviewType.BasedOnBook,
               ),
-              ListPost(
+              ListPostWidget(
                   postType: PostType.BasedOnBook,
                   bookId: widget.selectedBook.id),
             ],

@@ -19,9 +19,12 @@ class LocationController {
   }
 
   handleUpdateCurrentPost() {
-    if (selectedCity == null) return Notify().error(message: 'Hãy chọn tỉnh/thành của bạn');
-    if (selectedDistrict == null) return Notify().error(message: 'Hãy chọn quận/huyện của bạn');
-    if (selectedWard == null) return Notify().error(message: 'Hãy chọn phường/xã của bạn');
+    if (selectedCity == null)
+      return Notify().error(message: 'Hãy chọn tỉnh/thành của bạn');
+    if (selectedDistrict == null)
+      return Notify().error(message: 'Hãy chọn quận/huyện của bạn');
+    if (selectedWard == null)
+      return Notify().error(message: 'Hãy chọn phường/xã của bạn');
     PostModel _currentPost = PostModel(
       title: title,
       description: desc,
@@ -30,7 +33,11 @@ class LocationController {
       book: book ?? null,
     );
     _postBloc.add(UpdateCurrentPost(_currentPost));
-    toNextPage();
+    if (book != null)
+      _postBloc.add(AddPost(_currentPost));
+    else {
+      toNextPage();
+    }
   }
 
   get currentPost => _postBloc.state.currentPost;
@@ -40,32 +47,44 @@ class LocationController {
   get book => currentPost.book;
 
   get cities => _locationBloc.state.locations.values.toList();
-  get districts => _locationBloc.state.selectedCity["quan-huyen"].values.toList();
-  get wards => _locationBloc.state.selectedDistrict["xa-phuong"].values.toList();
+  get districts =>
+      _locationBloc.state.selectedCity["quan-huyen"].values.toList();
+  get wards =>
+      _locationBloc.state.selectedDistrict["xa-phuong"].values.toList();
 
   get selectedCity => _locationBloc.state.selectedCity;
   get selectedDistrict => _locationBloc.state.selectedDistrict;
   get selectedWard => _locationBloc.state.selectedWard;
 
-  get selectedCityName => selectedCity == null ? "Tỉnh/thành" : selectedCity["name_with_type"];
-  get selectedDistrictName => selectedDistrict == null ? "Quận/huyện" : selectedDistrict["name_with_type"];
-  get selectedWardName => selectedWard == null ? "Phường/xã" : selectedWard["name_with_type"];
+  get selectedCityName =>
+      selectedCity == null ? "Tỉnh/thành" : selectedCity["name_with_type"];
+  get selectedDistrictName => selectedDistrict == null
+      ? "Quận/huyện"
+      : selectedDistrict["name_with_type"];
+  get selectedWardName =>
+      selectedWard == null ? "Phường/xã" : selectedWard["name_with_type"];
 
-  toCityList(dynamic location) =>
-      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedLocationScreen(locations: location)));
+  toCityList(dynamic location) => Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => DetailedLocationScreen(locations: location)));
 
   toDistrictList() {
-    if (selectedCity == null) return Notify().error(message: 'Hãy chọn tỉnh/thành của bạn');
+    if (selectedCity == null)
+      return Notify().error(message: 'Hãy chọn tỉnh/thành của bạn');
     return toCityList(districts);
   }
 
   toWardList() {
-    if (selectedCity == null) return Notify().error(message: 'Hãy chọn tỉnh/thành của bạn');
-    if (selectedDistrict == null) return Notify().error(message: 'Hãy chọn quận/huyện của bạn');
+    if (selectedCity == null)
+      return Notify().error(message: 'Hãy chọn tỉnh/thành của bạn');
+    if (selectedDistrict == null)
+      return Notify().error(message: 'Hãy chọn quận/huyện của bạn');
     return toCityList(wards);
   }
 
   //navigator
-  toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
+  toNextPage() => pageController.nextPage(
+      duration: Duration(milliseconds: 500), curve: Curves.ease);
   toExit() => Navigator.pop(context);
 }

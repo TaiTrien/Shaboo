@@ -39,7 +39,7 @@ class _FeedScreenState extends State<FeedScreen> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: ListPost(postType: PostType.Feed),
+      body: ListPostWidget(postType: PostType.Feed),
       floatingActionButton: IconButton(
         iconSize: 60.0,
         padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),

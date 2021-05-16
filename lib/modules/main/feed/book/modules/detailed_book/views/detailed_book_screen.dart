@@ -25,9 +25,8 @@ class DetailedBookScreen extends StatelessWidget {
     return BlocConsumer<PostBloc, PostState>(
       listener: (context, state) {
         if (state is PostSucceed) {
-          Notify().success(message: "Tạo bài đăng thành công");
-          Navigator.pop(context);
-          Navigator.pop(context);
+          // Notify().success(message: "Tạo bài đăng thành công");
+          // Navigator.pop(context);
         }
       },
       builder: (context, state) {

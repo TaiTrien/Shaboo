@@ -43,83 +43,80 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Text(
-            widget.screenHeader,
-            style: kHeadingTextStyle,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        body: StreamBuilder(
-          stream: _controller.dataStream,
-          builder: (BuildContext _context, AsyncSnapshot _snapshot) {
-            if (!_snapshot.hasData ||
-                _snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (_snapshot.data.isEmpty) {
-              return Center(
-                  child: ArticleNotFoundScreen(
-                onPress: _controller.toExit,
-              ));
-            } else if (_snapshot.hasError) {
-              return Expanded(
-                child: Center(
-                  child: Text(
-                    'Lỗi',
-                    style: TextStyle(fontSize: 20, color: kGreyColor),
-                  ),
-                ),
-              );
-            } else {
-              return RefreshIndicator(
-                onRefresh: _controller.refresh,
-                child: ListView.separated(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-                  controller: _controller.scrollController,
-                  itemCount: _snapshot.data.length + 1,
-                  itemBuilder: (BuildContext _context, int index) {
-                    if (index < _snapshot.data.length) {
-                      return CustomListTileWithImage(
-                        imageLink: _snapshot.data[index].thumbnailUrl,
-                        subTitle: _snapshot.data[index].description,
-                        title: _snapshot.data[index].name,
-                        onPress: () => _controller
-                            .toDetailedBookScreen(_snapshot.data[index]),
-                      );
-                    } else if (_controller.hasMore) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 32.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    } else {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.0),
-                      );
-                    }
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return Divider();
-                  },
-                ),
-              );
-            }
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
           },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
         ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          widget.screenHeader,
+          style: kHeadingTextStyle,
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+      body: StreamBuilder(
+        stream: _controller.dataStream,
+        builder: (BuildContext _context, AsyncSnapshot _snapshot) {
+          if (!_snapshot.hasData ||
+              _snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (_snapshot.data.isEmpty) {
+            return Center(
+                child: ArticleNotFoundScreen(
+              onPress: _controller.toExit,
+            ));
+          } else if (_snapshot.hasError) {
+            return Expanded(
+              child: Center(
+                child: Text(
+                  'Lỗi',
+                  style: TextStyle(fontSize: 20, color: kGreyColor),
+                ),
+              ),
+            );
+          } else {
+            return RefreshIndicator(
+              onRefresh: _controller.refresh,
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
+                controller: _controller.scrollController,
+                itemCount: _snapshot.data.length + 1,
+                itemBuilder: (BuildContext _context, int index) {
+                  if (index < _snapshot.data.length) {
+                    return CustomListTileWithImage(
+                      imageLink: _snapshot.data[index].thumbnailUrl,
+                      subTitle: _snapshot.data[index].description,
+                      title: _snapshot.data[index].name,
+                      onPress: () => _controller
+                          .toDetailedBookScreen(_snapshot.data[index]),
+                    );
+                  } else if (_controller.hasMore) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 32.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  } else {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                    );
+                  }
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider();
+                },
+              ),
+            );
+          }
+        },
       ),
     );
   }

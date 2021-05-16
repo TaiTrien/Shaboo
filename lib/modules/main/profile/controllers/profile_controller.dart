@@ -51,7 +51,7 @@ class ProfileController {
                 size: 30,
               ),
               SizedBox(width: 5),
-              Text('Are you sure to sign out ?',
+              Text('Bạn sẽ đăng xuất?',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 18,
@@ -61,7 +61,7 @@ class ProfileController {
           actions: <Widget>[
             TextButton(
               child: Text(
-                'Cancel',
+                'Huỷ bỏ',
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontFamily: 'Helvetica Neue',
@@ -73,7 +73,7 @@ class ProfileController {
             ),
             TextButton(
               child: Text(
-                'Sign out',
+                'Đồng ý',
                 style: TextStyle(
                   color: Colors.red[600],
                   fontFamily: 'Helvetica Neue',
