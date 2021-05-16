@@ -24,7 +24,8 @@ class AuthApi {
     }
   }
 
-  static Future<dynamic> signInByFacebook({String userID, String idToken}) async {
+  static Future<dynamic> signInByFacebook(
+      {String userID, String idToken}) async {
     try {
       var response = await http.post(
         Uri.parse(urlFacebookSignin),

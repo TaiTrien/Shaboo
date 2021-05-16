@@ -19,7 +19,7 @@ class PostApi {
       };
 
   static Future<dynamic> uploadPost({PostModel post}) async {
-    var requestedPost = PostModel.converPostToMap(post: post);
+    var requestedPost = PostModel.convertPostToMap(post: post);
 
     try {
       var response = await http.post(
@@ -34,6 +34,20 @@ class PostApi {
     }
   }
 
+  static Future<dynamic> updatePost({PostModel selectedPost}) async {
+    try {
+      var response = await http.put(
+        Uri.parse(urlPosts + '/${selectedPost.id}'),
+        headers: await getHeader(),
+        body: jsonEncode(selectedPost),
+      );
+      if (!successCodes.contains(response.statusCode)) return null;
+      return json.decode(response.body);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<dynamic> uploadPhoto({List<File> photos}) async {
     var request = http.MultipartRequest('POST', Uri.parse(urlUploadPhoto));
 
@@ -41,7 +55,8 @@ class PostApi {
     request.headers.addAll(headers);
 
     for (var photo in photos) {
-      request.files.add(await http.MultipartFile.fromPath('images', photo.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('images', photo.path));
     }
 
     try {
@@ -54,7 +69,8 @@ class PostApi {
     }
   }
 
-  static Future<dynamic> getPosts(EOrder eOrder, int page, int take, int bookId, bool owned) async {
+  static Future<dynamic> getPosts(
+      EOrder eOrder, int page, int take, int bookId, bool owned) async {
     try {
       var response = await http.get(
         Uri.parse(

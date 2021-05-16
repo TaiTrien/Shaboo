@@ -28,7 +28,7 @@ class PostModel implements Model {
     return await PostApi.uploadPost(post: post);
   }
 
-  static converPostToMap({PostModel post}) {
+  static convertPostToMap({PostModel post}) {
     Map<String, dynamic> convertedPost = {
       "title": "${post.title}",
       "description": "${post.description}",
@@ -55,7 +55,9 @@ class PostModel implements Model {
                   "slug": publisher.slug,
                 })
             .toList(),
-        "categories": post.book.categories.map((category) => category.categoryID).toList(),
+        "categories": post.book.categories
+            .map((category) => category.categoryID)
+            .toList(),
       },
       "images": post.images.map((image) => image.imageID).toList(),
     };
@@ -111,7 +113,8 @@ class ListPost {
   int page, take;
   int itemCount, pageCount;
 
-  ListPost({this.listPost, this.page, this.take, this.itemCount, this.pageCount});
+  ListPost(
+      {this.listPost, this.page, this.take, this.itemCount, this.pageCount});
 
   factory ListPost.fromJson(Map<String, dynamic> json) {
     return ListPost(
@@ -123,7 +126,8 @@ class ListPost {
     );
   }
 
-  static Future<ListPost> getPosts({EOrder eOrder, int page, int take, int bookId, bool owned}) async {
+  static Future<ListPost> getPosts(
+      {EOrder eOrder, int page, int take, int bookId, bool owned}) async {
     final response = await PostApi.getPosts(eOrder, page, take, bookId, owned);
     return ListPost.fromJson(response);
   }

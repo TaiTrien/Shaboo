@@ -9,6 +9,7 @@ import 'package:shaboo/blocs/review/review_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/repositories/implement/book/book_repo_impl.dart';
+import 'package:shaboo/data/repositories/implement/post/post_repo_impl.dart';
 import 'package:shaboo/data/repositories/implement/review/review_repo_impl.dart';
 
 import 'package:shaboo/routes.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => BookRepoImpl(),
-        )
+        ),
+        RepositoryProvider(create: (context) => PostRepoImpl())
       ],
       child: MultiBlocProvider(
         providers: [
