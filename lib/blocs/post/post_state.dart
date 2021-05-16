@@ -1,5 +1,7 @@
 part of 'post_bloc.dart';
 
+enum Status { initial, loading, success, failure }
+
 @immutable
 abstract class PostState {
   final PostModel currentPost;
@@ -12,7 +14,18 @@ class PostInitial extends PostState {
 }
 
 class UpdateState extends PostState {
-  UpdateState(PostState oldState, {PostModel currentPost}) : super(currentPost: currentPost ?? oldState.currentPost);
+  UpdateState(PostState oldState, {PostModel currentPost})
+      : super(currentPost: currentPost ?? oldState.currentPost);
+}
+
+class PostProcessing extends PostState {}
+
+class PostSucceed extends PostState {}
+
+class PostError extends PostState {
+  final String error;
+  PostError(PostState oldstate, {this.error})
+      : super(currentPost: oldstate.currentPost);
 }
 
 class ResetState extends PostState {

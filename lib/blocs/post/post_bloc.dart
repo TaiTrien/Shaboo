@@ -18,6 +18,10 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       yield UpdateState(state, currentPost: event.payload);
     } else if (event is ResetCurrentPost) {
       yield ResetState(currentPost: event.payload);
+    } else if (event is AddPost) {
+      //TODO: upload post logic
+    } else if (event is UpdatePost) {
+      //TODO: update post logic here
     }
   }
 }
