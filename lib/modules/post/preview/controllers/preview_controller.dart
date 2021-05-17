@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/modules/main/feed/pop_contact/views/popup_contact.dart';

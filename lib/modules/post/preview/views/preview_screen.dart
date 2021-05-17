@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/data/models/post/post.dart';
@@ -21,10 +23,12 @@ class PreviewPostScreen extends StatefulWidget {
 class _PreviewPostScreenState extends State<PreviewPostScreen> {
   int _current = 0;
   PreviewPostController _controller;
+  UserBloc _userBloc;
   final CarouselController carouselController = CarouselController();
   @override
   void initState() {
     super.initState();
+    _userBloc = BlocProvider.of<UserBloc>(context);
     _controller = PreviewPostController(context: context);
   }
 
@@ -268,7 +272,11 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.35,
                               child: Text(
-                                "Nhà cung cấp",
+                                postModel.userId !=
+                                        _userBloc.state.currentUser.userId
+                                            .toString()
+                                    ? "Nhà cung cấp"
+                                    : 'Xoá bài đăng',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 16.0,
@@ -280,16 +288,26 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                           RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
-                            onPressed: () =>
-                                _controller.toPopupContact(postModel.userId),
+                            onPressed: () => postModel.userId !=
+                                    _userBloc.state.currentUser.userId
+                                        .toString()
+                                ? _controller.toPopupContact(postModel.userId)
+                                : () {}, //TODO: update post here
                             color: kPrimaryColor,
                             textColor: Colors.white,
                             padding: EdgeInsets.all(15.0),
                             child: Container(
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                child: Text("Liên hệ",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 16.0))),
+                              width: MediaQuery.of(context).size.width * 0.35,
+                              child: Text(
+                                postModel.userId !=
+                                        _userBloc.state.currentUser.userId
+                                            .toString()
+                                    ? "Liên hệ"
+                                    : "Sửa bài đăng",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                            ),
                           ),
                         ],
                       ),
