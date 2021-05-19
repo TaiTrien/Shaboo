@@ -19,8 +19,8 @@ class BookScreen extends StatelessWidget {
           if (state is PostSucceed) {
             var _postBloc = BlocProvider.of<PostBloc>(context);
             _postBloc.add(ResetCurrentPost(null));
-            Notify().success(message: 'Tạo bài đăng thành công');
-            Navigator.pop(context);
+            // Notify().success(message: 'Tạo bài đăng thành công');
+            // Navigator.pop(context);
           }
         },
         child: Scaffold(

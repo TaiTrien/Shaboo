@@ -80,7 +80,11 @@ class DataSearch extends SearchDelegate {
   }
 
   Stream<dynamic> dataStream() async* {
-    yield await this.dataSource(query);
+    try {
+      yield await this.dataSource(query);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

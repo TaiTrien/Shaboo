@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/model_constant.dart';
-import 'package:shaboo/modules/book/detail_book/views/reviews_tab.dart';
 import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
 import 'package:shaboo/modules/main/profile/components/header_info.dart';
 import 'package:shaboo/modules/post/list_post/views/list_post.dart';

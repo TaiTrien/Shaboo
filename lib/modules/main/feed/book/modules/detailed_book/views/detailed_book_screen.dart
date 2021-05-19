@@ -9,6 +9,7 @@ import 'package:shaboo/components/stateless/bottom_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/models/post/book.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
+import 'package:shaboo/modules/main_screen.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class DetailedBookScreen extends StatelessWidget {
@@ -25,8 +26,10 @@ class DetailedBookScreen extends StatelessWidget {
     return BlocConsumer<PostBloc, PostState>(
       listener: (context, state) {
         if (state is PostSucceed) {
-          // Notify().success(message: "Tạo bài đăng thành công");
-          // Navigator.pop(context);
+          // Navigator.pushAndRemoveUntil(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => MainScreen()),
+          //     ModalRoute.withName("/Home"));
         }
       },
       builder: (context, state) {

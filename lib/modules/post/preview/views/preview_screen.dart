@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
@@ -292,7 +293,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                                     _userBloc.state.currentUser.userId
                                         .toString()
                                 ? _controller.toPopupContact(postModel.userId)
-                                : () {}, //TODO: update post here
+                                : _controller.toEditPost(postModel),
                             color: kPrimaryColor,
                             textColor: Colors.white,
                             padding: EdgeInsets.all(15.0),

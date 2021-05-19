@@ -8,6 +8,7 @@ import 'package:shaboo/modules/main/feed/feed/controllers/feed_controller.dart';
 import 'package:shaboo/modules/main/feed/add_image/views/add_image_screen.dart';
 import 'package:shaboo/modules/main/feed/add_location/views/location_screen.dart';
 import 'package:shaboo/modules/main/feed/book/views/book_screen.dart';
+import 'package:shaboo/modules/main_screen.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class PostForm extends StatefulWidget {
@@ -34,16 +35,23 @@ class _PostFormState extends State<PostForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PostBloc, PostState>(
-        listener: (context, state) {
-          if (state is PostSucceed) {
-            var _postBloc = BlocProvider.of<PostBloc>(context);
-            _postBloc.add(ResetCurrentPost(null));
-            Notify().success(message: 'Tạo bài đăng thành công');
-            Navigator.pop(context);
-          }
-        },
-        child: SafeArea(
+    return BlocConsumer<PostBloc, PostState>(
+      listener: (context, state) {
+        if (state is PostSucceed) {
+          var _postBloc = BlocProvider.of<PostBloc>(context);
+          _postBloc.add(ResetCurrentPost(null));
+          Notify().success(
+              message: state.currentPost?.isEdit ?? false
+                  ? 'Sửa thành công'
+                  : 'Tạo bài đăng thành công');
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => MainScreen()),
+              ModalRoute.withName("/Home"));
+        }
+      },
+      builder: (context, state) {
+        return SafeArea(
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
@@ -56,7 +64,9 @@ class _PostFormState extends State<PostForm> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: Text(
-                'Nhập thông tin',
+                state.currentPost?.isEdit ?? false
+                    ? 'Sửa bài đăng'
+                    : 'Nhập thông tin',
                 style: kHeadingTextStyle.copyWith(
                     fontSize: 22.0, color: Colors.black),
               ),
@@ -78,6 +88,8 @@ class _PostFormState extends State<PostForm> {
               ],
             ),
           ),
-        ));
+        );
+      },
+    );
   }
 }

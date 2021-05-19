@@ -13,16 +13,17 @@ class PostModel implements Model {
   BookModel book;
   int id;
   String userId;
+  bool isEdit;
   List<ImageModel> images;
-  PostModel({
-    this.title,
-    this.userId,
-    this.description,
-    this.status = "OPENED",
-    this.location,
-    this.book,
-    this.images,
-  });
+  PostModel(
+      {this.title,
+      this.userId,
+      this.description,
+      this.status = "OPENED",
+      this.location,
+      this.book,
+      this.images,
+      this.isEdit = false});
 
   Future<dynamic> upload({PostModel post}) async {
     return await PostApi.uploadPost(post: post);
@@ -70,6 +71,7 @@ class PostModel implements Model {
   set setLocation(String location) => this.location = location;
   set setBook(BookModel selectedBook) => this.book = selectedBook;
   set setImages(List<ImageModel> images) => this.images = images;
+  set setIsEdit(bool isEdit) => this.isEdit = isEdit;
 
   Map<String, dynamic> toJson() => {
         'title': this.title,

@@ -67,7 +67,7 @@ class LocationScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomButton(
         onPress: _controller.handleUpdateCurrentPost,
-        title: _controller.book != null ? 'Đăng bài' : 'Tiếp tục',
+        title: _controller.buttonTitle(),
       ),
     );
   }

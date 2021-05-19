@@ -33,7 +33,9 @@ class DescriptionController {
       images: images ?? null,
       location: location ?? null,
       book: book ?? null,
+      isEdit: isEdit,
     );
+
     _postBloc.add(UpdateCurrentPost(_currentPost));
     toNextPage();
     outFocus();
@@ -52,6 +54,7 @@ class DescriptionController {
   get images => currentPost != null ? currentPost.images : null;
   get location => currentPost != null ? currentPost.location : null;
   get book => currentPost != null ? currentPost.book : null;
+  get isEdit => currentPost?.isEdit ?? false;
   get numberOfImages =>
       currentPost.images != null ? currentPost.images.length : 0;
 }

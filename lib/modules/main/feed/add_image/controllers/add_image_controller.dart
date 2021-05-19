@@ -21,7 +21,8 @@ class AddImageController {
   }
 
   handleUpdateCurrentPost() {
-    if (currentPost.images == null) return Notify().error(message: 'Vui lòng thêm ít nhất 1 tấm ảnh');
+    if (currentPost.images == null)
+      return Notify().error(message: 'Vui lòng thêm ít nhất 1 tấm ảnh');
     toNextPage();
   }
 
@@ -29,9 +30,11 @@ class AddImageController {
   get currentPost => _postBloc.state.currentPost;
   get title => currentPost.title;
   get desc => currentPost.description;
-  get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
+  get numberOfImages =>
+      currentPost.images != null ? currentPost.images.length : 0;
 
   //  Navigations
   toExit() => Navigator.pop(context);
-  toNextPage() => pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.ease);
+  toNextPage() => pageController.nextPage(
+      duration: Duration(milliseconds: 500), curve: Curves.ease);
 }

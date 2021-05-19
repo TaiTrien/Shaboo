@@ -31,20 +31,24 @@ class LocationController {
       images: images,
       location: selectedWard["path_with_type"],
       book: book ?? null,
+      isEdit: isEdit,
     );
     _postBloc.add(UpdateCurrentPost(_currentPost));
-    if (book != null)
+    if (book != null && isEdit) {
+      toNextPage();
+    } else if (book != null)
       _postBloc.add(AddPost(_currentPost));
     else {
       toNextPage();
     }
   }
 
-  get currentPost => _postBloc.state.currentPost;
-  get title => currentPost.title;
-  get desc => currentPost.description;
-  get images => currentPost.images;
-  get book => currentPost.book;
+  get currentPost => _postBloc.state?.currentPost;
+  get title => currentPost?.title;
+  get desc => currentPost?.description;
+  get images => currentPost?.images;
+  get book => currentPost?.book;
+  get isEdit => currentPost?.isEdit ?? false;
 
   get cities => _locationBloc.state.locations.values.toList();
   get districts =>
@@ -63,6 +67,16 @@ class LocationController {
       : selectedDistrict["name_with_type"];
   get selectedWardName =>
       selectedWard == null ? "Phường/xã" : selectedWard["name_with_type"];
+
+  buttonTitle() {
+    if (book != null && isEdit) {
+      return 'Tiếp tục';
+    } else if (book != null)
+      return 'Đăng bài';
+    else {
+      return 'Tiếp tục';
+    }
+  }
 
   toCityList(dynamic location) => Navigator.push(
       context,

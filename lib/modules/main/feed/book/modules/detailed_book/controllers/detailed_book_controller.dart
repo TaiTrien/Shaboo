@@ -25,10 +25,10 @@ class DetailedBookController {
   }
 
   //getter & setter
-  get title => _postBloc.state.currentPost.title;
-  get desc => _postBloc.state.currentPost.description;
-  get images => _postBloc.state.currentPost.images;
-  get location => _postBloc.state.currentPost.location;
+  get title => _postBloc.state.currentPost?.title;
+  get desc => _postBloc.state.currentPost?.description;
+  get images => _postBloc.state.currentPost?.images;
+  get location => _postBloc.state.currentPost?.location;
 
   // Navigations
 
