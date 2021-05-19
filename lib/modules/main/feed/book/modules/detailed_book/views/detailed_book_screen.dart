@@ -25,12 +25,7 @@ class DetailedBookScreen extends StatelessWidget {
     var random = new Random();
     return BlocConsumer<PostBloc, PostState>(
       listener: (context, state) {
-        if (state is PostSucceed) {
-          // Navigator.pushAndRemoveUntil(
-          //     context,
-          //     MaterialPageRoute(builder: (context) => MainScreen()),
-          //     ModalRoute.withName("/Home"));
-        }
+        if (state is PostSucceed) {}
       },
       builder: (context, state) {
         if (state is PostProcessing)

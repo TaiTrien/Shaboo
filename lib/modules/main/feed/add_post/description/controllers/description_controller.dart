@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/utils/notify.dart';
@@ -28,6 +29,7 @@ class DescriptionController {
     if (desc.isEmpty)
       return Notify().error(message: 'Bạn chưa mô tả bài đăng của mình');
     PostModel _currentPost = PostModel(
+      id: id,
       title: title,
       description: desc,
       images: images ?? null,
@@ -51,6 +53,7 @@ class DescriptionController {
       duration: Duration(milliseconds: 500), curve: Curves.ease);
 
   get currentPost => _postBloc.state.currentPost;
+  get id => currentPost?.id ?? null;
   get images => currentPost != null ? currentPost.images : null;
   get location => currentPost != null ? currentPost.location : null;
   get book => currentPost != null ? currentPost.book : null;

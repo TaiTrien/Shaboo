@@ -16,11 +16,9 @@ class BookScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return BlocListener<PostBloc, PostState>(
         listener: (context, state) {
-          if (state is PostSucceed) {
+          if (state is PostSucceed || state is UpdatePostSucceed) {
             var _postBloc = BlocProvider.of<PostBloc>(context);
             _postBloc.add(ResetCurrentPost(null));
-            // Notify().success(message: 'Tạo bài đăng thành công');
-            // Navigator.pop(context);
           }
         },
         child: Scaffold(

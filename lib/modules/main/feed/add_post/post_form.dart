@@ -40,14 +40,21 @@ class _PostFormState extends State<PostForm> {
         if (state is PostSucceed) {
           var _postBloc = BlocProvider.of<PostBloc>(context);
           _postBloc.add(ResetCurrentPost(null));
-          Notify().success(
-              message: state.currentPost?.isEdit ?? false
-                  ? 'Sửa thành công'
-                  : 'Tạo bài đăng thành công');
+          Notify().success(message: 'Tạo bài đăng thành công');
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => MainScreen()),
               ModalRoute.withName("/Home"));
+        } else if (state is UpdatePostSucceed) {
+          var _postBloc = BlocProvider.of<PostBloc>(context);
+          _postBloc.add(ResetCurrentPost(null));
+          Notify().success(message: 'Sửa thành công');
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => MainScreen()),
+              ModalRoute.withName("/Home"));
+        } else if (state is PostError) {
+          Notify().error(message: state.error);
         }
       },
       builder: (context, state) {

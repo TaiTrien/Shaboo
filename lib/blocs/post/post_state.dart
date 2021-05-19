@@ -22,6 +22,8 @@ class PostProcessing extends PostState {}
 
 class PostSucceed extends PostState {}
 
+class UpdatePostSucceed extends PostState {}
+
 class PostError extends PostState {
   final String error;
   PostError(PostState oldstate, {this.error})

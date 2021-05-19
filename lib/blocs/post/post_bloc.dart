@@ -34,7 +34,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         yield PostError(state, error: e.toString());
       }
     } else if (event is UpdatePost) {
-      //TODO: update post logic here
+      yield PostProcessing();
+      var result = await postRepo.updatePost(post: event.payload);
+
+      if (result == null)
+        yield PostError(state, error: 'Đã có lỗi xảy ra');
+      else
+        yield UpdatePostSucceed();
     }
   }
 }

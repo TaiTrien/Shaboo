@@ -16,19 +16,27 @@ class DetailedBookController {
 
   uploadPost() {
     PostModel _currentPost = PostModel(
+        id: this.id,
         title: title,
         description: desc,
         images: images,
         location: location,
         book: selectedBook);
-    _postBloc.add(AddPost(_currentPost));
+    //TODO: add update logic here
+    if (isEdit) {
+      _postBloc.add(UpdatePost(_currentPost));
+    } else {
+      _postBloc.add(AddPost(_currentPost));
+    }
   }
 
   //getter & setter
+  get id => _postBloc.state.currentPost?.id;
   get title => _postBloc.state.currentPost?.title;
   get desc => _postBloc.state.currentPost?.description;
   get images => _postBloc.state.currentPost?.images;
   get location => _postBloc.state.currentPost?.location;
+  get isEdit => _postBloc.state.currentPost?.isEdit ?? false;
 
   // Navigations
 

@@ -26,6 +26,7 @@ class LocationController {
     if (selectedWard == null)
       return Notify().error(message: 'Hãy chọn phường/xã của bạn');
     PostModel _currentPost = PostModel(
+      id: id,
       title: title,
       description: desc,
       images: images,
@@ -44,6 +45,7 @@ class LocationController {
   }
 
   get currentPost => _postBloc.state?.currentPost;
+  get id => currentPost?.id ?? null;
   get title => currentPost?.title;
   get desc => currentPost?.description;
   get images => currentPost?.images;

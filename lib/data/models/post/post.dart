@@ -16,7 +16,8 @@ class PostModel implements Model {
   bool isEdit;
   List<ImageModel> images;
   PostModel(
-      {this.title,
+      {this.id,
+      this.title,
       this.userId,
       this.description,
       this.status = "OPENED",
@@ -84,6 +85,7 @@ class PostModel implements Model {
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     final postModel = PostModel(
+      id: json['id'] ?? '',
       title: json['title'],
       description: json['description'],
       status: json['status'],
