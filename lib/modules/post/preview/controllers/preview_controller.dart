@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
+import 'package:shaboo/constants/model_constant.dart';
 
 import 'package:shaboo/data/models/post/post.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
@@ -34,6 +35,12 @@ class PreviewPostController {
     _postBloc.add(UpdateCurrentPost(_currentPost));
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => PostForm()));
+  }
+
+  toClosePost(PostModel postModel) {
+    PostModel _currentPost = postModel;
+    _currentPost.status = 'CLOSED';
+    _postBloc.add(UpdatePost(_currentPost));
   }
 
   toExit() => Navigator.pop(context);

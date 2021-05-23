@@ -8,7 +8,7 @@ class PostModel implements Model {
   String title;
   String description;
   String range;
-  String status = "OPENED";
+  String status;
   String location;
   BookModel book;
   int id;
@@ -20,7 +20,7 @@ class PostModel implements Model {
       this.title,
       this.userId,
       this.description,
-      this.status = "OPENED",
+      this.status = 'OPENED',
       this.location,
       this.book,
       this.images,
@@ -108,7 +108,7 @@ class PostModel implements Model {
 
   static getPost(int id) async {
     final response = await PostApi.getPostById(id);
-    return PostModel.fromJson(response['data']);
+    if (response != null) return PostModel.fromJson(response['data']);
   }
 }
 

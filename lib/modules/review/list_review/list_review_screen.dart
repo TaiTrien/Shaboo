@@ -24,7 +24,7 @@ class ListReviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ReviewBloc, ReviewState>(builder: (context, state) {
       if (state is ReviewLoadingState) {
-        return CircularProgressIndicator();
+        return Center(child: CircularProgressIndicator());
       }
       return BlocProvider<LazyLoadBloc>(
         create: (context) => LazyLoadBloc(),
