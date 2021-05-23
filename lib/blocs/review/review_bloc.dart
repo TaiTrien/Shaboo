@@ -44,10 +44,10 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
       yield ReviewLoadingState();
       try {
         var result = await reviewRepo.deleteReview(reviewId: event.payload.id);
-        if (state.currentReview == null || result == null)
+        if (result == null)
           yield ReviewErrorState(message: 'Đã có lỗi xảy ra');
         else
-          yield ReviewSuccessState();
+          yield DeleteSuccessState();
       } catch (e) {
         yield ReviewErrorState(message: e);
       }

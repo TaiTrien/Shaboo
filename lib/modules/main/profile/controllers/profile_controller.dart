@@ -9,11 +9,6 @@ import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/auth/login/models/auth.dart';
 
-enum MenuValue {
-  SETTINGS,
-  SIGNOUT,
-}
-
 class ProfileController {
   BuildContext context;
   // ignore: close_sinks

@@ -22,35 +22,35 @@ class InfoTab extends StatelessWidget {
               textAlign: TextAlign.justify,
             ),
             SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlatButton(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  shape: CircleBorder(),
-                  onPressed: () {},
-                  child: Icon(Icons.mail, color: Colors.white),
-                  color: Colors.purple,
-                ),
-                FlatButton(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  shape: CircleBorder(),
-                  onPressed: () {},
-                  child: Icon(Icons.chat, color: Colors.white),
-                  color: kPrimaryColor,
-                ),
-                FlatButton(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  shape: CircleBorder(),
-                  onPressed: () {},
-                  child: Icon(Icons.phone, color: Colors.white),
-                  color: Colors.green,
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     FlatButton(
+            //       padding:
+            //           const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            //       shape: CircleBorder(),
+            //       onPressed: () {},
+            //       child: Icon(Icons.mail, color: Colors.white),
+            //       color: Colors.purple,
+            //     ),
+            //     FlatButton(
+            //       padding:
+            //           const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            //       shape: CircleBorder(),
+            //       onPressed: () {},
+            //       child: Icon(Icons.chat, color: Colors.white),
+            //       color: kPrimaryColor,
+            //     ),
+            //     FlatButton(
+            //       padding:
+            //           const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            //       shape: CircleBorder(),
+            //       onPressed: () {},
+            //       child: Icon(Icons.phone, color: Colors.white),
+            //       color: Colors.green,
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

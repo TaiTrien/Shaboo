@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/lazy_load/lazyload_bloc.dart';
+import 'package:shaboo/blocs/review/review_bloc.dart';
 import 'package:shaboo/components/stateful/lazy_load_item.dart';
 import 'package:shaboo/components/stateful/lazy_load_list.dart';
 import 'package:shaboo/constants/model_constant.dart';
@@ -21,22 +22,27 @@ class ListReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LazyLoadBloc>(
-      create: (context) => LazyLoadBloc(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: kDefaultPaddingHorizontal + 10,
-          vertical: kDefaultPaddingVerical,
+    return BlocBuilder<ReviewBloc, ReviewState>(builder: (context, state) {
+      if (state is ReviewLoadingState) {
+        return CircularProgressIndicator();
+      }
+      return BlocProvider<LazyLoadBloc>(
+        create: (context) => LazyLoadBloc(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPaddingHorizontal + 10,
+            vertical: kDefaultPaddingVerical,
+          ),
+          child: reviewType == ReviewType.Owned
+              ? BlocProvider<LazyLoadBloc>(
+                  create: (context) => LazyLoadBloc(),
+                  child: ListReviewOwned(userId: userId))
+              : ListViewBasedOnBook(
+                  bookId: this.bookId,
+                ),
         ),
-        child: reviewType == ReviewType.Owned
-            ? BlocProvider<LazyLoadBloc>(
-                create: (context) => LazyLoadBloc(),
-                child: ListReviewOwned(userId: userId))
-            : ListViewBasedOnBook(
-                bookId: this.bookId,
-              ),
-      ),
-    );
+      );
+    });
   }
 }
 

@@ -13,6 +13,8 @@ class ReviewLoadingState extends ReviewState {}
 
 class ReviewSuccessState extends ReviewState {}
 
+class DeleteSuccessState extends ReviewState {}
+
 class ReviewErrorState extends ReviewState {
   final String message;
   ReviewErrorState({this.message});
