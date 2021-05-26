@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/components/stateful/custom_textfield.dart';
 import 'package:shaboo/components/stateful/date_time_picker.dart';
 import 'package:shaboo/components/stateless/default_button.dart';
 import 'package:shaboo/components/stateless/widget_with_label.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/updateInfo/update_contact.dart';
+import 'package:shaboo/utils/notify.dart';
 
 class UpdateGeneralInfo extends StatefulWidget {
   @override
@@ -15,11 +18,32 @@ class UpdateGeneralInfo extends StatefulWidget {
 class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
   var firstNameController;
   var lastNameController;
+  UserBloc _userBloc;
   @override
   void initState() {
     super.initState();
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
+    _userBloc = BlocProvider.of<UserBloc>(context);
+
+    firstNameController.text = _userBloc.state.currentUser?.firstName;
+    lastNameController.text = _userBloc.state.currentUser?.lastName;
+  }
+
+  handleUpdateGeneralInfo() {
+    if (this.firstNameController.text.trim() == '') {
+      Notify().error(message: 'Vui lòng điền họ của bạn');
+    } else if (this.lastNameController.text.trim() == '') {
+      Notify().error(message: 'Vui lòng điền tên của bạn');
+    } else {
+      _userBloc.state.currentUser.firstName =
+          this.firstNameController.text.trim();
+      _userBloc.state.currentUser.lastName =
+          this.lastNameController.text.trim();
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => UpdateContactInfo()));
+    }
   }
 
   @override
@@ -64,15 +88,16 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
               WidgetWithLabel(
                 label: 'Sinh nhật của bạn',
                 child: DateTimePicker(
-                  onConfirmCallBack: (selectedDate) => print(selectedDate),
+                  onConfirmCallBack: (selectedDate) =>
+                      _userBloc.state.currentUser.birthday = selectedDate,
+                  maxDate: DateTime.now(),
                 ),
               ),
               Spacer(),
               DefaultButton(
                 text: 'Tiếp tục',
                 onPress: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UpdateContactInfo()));
+                  this.handleUpdateGeneralInfo();
                 },
               ),
             ],

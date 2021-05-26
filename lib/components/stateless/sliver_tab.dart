@@ -8,14 +8,23 @@ class SliverTab extends StatelessWidget {
   final String author;
   final double score;
 
-  SliverTab({this.backgroundColor, this.bookName, this.author, this.score, this.numberOfTabs});
+  SliverTab(
+      {this.backgroundColor,
+      this.bookName,
+      this.author,
+      this.score,
+      this.numberOfTabs});
 
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
       pinned: true,
       floating: false,
-      delegate: Delegate(backgroundColor: backgroundColor, bookName: bookName, author: author, score: score),
+      delegate: Delegate(
+          backgroundColor: backgroundColor,
+          bookName: bookName,
+          author: author,
+          score: score),
     );
   }
 }
@@ -27,10 +36,16 @@ class Delegate extends SliverPersistentHeaderDelegate {
   final double score;
   final int numberOfTabs;
 
-  Delegate({this.backgroundColor, this.bookName, this.author, this.score, this.numberOfTabs});
+  Delegate(
+      {this.backgroundColor,
+      this.bookName,
+      this.author,
+      this.score,
+      this.numberOfTabs});
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
@@ -45,10 +60,10 @@ class Delegate extends SliverPersistentHeaderDelegate {
                 author,
                 style: kDefaultTextStyle.copyWith(color: kGreyColor),
               ),
-              Text(
-                '9.5/10',
-                style: kDefaultTextStyle.copyWith(color: kSecondaryColor, fontWeight: FontWeight.bold),
-              )
+              // Text(
+              //   '9.5/10',
+              //   style: kDefaultTextStyle.copyWith(color: kSecondaryColor, fontWeight: FontWeight.bold),
+              // )
             ],
           ),
         ],

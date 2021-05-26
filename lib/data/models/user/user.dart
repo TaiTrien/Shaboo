@@ -15,6 +15,7 @@ class UserModel implements Model {
   String birthday;
   String avatar;
   String facebook;
+  bool isUpdatedInfo;
   List<CategoryModel> categories;
 
   UserModel({
@@ -30,6 +31,7 @@ class UserModel implements Model {
     this.avatar,
     this.facebook,
     this.categories,
+    this.isUpdatedInfo,
   })  : _userID = userID,
         _password = password;
 
@@ -59,6 +61,7 @@ class UserModel implements Model {
       avatar: json['avatar'],
       facebook: json['facebook'],
       categories: CategoryModel.toList(json['categories']),
+      isUpdatedInfo: json['isUpdatedInfo'],
     );
     userModel._userID = json['id'];
     return userModel;

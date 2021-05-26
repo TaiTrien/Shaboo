@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/components/stateful/custom_textfield.dart';
-import 'package:shaboo/components/stateful/date_time_picker.dart';
-import 'package:shaboo/components/stateless/default_button.dart';
 import 'package:shaboo/components/stateless/widget_with_label.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/main/feed/components/note_board.dart';
+import 'package:shaboo/modules/updateInfo/validator.dart';
+import 'package:shaboo/utils/notify.dart';
 
 class UpdateContactInfo extends StatefulWidget {
   @override
@@ -12,13 +14,31 @@ class UpdateContactInfo extends StatefulWidget {
 }
 
 class _UpdateContactInfoState extends State<UpdateContactInfo> {
-  var firstNameController;
-  var lastNameController;
+  var emailController;
+  var phoneController;
+  var facebookLinkController;
+  UserBloc _userBloc;
   @override
   void initState() {
     super.initState();
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
+    emailController = TextEditingController();
+    phoneController = TextEditingController();
+    facebookLinkController = TextEditingController();
+    _userBloc = BlocProvider.of<UserBloc>(context);
+    emailController.text = _userBloc.state.currentUser?.email;
+    phoneController.text = _userBloc.state.currentUser?.phone;
+  }
+
+  handleUpdateInfo() {
+    if (this.emailController.text.trim() == '') {
+      Notify().error(message: 'Vui lòng nhập email của bạn');
+    } else if (!Validator.isEmail(this.emailController.text.trim())) {
+      Notify().error(message: 'Email không hợp lệ');
+    } else if (this.phoneController.text.trim() == '') {
+      Notify().error(message: 'Vui lòng nhập số điện thoại');
+    } else if (!Validator.isPhoneNumber(this.phoneController.text.trim())) {
+      Notify().error(message: 'Số điện thoại không hợp lệ');
+    }
   }
 
   @override
@@ -38,7 +58,9 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              this.handleUpdateInfo();
+            },
             child: Text(
               'Lưu',
               style: TextStyle(
@@ -63,7 +85,7 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
                     label: 'Email để liên hệ',
                     isRequired: true,
                     child: CustomTextField(
-                      controller: firstNameController,
+                      controller: emailController,
                       keyboard: TextInputType.emailAddress,
                       mainColor: kBorderColor,
                       labelText: 'VD: email@example.com',
@@ -73,8 +95,8 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
                   label: 'Số điện thoại',
                   isRequired: true,
                   child: CustomTextField(
-                    controller: lastNameController,
-                    keyboard: TextInputType.emailAddress,
+                    controller: phoneController,
+                    keyboard: TextInputType.number,
                     mainColor: kBorderColor,
                     labelText: 'VD: 090******',
                   ),
@@ -83,7 +105,7 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
                 WidgetWithLabel(
                   label: 'Đường dẫn Facebook liên hệ',
                   child: CustomTextField(
-                    controller: lastNameController,
+                    controller: facebookLinkController,
                     keyboard: TextInputType.emailAddress,
                     mainColor: kBorderColor,
                     labelText: 'VD: www.facebook.com/example/',

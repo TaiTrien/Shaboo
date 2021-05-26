@@ -6,8 +6,10 @@ import 'package:shaboo/utils/formatter.dart';
 
 class DateTimePicker extends StatefulWidget {
   final Function onConfirmCallBack;
+  final DateTime maxDate;
 
-  const DateTimePicker({Key key, this.onConfirmCallBack}) : super(key: key);
+  const DateTimePicker({Key key, this.onConfirmCallBack, this.maxDate})
+      : super(key: key);
   @override
   _DateTimePickerState createState() => _DateTimePickerState();
 }
@@ -43,6 +45,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
             },
             currentTime: DateTime.now(),
             locale: LocaleType.vi,
+            maxTime: widget.maxDate,
           );
         },
         leading: Icon(Icons.calendar_today),
