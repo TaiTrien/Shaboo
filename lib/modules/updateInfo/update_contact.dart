@@ -45,6 +45,7 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Thông tin liên hệ'),
         backgroundColor: kPrimaryColor,
@@ -71,13 +72,13 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingHorizontal,
-            vertical: kDefaultPaddingVerical + 20),
-        child: Container(
-          height: size.height,
-          child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: kDefaultPaddingHorizontal,
+              vertical: kDefaultPaddingVerical + 20),
+          child: Container(
+            height: size.height,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
