@@ -10,3 +10,7 @@ abstract class UserEvent {
 class UpdateUserData extends UserEvent {
   UpdateUserData(UserModel currentUser) : super(payload: currentUser);
 }
+
+class EditUserInfo extends UserEvent {
+  EditUserInfo(UserModel data) : super(payload: data);
+}

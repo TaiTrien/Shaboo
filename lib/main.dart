@@ -11,6 +11,7 @@ import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/repositories/implement/book/book_repo_impl.dart';
 import 'package:shaboo/data/repositories/implement/post/post_repo_impl.dart';
 import 'package:shaboo/data/repositories/implement/review/review_repo_impl.dart';
+import 'package:shaboo/data/repositories/implement/user/user_repo_impl.dart';
 
 import 'package:shaboo/routes.dart';
 
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
+          create: (context) => UserRepoImpl(),
+        ),
+        RepositoryProvider(
           create: (context) => ReviewRepoImpl(),
         ),
         RepositoryProvider(
@@ -42,7 +46,8 @@ class MyApp extends StatelessWidget {
             create: (context) => InternetCubit(),
           ),
           BlocProvider<UserBloc>(
-            create: (context) => UserBloc(),
+            create: (context) => UserBloc(
+                userRepo: RepositoryProvider.of<UserRepoImpl>(context)),
           ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(),

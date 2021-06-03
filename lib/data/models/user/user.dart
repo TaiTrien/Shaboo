@@ -35,18 +35,16 @@ class UserModel implements Model {
   })  : _userID = userID,
         _password = password;
 
-  Map<String, dynamic> toJson() => {
-        'userID': _userID,
-        'firstName': firstName,
-        'lastName': lastName,
-        'userName': userName,
-        'password': _password,
-        'email': email,
-        'phone': phone,
-        'gender': gender,
-        'birthday': birthday,
-        'avatar': avatar,
-        'categories': categories,
+  Map<String, dynamic> toJson({UserModel data}) => {
+        'firstName': data?.firstName,
+        'lastName': data?.lastName,
+        'email': data?.email,
+        'phone': data?.phone,
+        'gender': data?.gender ?? 'MALE',
+        'birth': data?.birthday ?? '',
+        'facebook': data?.facebook ?? '',
+        'categories':
+            data?.categories?.map((cate) => cate.categoryID)?.toList(),
       };
 
   factory UserModel.fromJson(Map<String, dynamic> json) {

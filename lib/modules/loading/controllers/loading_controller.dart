@@ -38,7 +38,7 @@ class LoadingController {
 
   get currentUser => _userBloc.state.currentUser;
   get categories => currentUser?.categories;
-  get isUpdatedInfo => currentUser?.isUpdatedInfo;
+  get isUpdatedInfo => currentUser?.isUpdatedInfo ?? true;
   //navigations
   toMainScreen() => Navigator.pushNamedAndRemoveUntil(
       context, '/mainScreen', (context) => false);

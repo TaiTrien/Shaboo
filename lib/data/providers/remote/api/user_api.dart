@@ -27,17 +27,7 @@ class UserApi {
   }
 
   static Future<dynamic> editInfo({UserModel currentUser}) async {
-    //TODO: fix data here to dynamic
-    var requestedUser = {
-      "firstName": currentUser.firstName,
-      "lastName": currentUser.lastName,
-      "email": currentUser.email,
-      "phone": "0906839130",
-      "gender": "MALE",
-      "birth": "1999-05-28",
-      "facebook": "https://www.facebook.com/taitrien99/",
-      "categories": currentUser.categories.map((category) => category.categoryID).toList(),
-    };
+    var requestedUser = UserModel().toJson(data: currentUser);
     try {
       var response = await http.put(
         Uri.parse('$urlUsers'),

@@ -17,3 +17,16 @@ class UpdateState extends UserState {
     UserModel currentUser,
   }) : super(currentUser: currentUser ?? oldState.currentUser);
 }
+
+class EditProcessing extends UserState {}
+
+class EditFailed extends UserState {
+  final String message;
+
+  EditFailed(UserState oldState, {this.message})
+      : super(currentUser: oldState.currentUser);
+}
+
+class EditSucceed extends UserState {
+  EditSucceed(UserState oldState) : super(currentUser: oldState.currentUser);
+}
