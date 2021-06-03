@@ -42,7 +42,7 @@ class CategoryController {
   }
 
   updateSelectedCategories({CategoryModel selectCategory}) {
-    selectedCategories = currentUser.categories;
+    selectedCategories = currentUser?.categories;
 
     if (selectedCategories == null)
       selectedCategories = [selectCategory];
@@ -77,16 +77,16 @@ class CategoryController {
   }
 
   get currentUser => _userBloc.state.currentUser;
-  get userId => currentUser.userId;
-  get firstName => currentUser.firstName;
-  get lastName => currentUser.lastName;
-  get userName => currentUser.userName;
-  get email => currentUser.email;
-  get phone => currentUser.phone;
-  get gender => currentUser.gender;
-  get birthday => currentUser.birthday;
-  get facebook => currentUser.facebook;
-  get avatar => currentUser.avatar;
-  get categories => currentUser.categories;
+  get userId => currentUser?.userId;
+  get firstName => currentUser?.firstName;
+  get lastName => currentUser?.lastName;
+  get userName => currentUser?.userName;
+  get email => currentUser?.email;
+  get phone => currentUser?.phone;
+  get gender => currentUser?.gender;
+  get birthday => currentUser?.birthday;
+  get facebook => currentUser?.facebook;
+  get avatar => currentUser?.avatar;
+  get categories => currentUser?.categories;
   get numberOfSelectedCategories => categories != null ? categories.length : 0;
 }

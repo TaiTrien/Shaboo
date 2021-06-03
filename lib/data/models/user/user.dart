@@ -44,7 +44,7 @@ class UserModel implements Model {
         'birth': data?.birthday ?? '',
         'facebook': data?.facebook ?? '',
         'categories':
-            data?.categories?.map((cate) => cate.categoryID)?.toList(),
+            data?.categories?.map((cate) => cate?.categoryID)?.toList(),
       };
 
   factory UserModel.fromJson(Map<String, dynamic> json) {

@@ -24,6 +24,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } else if (event is EditUserInfo) {
       yield EditProcessing();
       Response res = await userRepo.updateProfile(user: event.payload);
+      yield UpdateState(state, currentUser: event.payload);
       if (!successCodes.contains(res?.statusCode))
         yield EditFailed(state, message: res?.apiMessagse);
       else if (res == null)

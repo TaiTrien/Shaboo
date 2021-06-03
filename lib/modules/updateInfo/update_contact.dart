@@ -57,8 +57,8 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
       listener: (context, state) {
         if (state is EditSucceed) {
           Notify().success(message: 'Cập nhật thành công');
-          if (state.currentUser.categories?.length == 0 ||
-              state.currentUser.categories == null) {
+          if (state.currentUser?.categories?.length == 0 ||
+              state.currentUser?.categories == null) {
             Navigator.pushNamedAndRemoveUntil(
                 context, '/categoryScreen', (context) => false);
           } else {
