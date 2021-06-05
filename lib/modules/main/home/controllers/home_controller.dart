@@ -17,15 +17,25 @@ class HomeController {
   }
 
   getRecommendBooks() async => await ListBook.getRecommendBooks(EOrder.ASC, 1);
-  getMostReviewedBooks() async =>
-      await ListBook.getBooks(eOrder: EOrder.ASC, page: 1, take: 10, bookName: '', orderBy: EOrder.RatingCount);
-  getHighestScoreBooks() async =>
-      await ListBook.getBooks(eOrder: EOrder.ASC, page: 1, take: 10, bookName: '', orderBy: EOrder.FinalScore);
+  getMostReviewedBooks() async => await ListBook.getBooks(
+      eOrder: EOrder.DESC,
+      page: 1,
+      take: 10,
+      bookName: '',
+      orderBy: EOrder.RatingCount);
+
+  getHighestScoreBooks() async => await ListBook.getBooks(
+      eOrder: EOrder.DESC,
+      page: 1,
+      take: 10,
+      bookName: '',
+      orderBy: EOrder.FinalScore);
 
   get currentUser => _userBloc.state.currentUser;
   get avatarLink => _userBloc.state.currentUser.avatar;
 
-  toPostByIdScreen(int bookId) => Navigator.push(context, MaterialPageRoute(builder: (context) => FeedScreen()));
+  toPostByIdScreen(int bookId) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => FeedScreen()));
 
   toDetailedBookScreen(BookModel selectedBook) => Navigator.push(
       context,

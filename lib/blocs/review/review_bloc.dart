@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:shaboo/blocs/lazy_load/lazyload_bloc.dart';
 import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/data/models/review/review.dart';
 import 'package:shaboo/data/repositories/implement/review/review_repo_impl.dart';
@@ -22,9 +23,10 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
       yield ReviewLoadingState();
       try {
         var result = await reviewRepo.addReview(review: event.payload);
-        if (result == null)
+        if (result == null) {
           yield ReviewErrorState(message: 'Đã có lỗi xảy ra');
-        else
+          yield UpdateCurrentReviewState(state);
+        } else
           yield ReviewSuccessState();
       } catch (e) {
         yield ReviewErrorState(message: e.toString());
