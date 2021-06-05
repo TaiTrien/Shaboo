@@ -8,10 +8,25 @@ import 'package:shaboo/utils/store.dart';
 
 class UserApi {
   static String urlUsers = '$kPrefixUrl/users';
+  static String urlGetMyProfile = '$kPrefixUrl/auth/me';
+
   static getHeader() async => {
         "Authorization": "Bearer ${await Store.getToken()}",
         "Content-Type": "application/json",
       };
+
+  static Future<dynamic> getMyProfile() async {
+    try {
+      var response = await http.get(
+        Uri.parse('$urlGetMyProfile'),
+        headers: await getHeader(),
+      );
+      if (!successCodes.contains(response.statusCode)) return null;
+      return json.decode(response.body);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   static Future<dynamic> getUserById(String id) async {
     try {

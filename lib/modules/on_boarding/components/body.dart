@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shaboo/components/stateless/default_button.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/size_config.dart';
+import 'package:shaboo/utils/store.dart';
 
 // This is the best practice
 import 'onboarding_content.dart';
@@ -60,7 +61,8 @@ class _BodyState extends State<Body> {
             Expanded(
               flex: 1,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+                padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(20)),
                 child: Column(
                   children: <Widget>[
                     Spacer(),
@@ -76,7 +78,8 @@ class _BodyState extends State<Body> {
                     ),
                     DefaultButton(
                       text: "Bắt đầu",
-                      onPress: () {
+                      onPress: () async {
+                        await Store.setIsFirstTime('false');
                         Navigator.pushNamedAndRemoveUntil(
                           context,
                           '/loginScreen',

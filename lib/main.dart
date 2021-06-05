@@ -12,19 +12,41 @@ import 'package:shaboo/data/repositories/implement/book/book_repo_impl.dart';
 import 'package:shaboo/data/repositories/implement/post/post_repo_impl.dart';
 import 'package:shaboo/data/repositories/implement/review/review_repo_impl.dart';
 import 'package:shaboo/data/repositories/implement/user/user_repo_impl.dart';
+import 'package:shaboo/modules/auth/login/views/login_screen.dart';
+import 'package:shaboo/modules/loading/views/loading_screen.dart';
+import 'package:shaboo/modules/on_boarding/views/on_boarding_screen.dart';
 
 import 'package:shaboo/routes.dart';
+import 'package:shaboo/utils/store.dart';
+
+getInitRoute() async {
+  bool isFirstTime =
+      await Store.getIsFirstTime() == 'true' ? true : false ?? true;
+  String token = await Store.getToken();
+  if (isFirstTime)
+    return OnBoardingScreen();
+  else if (token != null) {
+    return LoadingScreen();
+  } else
+    return LoginScreen();
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Widget _defaultHome = await getInitRoute();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: kPrimaryColor, // navigation bar color
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark));
-  runApp(MyApp());
+  runApp(MyApp(
+    initScreen: _defaultHome,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  final Widget initScreen;
+
+  const MyApp({Key key, this.initScreen}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -73,7 +95,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: kPrimaryColor,
             ),
           ),
-          initialRoute: '/loginScreen',
+          home: this.initScreen,
           routes: routes,
         ),
       ),

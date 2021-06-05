@@ -1,4 +1,3 @@
-import 'package:path/path.dart';
 import 'package:shaboo/modules/pick_category/views/category_screen.dart';
 import 'package:shaboo/modules/loading/views/loading_screen.dart';
 import 'package:shaboo/modules/main_screen.dart';

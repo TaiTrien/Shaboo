@@ -8,6 +8,7 @@ import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/data/models/user/user.dart';
 import 'package:shaboo/modules/auth/login/models/auth.dart';
 import 'package:shaboo/utils/notify.dart';
+import 'package:shaboo/utils/store.dart';
 
 class LoginController {
   AuthBloc _authBloc;
@@ -31,7 +32,7 @@ class LoginController {
 
   Future<void> signInByGoogle() async {
     _authBloc.add(Login(true));
-
+    print(await Store.getIsFirstTime());
     UserModel currentUser = await _authModel.googleSignIn();
     _authBloc.add(Login(false));
 

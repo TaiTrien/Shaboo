@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart';
 import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
+import 'package:shaboo/data/models/user/user.dart';
+import 'package:shaboo/data/providers/remote/api/user_api.dart';
 
 class LoadingController {
   BuildContext context;
@@ -20,10 +22,12 @@ class LoadingController {
 
   handleLoad() async {
     await loadLocationData();
+    var currentUser = await UserApi.getMyProfile();
+    _userBloc.add(UpdateUserData(UserModel.fromJson(currentUser)));
 
     if (!isUpdatedInfo) {
       toUpdateInfo();
-    } else if (categories.isEmpty) {
+    } else if (categories?.isEmpty ?? false) {
       toCategoryScreen();
     } else
       toMainScreen();
