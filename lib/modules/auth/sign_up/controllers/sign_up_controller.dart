@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/modules/auth/login/models/auth.dart';
+import 'package:shaboo/modules/updateInfo/validator.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class SignupController {
@@ -50,9 +51,39 @@ class SignupController {
     toLoadingScreen();
   }
 
+  Future<void> signUp() async {
+    // String email = emailController.text.trim();
+    // String password = passwordController.text.trim();
+    // String reEnterPassword = confirmPasswordController.text.trim();
+
+    String email = 'test@gmail.com';
+    String password = '123456789';
+    String reEnterPassword = '123456789';
+    if (!Validator.isEmail(email)) {
+      return Notify().error(message: 'Email không khả dụng');
+    } else if (email == '' || email == null) {
+      return Notify().error(message: 'Vui lòng nhập email');
+    } else if (password == '' || password == null) {
+      return Notify().error(message: 'Vui lòng nhập mật khẩu');
+    } else if (reEnterPassword == '' || reEnterPassword == null) {
+      return Notify().error(message: 'Vui lòng xác thực mật khẩu');
+    } else if (password != reEnterPassword)
+      return Notify().error(message: 'Mật khẩu nhập lại không khớp');
+    else if (!Validator.isPassword(password)) {
+      return Notify().error(message: 'Mật khẩu phải dài hơn 8 kí tự');
+    } else {
+      _authBloc.add(SignUp(email: email, password: password));
+      // if (currentUser == null) return Notify().error(message: 'Sign in failed');
+      // _userBloc.add(UpdateUserData(currentUser));
+      // toLoadingScreen();
+    }
+  }
+
   // Navigations
 
-  toMainScreen() => Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
+  toMainScreen() => Navigator.pushNamedAndRemoveUntil(
+      context, '/mainScreen', (context) => false);
   toLoginScreen() => Navigator.pop(context);
-  toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(context, '/loadingScreen', (context) => false);
+  toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(
+      context, '/loadingScreen', (context) => false);
 }

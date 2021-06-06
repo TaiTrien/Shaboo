@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
       body: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
           return ModalProgressHUD(
-            inAsyncCall: state.isLogging,
+            inAsyncCall: state.isLogging ?? false,
             child: SingleChildScrollView(
               child: Container(
                 height: size.height,

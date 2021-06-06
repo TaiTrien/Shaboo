@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
+import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
 import 'package:shaboo/modules/main/profile/components/header_info.dart';
@@ -108,11 +109,29 @@ class _ProfileScreenState extends State<ProfileScreen>
                   }),
                   Align(
                     alignment: Alignment.bottomCenter,
+                    // child: CircleAvatar(
+                    //     backgroundImage:
+                    //         NetworkImage(_controller.currentUser.avatar) ??
+                    //             _controller.defaultAvatar,
+                    //     radius: 50),
                     child: CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(_controller.currentUser.avatar) ??
-                                _controller.defaultAvatar,
-                        radius: 50),
+                        radius: 50,
+                        child: ClipOval(
+                            child: _controller.currentUser.avatar == null
+                                ? Image.asset(
+                                    'assets/images/default-avatar.png',
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.network(
+                                    _controller.currentUser.avatar,
+                                    fit: BoxFit.cover,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return LoadingWidget(isImage: true);
+                                    },
+                                  ))),
                   )
                 ])),
                 actions: [

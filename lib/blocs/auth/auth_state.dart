@@ -11,6 +11,15 @@ class AuthInitial extends AuthState {
   AuthInitial() : super(isLogging: false);
 }
 
+class AuthLoadingState extends AuthState {}
+
+class SignUpSuccessState extends AuthState {}
+
+class SignUpFailedState extends AuthState {
+  final String error;
+  SignUpFailedState({this.error});
+}
+
 class UpdateState extends AuthState {
   UpdateState(
     AuthState oldState, {

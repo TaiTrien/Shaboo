@@ -49,6 +49,7 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Thông tin cơ bản'),

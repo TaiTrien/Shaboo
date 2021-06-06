@@ -17,9 +17,9 @@ class Validator {
   }
 
   static isPassword(String password) {
-    String pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{8,}$";
+    // String pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{8,}$";
     // return new RegExp(pattern).hasMatch(password);
-    return true;
+    return password.trim().length > 8;
   }
 
   static isReEnterPassword(String password, String reEnterPassword) {

@@ -35,15 +35,21 @@ class HomeScreen extends StatelessWidget {
                   child: CircleAvatar(
                       radius: 18,
                       child: ClipOval(
-                          child: Image.network(
-                        _controller.avatarLink,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return LoadingWidget(isImage: true);
-                        },
-                      ))));
+                          child: _controller.avatarLink == null
+                              ? Image.asset(
+                                  'assets/images/default-avatar.png',
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  _controller.avatarLink,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return LoadingWidget(isImage: true);
+                                  },
+                                ))));
             },
           ),
         ],

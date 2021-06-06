@@ -7,6 +7,7 @@ import 'package:shaboo/blocs/location/location_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/data/models/user/user.dart';
 import 'package:shaboo/data/providers/remote/api/user_api.dart';
+import 'package:shaboo/utils/store.dart';
 
 class LoadingController {
   BuildContext context;
@@ -16,11 +17,13 @@ class LoadingController {
   LoadingController({this.context}) {
     _locationBloc = BlocProvider.of<LocationBloc>(context);
     _userBloc = BlocProvider.of<UserBloc>(context);
-
     handleLoad();
   }
 
   handleLoad() async {
+    // print(await Store.getToken());
+    // Store.deleteToken();
+
     await loadLocationData();
     var currentUser = await UserApi.getMyProfile();
     _userBloc.add(UpdateUserData(UserModel.fromJson(currentUser)));
@@ -42,7 +45,7 @@ class LoadingController {
 
   get currentUser => _userBloc.state.currentUser;
   get categories => currentUser?.categories;
-  get isUpdatedInfo => currentUser?.isUpdatedInfo ?? true;
+  get isUpdatedInfo => currentUser?.isUpdatedInfo ?? false;
   //navigations
   toMainScreen() => Navigator.pushNamedAndRemoveUntil(
       context, '/mainScreen', (context) => false);
