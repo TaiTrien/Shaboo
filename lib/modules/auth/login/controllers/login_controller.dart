@@ -7,6 +7,7 @@ import 'package:shaboo/blocs/auth/auth_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/data/models/user/user.dart';
 import 'package:shaboo/modules/auth/login/models/auth.dart';
+import 'package:shaboo/modules/updateInfo/validator.dart';
 import 'package:shaboo/utils/notify.dart';
 import 'package:shaboo/utils/store.dart';
 
@@ -44,6 +45,19 @@ class LoginController {
   Future<void> signInByFacebook() async {
     _authBloc.add(Login(true));
     var currentUser = await _authModel.facebookSignIn();
+    _authBloc.add(Login(false));
+
+    if (currentUser == null) return Notify().error(message: 'Sign in failed');
+    _userBloc.add(UpdateUserData(currentUser));
+    toLoadingScreen();
+  }
+
+  Future<void> signIn() async {
+    String email = usernameController.text.trim();
+    String password = passwordController.text;
+
+    _authBloc.add(Login(true));
+    var currentUser = await _authModel.signIn(email: email, password: password);
     _authBloc.add(Login(false));
 
     if (currentUser == null) return Notify().error(message: 'Sign in failed');

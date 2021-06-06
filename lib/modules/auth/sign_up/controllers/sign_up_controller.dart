@@ -70,9 +70,6 @@ class SignupController {
       return Notify().error(message: 'Mật khẩu phải dài hơn 8 kí tự');
     } else {
       _authBloc.add(SignUp(email: email, password: password));
-      // if (currentUser == null) return Notify().error(message: 'Sign in failed');
-      // _userBloc.add(UpdateUserData(currentUser));
-      // toLoadingScreen();
     }
   }
 

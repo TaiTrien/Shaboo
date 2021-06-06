@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     DefaultButton(
-                      onPress: () {},
+                      onPress: () => controller.signIn(),
                       text: 'Đăng nhập',
                     ),
                     SizedBox(height: 20),

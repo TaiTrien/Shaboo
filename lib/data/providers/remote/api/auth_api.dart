@@ -9,6 +9,7 @@ class AuthApi {
   static String urlGoogleSignin = '$kPrefixUrl/auth/google';
   static String urlFacebookSignin = '$kPrefixUrl/auth/facebook';
   static String urlSignUp = '$kPrefixUrl/auth/register';
+  static String urlSignIn = '$kPrefixUrl/auth/login';
 
   static Future<dynamic> signInByGoogle({String userID, String idToken}) async {
     try {
@@ -54,6 +55,26 @@ class AuthApi {
           "gender": "MALE",
           "birth": defaultDOB,
           "username": email,
+        },
+      );
+      if (!successCodes.contains(response.statusCode)) return null;
+      return Response.map(json.decode(response.body));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<dynamic> signIn({String email, String password}) async {
+    try {
+      var response = await http.post(
+        Uri.parse(urlSignIn),
+        body: {
+          "username": email,
+          "facebookID": "",
+          "googleID": "",
+          "facebookToken": "",
+          "googleToken": "",
+          "password": password
         },
       );
       if (!successCodes.contains(response.statusCode)) return null;

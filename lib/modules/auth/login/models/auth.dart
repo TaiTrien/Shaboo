@@ -60,6 +60,23 @@ class AuthModel {
     }
   }
 
+  Future<dynamic> signIn({String email, String password}) async {
+    try {
+      var response = await AuthApi.signIn(email: email, password: password);
+      if (response == null) return null;
+
+      var token = response.token["accessToken"];
+      Store.setToken(token);
+
+      var userData = response.data;
+      UserModel currentUser = UserModel.fromJson(userData);
+
+      return currentUser;
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> signOut() async {
     await _googleSignIn.signOut();
     await _facebooklogin.logOut();
