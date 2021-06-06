@@ -52,13 +52,10 @@ class SignupController {
   }
 
   Future<void> signUp() async {
-    // String email = emailController.text.trim();
-    // String password = passwordController.text.trim();
-    // String reEnterPassword = confirmPasswordController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+    String reEnterPassword = confirmPasswordController.text.trim();
 
-    String email = 'test@gmail.com';
-    String password = '123456789';
-    String reEnterPassword = '123456789';
     if (!Validator.isEmail(email)) {
       return Notify().error(message: 'Email không khả dụng');
     } else if (email == '' || email == null) {
