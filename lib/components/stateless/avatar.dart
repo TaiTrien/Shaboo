@@ -29,9 +29,11 @@ class Avatar extends StatelessWidget {
             ),
           ),
           radius: radius - 2 ?? 58.0,
-          backgroundImage: avatarUrl != ''
+          backgroundImage: avatarUrl != '' && avatarUrl != null
               ? NetworkImage(avatarUrl)
-              : AssetImage('assets/images/default_avatar.png'),
+              : AssetImage(
+                  'assets/images/default-avatar.png',
+                ),
         ),
       ),
     );

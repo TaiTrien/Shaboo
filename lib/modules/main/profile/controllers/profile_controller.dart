@@ -8,6 +8,7 @@ import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
 import 'package:shaboo/modules/auth/login/models/auth.dart';
+import 'package:shaboo/modules/updateInfo/update_profile.dart';
 
 class ProfileController {
   BuildContext context;
@@ -28,7 +29,15 @@ class ProfileController {
   }
 
   onMenuSelect(value) {
-    if (value == MenuValue.SIGNOUT) _alertSignOut();
+    if (value == MenuValue.SIGNOUT)
+      _alertSignOut();
+    else
+      toEditProfile();
+  }
+
+  toEditProfile() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => UpdateProfile()));
   }
 
   Future<void> _alertSignOut() async {

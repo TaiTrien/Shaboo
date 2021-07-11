@@ -28,5 +28,6 @@ class EditFailed extends UserState {
 }
 
 class EditSucceed extends UserState {
-  EditSucceed(UserState oldState) : super(currentUser: oldState.currentUser);
+  EditSucceed(UserState oldState, {UserModel currentUser})
+      : super(currentUser: currentUser ?? oldState.currentUser);
 }

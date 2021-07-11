@@ -82,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               children: [
                 InfoTab(),
                 ListReviewScreen(
-                  userId: state.currentUser.userId.toString(),
+                  userId: state.currentUser?.userId.toString(),
                   reviewType: ReviewType.Owned,
                 ),
                 ListPostWidget(postType: PostType.Owned),
@@ -142,7 +142,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         leading: Icon(Icons.settings),
                         title: Transform(
                           transform: Matrix4.translationValues(-16, 0.0, 0.0),
-                          child: Text("Cài đặt"),
+                          child: Text("Cập nhật"),
                         ),
                       ),
                     ),
