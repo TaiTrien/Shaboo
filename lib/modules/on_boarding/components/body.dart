@@ -18,19 +18,19 @@ class _BodyState extends State<Body> {
     {
       "title": 'Sách',
       "subTitle":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+          "Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn.",
       "image": "assets/images/book.svg"
     },
     {
       "title": 'Xứng đáng',
       "subTitle":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+          "Kiến thức là vô giá, nhưng không ai được đánh thuế, ngăn cản việc bạn tiếp cận nó trừ bạn. Bạn xứng đáng với kiến thức",
       "image": "assets/images/savings.svg"
     },
     {
       "title": 'Chia sẻ',
       "subTitle":
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+          "Có điều kỳ diệu xảy đến với những người thực sự biết yêu thương: họ càng cho nhiều, họ càng có nhiều.",
       "image": "assets/images/share.svg"
     },
   ];

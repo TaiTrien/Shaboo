@@ -8,7 +8,7 @@ class Formatter {
   }
 
   static formateStringToDate({String date}) {
-    return _dateFormat.parse(date);
+    if (date != null) return _dateFormat.parse(date);
   }
 
   static formatDateSignUp({var date}) {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:shaboo/data/models/review/review.dart';
 import 'package:shaboo/data/models/user/user.dart';
 import 'package:shaboo/data/providers/remote/api/user_api.dart';
@@ -17,14 +19,14 @@ class UserRepoImpl implements UserReposity {
   }
 
   @override
-  Future uploadAvatar({ReviewModel review}) {
-    // TODO: implement uploadAvatar
-    throw UnimplementedError();
+  Future getMyProfile() async {
+    final response = await UserApi.getMyProfile();
+    return response;
   }
 
   @override
-  Future getMyProfile() async {
-    final response = await UserApi.getMyProfile();
+  Future uploadAvatar({File avatar}) async {
+    final response = await UserApi.uploadAvatar(avatar: avatar);
     return response;
   }
 }

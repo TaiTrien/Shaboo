@@ -53,10 +53,11 @@ class Delegate extends SliverPersistentHeaderDelegate {
                 author,
                 style: kDefaultTextStyle.copyWith(color: kGreyColor),
               ),
-              // Text(
-              //   '9.5/10',
-              //   style: kDefaultTextStyle.copyWith(color: kSecondaryColor, fontWeight: FontWeight.bold),
-              // )
+              Text(
+                '${score ?? 0} /10',
+                style: kDefaultTextStyle.copyWith(
+                    color: kSecondaryColor, fontWeight: FontWeight.bold),
+              )
             ],
           ),
         ],

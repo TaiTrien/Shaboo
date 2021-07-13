@@ -33,4 +33,18 @@ class Photo {
       print(e);
     }
   }
+
+  static Future<dynamic> getPhotoFromGallery() async {
+    PickedFile photo;
+    try {
+      final picker = ImagePicker();
+      var status = await Permission.photos.request();
+      if (!status.isGranted) return null;
+
+      photo = await picker.getImage(source: ImageSource.gallery);
+      return photo;
+    } catch (e) {
+      print(e);
+    }
+  }
 }

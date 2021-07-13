@@ -12,11 +12,22 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shaboo/modules/auth/sign_up/controllers/sign_up_controller.dart';
 import 'package:shaboo/utils/notify.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
+  @override
+  _SignupScreenState createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  var controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = SignupController(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var controller = SignupController(context: context);
 
     return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
       if (state is SignUpFailedState) {

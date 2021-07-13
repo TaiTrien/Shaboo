@@ -148,42 +148,6 @@ class Body extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Tags', style: kHeadingTextStyle),
-            SizedBox(height: 15),
-            Wrap(
-              spacing: 10,
-              alignment: WrapAlignment.center,
-              children: [
-                Chip(
-                  label: Text('#Tieuthuyet',
-                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
-                  backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                ),
-                Chip(
-                  label: Text('#laptrinh',
-                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
-                  backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                ),
-                Chip(
-                  label: Text('#kinhdi',
-                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
-                  backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                ),
-                Chip(
-                  label: Text('#lichsu',
-                      style: kDefaultTextStyle.copyWith(color: Colors.white)),
-                  backgroundColor: kSecondaryColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                ),
-              ],
-            ),
             SizedBox(height: 15),
             Text(
               reviewContent,

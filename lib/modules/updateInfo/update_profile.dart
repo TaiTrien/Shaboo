@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/components/stateful/custom_textfield.dart';
 import 'package:shaboo/components/stateful/date_time_picker.dart';
@@ -10,6 +13,7 @@ import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/updateInfo/validator.dart';
 import 'package:shaboo/utils/formatter.dart';
 import 'package:shaboo/utils/notify.dart';
+import 'package:shaboo/utils/photo.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({Key key}) : super(key: key);
@@ -127,7 +131,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   children: [
                     Avatar(
                       avatarUrl: state.currentUser?.avatar,
-                      onPress: () {},
+                      onPress: () async {
+                        PickedFile avatar = await Photo.getPhotoFromGallery();
+                        _userBloc.add(UploadAvatar(File(avatar.path)));
+                      },
                     ),
                     SizedBox(height: 10),
                     WidgetWithLabel(
@@ -158,7 +165,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             _userBloc.state.currentUser.birthday = selectedDate,
                         maxDate: DateTime.now(),
                         initDate: Formatter.formateStringToDate(
-                            date: state.currentUser.birthday),
+                            date: state.currentUser?.birthday),
                       ),
                     ),
                     SizedBox(height: 20),

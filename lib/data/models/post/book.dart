@@ -1,4 +1,5 @@
 import 'package:shaboo/data/models/model.dart';
+import 'package:shaboo/data/models/post/rating.dart';
 import 'package:shaboo/data/providers/remote/api/book_api.dart';
 import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/data/models/post/author.dart';
@@ -15,6 +16,7 @@ class BookModel implements Model {
   List<AuthorModel> authors;
   List<PublisherModel> publisher;
   List<CategoryModel> categories;
+  RatingModel rating;
 
   BookModel({
     int id,
@@ -26,6 +28,7 @@ class BookModel implements Model {
     this.thumbnailUrl,
     this.publisher,
     this.categories,
+    this.rating,
   }) : this._id = id;
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
@@ -39,6 +42,8 @@ class BookModel implements Model {
       thumbnailUrl: json['thumbnailUrl'],
       publisher: PublisherModel.toList(json['publishers']),
       categories: CategoryModel.toList(json['categories']),
+      rating:
+          json['rating'] != null ? RatingModel.fromJson(json['rating']) : null,
     );
   }
   static List<BookModel> toList(List<dynamic> dynamicList) {
@@ -69,7 +74,8 @@ class ListBook {
   int page, take;
   int itemCount, pageCount;
 
-  ListBook({this.listBook, this.page, this.take, this.itemCount, this.pageCount});
+  ListBook(
+      {this.listBook, this.page, this.take, this.itemCount, this.pageCount});
 
   factory ListBook.fromJson(Map<String, dynamic> json) {
     return ListBook(
@@ -81,13 +87,23 @@ class ListBook {
     );
   }
 
-  static Future<ListBook> getBooks({EOrder eOrder, int page, int take, String bookName, EOrder orderBy}) async {
-    final response = await BookApi.getBooks(eOrder: EOrder.ASC, page: page, bookName: bookName, orderBy: orderBy);
+  static Future<ListBook> getBooks(
+      {EOrder eOrder,
+      int page,
+      int take,
+      String bookName,
+      EOrder orderBy}) async {
+    final response = await BookApi.getBooks(
+        eOrder: eOrder ?? EOrder.ASC,
+        page: page,
+        bookName: bookName,
+        orderBy: orderBy);
     return ListBook.fromJson(response);
   }
 
   static Future<ListBook> getRecommendBooks(EOrder eOrder, int page) async {
-    final response = await BookApi.getRecommendBooks(eOrder: eOrder, page: page ?? 1);
+    final response =
+        await BookApi.getRecommendBooks(eOrder: eOrder, page: page ?? 1);
     return ListBook.fromJson(response);
   }
 }

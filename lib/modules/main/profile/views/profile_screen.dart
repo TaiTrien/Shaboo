@@ -115,7 +115,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                     //             _controller.defaultAvatar,
                     //     radius: 50),
                     child: CircleAvatar(
-                        radius: 50,
+                        backgroundColor: Colors.white,
+                        maxRadius: 50,
                         child: ClipOval(
                             child: _controller.currentUser.avatar == null
                                 ? Image.asset(

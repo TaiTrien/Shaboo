@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import "package:bloc/bloc.dart";
 import 'package:meta/meta.dart';
@@ -32,6 +33,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       else {
         yield EditSucceed(state);
       }
+    } else if (event is UploadAvatar) {
+      yield UploadAvatarProcessing();
+      Response res = await userRepo.uploadAvatar(avatar: event.payload);
+      print(res);
+      // yield UpdateState(state, currentUser: event.payload);
+      // if (!successCodes.contains(res?.statusCode))
+      //   yield EditFailed(state, message: res?.apiMessagse);
+      // else if (res == null)
+      //   yield EditFailed(state, message: 'Đã xảy ra lỗi');
+      // else {
+      //   yield EditSucceed(state);
+      // }
+    } else if (event is Reset) {
+      yield ResetState();
     }
   }
 }

@@ -141,13 +141,6 @@ class _BodyState extends State<Body> {
             ),
             Container(
               width: double.infinity,
-              alignment: Alignment.center,
-              child: Text('Cực kì thích',
-                  style: kDefaultTextStyle.copyWith(color: kGreyColor)),
-            ),
-            SizedBox(height: 20),
-            Container(
-              width: double.infinity,
               child: Slider(
                   onChanged: (value) {
                     _currentReview.score = value.toInt();
@@ -162,25 +155,25 @@ class _BodyState extends State<Body> {
                   activeColor: kPrimaryColor),
             ),
             SizedBox(height: 20),
-            Text('Tags', style: kHeadingTextStyle),
-            SizedBox(height: 10),
-            Text('Thêm tags như: #kinhdi, #kinhte, ...',
-                style: kDefaultTextStyle.copyWith(color: kGreyColor)),
-            SizedBox(height: 20),
-            TextField(
-              controller: tagController,
-              cursorColor: Colors.black,
-              decoration: new InputDecoration(
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-                hintText: "Thêm tags của bạn",
-              ),
-              onChanged: (value) {
-                _currentReview.tags = value;
-                _reviewBloc.add(UpdateCurrentReview(_currentReview));
-              },
-            ),
+            // Text('Tags', style: kHeadingTextStyle),
+            // SizedBox(height: 10),
+            // Text('Thêm tags như: #kinhdi, #kinhte, ...',
+            //     style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+            // SizedBox(height: 20),
+            // TextField(
+            //   controller: tagController,
+            //   cursorColor: Colors.black,
+            //   decoration: new InputDecoration(
+            //     border: OutlineInputBorder(),
+            //     contentPadding:
+            //         EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+            //     hintText: "Thêm tags của bạn",
+            //   ),
+            //   onChanged: (value) {
+            //     _currentReview.tags = value;
+            //     _reviewBloc.add(UpdateCurrentReview(_currentReview));
+            //   },
+            // ),
             SizedBox(height: 20),
             Text('Đánh giá (*)', style: kHeadingTextStyle),
             SizedBox(height: 10),

@@ -25,4 +25,8 @@ class Store {
   static getIsFirstTime() async {
     return await store.read(key: "isFirstTime");
   }
+
+  static deleteIsFirstTime() async {
+    await store.delete(key: "isFirstTime");
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
@@ -25,6 +26,7 @@ class ProfileController {
 
   Future<void> signOut() async {
     _authModel.signOut();
+    _userBloc.add(Reset());
     Navigator.pushNamed(context, '/loginScreen');
   }
 

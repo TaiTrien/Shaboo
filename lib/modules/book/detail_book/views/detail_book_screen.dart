@@ -164,7 +164,7 @@ class _DetailBookScreenState extends State<DetailBookScreen>
                 author: widget.selectedBook.authors.isEmpty
                     ? 'Trống'
                     : widget.selectedBook.authors[0].name,
-                // score: 9.5,
+                score: widget.selectedBook.rating?.finalScore,
               ),
               SliverAppBar(
                 pinned: true,

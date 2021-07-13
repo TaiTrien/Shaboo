@@ -15,6 +15,7 @@ import 'package:shaboo/data/repositories/implement/user/user_repo_impl.dart';
 import 'package:shaboo/modules/auth/login/views/login_screen.dart';
 import 'package:shaboo/modules/loading/views/loading_screen.dart';
 import 'package:shaboo/modules/on_boarding/views/on_boarding_screen.dart';
+import 'package:shaboo/modules/updateInfo/update_profile.dart';
 
 import 'package:shaboo/routes.dart';
 import 'package:shaboo/utils/store.dart';
@@ -23,7 +24,7 @@ getInitRoute() async {
   bool isFirstTime =
       await Store.getIsFirstTime() == 'true' ? true : false ?? true;
   String token = await Store.getToken();
-  if (isFirstTime)
+  if (true)
     return OnBoardingScreen();
   else if (token != null) {
     return LoadingScreen();
