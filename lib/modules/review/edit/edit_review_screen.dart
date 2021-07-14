@@ -145,22 +145,22 @@ class _BodyState extends State<Body> {
                   min: 0,
                   activeColor: kPrimaryColor),
             ),
-            SizedBox(height: 20),
-            Text('Tags', style: kHeadingTextStyle),
-            SizedBox(height: 10),
-            Text('Thêm tags như: #kinhdi, #kinhte, ...',
-                style: kDefaultTextStyle.copyWith(color: kGreyColor)),
-            SizedBox(height: 20),
-            TextField(
-              controller: tagController,
-              cursorColor: Colors.black,
-              decoration: new InputDecoration(
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-                hintText: "Thêm tags của bạn",
-              ),
-            ),
+            // SizedBox(height: 20),
+            // Text('Tags', style: kHeadingTextStyle),
+            // SizedBox(height: 10),
+            // Text('Thêm tags như: #kinhdi, #kinhte, ...',
+            //     style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+            // SizedBox(height: 20),
+            // TextField(
+            //   controller: tagController,
+            //   cursorColor: Colors.black,
+            //   decoration: new InputDecoration(
+            //     border: OutlineInputBorder(),
+            //     contentPadding:
+            //         EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+            //     hintText: "Thêm tags của bạn",
+            //   ),
+            // ),
             SizedBox(height: 20),
             Text('Đánh giá (*)', style: kHeadingTextStyle),
             SizedBox(height: 10),
@@ -201,9 +201,7 @@ class _BodyState extends State<Body> {
                     if (reviewController.text.isEmpty)
                       return Notify()
                           .error(message: "Chưa đánh giá cuốn sách này");
-                    if (tagController.text.isEmpty)
-                      return Notify()
-                          .error(message: "Chưa thêm tag cho đánh giá này");
+
                     _currentReview = ReviewModel(
                       id: widget.selectedReview.id,
                       review: reviewController.text,

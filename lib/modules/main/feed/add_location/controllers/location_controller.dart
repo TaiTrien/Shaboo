@@ -35,8 +35,10 @@ class LocationController {
       isEdit: isEdit,
     );
     _postBloc.add(UpdateCurrentPost(_currentPost));
-    if (book != null && isEdit) {
+    if (book == null && isEdit) {
       toNextPage();
+    } else if (book != null && isEdit) {
+      _postBloc.add(UpdatePost(_currentPost));
     } else if (book != null)
       _postBloc.add(AddPost(_currentPost));
     else {

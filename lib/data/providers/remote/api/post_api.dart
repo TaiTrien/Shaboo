@@ -35,11 +35,17 @@ class PostApi {
   }
 
   static Future<dynamic> updatePost({PostModel selectedPost}) async {
+    var reqBook = {
+      "title": selectedPost.title,
+      "description": selectedPost.description,
+      "status": selectedPost.status,
+      "location": selectedPost.location,
+    };
     try {
       var response = await http.put(
         Uri.parse(urlPosts + '/${selectedPost.id}'),
         headers: await getHeader(),
-        body: jsonEncode(selectedPost),
+        body: jsonEncode(reqBook),
       );
       if (!successCodes.contains(response.statusCode)) return null;
       return json.decode(response.body);

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:shaboo/blocs/post/post_bloc.dart';
 import 'package:shaboo/data/models/post/image.dart';
 import 'package:shaboo/data/models/post/post.dart';
@@ -47,25 +48,30 @@ class ImageContainerController {
       uploadedImages.add(uploadedImage);
 
     PostModel _currentPost = PostModel(
+      id: id,
       title: title,
       description: desc,
       images: uploadedImages,
       location: location ?? null,
       book: book ?? null,
+      isEdit: isEdit,
     );
     _postBloc.add(UpdateCurrentPost(_currentPost));
   }
 
   removeUploadedImage({ImageModel uploadedImage}) {
     uploadedImages = currentPost.images ?? null;
-    uploadedImages.removeWhere((image) => image.imageID == uploadedImage.imageID);
+    uploadedImages
+        .removeWhere((image) => image.imageID == uploadedImage.imageID);
 
     PostModel _currentPost = PostModel(
+      id: id,
       title: title,
       description: desc,
       images: uploadedImages,
       location: location ?? null,
       book: book ?? null,
+      isEdit: isEdit,
     );
     _postBloc.add(UpdateCurrentPost(_currentPost));
   }
@@ -88,11 +94,14 @@ class ImageContainerController {
 
   //getter & setters
   get currentPost => _postBloc.state.currentPost;
+  get id => currentPost.id;
   get title => currentPost.title;
   get desc => currentPost.description;
   get location => currentPost.location;
   get book => currentPost.book;
+  get isEdit => currentPost.isEdit;
 
-  get numberOfImages => currentPost.images != null ? currentPost.images.length : 0;
+  get numberOfImages =>
+      currentPost.images != null ? currentPost.images.length : 0;
   get imageUploadStream => _streamController.stream;
 }
