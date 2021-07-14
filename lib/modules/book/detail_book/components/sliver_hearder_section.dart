@@ -54,7 +54,7 @@ class Delegate extends SliverPersistentHeaderDelegate {
                 style: kDefaultTextStyle.copyWith(color: kGreyColor),
               ),
               Text(
-                '${score ?? 0} /10',
+                '${score ?? 0} /10.0',
                 style: kDefaultTextStyle.copyWith(
                     color: kSecondaryColor, fontWeight: FontWeight.bold),
               )

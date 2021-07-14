@@ -80,6 +80,6 @@ class AuthModel {
   Future<void> signOut() async {
     await _googleSignIn.signOut();
     await _facebooklogin.logOut();
-    Store.deleteToken();
+    await Store.deleteToken();
   }
 }
