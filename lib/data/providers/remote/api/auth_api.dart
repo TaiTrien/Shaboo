@@ -27,8 +27,7 @@ class AuthApi {
     }
   }
 
-  static Future<dynamic> signInByFacebook(
-      {String userID, String idToken}) async {
+  static Future<dynamic> signInByFacebook({String userID, String idToken}) async {
     try {
       var response = await http.post(
         Uri.parse(urlFacebookSignin),
@@ -48,8 +47,8 @@ class AuthApi {
       var response = await http.post(
         Uri.parse(urlSignUp),
         body: {
-          "firstName": "user",
-          "lastName": "name",
+          "firstName": "",
+          "lastName": "",
           "password": password,
           "role": "USER",
           "gender": "MALE",
@@ -68,14 +67,7 @@ class AuthApi {
     try {
       var response = await http.post(
         Uri.parse(urlSignIn),
-        body: {
-          "username": email,
-          "facebookID": "",
-          "googleID": "",
-          "facebookToken": "",
-          "googleToken": "",
-          "password": password
-        },
+        body: {"username": email, "facebookID": "", "googleID": "", "facebookToken": "", "googleToken": "", "password": password},
       );
       if (!successCodes.contains(response.statusCode)) return null;
       return Response.map(json.decode(response.body));

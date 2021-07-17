@@ -55,8 +55,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
       return FutureBuilder(
           future: _controller.getPost(widget.id),
           builder: (context, snapshot) {
-            if (!snapshot.hasData ||
-                snapshot.connectionState != ConnectionState.done) {
+            if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done) {
               return Container(
                 height: size.height,
                 width: size.width,
@@ -99,10 +98,8 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                                 decoration: BoxDecoration(
                                     color: Colors.transparent,
                                     borderRadius: BorderRadius.circular(100),
-                                    border: Border.all(
-                                        width: 2, color: Colors.white)),
-                                child: Icon(Icons.close,
-                                    color: Colors.white, size: 25),
+                                    border: Border.all(width: 2, color: Colors.white)),
+                                child: Icon(Icons.close, color: Colors.white, size: 25),
                               ),
                             ),
                           ),
@@ -119,13 +116,11 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(
-                              onTap: () =>
-                                  carouselController.animateToPage(index),
+                              onTap: () => carouselController.animateToPage(index),
                               child: Container(
                                 width: 100.0,
                                 height: 100.0,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 10.0, horizontal: 2.0),
+                                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Stack(
@@ -137,15 +132,9 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                                               fit: BoxFit.cover,
                                               width: 100.0,
                                               height: 100.0,
-                                              loadingBuilder:
-                                                  (BuildContext context,
-                                                      Widget child,
-                                                      ImageChunkEvent
-                                                          loadingProgress) {
-                                                if (loadingProgress == null)
-                                                  return child;
-                                                return LoadingWidget(
-                                                    isImage: true);
+                                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                                                if (loadingProgress == null) return child;
+                                                return LoadingWidget(isImage: true);
                                               },
                                             )
                                           : Image.asset(
@@ -153,9 +142,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                                               fit: BoxFit.cover,
                                             ),
                                       Container(
-                                        color: _current == index
-                                            ? Colors.transparent
-                                            : Color.fromRGBO(0, 0, 0, 0.2),
+                                        color: _current == index ? Colors.transparent : Color.fromRGBO(0, 0, 0, 0.2),
                                       ),
                                     ],
                                   ),
@@ -170,20 +157,19 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                         margin: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 0),
                         child: Text(
                           postModel.book.name + ' [${postModel.status}]',
-                          style: TextStyle(
-                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Container(
-                          margin: EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Image.asset('assets/icons/location.png',
-                                  scale: 1.5),
-                              Text('2.4 km')
-                            ],
-                          )),
+                      // Container(
+                      //     margin: EdgeInsets.symmetric(horizontal: 15.0),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.end,
+                      //       children: <Widget>[
+                      //         Image.asset('assets/icons/location.png',
+                      //             scale: 1.5),
+                      //         Text('2.4 km')
+                      //       ],
+                      //     )),
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 15.0),
                         alignment: Alignment.centerLeft,
@@ -193,18 +179,11 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                             RichText(
                               text: TextSpan(
                                 text: 'Tác giả: ',
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: postModel.book.authors
-                                          .map((item) => item.name)
-                                          .join(', ')
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400)),
+                                      text: postModel.book.authors.map((item) => item.name).join(', ').toString(),
+                                      style: TextStyle(fontWeight: FontWeight.w400)),
                                 ],
                               ),
                             ),
@@ -212,18 +191,11 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                             RichText(
                               text: TextSpan(
                                 text: 'Thể loại: ',
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: postModel.book.categories
-                                          .map((item) => item.name)
-                                          .join(', ')
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400)),
+                                      text: postModel.book.categories.map((item) => item.name).join(', ').toString(),
+                                      style: TextStyle(fontWeight: FontWeight.w400)),
                                 ],
                               ),
                             ),
@@ -231,15 +203,9 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                             RichText(
                               text: TextSpan(
                                 text: 'Vị trí: ',
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
                                 children: <TextSpan>[
-                                  TextSpan(
-                                      text: postModel.location,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400)),
+                                  TextSpan(text: postModel.location, style: TextStyle(fontWeight: FontWeight.w400)),
                                 ],
                               ),
                             ),
@@ -247,21 +213,14 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 10.0),
+                        margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                         alignment: Alignment.centerLeft,
                         child: RichText(
                           text: TextSpan(
                             text: 'Lời nhắn: ',
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
                             children: <TextSpan>[
-                              TextSpan(
-                                  text: postModel.description,
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.w400)),
+                              TextSpan(text: postModel.description, style: TextStyle(fontWeight: FontWeight.w400)),
                             ],
                           ),
                         ),
@@ -273,24 +232,17 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                               color: Color(0xFFA81C1C),
                               textColor: Colors.white,
                               padding: EdgeInsets.all(15.0),
-                              onPressed: () => postModel.userId !=
-                                      _userBloc.state.currentUser.userId
-                                          .toString()
+                              onPressed: () => postModel.userId != _userBloc.state.currentUser.userId.toString()
                                   ? _controller.toPopupContact(postModel.userId)
                                   : _alertClosePost(),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.35,
                                 child: Text(
-                                  postModel.userId !=
-                                          _userBloc.state.currentUser.userId
-                                              .toString()
-                                      ? "Nhà cung cấp"
-                                      : 'Đóng bài đăng',
+                                  postModel.userId != _userBloc.state.currentUser.userId.toString() ? "Nhà cung cấp" : 'Đóng bài đăng',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 16.0,
@@ -300,11 +252,8 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                             ),
                             SizedBox(width: 15.0),
                             RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              onPressed: () => postModel.userId !=
-                                      _userBloc.state.currentUser.userId
-                                          .toString()
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                              onPressed: () => postModel.userId != _userBloc.state.currentUser.userId.toString()
                                   ? _controller.toPopupContact(postModel.userId)
                                   : _controller.toEditPost(postModel),
                               color: kPrimaryColor,
@@ -313,11 +262,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.35,
                                 child: Text(
-                                  postModel.userId !=
-                                          _userBloc.state.currentUser.userId
-                                              .toString()
-                                      ? "Liên hệ"
-                                      : "Sửa bài đăng",
+                                  postModel.userId != _userBloc.state.currentUser.userId.toString() ? "Liên hệ" : "Sửa bài đăng",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontSize: 16.0),
                                 ),

@@ -14,19 +14,19 @@ import 'package:shaboo/modules/updateInfo/update_profile.dart';
 class ProfileController {
   BuildContext context;
   // ignore: close_sinks
-  UserBloc _userBloc;
+  UserBloc userBloc;
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FacebookLogin facebooklogin = FacebookLogin();
   final AuthModel _authModel = AuthModel();
 
   ProfileController({this.context}) {
-    _userBloc = BlocProvider.of<UserBloc>(context);
+    userBloc = BlocProvider.of<UserBloc>(context);
   }
 
   Future<void> signOut() async {
     _authModel.signOut();
-    _userBloc.add(Reset());
+    userBloc.add(Reset());
 
     Navigator.pushNamedAndRemoveUntil(context, '/loginScreen', (context) => false);
   }
@@ -95,7 +95,7 @@ class ProfileController {
     );
   }
 
-  get currentUser => _userBloc.state.currentUser;
-  get userFullName => _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
+  get currentUser => userBloc.state.currentUser;
+  get userFullName => userBloc.state.currentUser.firstName.toUpperCase() + ' ' + userBloc.state.currentUser.lastName.toUpperCase();
   get defaultAvatar => SvgPicture.asset('assets/images/reader.svg');
 }

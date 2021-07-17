@@ -12,7 +12,9 @@ class ContactController {
   //     MaterialPageRoute(
   //         builder: (context) => PreviewPostScreen(id: postModel.id)));
 
-  openMessenger(String username) async {
+  openMessenger(String fbLink) async {
+    if (fbLink.isEmpty) return;
+    var username = fbLink.substring('https://www.facebook.com/'.length);
     await launch('https://m.me/$username');
   }
 

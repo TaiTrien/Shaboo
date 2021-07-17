@@ -68,21 +68,21 @@ class PostCard extends StatelessWidget {
                       style: kHeadingTextStyle.copyWith(fontSize: 18),
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/location.png', scale: 1.5),
-                        SizedBox(width: 10),
-                        Text(
-                          range.toString() + ' km',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).accentColor,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Image.asset('assets/icons/location.png', scale: 1.5),
+                    //     SizedBox(width: 10),
+                    //     Text(
+                    //       range.toString() + ' km',
+                    //       overflow: TextOverflow.ellipsis,
+                    //       style: TextStyle(
+                    //         fontSize: 15.0,
+                    //         fontWeight: FontWeight.w500,
+                    //         color: Theme.of(context).accentColor,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
                 Text(
