@@ -40,7 +40,9 @@ class PostApi {
       "description": selectedPost.description,
       "status": selectedPost.status,
       "location": selectedPost.location,
+      "images": selectedPost.images.map((image) => image.imageID).toList(),
     };
+
     try {
       var response = await http.put(
         Uri.parse(urlPosts + '/${selectedPost.id}'),
@@ -61,8 +63,7 @@ class PostApi {
     request.headers.addAll(headers);
 
     for (var photo in photos) {
-      request.files
-          .add(await http.MultipartFile.fromPath('images', photo.path));
+      request.files.add(await http.MultipartFile.fromPath('images', photo.path));
     }
 
     try {
@@ -75,8 +76,7 @@ class PostApi {
     }
   }
 
-  static Future<dynamic> getPosts(
-      EOrder eOrder, int page, int take, int bookId, bool owned) async {
+  static Future<dynamic> getPosts(EOrder eOrder, int page, int take, int bookId, bool owned) async {
     try {
       var response = await http.get(
         Uri.parse(
