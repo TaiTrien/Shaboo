@@ -10,8 +10,7 @@ import 'package:shaboo/utils/notify.dart';
 class EditReviewScreen extends StatelessWidget {
   final ReviewModel selectedReview;
 
-  const EditReviewScreen({Key key, @required this.selectedReview})
-      : super(key: key);
+  const EditReviewScreen({Key key, @required this.selectedReview}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,18 +85,43 @@ class _BodyState extends State<Body> {
   ReviewModel _currentReview;
 
   bool _canSubmit = true;
+  String _motion;
 
   @override
   void initState() {
     tagController = new TextEditingController();
     reviewController = new TextEditingController();
     _reviewBloc = BlocProvider.of<ReviewBloc>(context);
+    changeMotion();
 
-    _sliderValue = widget.selectedReview.score.toDouble();
     tagController.text = widget.selectedReview.tags;
     reviewController.text = widget.selectedReview.review;
 
     super.initState();
+  }
+
+  changeMotion() {
+    _sliderValue = _sliderValue ?? widget.selectedReview.score.toDouble();
+    if (_sliderValue > 0 && _sliderValue <= 2)
+      setState(() {
+        _motion = motionList[0];
+      });
+    else if (_sliderValue > 2 && _sliderValue <= 4)
+      setState(() {
+        _motion = motionList[1];
+      });
+    else if (_sliderValue > 4 && _sliderValue <= 6)
+      setState(() {
+        _motion = motionList[2];
+      });
+    else if (_sliderValue > 6 && _sliderValue <= 8)
+      setState(() {
+        _motion = motionList[3];
+      });
+    else if (_sliderValue > 8 && _sliderValue <= 10)
+      setState(() {
+        _motion = motionList[4];
+      });
   }
 
   @override
@@ -107,9 +131,7 @@ class _BodyState extends State<Body> {
         child: ConstrainedBox(
       constraints: BoxConstraints(minHeight: size.height),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingHorizontal,
-            vertical: kDefaultPaddingVerical),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: kDefaultPaddingVerical),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -128,8 +150,7 @@ class _BodyState extends State<Body> {
             Container(
               width: double.infinity,
               alignment: Alignment.center,
-              child: Text('Cực kì thích',
-                  style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+              child: Text(_motion, style: kDefaultTextStyle.copyWith(color: kGreyColor)),
             ),
             SizedBox(height: 20),
             Container(
@@ -138,6 +159,7 @@ class _BodyState extends State<Body> {
                   onChanged: (value) {
                     setState(() {
                       _sliderValue = value;
+                      changeMotion();
                     });
                   },
                   value: _sliderValue,
@@ -172,8 +194,7 @@ class _BodyState extends State<Body> {
                   maxLines: 10,
                   decoration: new InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
+                    contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                     hintText: "Hãy chia sẻ cảm nghĩ của bạn về cuốn sách nhé",
                   ),
                 );
@@ -198,9 +219,7 @@ class _BodyState extends State<Body> {
                 return DefaultButton(
                   color: _canSubmit ? kPrimaryColor : kGreyColor,
                   onPress: () {
-                    if (reviewController.text.isEmpty)
-                      return Notify()
-                          .error(message: "Chưa đánh giá cuốn sách này");
+                    if (reviewController.text.isEmpty) return Notify().error(message: "Chưa đánh giá cuốn sách này");
 
                     _currentReview = ReviewModel(
                       id: widget.selectedReview.id,

@@ -53,3 +53,11 @@ enum MenuValue {
   EDIT,
   DELETE,
 }
+
+List<String> motionList = [
+  'Cực kì không thích',
+  'Không thích',
+  'Bình thường',
+  'Thích',
+  'Rất thích',
+];

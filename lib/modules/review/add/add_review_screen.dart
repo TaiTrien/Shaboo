@@ -89,6 +89,8 @@ class _BodyState extends State<Body> {
   ReviewBloc _reviewBloc;
   ReviewModel _currentReview;
 
+  String _motion;
+
   bool _canSubmit = true;
 
   @override
@@ -96,10 +98,10 @@ class _BodyState extends State<Body> {
     tagController = new TextEditingController();
     reviewController = new TextEditingController();
     _sliderValue = 5.0;
+    changeMotion();
     _reviewBloc = BlocProvider.of<ReviewBloc>(context);
 
-    if (_reviewBloc.state.currentReview != null &&
-        _reviewBloc.state.currentReview.bookId == widget.selectedBook.id) {
+    if (_reviewBloc.state.currentReview != null && _reviewBloc.state.currentReview.bookId == widget.selectedBook.id) {
       _sliderValue = _reviewBloc.state.currentReview.score.toDouble();
       tagController.text = _reviewBloc.state.currentReview.tags;
       reviewController.text = _reviewBloc.state.currentReview.review;
@@ -114,6 +116,29 @@ class _BodyState extends State<Body> {
     super.initState();
   }
 
+  changeMotion() {
+    if (_sliderValue > 0 && _sliderValue <= 2)
+      setState(() {
+        _motion = motionList[0];
+      });
+    else if (_sliderValue > 2 && _sliderValue <= 4)
+      setState(() {
+        _motion = motionList[1];
+      });
+    else if (_sliderValue > 4 && _sliderValue <= 6)
+      setState(() {
+        _motion = motionList[2];
+      });
+    else if (_sliderValue > 6 && _sliderValue <= 8)
+      setState(() {
+        _motion = motionList[3];
+      });
+    else if (_sliderValue > 8 && _sliderValue <= 10)
+      setState(() {
+        _motion = motionList[4];
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -121,9 +146,7 @@ class _BodyState extends State<Body> {
         child: ConstrainedBox(
       constraints: BoxConstraints(minHeight: size.height),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingHorizontal,
-            vertical: kDefaultPaddingVerical),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: kDefaultPaddingVerical),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -147,6 +170,7 @@ class _BodyState extends State<Body> {
                     _reviewBloc.add(UpdateCurrentReview(_currentReview));
                     setState(() {
                       _sliderValue = value;
+                      changeMotion();
                     });
                   },
                   value: _sliderValue,
@@ -154,7 +178,11 @@ class _BodyState extends State<Body> {
                   min: 0,
                   activeColor: kPrimaryColor),
             ),
-            SizedBox(height: 20),
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Text(_motion, style: kDefaultTextStyle.copyWith(color: kGreyColor)),
+            ),
             // Text('Tags', style: kHeadingTextStyle),
             // SizedBox(height: 10),
             // Text('Thêm tags như: #kinhdi, #kinhte, ...',
@@ -185,8 +213,7 @@ class _BodyState extends State<Body> {
                   maxLines: 10,
                   decoration: new InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
+                    contentPadding: EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                     hintText: "Hãy chia sẻ cảm nghĩ của bạn về cuốn sách nhé",
                   ),
                   onChanged: (value) {

@@ -13,8 +13,7 @@ import 'package:shaboo/utils/notify.dart';
 class DetailReviewScreen extends StatefulWidget {
   final ReviewModel selectedReview;
 
-  const DetailReviewScreen({Key key, @required this.selectedReview})
-      : super(key: key);
+  const DetailReviewScreen({Key key, @required this.selectedReview}) : super(key: key);
 
   @override
   _DetailReviewScreenState createState() => _DetailReviewScreenState();
@@ -64,8 +63,7 @@ class _DetailReviewScreenState extends State<DetailReviewScreen> {
                   backgroundColor: Colors.white,
                   flexibleSpace: FlexibleSpaceBar(
                       background: Stack(children: [
-                    LayoutBuilder(builder:
-                        (BuildContext context, BoxConstraints constraints) {
+                    LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       return Container(height: constraints.maxHeight - 50);
                     }),
                     Align(
@@ -76,8 +74,7 @@ class _DetailReviewScreenState extends State<DetailReviewScreen> {
                               child: Image.network(
                             widget.selectedReview.userModel.avatar,
                             fit: BoxFit.cover,
-                            loadingBuilder: (BuildContext context, Widget child,
-                                ImageChunkEvent loadingProgress) {
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
                               if (loadingProgress == null) return child;
                               return LoadingWidget(isImage: true);
                             },
@@ -101,17 +98,14 @@ class _DetailReviewScreenState extends State<DetailReviewScreen> {
                           child: ListTile(
                             leading: Icon(Icons.delete),
                             title: Transform(
-                              transform:
-                                  Matrix4.translationValues(-16, 0.0, 0.0),
+                              transform: Matrix4.translationValues(-16, 0.0, 0.0),
                               child: Text("Xoá đánh giá"),
                             ),
                           ))
                     ])
                   ]),
               SliverHeaderView(
-                userName: widget.selectedReview.userModel.firstName +
-                    ' ' +
-                    widget.selectedReview.userModel.lastName,
+                userName: widget.selectedReview.userModel.firstName + ' ' + widget.selectedReview.userModel.lastName,
                 score: widget.selectedReview.score.toDouble(),
               ),
             ];
@@ -142,20 +136,23 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 15),
-            Text(
-              reviewContent,
-              style: kDefaultTextStyle.copyWith(fontSize: 18),
-              overflow: TextOverflow.clip,
-              textAlign: TextAlign.justify,
-            ),
-          ],
+      child: Container(
+        color: Colors.white,
+        height: 10000,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15),
+              Text(
+                reviewContent,
+                style: kDefaultTextStyle.copyWith(fontSize: 18),
+                overflow: TextOverflow.clip,
+                textAlign: TextAlign.justify,
+              ),
+            ],
+          ),
         ),
       ),
     );
