@@ -67,7 +67,6 @@ class LoginController {
 
   // Navigations
   toSignupScreen() => Navigator.pushNamed(context, '/signupScreen');
-  toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(
-      context, '/loadingScreen', (context) => false);
+  toLoadingScreen() => Navigator.pushNamedAndRemoveUntil(context, '/loadingScreen', (context) => false);
   toGoogleSignIn() => Navigator.pushNamed(context, '/googleSigninScreen');
 }

@@ -27,7 +27,8 @@ class ProfileController {
   Future<void> signOut() async {
     _authModel.signOut();
     _userBloc.add(Reset());
-    Navigator.pushNamed(context, '/loginScreen');
+
+    Navigator.pushNamedAndRemoveUntil(context, '/loginScreen', (context) => false);
   }
 
   onMenuSelect(value) {
@@ -38,8 +39,7 @@ class ProfileController {
   }
 
   toEditProfile() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => UpdateProfile()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateProfile()));
   }
 
   Future<void> _alertSignOut() async {
@@ -87,7 +87,7 @@ class ProfileController {
                   fontSize: 20,
                 ),
               ),
-              onPressed: signOut,
+              onPressed: () async => await signOut(),
             ),
           ],
         );
@@ -96,9 +96,6 @@ class ProfileController {
   }
 
   get currentUser => _userBloc.state.currentUser;
-  get userFullName =>
-      _userBloc.state.currentUser.firstName.toUpperCase() +
-      ' ' +
-      _userBloc.state.currentUser.lastName.toUpperCase();
+  get userFullName => _userBloc.state.currentUser.firstName.toUpperCase() + ' ' + _userBloc.state.currentUser.lastName.toUpperCase();
   get defaultAvatar => SvgPicture.asset('assets/images/reader.svg');
 }

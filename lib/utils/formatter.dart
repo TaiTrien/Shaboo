@@ -7,6 +7,10 @@ class Formatter {
     return _dateFormat.format(date);
   }
 
+  static formatDataForUpdate({var date}) {
+    return _dateFormatForSignUp.format(date);
+  }
+
   static formateStringToDate({String date}) {
     if (date != null) return _dateFormat.parse(date);
   }

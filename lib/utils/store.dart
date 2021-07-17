@@ -10,7 +10,7 @@ class Store {
   }
 
   static getToken() async {
-    if (currentToken != null) return currentToken;
+    // if (currentToken != null) return currentToken;
     return await store.read(key: "token");
   }
 

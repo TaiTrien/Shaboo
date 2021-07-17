@@ -11,11 +11,23 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:shaboo/modules/auth/login/controllers/login_controller.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  var controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = LoginController(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var controller = LoginController(context: context);
     return Scaffold(
       body: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
@@ -113,8 +125,7 @@ class LoginScreen extends StatelessWidget {
                               onPressed: controller.signInByGoogle,
                               text: 'Đăng nhập bằng Google',
                               darkMode: false,
-                              textStyle: TextStyle(
-                                  fontSize: 16, color: Colors.black87),
+                              textStyle: TextStyle(fontSize: 16, color: Colors.black87),
                             ),
                           ),
                           SizedBox(
@@ -125,8 +136,7 @@ class LoginScreen extends StatelessWidget {
                             child: FacebookSignInButton(
                               onPressed: controller.signInByFacebook,
                               text: '   Đăng nhập bằng Facebook',
-                              textStyle:
-                                  TextStyle(fontSize: 16, color: Colors.white),
+                              textStyle: TextStyle(fontSize: 16, color: Colors.white),
                             ),
                           ),
                         ],

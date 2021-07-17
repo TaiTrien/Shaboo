@@ -22,7 +22,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
   @override
   void initState() {
     super.initState();
-    _selectedDate = Formatter.formatDate(date: DateTime.now());
+    _selectedDate = Formatter.formatDateSignUp(date: DateTime.now());
   }
 
   @override
@@ -41,7 +41,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
             showTitleActions: true,
             onConfirm: (date) {
               setState(() {
-                _selectedDate = Formatter.formatDate(date: date);
+                _selectedDate = Formatter.formatDataForUpdate(date: date);
               });
               widget.onConfirmCallBack(_selectedDate);
             },
