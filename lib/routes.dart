@@ -2,6 +2,7 @@ import 'package:shaboo/modules/pick_category/views/category_screen.dart';
 import 'package:shaboo/modules/loading/views/loading_screen.dart';
 import 'package:shaboo/modules/main_screen.dart';
 import 'package:shaboo/modules/on_boarding/views/on_boarding_screen.dart';
+import 'package:shaboo/modules/supplier/supplier_screen.dart';
 import 'package:shaboo/modules/updateInfo/update_contact.dart';
 
 import 'modules/auth/login/views/login_screen.dart';
@@ -19,4 +20,5 @@ final routes = {
   '/loadingScreen': (context) => LoadingScreen(),
   '/updateGeneralInfo': (context) => UpdateGeneralInfo(),
   '/updateContactInfo': (context) => UpdateContactInfo(),
+  '/supplierScreen': (context) => SupplierScreen(),
 };

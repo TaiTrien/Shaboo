@@ -237,7 +237,7 @@ class _PreviewPostScreenState extends State<PreviewPostScreen> {
                               textColor: Colors.white,
                               padding: EdgeInsets.all(15.0),
                               onPressed: () => postModel.userId != _userBloc.state.currentUser.userId.toString()
-                                  ? _controller.toPopupContact(postModel.userId)
+                                  ? Navigator.pushNamed(context, '/supplierScreen')
                                   : _alertClosePost(),
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.35,
