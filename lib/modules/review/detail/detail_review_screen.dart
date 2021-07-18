@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/lazy_load/lazyload_bloc.dart';
 import 'package:shaboo/blocs/review/review_bloc.dart';
+import 'package:shaboo/components/stateless/avatar.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/components/stateless/popup_menu.dart';
 import 'package:shaboo/constants/ui_constants.dart';
@@ -67,19 +68,23 @@ class _DetailReviewScreenState extends State<DetailReviewScreen> {
                       return Container(height: constraints.maxHeight - 50);
                     }),
                     Align(
-                      alignment: Alignment.bottomCenter,
-                      child: CircleAvatar(
+                        alignment: Alignment.bottomCenter,
+                        child: Avatar(
+                          avatarUrl: widget.selectedReview.userModel.avatar,
                           radius: 45,
-                          child: ClipOval(
-                              child: Image.network(
-                            widget.selectedReview.userModel.avatar,
-                            fit: BoxFit.cover,
-                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return LoadingWidget(isImage: true);
-                            },
-                          ))),
-                    )
+                        )
+                        // child: CircleAvatar(
+                        //     radius: 45,
+                        //     child: ClipOval(
+                        //         child: Image.network(
+                        //       widget.selectedReview.userModel.avatar,
+                        //       fit: BoxFit.cover,
+                        //       loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                        //         if (loadingProgress == null) return child;
+                        //         return LoadingWidget(isImage: true);
+                        //       },
+                        //     ))),
+                        )
                   ])),
                   actions: [
                     PopupMenu(onSelect: handleSelectMenu, items: [
