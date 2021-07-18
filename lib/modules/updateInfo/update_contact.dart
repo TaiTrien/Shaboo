@@ -44,8 +44,7 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
     } else {
       _userBloc.state.currentUser.email = this.emailController.text.trim();
       _userBloc.state.currentUser.phone = this.phoneController.text.trim();
-      _userBloc.state.currentUser.facebook =
-          this.facebookLinkController.text?.trim();
+      _userBloc.state.currentUser.facebook = this.facebookLinkController.text?.trim();
       _userBloc.add(EditUserInfo(_userBloc.state.currentUser));
     }
   }
@@ -57,13 +56,10 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
       listener: (context, state) {
         if (state is EditSucceed) {
           Notify().success(message: 'Cập nhật thành công');
-          if (state.currentUser?.categories?.length == 0 ||
-              state.currentUser?.categories == null) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, '/categoryScreen', (context) => false);
+          if (state.currentUser?.categories?.length == 0 || state.currentUser?.categories == null) {
+            Navigator.pushNamedAndRemoveUntil(context, '/categoryScreen', (context) => false);
           } else {
-            Navigator.pushNamedAndRemoveUntil(
-                context, '/mainScreen', (context) => false);
+            Navigator.pushNamedAndRemoveUntil(context, '/mainScreen', (context) => false);
           }
         } else if (state is EditFailed) {
           Notify().error(message: state.message);
@@ -103,9 +99,7 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: kDefaultPaddingHorizontal,
-                  vertical: kDefaultPaddingVerical + 20),
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: kDefaultPaddingVerical + 20),
               child: Container(
                 height: size.height,
                 child: Column(
@@ -115,6 +109,7 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
                         label: 'Email để liên hệ',
                         isRequired: true,
                         child: CustomTextField(
+                          enabled: false,
                           controller: emailController,
                           keyboard: TextInputType.emailAddress,
                           mainColor: kBorderColor,
@@ -146,18 +141,13 @@ class _UpdateContactInfoState extends State<UpdateContactInfo> {
                       paddingHorizontal: 0,
                       paddingVertical: 0,
                       notes: [
+                        TextSpan(text: 'Lưu ý:\n', style: kTitleTextStyle.copyWith(color: kPrimaryColor)),
                         TextSpan(
-                            text: 'Lưu ý:\n',
-                            style:
-                                kTitleTextStyle.copyWith(color: kPrimaryColor)),
-                        TextSpan(
-                          text:
-                              '\n- Những thông tin bạn cung cấp giúp thuận tiện liên lạc.\n',
+                          text: '\n- Những thông tin bạn cung cấp giúp thuận tiện liên lạc.\n',
                           style: TextStyle(color: kPrimaryColor, fontSize: 18),
                         ),
                         TextSpan(
-                          text:
-                              '\n- Chúng tôi không sử dụng nhằm những mục đích xấu.\n',
+                          text: '\n- Chúng tôi không sử dụng nhằm những mục đích xấu.\n',
                           style: TextStyle(color: kPrimaryColor, fontSize: 18),
                         ),
                       ],

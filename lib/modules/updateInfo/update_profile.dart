@@ -129,20 +129,19 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Avatar(
-                      avatarUrl: state.currentUser?.avatar,
-                      onPress: () async {
-                        PickedFile avatar = await Photo.getPhotoFromGallery();
-                        _userBloc.add(UploadAvatar(File(avatar.path)));
-                      },
-                    ),
+                    // Avatar(
+                    //   avatarUrl: state.currentUser?.avatar,
+                    //   onPress: () async {
+                    //     PickedFile avatar = await Photo.getPhotoFromGallery();
+                    //     _userBloc.add(UploadAvatar(File(avatar.path)));
+                    //   },
+                    // ),
                     SizedBox(height: 10),
                     WidgetWithLabel(
                         label: 'Họ của bạn',
                         isRequired: true,
                         child: CustomTextField(
                           controller: _firstNameController,
-                          keyboard: TextInputType.emailAddress,
                           mainColor: kBorderColor,
                           labelText: 'VD: Võ',
                         )),
@@ -152,7 +151,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       isRequired: true,
                       child: CustomTextField(
                         controller: _lastNameController,
-                        keyboard: TextInputType.emailAddress,
                         mainColor: kBorderColor,
                         labelText: 'VD: Triển',
                       ),
@@ -161,18 +159,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     WidgetWithLabel(
                       label: 'Sinh nhật của bạn',
                       child: DateTimePicker(
-                        onConfirmCallBack: (selectedDate) =>
-                            _userBloc.state.currentUser.birthday = selectedDate,
+                        onConfirmCallBack: (selectedDate) => _userBloc.state.currentUser.birthday = selectedDate,
                         maxDate: DateTime.now(),
-                        initDate: Formatter.formateStringToDate(
-                            date: state.currentUser?.birthday),
+                        initDate: state.currentUser?.birthday != null
+                            ? Formatter.formateStringToDate(date: state.currentUser?.birthday)
+                            : Formatter.formateStringToDate(date: DateTime.now().toString()),
                       ),
                     ),
                     SizedBox(height: 20),
                     WidgetWithLabel(
                         label: 'Email để liên hệ',
+                        textColor: Colors.grey,
                         isRequired: true,
                         child: CustomTextField(
+                          enabled: false,
                           controller: _emailController,
                           keyboard: TextInputType.emailAddress,
                           mainColor: kBorderColor,
@@ -180,9 +180,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         )),
                     SizedBox(height: 20),
                     WidgetWithLabel(
+                      textColor: Colors.grey,
                       label: 'Số điện thoại',
                       isRequired: true,
                       child: CustomTextField(
+                        enabled: false,
                         controller: _phoneController,
                         keyboard: TextInputType.number,
                         mainColor: kBorderColor,
@@ -191,10 +193,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     ),
                     SizedBox(height: 20),
                     WidgetWithLabel(
+                      textColor: Colors.grey,
                       label: 'Đường dẫn Facebook liên hệ',
                       child: CustomTextField(
+                        enabled: false,
                         controller: _facebookLinkController,
-                        keyboard: TextInputType.emailAddress,
                         mainColor: kBorderColor,
                         labelText: 'VD: www.facebook.com/example/',
                       ),

@@ -47,8 +47,6 @@ class AuthApi {
       var response = await http.post(
         Uri.parse(urlSignUp),
         body: {
-          "firstName": "",
-          "lastName": "",
           "password": password,
           "role": "USER",
           "gender": "MALE",

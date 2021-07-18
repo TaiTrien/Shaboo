@@ -23,8 +23,7 @@ class CategoryController {
     var response = await BookApi.getCategories(eOrder: EOrder.ASC);
     List<CategoryModel> categories = [];
     try {
-      response.data.forEach(
-          (category) => categories.add(CategoryModel.fromJson(category)));
+      response.data.forEach((category) => categories.add(CategoryModel.fromJson(category)));
       return categories;
     } catch (e) {
       print(e);
@@ -33,8 +32,7 @@ class CategoryController {
   }
 
   handleSelectCategories() async {
-    if (categories.isEmpty)
-      return Notify().error(message: "Vui lòng chọn ít nhất 1 thể loại");
+    if (categories.isEmpty) return Notify().error(message: "Vui lòng chọn ít nhất 1 thể loại");
     var response = await UserApi.editInfo(currentUser: currentUser);
     if (response == null) return Notify().error(message: "Đã xảy ra lỗi");
 
@@ -47,11 +45,9 @@ class CategoryController {
     if (selectedCategories == null)
       selectedCategories = [selectCategory];
     else {
-      var contains = categories.where(
-          (category) => category.categoryID == selectCategory.categoryID);
+      var contains = categories.where((category) => category.categoryID == selectCategory.categoryID);
       if (contains.isNotEmpty)
-        selectedCategories.removeWhere(
-            (category) => category.categoryID == selectCategory.categoryID);
+        selectedCategories.removeWhere((category) => category.categoryID == selectCategory.categoryID);
       else
         selectedCategories.add(selectCategory);
     }
@@ -65,14 +61,14 @@ class CategoryController {
       phone: phone,
       avatar: avatar,
       categories: selectedCategories,
+      birthday: birthday,
     );
     _userBloc.add(UpdateUserData(_currentUser));
   }
 
   bool isSelected(CategoryModel selectCategory) {
     if (categories == null) return false;
-    var contains = categories
-        .where((category) => category.categoryID == selectCategory.categoryID);
+    var contains = categories.where((category) => category.categoryID == selectCategory.categoryID);
     return contains.isNotEmpty;
   }
 

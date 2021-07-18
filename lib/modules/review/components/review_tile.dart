@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shaboo/components/stateless/avatar.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 
@@ -21,17 +22,21 @@ class ReviewTile extends StatelessWidget {
       onTap: onPress,
       child: ListTile(
         contentPadding: EdgeInsets.zero,
-        leading: CircleAvatar(
-            radius: 18,
-            child: ClipOval(
-                child: Image.network(
-              urlImage,
-              fit: BoxFit.cover,
-              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                if (loadingProgress == null) return child;
-                return LoadingWidget(isImage: true);
-              },
-            ))),
+        // leading: CircleAvatar(
+        //     radius: 18,
+        //     child: ClipOval(
+        //         child: Image.network(
+        //       urlImage,
+        //       fit: BoxFit.cover,
+        //       loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+        //         if (loadingProgress == null) return child;
+        //         return LoadingWidget(isImage: true);
+        //       },
+        //     ))),
+        leading: Avatar(
+          avatarUrl: urlImage,
+          radius: 18,
+        ),
         title: Text(
           title ?? 'Title',
           maxLines: 1,

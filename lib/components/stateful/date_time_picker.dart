@@ -9,9 +9,7 @@ class DateTimePicker extends StatefulWidget {
   final DateTime maxDate;
   final DateTime initDate;
 
-  const DateTimePicker(
-      {Key key, this.onConfirmCallBack, this.maxDate, this.initDate})
-      : super(key: key);
+  const DateTimePicker({Key key, this.onConfirmCallBack, this.maxDate, this.initDate}) : super(key: key);
   @override
   _DateTimePickerState createState() => _DateTimePickerState();
 }
@@ -22,7 +20,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
   @override
   void initState() {
     super.initState();
-    _selectedDate = Formatter.formatDateSignUp(date: DateTime.now());
+    _selectedDate = Formatter.formatDateSignUp(date: widget.initDate) ?? Formatter.formatDateSignUp(date: DateTime.now());
   }
 
   @override
@@ -30,8 +28,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(width: 1.0, color: kGreyColor),
-        borderRadius: BorderRadius.all(
-            Radius.circular(5.0) //                 <--- border radius here
+        borderRadius: BorderRadius.all(Radius.circular(5.0) //                 <--- border radius here
             ),
       ),
       child: ListTile(
@@ -51,8 +48,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
           );
         },
         leading: Icon(Icons.calendar_today),
-        title: Text(_selectedDate.toString() ??
-            Formatter.formatDate(date: widget.initDate)),
+        title: Text(_selectedDate.toString() ?? Formatter.formatDateSignUp(date: widget.initDate)),
       ),
     );
   }

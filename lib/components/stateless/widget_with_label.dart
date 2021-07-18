@@ -4,12 +4,9 @@ class WidgetWithLabel extends StatelessWidget {
   final String label;
   final bool isRequired;
   final Widget child;
+  final Color textColor;
 
-  const WidgetWithLabel(
-      {Key key,
-      @required this.label,
-      this.isRequired = false,
-      @required this.child})
+  const WidgetWithLabel({Key key, @required this.label, this.isRequired = false, @required this.child, this.textColor = Colors.black})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -19,12 +16,8 @@ class WidgetWithLabel extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: '$label ',
-            style: TextStyle(color: Colors.black, fontSize: 18),
-            children: [
-              isRequired
-                  ? TextSpan(text: '*', style: TextStyle(color: Colors.red))
-                  : TextSpan(text: '')
-            ],
+            style: TextStyle(color: textColor, fontSize: 18),
+            children: [isRequired ? TextSpan(text: '*', style: TextStyle(color: Colors.red)) : TextSpan(text: '')],
           ),
         ),
         SizedBox(height: 5),

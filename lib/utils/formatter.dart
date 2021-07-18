@@ -12,7 +12,7 @@ class Formatter {
   }
 
   static formateStringToDate({String date}) {
-    if (date != null) return _dateFormat.parse(date);
+    if (date != null) return _dateFormatForSignUp.parse(date);
   }
 
   static formatDateSignUp({var date}) {

@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final bool isObscure;
   final IconData icon;
   final Color mainColor;
+  final bool enabled;
 
   const CustomTextField({
     Key key,
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
     this.isObscure = false,
     this.icon,
     this.mainColor,
+    this.enabled = true,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class CustomTextField extends StatelessWidget {
       controller: this.controller,
       keyboardType: this.keyboard,
       obscureText: this.isObscure,
+      enabled: enabled,
       decoration: InputDecoration(
         enabledBorder: new OutlineInputBorder(
           borderSide: BorderSide(color: mainColor ?? kPrimaryColor),

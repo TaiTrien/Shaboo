@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 import 'package:shaboo/constants/api_constants.dart';
 
 import 'package:shaboo/data/models/response/response.dart';
 import 'package:shaboo/data/models/user/user.dart';
+import 'package:shaboo/utils/formatter.dart';
 import 'package:shaboo/utils/store.dart';
 
 class UserApi {
@@ -44,12 +46,27 @@ class UserApi {
   }
 
   static Future<dynamic> editInfo({UserModel currentUser}) async {
-    var requestedUser = UserModel().toJson(data: currentUser);
+    // var requestedUser = UserModel().toJson(data: currentUser);
+    // print(json.encode(currentUser.categories.map((cate) => cate?.categoryID)?.toList()));
+    var categoriesId = [];
+    for (var e in currentUser.categories) {
+      categoriesId.add(e.categoryID);
+    }
+    print(categoriesId);
     try {
       var response = await http.put(
         Uri.parse('$urlUsers'),
         headers: await getHeader(),
-        body: json.encode(requestedUser),
+        body: json.encode({
+          "firstName": currentUser.firstName,
+          "lastName": currentUser.lastName,
+          "email": currentUser.email,
+          "phone": currentUser.phone,
+          "gender": "MALE",
+          "birth": currentUser.birthday ?? Formatter.formatDataForUpdate(date: DateTime.now()),
+          "facebook": currentUser.facebook != null ? currentUser.facebook : '',
+          "categories": categoriesId,
+        }),
       );
       if (!successCodes.contains(response.statusCode)) return null;
       return Response.map(json.decode(response.body));

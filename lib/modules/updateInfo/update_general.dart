@@ -8,6 +8,7 @@ import 'package:shaboo/components/stateless/default_button.dart';
 import 'package:shaboo/components/stateless/widget_with_label.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/updateInfo/update_contact.dart';
+import 'package:shaboo/utils/formatter.dart';
 import 'package:shaboo/utils/notify.dart';
 
 class UpdateGeneralInfo extends StatefulWidget {
@@ -28,6 +29,7 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
 
     firstNameController.text = _userBloc.state.currentUser?.firstName;
     lastNameController.text = _userBloc.state.currentUser?.lastName;
+    _userBloc.state.currentUser.birthday = Formatter.formatDateSignUp(date: DateTime.now()).toString();
   }
 
   handleUpdateGeneralInfo() {
@@ -36,13 +38,10 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
     } else if (this.lastNameController.text.trim() == '') {
       Notify().error(message: 'Vui lòng điền tên của bạn');
     } else {
-      _userBloc.state.currentUser.firstName =
-          this.firstNameController.text.trim();
-      _userBloc.state.currentUser.lastName =
-          this.lastNameController.text.trim();
+      _userBloc.state.currentUser.firstName = this.firstNameController.text.trim();
+      _userBloc.state.currentUser.lastName = this.lastNameController.text.trim();
 
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => UpdateContactInfo()));
+      Navigator.push(context, MaterialPageRoute(builder: (_) => UpdateContactInfo()));
     }
   }
 
@@ -57,9 +56,7 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingHorizontal,
-            vertical: kDefaultPaddingVerical + 20),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal, vertical: kDefaultPaddingVerical + 20),
         child: Container(
           height: size.height,
           child: Column(
@@ -70,7 +67,6 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
                   isRequired: true,
                   child: CustomTextField(
                     controller: firstNameController,
-                    keyboard: TextInputType.emailAddress,
                     mainColor: kBorderColor,
                     labelText: 'VD: Nguyễn',
                   )),
@@ -80,18 +76,17 @@ class _UpdateGeneralInfoState extends State<UpdateGeneralInfo> {
                 isRequired: true,
                 child: CustomTextField(
                   controller: lastNameController,
-                  keyboard: TextInputType.emailAddress,
                   mainColor: kBorderColor,
-                  labelText: 'VD: Như',
+                  labelText: 'VD: Đạt',
                 ),
               ),
               SizedBox(height: 20),
               WidgetWithLabel(
                 label: 'Sinh nhật của bạn',
                 child: DateTimePicker(
-                  onConfirmCallBack: (selectedDate) =>
-                      _userBloc.state.currentUser.birthday = selectedDate,
+                  onConfirmCallBack: (selectedDate) => _userBloc.state.currentUser.birthday = selectedDate,
                   maxDate: DateTime.now(),
+                  initDate: Formatter.formateStringToDate(date: DateTime.now().toString()),
                 ),
               ),
               Spacer(),
