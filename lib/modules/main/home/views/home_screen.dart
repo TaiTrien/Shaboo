@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
+import 'package:shaboo/components/stateless/avatar.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/data/repositories/implement/book/book_repo_impl.dart';
 import 'package:shaboo/modules/book/detail_book/views/detail_book_screen.dart';
@@ -31,25 +32,28 @@ class HomeScreen extends StatelessWidget {
           BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
               return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: CircleAvatar(
-                      radius: 18,
-                      child: ClipOval(
-                          child: _controller.avatarLink == null
-                              ? Image.asset(
-                                  'assets/images/default-avatar.png',
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.network(
-                                  _controller.avatarLink,
-                                  fit: BoxFit.cover,
-                                  loadingBuilder: (BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent loadingProgress) {
-                                    if (loadingProgress == null) return child;
-                                    return LoadingWidget(isImage: true);
-                                  },
-                                ))));
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Avatar(
+                  avatarUrl: _controller.avatarLink,
+                  radius: 18,
+                ),
+                // child: CircleAvatar(
+                //     radius: 18,
+                //     child: ClipOval(
+                //         child: _controller.avatarLink == null
+                //             ? Image.asset(
+                //                 'assets/images/default-avatar.png',
+                //                 fit: BoxFit.cover,
+                //               )
+                //             : Image.network(
+                //                 _controller.avatarLink,
+                //                 fit: BoxFit.cover,
+                //                 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                //                   if (loadingProgress == null) return child;
+                //                   return LoadingWidget(isImage: true);
+                //                 },
+                //               ))),
+              );
             },
           ),
         ],
@@ -61,15 +65,11 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: kDefaultPaddingVerical, horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: kDefaultPaddingVerical, horizontal: 15),
                 child: SearchBar(
-                  onItemSelected: (selectedItem) =>
-                      this.toDetailScreen(context, selectedItem),
-                  dataSource: (query) => Future.delayed(
-                      const Duration(seconds: 1),
-                      () => RepositoryProvider.of<BookRepoImpl>(context)
-                          .search(bookName: query)),
+                  onItemSelected: (selectedItem) => this.toDetailScreen(context, selectedItem),
+                  dataSource: (query) =>
+                      Future.delayed(const Duration(seconds: 1), () => RepositoryProvider.of<BookRepoImpl>(context).search(bookName: query)),
                 ),
               ),
               SizedBox(height: 20),
@@ -110,14 +110,11 @@ class HomeScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: 5,
                           itemBuilder: (context, index) => GestureDetector(
-                                onTap: () => _controller.toDetailedBookScreen(
-                                    bookList.listBook[index]),
+                                onTap: () => _controller.toDetailedBookScreen(bookList.listBook[index]),
                                 child: BooksTile(
                                   title: bookList.listBook[index].name,
-                                  description:
-                                      bookList.listBook[index].description,
-                                  imageLink:
-                                      bookList.listBook[index].thumbnailUrl,
+                                  description: bookList.listBook[index].description,
+                                  imageLink: bookList.listBook[index].thumbnailUrl,
                                 ),
                               )),
                     );

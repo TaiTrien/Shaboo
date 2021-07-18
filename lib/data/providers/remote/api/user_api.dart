@@ -61,13 +61,10 @@ class UserApi {
   static Future<dynamic> uploadAvatar({File avatar}) async {
     var request = http.MultipartRequest('PUT', Uri.parse(urlUploadAvatar));
 
-    Map<String, String> headers = {
-      "Authorization": "Bearer ${await Store.getToken()}",
-      "Content-Type": "multipart/form-data"
-    };
+    Map<String, String> headers = await getHeader();
     request.headers.addAll(headers);
 
-    request.files.add(await http.MultipartFile.fromPath('images', avatar.path));
+    request.files.add(await http.MultipartFile.fromPath('image', avatar.path));
 
     try {
       var response = await http.Response.fromStream(await request.send());

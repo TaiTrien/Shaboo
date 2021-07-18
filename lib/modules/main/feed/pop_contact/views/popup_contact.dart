@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shaboo/components/stateless/avatar.dart';
+import 'package:shaboo/constants/api_constants.dart';
 import 'package:shaboo/data/models/user/user.dart';
 import 'package:shaboo/modules/main/feed/pop_contact/controllers/popup_contact_controller.dart';
 
@@ -45,21 +47,18 @@ class _PopupContactState extends State<PopupContact> {
     return FutureBuilder(
         future: _controller.getInfoUser(widget.userId),
         builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done)
-            return Center(child: CircularProgressIndicator());
+          if (!snapshot.hasData || snapshot.connectionState != ConnectionState.done) return Center(child: CircularProgressIndicator());
           UserModel userModel = snapshot.data;
+          print(userModel.avatar);
+
           return Stack(
             children: <Widget>[
               Container(
                 padding: EdgeInsets.only(left: 20.0, top: 45.0 + 20.0, right: 20.0, bottom: 20.0),
                 margin: EdgeInsets.only(top: 45.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black12, offset: Offset(0, 10), blurRadius: 5),
-                    ]),
+                decoration: BoxDecoration(shape: BoxShape.rectangle, color: Colors.white, borderRadius: BorderRadius.circular(20.0), boxShadow: [
+                  BoxShadow(color: Colors.black12, offset: Offset(0, 10), blurRadius: 5),
+                ]),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -73,11 +72,7 @@ class _PopupContactState extends State<PopupContact> {
                     Text(
                       'Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.grey[900],
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic),
+                      style: TextStyle(color: Colors.grey[900], fontSize: 16.0, fontWeight: FontWeight.w400, fontStyle: FontStyle.italic),
                     ),
                     SizedBox(
                       height: 20.0,
@@ -86,7 +81,7 @@ class _PopupContactState extends State<PopupContact> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FlatButton(
-                            color: Colors.green,
+                            color: userModel.phone != null && userModel.phone != '' ? Colors.green : Colors.grey,
                             shape: CircleBorder(),
                             onPressed: () => _controller.openTel(userModel.phone),
                             child: Padding(
@@ -98,17 +93,18 @@ class _PopupContactState extends State<PopupContact> {
                               ),
                             )),
                         FlatButton(
-                            color: Colors.orange,
+                            color: userModel.phone != null && userModel.phone != '' ? Colors.orange : Colors.grey,
                             shape: CircleBorder(),
-                            onPressed: () => _controller.openMessage(userModel.phone),
+                            onPressed: () => userModel.phone != null && userModel.phone != '' ? _controller.openMessage(userModel.phone) : {},
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Icon(MdiIcons.message, size: 25.0, color: Colors.white),
                             )),
                         FlatButton(
-                            color: Colors.blue,
+                            color: userModel.facebook != null && userModel.facebook != '' ? Colors.blue : Colors.grey,
                             shape: CircleBorder(),
-                            onPressed: () => _controller.openMessenger(userModel.facebook),
+                            onPressed: () =>
+                                userModel.facebook != null && userModel.facebook != '' ? _controller.openMessenger(userModel.facebook) : {},
                             child: Padding(
                               padding: const EdgeInsets.all(7.0),
                               child: Icon(MdiIcons.facebookMessenger, size: 30.0, color: Colors.white),
@@ -121,24 +117,24 @@ class _PopupContactState extends State<PopupContact> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CachedNetworkImage(
-                      imageUrl: userModel.avatar,
-                      imageBuilder: (context, imageProvider) => Container(
-                            width: 100.0,
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                            ),
-                          ),
-                      placeholder: (context, url) => Container(
-                            child: Icon(MdiIcons.accountCircle),
-                          ),
-                      errorWidget: (context, url, error) => Image.asset(
-                            'assets/icons/book-placeholder.png',
-                            fit: BoxFit.cover,
-                          ),
-                      fit: BoxFit.cover),
+                  userModel.avatar != null
+                      ? CachedNetworkImage(
+                          imageUrl: kPrefixUploadImageUrl + userModel?.avatar,
+                          imageBuilder: (context, imageProvider) => Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                                ),
+                              ),
+                          placeholder: (context, url) => Container(
+                                child: Icon(MdiIcons.accountCircle),
+                              ),
+                          errorWidget: (context, url, error) => Avatar(
+                                avatarUrl: '',
+                              ))
+                      : Avatar(avatarUrl: '', radius: 40),
                 ],
               ),
             ],

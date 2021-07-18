@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shaboo/blocs/user/user_bloc.dart';
+import 'package:shaboo/components/stateless/avatar.dart';
 import 'package:shaboo/components/stateless/loading_widget.dart';
 import 'package:shaboo/constants/model_constant.dart';
 import 'package:shaboo/modules/main/feed/add_post/post_form.dart';
@@ -13,14 +17,14 @@ import 'package:shaboo/components/stateless/popup_menu.dart';
 import 'package:shaboo/constants/ui_constants.dart';
 import 'package:shaboo/modules/main/profile/views/info_tab.dart';
 import 'package:shaboo/modules/review/list_review/list_review_screen.dart';
+import 'package:shaboo/utils/photo.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen>
-    with SingleTickerProviderStateMixin {
+class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProviderStateMixin {
   TabController _tabController;
   ProfileController _controller;
 
@@ -103,8 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 backgroundColor: Colors.white,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Stack(children: [
-                  LayoutBuilder(builder:
-                      (BuildContext context, BoxConstraints constraints) {
+                  LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                     return Container(height: constraints.maxHeight - 50);
                   }),
                   Align(
@@ -114,25 +117,36 @@ class _ProfileScreenState extends State<ProfileScreen>
                     //         NetworkImage(_controller.currentUser.avatar) ??
                     //             _controller.defaultAvatar,
                     //     radius: 50),
-                    child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        maxRadius: 50,
-                        child: ClipOval(
-                            child: _controller.currentUser.avatar == null
-                                ? Image.asset(
-                                    'assets/images/default-avatar.png',
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.network(
-                                    _controller.currentUser.avatar,
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return LoadingWidget(isImage: true);
-                                    },
-                                  ))),
+                    // child: CircleAvatar(
+                    //     backgroundColor: Colors.white,
+                    //     maxRadius: 50,
+                    //     child: ClipOval(
+                    //         child: _controller.currentUser.avatar == null
+                    //             ? Image.asset(
+                    //                 'assets/images/default-avatar.png',
+                    //                 fit: BoxFit.cover,
+                    //               )
+                    //             : Image.network(
+                    //                 _controller.currentUser.avatar,
+                    //                 fit: BoxFit.cover,
+                    //                 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                    //                   if (loadingProgress == null) return child;
+                    //                   return LoadingWidget(isImage: true);
+                    //                 },
+                    //               ))),
+                    child: BlocConsumer<UserBloc, UserState>(listener: (context, state) {
+                      if (state is UploadAvatarProcessing) {}
+                    }, builder: (context, state) {
+                      if (state is UploadAvatarProcessing) return CircularProgressIndicator();
+
+                      return Avatar(
+                        avatarUrl: _controller.currentUser?.avatar,
+                        onPress: () async {
+                          PickedFile avatar = await Photo.getPhotoFromGallery();
+                          _controller.userBloc.add(UploadAvatar(File(avatar.path)));
+                        },
+                      );
+                    }),
                   )
                 ])),
                 actions: [
@@ -170,8 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               titleSpacing: 0.0,
               title: TabBar(
                 labelColor: Colors.black,
-                labelStyle: kDefaultTextStyle.copyWith(
-                    fontSize: 18, fontWeight: FontWeight.w500),
+                labelStyle: kDefaultTextStyle.copyWith(fontSize: 18, fontWeight: FontWeight.w500),
                 indicatorColor: kSecondaryColor,
                 unselectedLabelColor: kGreyColor,
                 indicatorSize: TabBarIndicatorSize.label,

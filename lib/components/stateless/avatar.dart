@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shaboo/constants/api_constants.dart';
 
 class Avatar extends StatelessWidget {
   final String avatarUrl;
@@ -21,16 +22,17 @@ class Avatar extends StatelessWidget {
         child: CircleAvatar(
           child: Align(
             alignment: Alignment.bottomRight,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 12.0,
-              child:
-                  Icon(Icons.camera_alt, size: 15.0, color: Color(0xFF404040)),
-            ),
+            child: onPress != null
+                ? CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 12.0,
+                    child: onPress != null ? Icon(Icons.camera_alt, size: 15.0, color: Color(0xFF404040)) : null,
+                  )
+                : Container(),
           ),
           radius: radius - 2 ?? 58.0,
           backgroundImage: avatarUrl != '' && avatarUrl != null
-              ? NetworkImage(avatarUrl)
+              ? NetworkImage(avatarUrl?.substring(0, 6) == 'avatar' ? (kPrefixUploadImageUrl + avatarUrl) : avatarUrl)
               : AssetImage(
                   'assets/images/default-avatar.png',
                 ),

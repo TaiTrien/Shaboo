@@ -6,13 +6,11 @@ class InfoTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPaddingHorizontal + 10,
-            vertical: kDefaultPaddingVerical),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddingHorizontal + 10, vertical: kDefaultPaddingVerical),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Giới thiệu', style: kHeadingTextStyle.copyWith(fontSize: 24)),
+            // Text('Giới thiệu', style: kHeadingTextStyle.copyWith(fontSize: 24)),
             SizedBox(height: 5),
             Text(
               '',
