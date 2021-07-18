@@ -60,30 +60,31 @@ class PostCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: kHeadingTextStyle.copyWith(fontSize: 18),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    // Row(
-                    //   children: [
-                    //     Image.asset('assets/icons/location.png', scale: 1.5),
-                    //     SizedBox(width: 10),
-                    //     Text(
-                    //       range.toString() + ' km',
-                    //       overflow: TextOverflow.ellipsis,
-                    //       style: TextStyle(
-                    //         fontSize: 15.0,
-                    //         fontWeight: FontWeight.w500,
-                    //         color: Theme.of(context).accentColor,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                  ],
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+
+                //     // Row(
+                //     //   children: [
+                //     //     Image.asset('assets/icons/location.png', scale: 1.5),
+                //     //     SizedBox(width: 10),
+                //     //     Text(
+                //     //       range.toString() + ' km',
+                //     //       overflow: TextOverflow.ellipsis,
+                //     //       style: TextStyle(
+                //     //         fontSize: 15.0,
+                //     //         fontWeight: FontWeight.w500,
+                //     //         color: Theme.of(context).accentColor,
+                //     //       ),
+                //     //     ),
+                //     //   ],
+                //     // ),
+                //   ],
+                // ),
+                Text(
+                  title,
+                  style: kHeadingTextStyle.copyWith(fontSize: 18),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   description,

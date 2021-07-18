@@ -21,10 +21,9 @@ import 'package:shaboo/routes.dart';
 import 'package:shaboo/utils/store.dart';
 
 getInitRoute() async {
-  bool isFirstTime =
-      await Store.getIsFirstTime() == 'true' ? true : false ?? true;
+  bool isFirstTime = await Store.getIsFirstTime() == 'true' ? true : false ?? true;
   String token = await Store.getToken();
-  if (true)
+  if (isFirstTime)
     return OnBoardingScreen();
   else if (token != null) {
     return LoadingScreen();
@@ -69,8 +68,7 @@ class MyApp extends StatelessWidget {
             create: (context) => InternetCubit(),
           ),
           BlocProvider<UserBloc>(
-            create: (context) => UserBloc(
-                userRepo: RepositoryProvider.of<UserRepoImpl>(context)),
+            create: (context) => UserBloc(userRepo: RepositoryProvider.of<UserRepoImpl>(context)),
           ),
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(),
@@ -79,12 +77,10 @@ class MyApp extends StatelessWidget {
             create: (context) => LocationBloc(),
           ),
           BlocProvider<PostBloc>(
-            create: (context) => PostBloc(
-                postRepo: RepositoryProvider.of<PostRepoImpl>(context)),
+            create: (context) => PostBloc(postRepo: RepositoryProvider.of<PostRepoImpl>(context)),
           ),
           BlocProvider<ReviewBloc>(
-            create: (context) => ReviewBloc(
-                reviewRepo: RepositoryProvider.of<ReviewRepoImpl>(context)),
+            create: (context) => ReviewBloc(reviewRepo: RepositoryProvider.of<ReviewRepoImpl>(context)),
           ),
         ],
         child: MaterialApp(

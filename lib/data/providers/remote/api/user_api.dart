@@ -52,7 +52,6 @@ class UserApi {
     for (var e in currentUser.categories) {
       categoriesId.add(e.categoryID);
     }
-    print(categoriesId);
     try {
       var response = await http.put(
         Uri.parse('$urlUsers'),
